@@ -47,14 +47,17 @@ form, fieldset{
 }
 		
  
-.flex-items-default {
+.flex-item {
     width: 300px;
     height: 250px;
-    flex-grow: 0;
+    flex-grow: 1;
     flex-shrink: 0;
-    flex-basis: 0;
+    flex-basis: 10%;
+    /*width: 50%; */
+    background-color: aliceblue;
+    padding-left: 10px;
+    border: solid black 1px;
 }
-
 
 #wrapper{
 	width: 100%;
@@ -727,8 +730,6 @@ form, fieldset{
 }
 
 
-
-
 .mainblock{
 	margin-bottom: 8px;
 	width: 1232px;
@@ -1008,7 +1009,7 @@ form, fieldset{
 
 
 
-.twothirds{
+/*.twothirds{
 	margin-bottom: 3px;
 	width: 100%;
 	position: relative;
@@ -1033,7 +1034,7 @@ form, fieldset{
 	margin-left: 1px;
 	width: 455px;
 
-}
+} 
 .twothirds .box-hold .box-even:first-child,
 .twothirds .box-hold .box-even{
 	width: 613px;
@@ -1078,6 +1079,15 @@ form, fieldset{
 .twothirds .box-hold .box-even .cont-even{
 	min-height: 360px; 
 	width: 613px;
+}*/
+
+
+#dash-top-left-box {
+
+}
+
+#dash-top-right-box {
+
 }
 
 
