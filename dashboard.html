@@ -1,0 +1,1771 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0039)http://staging.offerit.com/internal.php -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>OFFERIT</title>
+	<link rel="stylesheet" type="text/css" href="./dashboard_files/css_builder.css">
+	<script type="text/javascript" src="./dashboard_files/aff_all.js"></script>
+	<script type="text/javascript" src="./dashboard_files/jquery.main.js"></script>
+	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
+	
+	
+	
+	<script>
+		var linkurl = "/internal.php";
+		var linkname = "Dashboard";
+		
+		function removeBookmarkAction(bkmrkid){
+			//remove the bookmark
+			$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_bookmark', 'bookmark_id': bkmrkid }, function(data){
+				if(data == 'OK'){
+					$("#bkmrk_"+bkmrkid).remove();
+					$("#link_"+bkmrkid).remove();
+					$(".quicklink-button.left-button").attr("id", 'create_bkmrk');
+					$("#create_bkmrk").html('+ Quick Link This Page');
+					$(".bookmark-set").removeClass('bookmark-unset');
+					
+				}
+			});
+			return false;
+		}
+		
+		function notificationPopup(url, subject,body,notification)
+		{
+			//display the popup to submit the bookmark
+			var txt = {
+				state0: {
+					html:'<div class="title">'+notification+' '+subject+'</div><table class="prompt-table" sty;e="width:500px;"><tr><td align="left">'+body+'</td></tr></table>',
+					buttons: { 'CLOSE': true },
+					focus: 1,
+					submit:function(v,m,f){
+						$.prompt.close();
+						return true;
+					}
+				}
+			}
+			$.prompt(txt);
+		}
+			
+		$(document).ready(function(){
+			//set/remove bookmark
+			$(".quicklink-button").click(function(){
+				var curId = $(this).attr("id");
+				if(curId == 'create_bkmrk'){
+					
+					//display the popup to submit the bookmark
+					var txt = {
+						state0: {
+							html:'<div class="title">Quicklink Details</div><table class="prompt-table"><tr><td align="left" colspan="2"><span id="title_error" class="error-text"></span></td></tr><tr><td align="right">Title:</td><td><input type="text" id="titleField" name="title" value="'+linkname+'" style="width: 200px;"></td></tr><tr><td align="right">Icon:</td><td><div class="quick-icon-option"><input type="radio" name="icon" value="1"></div><div class="quick-icon-opt-img"><img src="product_images/ico1-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="2"></div><div class="quick-icon-opt-img"><img src="product_images/ico2-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="3"></div><div class="quick-icon-opt-img"><img src="product_images/ico3-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="4"></div><div class="quick-icon-opt-img"><img src="product_images/ico4-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="5"></div><div class="quick-icon-opt-img"><img src="product_images/ico5-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="6"></div><div class="quick-icon-opt-img"><img src="product_images/ico6-quicklinks.gif"></div></td></tr></table>',
+							buttons: { 'CANCEL': false, 'SAVE QUICKLINK': true },
+							focus: 1,
+							submit:function(v,m,f){
+								if(!v) $.prompt.close();
+								else if(!f.title){
+									$("#titleField").addClass('edit-form-error');
+									$("#title_error").html('Title Required');
+									return false;
+								}
+								else{
+									$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_bookmark', 'url': linkurl, 'name': f.title, 'icon': f.icon }, function(data){
+										if(data == 'FAIL URL'){
+											$.prompt.getStateContent('state0').find('#titleField').addClass('edit-form-error');
+											$.prompt.getStateContent('state0').find('#title_error').html('');
+											
+											return false;
+										}
+										else if(data == 'FAIL TITLE'){
+											
+											$.prompt.getStateContent('state0').find('#titleField').addClass('edit-form-error');
+											$.prompt.getStateContent('state0').find('#title_error').html('Title may only be alphanumeric character(s) and underscores!');
+											
+											return false;
+										}
+										else if(data != 'EXISTS' && data != 'FAIL'){
+											if(f.icon) var linkImage = 'ico'+f.icon+'-quicklinks.gif';
+											else var linkImage = 'bookmark-list.png';
+											//Add the bookmarks to the quicklinks section in the dashboard
+											$(".bookmark-ul").append('<li id="bkmrk_'+data+'"><a href="'+linkurl+'" title="'+f.title+'"><img src="product_images/'+linkImage+'" /><strong>'+f.title.substring(0,36)+'</strong></a><a href="#" class="remove_bookmark" onClick="removeBookmarkAction('+"'"+data+"'"+')" id="remove_'+data+'" title="Remove Quick Link">X</a></li>');
+											var new_li = '<li class="quicklink" id="link_' + data +'"><a href="' + linkurl + '">' + f.title.substring(0,36) +'</a></li>';
+											$('#quicklink-dropdown').append(new_li);
+											$("#create_bkmrk").html('- Remove Quick Link');
+											$("#create_bkmrk").attr("id", 'bkmrkid_'+data);
+											$(".bookmark-set").addClass('bookmark-unset');
+											if($("#bkmrk_0")) $("#bkmrk_0").remove();
+											
+											$.prompt.close();
+										}
+									});
+									return false;
+								}
+								$.prompt.close();
+								return false;
+							}
+						}
+					}
+					$.prompt(txt);
+					
+				}
+				else{
+					var idParts = curId.split('_');
+					removeBookmarkAction(idParts[1]);
+				}
+				return false;
+			});
+			$('.quicklink-button.right-button').hover(function(){
+				$('#quicklink-dropdown').show();
+			}, function(){
+				//Check if we are mousing over the dropdown menu
+				window.setTimeout(function(){
+					if(!$('#quicklink-button-container:hover').length){
+						$('#quicklink-dropdown').hide();
+					}
+				}, 100);
+			});
+			$('#quicklink-dropdown').hover(function(){}, function(){
+				window.setTimeout(function(){
+					if(!$('#quicklink-button-container:hover').length){
+						$('#quicklink-dropdown').hide();
+					}
+				}, 100);
+			});
+		});
+		
+		var status_time=0
+		setInterval(function() {
+		status_time = status_time+1;
+		}, 1000);
+		
+		function status_check(){ if (status_time < 130) var re=1; else var re=0; $.get("/status.php?url="+encodeURI(window.location.href+"&refresh="+re),function(e){if(e=="FALSE"){document.location.href="/"}})}setInterval(status_check,120000)
+		$(document).ready(function(){
+			$( "body" ).mousemove(function( event ) {
+			status_time=0;
+			});
+		});
+	</script>
+	
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<div class="bar">
+				<div class="holder">
+					<strong class="logo"><a href="http://staging.offerit.com/index.php">OFFERIT</a></strong>
+					<div class="info-box">
+						<div class="box">
+							<h4>Too Much Media</h4>
+							<ul>
+								<li>Logged in as as <strong>fdkihfdfefdk Wu</strong></li>							<li><a href="http://staging.offerit.com/internal.php?page=account&view=display_settings">Settings</a></li>
+								<li><a href="http://staging.offerit.com/index.php?logout=1">Log out</a></li>
+							</ul>
+							<p class="messages"><span>You have 0 unread messages | 0 new notifications</span></p>
+							
+							
+							
+							<div id="quicklink-button-container">
+								<button class="quicklink-button left-button" id="create_bkmrk">+ Quick Link This Page</button><button class="quicklink-button right-button" id="bkmrkid_"><span class="quicklink-caret"></span></button>
+								<ul id="quicklink-dropdown" class="bookmark-set">
+									<li class="quicklink" id="link-32"><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl">This Period Referring URL Stats</a></li>
+									<li class="quicklink" id="link-33"><a href="http://staging.offerit.com/internal.php?page=referrals">Affiliate Referrals</a></li>
+									<li class="quicklink" id="link-34"><a href="http://staging.offerit.com/internal.php?page=payments">Payment History</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="nav-bar">
+						<div class="hold">
+							<ul id="nav" class=" scaling-active scaling-ready">
+								<li class=" first-child">
+									<a style="width: 246px;" href="./dashboard_files/dashboard.html" class=" first-child-a"><strong>Dashboard</strong><span>Welcome</span></a>
+								</li>
+								<li>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=offers"><strong>Offers</strong><span>View Our Offers</span></a>
+									<ul style="width: 99%; display: none;" class="sub-nav">
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=offers&view=offer"><strong>List All Offers</strong></a>
+										</li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=campaigns"><strong>List My Campaigns</strong></a>
+										</li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=referrals"><strong>Affiliate Referrals</strong></a>
+										</li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=requestable"><strong>Request Private Offers</strong></a>
+										</li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=link_groups"><strong>Manage Link Groups</strong></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=stats"><strong>Statistics</strong><span>View detailed statistics</span></a>
+									<ul class="sub-nav" style="display: none;">
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=stats&view=date" class="isParent"><strong>By Date<span class="parent-triangle"></span></strong></a>
+											<ul class="sub-nav-child" style="left: 243px; display: none;">
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=2"><strong>Today</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=3"><strong>Yesterday</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=0"><strong>This Period</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=1"><strong>Last Period</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=5"><strong>This Month</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=11"><strong>Last Month</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=17"><strong>Past 30 Days</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=12"><strong>Past 60 Days</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=13"><strong>Past 90 Days</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=6"><strong>This Year</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=7"><strong>All Time</strong></a></li>
+											</ul>
+										</li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=stats&view=offer" class="isParent"><strong>By Offer<span class="parent-triangle"></span></strong></a>
+											<ul class="sub-nav-child" style="left: 243px; display: none;">
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=offer"><strong>By Offer</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=landing_page"><strong>By Landing Page</strong></a></li>
+											</ul>
+										</li>
+										<li>
+											
+											<a href="http://staging.offerit.com/internal.php?page=stats&view=subid" class="isParent"><strong>By SubID<span class="parent-triangle"></span></strong></a>
+											<ul class="sub-nav-child" style="left: 243px; display: none;">
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=subidset"><strong>By SubID Set</strong></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=subid"><strong>By SubID</strong></a></li>
+											</ul>
+										</li>
+										<li><a style="width:150px" href="http://staging.offerit.com/internal.php?page=stats&view=country"><strong>By Demographic</strong></a></li>
+										<li>
+											<a href="http://staging.offerit.com/internal.php?page=stats&view=adtool"><strong>By Creative</strong></a>
+										</li>
+										<li><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl"><strong>By Referring URL</strong></a></li>					<li><a href="http://staging.offerit.com/internal.php?page=stats&view=additional_tracking"><strong>By Sub Affiliate</strong></a></li>
+										<li><a href="http://staging.offerit.com/internal.php?page=stats&view=other"><strong>Other Income</strong></a></li>
+										<li><a href="http://staging.offerit.com/internal.php?page=referrals"><strong>Affiliate Referrals</strong></a></li>				</ul>
+									</li>
+									<li>
+										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=adtools"><strong>Creatives</strong><span>Set up promotional materials</span></a>
+										<ul class="sub-nav">
+											<li>
+												<a href="http://staging.offerit.com/internal.php?page=adtools&category=1" class="isParent"><strong>Banner Creatives<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><div class="mopad-up"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=1"><strong>Image Banners</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=9"><strong>Flash Banners</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=8"><strong>Geo Targeted Banners</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=1000"><strong>Text Link Creative</strong></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="http://staging.offerit.com/internal.php?page=adtools&category=3" class="isParent"><strong>Content<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><div class="mopad-up"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=5"><strong>Feeds</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=4"><strong>Content Zips</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=6"><strong>Mailing Ads</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=11"><strong>Custom Dynamic Text Banners</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=12"><strong>Downloadable Videos</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=23"><strong>Embedded Videos</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=3&typeid=22"><strong>Hosted Videos</strong></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="http://staging.offerit.com/internal.php?page=adtools&category=5" class="isParent"><strong>Interactives<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><div class="mopad-up"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=5&typeid=7"><strong>Page Peel Ads</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=5&typeid=18"><strong>IM Popups</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=5&typeid=19"><strong>Footer Ads</strong></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="http://staging.offerit.com/internal.php?page=adtools&category=6" class="isParent"><strong>Page Advertisements<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><div class="mopad-up"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=6&typeid=3"><strong>Half Page / Full Page Ads</strong></a></li>
+													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=6&typeid=21"><strong>Page Overlay Ads</strong></a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class=" last-child">
+										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=account" class=" last-child-a"><strong>My Account</strong><span>View Account Settings</span></a>
+									</li>
+								</ul>
+							</div>
+						</div>			</div>
+					</div>
+				</div>
+				<div id="main">
+					
+					
+					
+					<script>
+						//preload('product_images/loading.gif');
+					
+								//set our starting stats view
+						var StatsTpl = 'function_display_stats_dashboard_table';
+						var mapField = '';
+						var curLink = '';
+						
+						//setting the date range for the key stats box
+						var keyPeriod = '2';
+						var keyPeriodVal = 10;
+						if(keyPeriod == '2') keyPeriodVal = 10;
+						else if(keyPeriod == '15') keyPeriodVal = 20;
+						else if(keyPeriod == '28') keyPeriodVal = 30;
+						else if(keyPeriod == '17') keyPeriodVal = 40;
+						else if(keyPeriod == '12') keyPeriodVal = 50;
+						else if(keyPeriod == '13') keyPeriodVal = 60;
+					
+						//function used to update the view for the period stats summary
+						function updateStatsView(){
+							//reset the div to loading
+							$('#stats-loading').show();
+							//hide the stats display
+							$('#dashboard-stats').hide();
+							var curLink = '';
+							
+							//hide the options for the stats views
+							$(".stats-view-options").hide();
+							//show the options for this view
+							$("#"+StatsTpl+"-options").show();
+							
+							//load the selected template using ajax
+							$('#dashboard-stats').load('internal_data.php?function=offerit_display_stats&order=name|1&tpl='+StatsTpl+curLink, function(){
+								//switch this to be the active display
+								$('#dashboard-stats').show(0, function(){
+									$('#stats-loading').hide();
+								});
+							});
+							//set the selected icon
+							$('.dashboard-stats-view img').removeClass('current-view');
+							$('.'+StatsTpl+" > img").addClass('current-view');
+							return false;
+						}
+						
+						//function to clear quicklinks on the dashboard
+						function removeQuicklink(qid){
+							//remove the bookmark
+							$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_bookmark', 'bookmark_id': qid }, function(data){
+								if($.trim(data) == 'OK'){
+									$(".bkmrk_"+qid).remove();
+									if($("#bkmrkid_"+qid)){
+										$(".edit_bookmark").attr("id", 'create_bkmrk');
+										$(".edit_bookmark").html('+ Quick Link This Page');
+										$(".bookmark-set").removeClass('bookmark-unset');
+									}
+									$(".bookmark-ul li:first-child").addClass("list-first");
+								}
+							});
+							$(".bkrmrk_tooltip").hide();
+							return false;
+						}
+						
+						//function to toggle the messages for being read
+						function toggleMessages(formName){
+							var parts = formName.split('_');
+							
+							if($("."+formName+" div").hasClass('entry-status-none')){
+								var chngfunc = 'viewed';
+								var newCls = 'entry-status-viewed';
+							}
+							else{
+								var chngfunc = 'notviewed';
+								var newCls = 'entry-status-none';
+							}
+							
+							$("."+formName+" div").removeClass('entry-status-none entry-status-viewed');
+							$("."+formName+" div").addClass(newCls);
+							
+							//revert the value through ajax
+							$.post("submit.php?submit_function=submit_message_"+chngfunc+"&variable_array[]=message&message["+parts[1]+"]="+parts[2]);
+							return false;
+						}
+						
+						function update_slider(event, ui){
+							//$('#key_stats_content').fadeTo('fast', 0.3);
+							if(ui.value == 10) keyPeriod = '2';
+							else if(ui.value == 20) keyPeriod = '15';
+							else if(ui.value == 30) keyPeriod = '28';
+							else if(ui.value == 40) keyPeriod = '17';
+							else if(ui.value == 50) keyPeriod = '12';
+							else if(ui.value == 60) keyPeriod = '13';
+							
+							//update with loading overlay
+							
+							$("#key_stats_content").html("<center><br><img src='product_images/loading.gif' /><br></center>");
+							$.post('internal_data.php', { 'function': 'offerit_display_stats', 'tpl': 'function_display_stats_dashboard_summary', 'period': keyPeriod }, function(data){
+								if(data){
+									//place the data in the contents
+									$("#key_stats_content").html(data);
+									$('#key_stats_content').fadeTo('fast', 1);
+								}
+							});
+							//update the sticky setting
+							$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_setting', 'setting': 'default_dashboard_key_stats_range', 'value': keyPeriod });
+						}
+					
+						/*
+						* function to load all components through AJAX.
+						* @param name shortname of the dashboard single column views
+						* @param index which box to change (values: dash-top-left dash-bottom-left dash-bottom-middle or dash-bottom-right)
+						* @param show set to '1' to show otherwise hides the component
+						*/
+						function load_component(name, index, show) {
+							var queryVars = false;
+							
+							switch(name) {
+								case 'news': {
+									//grab the contents for the section
+									queryVars = { 'function': 'offerit_display_news', 'tpl': 'function_display_news_headlines', 'section': 'Announcements', 'count': '7', 'ajaxInc': index };
+									break;
+								}
+								case 'quicklinks': {
+									queryVars = { 'function': 'offerit_display_quicklinks', 'ajaxInc': index };
+									break;
+								}
+								case 'account_preview': {
+									queryVars = { 'function': 'offerit_display_account_preview', 'ajaxInc': index };
+									break;
+								}
+								case 'payment_history': {
+									queryVars = { 'function': 'offerit_display_payment_history', 'tpl': 'function_display_payment_history_preview', 'order': '2', 'ajaxInc': index };
+									break;
+								}
+								case 'notifications':
+								case 'messages': {
+									queryVars = { 'function': 'offerit_display_account_notifications', 'tpl': 'function_display_account_notifications_preview', 'count': '8', 'folder': name, 'ajaxInc': index };
+									break;
+								}
+								case 'top_sites': {
+									queryVars = { 'function': 'offerit_display_stats', 'tpl': 'function_display_top_stats_preview', 'period': '13', 'breakdown': 'site', 'order': 'total_payout', 'trans_count': '8', 'ajaxInc': index };
+									break;
+								}
+								case 'joins': {
+									queryVars = { 'function': 'offerit_display_stats', 'tpl': 'function_display_stats_joins_preview', 'breakdown': 'members', 'order': 'joined', 'trans_count': '5', 'period': '15', 'ajaxInc': index };
+									break;
+								}
+								case 'tag_cloud_traffic':
+								case 'tag_cloud_income': {
+									if(name == 'tag_cloud_traffic') {
+										var statOrder = 'unique_hits';
+									}
+									else {
+										var statOrder = 'total_payout';
+									}
+									
+									queryVars = { 'function': 'offerit_display_stats', 'tpl': 'function_display_stats_tag_cloud', 'breakdown': 'tag', 'order': statOrder, 'trans_count': '30', 'ajaxInc': index };
+									break;
+								}
+							}
+							
+							//grab the contents for the section
+							$.post('internal_data.php', queryVars, function(data){
+								if(data){
+									//place the data in the contents
+									$("#"+index+"-box .content").html(data);
+									if(show != "1") {
+										$("#"+index+"-box .content").fadeTo('fast', 1);
+									}
+								}
+							});
+							//do we want to show or hide the contents
+							if(show == "1"){
+								var setVal = "1";
+								$("#"+index+"-box .heading .hold .open-close span").addClass("open-plus");
+								$("#"+index+"-box .heading .hold .open-close span").html("+");
+								$("#"+index+"-box .content").hide();
+							}
+							else{
+								var setVal = "0";
+								$("#"+index+"-box .heading .hold .open-close span").removeClass("open-plus");
+								$("#"+index+"-box .heading .hold .open-close span").html("-");
+								$("#"+index+"-box .content").show();
+							}
+						}
+					
+						//start the jquery on loads
+						$(document).ready(function(){
+							
+												
+								var componentShort = "quicklinks";
+								var show = "0";
+								load_component(componentShort, 'dash-top-left', show);
+																
+								var componentShort = "news";
+								var show = "0";
+								load_component(componentShort, 'dash-bottom-left', show);
+								
+																
+								var componentShort = "account_preview";
+								var show = "0";
+								load_component(componentShort, 'dash-bottom-middle', show);
+								
+																
+								var componentShort = "payment_history";
+								var show = "0";
+								load_component(componentShort, 'dash-bottom-right', show);
+							
+						
+							//load our default view for the stats block
+							$('#dashboard-stats').load('internal_data.php?function=offerit_display_stats&order=name|1&tpl='+StatsTpl+curLink, function(){
+								$('#stats-loading').hide();
+							});
+							
+							//setup our changes for the stats block
+							$('.dashboard-stats-view').click(function(){
+								//select the template to display
+								var newTpl = $(this).attr('id');
+								var idParts = newTpl.split('_');
+								StatsTpl = "function_display_stats_dashboard_"+idParts[0];
+								//call the function to update the view
+								updateStatsView();
+								//ajax update the setting
+								$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_setting', 'setting': 'default_dashboard_period_stats_view_as', 'value': idParts[1] });
+								return false;
+							});
+					
+							//build all of our tooltips specific to this page
+							$(".summary li .sum-box").tooltip({
+								offset: [5, 70],
+								predelay: 800,
+								effect: 'fade',
+								fadeInSpeed: 200,
+								delay: 0,
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic();
+							$(".dashboard-stats-view").tooltip({
+								offset: [-15, 43],
+								delay: 0,
+								tipClass: 'small-tooltip',
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic({left: {offset: [-15,37]}});
+							$(".dashboard-stats-view2").tooltip({
+								offset: [-15, 43],
+								delay: 0,
+								tipClass: 'small-tooltip',
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic({left: {offset: [-15,37]}});
+							$(".news-headline").tooltip({
+								offset: [-10, 200],
+								predelay: 600,
+								delay: 0,
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic();
+							$(".remove_bookmark").tooltip({
+								offset: [-15, 45],
+								delay: 0,
+								tipClass: 'small-tooltip',
+								layout: '<div class="bkrmrk_tooltip"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic({left: {offset: [-15,33]}});
+							$(".tag-data").tooltip({
+								offset: [-15, 50],
+								predelay: 300,
+								delay: 0,
+								tipClass: 'small-tooltip',
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic();
+							$(".noteSubject").tooltip({
+								offset: [-10, 150],
+								predelay: 300,
+								delay: 0,
+								layout: '<div><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div></div>'
+							}).dynamic();
+							
+							//setup the popup for setting box options
+							$(".box-set-options").click(function(){
+								var linkId = $(this).attr('id').split('_')[0];
+								$(".tooltip, .small-tooltip").hide('fast');
+								
+								//grab the content box id
+								var contAreaId = $("#"+linkId+"-box .content").attr('id');
+								var areaIdParts = contAreaId.split('_');
+								
+								//is this box hidden?
+								var contHidden = $("#"+linkId+"-box .content").css('display');
+								
+								//display popup
+								var txt = {
+									state0: {
+										html:'<div class="title">Display Options</div><table class="prompt-table"><tr><td align="right">Display:</td><td><select name="disp_content" id="newDisplayContent"><option value="news-1"'+(areaIdParts[1] == '1' ? ' selected' : '')+'>OFFERIT News</option><option value="quicklinks-2"'+(areaIdParts[1] == '2' ? ' selected' : '')+'>Quick Links</option><option value="account_preview-3"'+(areaIdParts[1] == '3' ? ' selected' : '')+'>My Account</option><option value="payment_history-4"'+(areaIdParts[1] == '4' ? ' selected' : '')+'>Payment History</option><option value="notifications-5"'+(areaIdParts[1] == '5' ? ' selected' : '')+'>Recent Notifications</option><option value="messages-6"'+(areaIdParts[1] == '6' ? ' selected' : '')+'>Recent Messages</option><option value="joins-8"'+(areaIdParts[1] == '8' ? ' selected' : '')+'>Latest Conversions</option></select></td></tr><tr><td align="right">Collapse:</td><td><input type="checkbox" name="hideCont" id="hideContent" value="1"'+(contHidden == 'none' ? ' checked' : '')+'></td></tr></table>',
+										buttons: { 'CANCEL': false, 'APPLY CHANGES': true },
+										focus: 1,
+										submit:function(v, m, f){
+											if(v) {
+												//what is the name of the new content
+												var linkTitle = $("#newDisplayContent option:selected").text();
+												var cValParts = f.disp_content.split('-');
+												
+												//rename the header
+												$("#"+linkId+"-box .heading .hold h2").html(linkTitle);
+												//grab the location parts
+												var posParts = linkId.split('-');
+												
+												//ajax update the setting
+												$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_setting', 'setting': 'default_dashboard_'+posParts[1]+'_'+posParts[2]+'_box_contents', 'value': cValParts[1] });
+												//set the id of the content
+												$("#"+linkId+"-box .content").attr('id', areaIdParts[0]+'_'+cValParts[1]+'_'+cValParts[0]);
+												if(f.hideCont != "1") {
+													$("#"+linkId+"-box .content").fadeTo('fast', 0.3);
+												}
+												load_component(cValParts[0], linkId, f.hideCont, linkTitle);
+												//ajax update the setting
+												var curId = $("#"+linkId+"-box .heading .hold .open-close").attr('id');
+												$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_setting', 'setting': curId, 'value': f.hideCont });
+											}
+											$.prompt.close();
+											return false;
+										}
+									}
+								}
+								$.prompt(txt);
+								
+								$(".tooltip, .small-tooltip").hide('fast');
+								
+								return false;
+							});
+							
+							//setting the slider to change the key stats box date range
+							$("#slider").slider({
+								value: keyPeriodVal,
+								min: 10,
+								max: 60,
+								step: 10,
+								start: function(event, ui) {
+									$(".summary li .sum-box").unbind('mouseenter mouseleave');
+								},
+								slide: function(event, ui) {
+									if(ui.value == 10) curKeyStat = "Today's Key Statistics";
+									else if(ui.value == 20) curKeyStat = "Past 7 Day's Key Statistics";
+									else if(ui.value == 30) curKeyStat = "Past 15 Day's Key Statistics";
+									else if(ui.value == 40) curKeyStat = "Past 30 Day's Key Statistics";
+									else if(ui.value == 50) curKeyStat = "Past 60 Day's Key Statistics";
+									else if(ui.value == 60) curKeyStat = "Past 90 Day's Key Statistics";
+										
+									$("#key_stats_title").html(curKeyStat);
+								},
+								stop: function(event, ui) {
+									update_slider(event, ui);
+									
+								}
+							});
+							
+							// run the ajax call to update the slider for the first time:
+							update_slider("", keyPeriodVal);
+							
+						});
+					</script>
+					<div class="text-block">
+						<h1>Dashboard<a href="http://staging.offerit.com/internal.php#" id="default_minimize_page_description" class="min-page-desc">-</a></h1>
+						
+					</div>
+					<div class="twothirds">
+						<div class="c">
+							<div class="box-hold">
+								
+								<div class="box first-child" id="dash-top-left-box">
+									
+									
+								</div>
+								<div class="box" id="dash-top-right-box">
+									
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="clear-separator"></div>
+					<div class="mainblock">
+						<div class="heading">
+							<div class="hold">
+								<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_period_stats"><span>-</span></a>
+								<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+								<h2>This Period's Statistics</h2>
+							</div>
+						</div>
+						<div class="content">
+							<div class="c">
+								<div class="standard-block">
+									
+									<div class="title">
+										<div class="desc2">Viewing Stats for <strong>June  1, 2015 - June 15, 2015</strong>. <a href="http://staging.offerit.com/internal.php?page=stats">Click Here to View Detailed Statistics</a></div>
+										<div class="view">
+											<span>View as:</span>
+											<ul>
+												<li><a href="http://staging.offerit.com/internal.php#" class="dashboard-stats-view function_display_stats_dashboard_table" id="table_0"><img src="./dashboard_files/view-as-table.png" alt="View as a Table" width="16" height="16" class="current-view"></a></li>
+												<li><a href="http://staging.offerit.com/internal.php#" class="dashboard-stats-view function_display_stats_dashboard_multichart" id="multichart_5"><img src="./dashboard_files/view-as-bar.png" alt="View as a Graph" width="16" height="16"></a></li>
+												
+												<li><a href="http://staging.offerit.com/internal.php?page=account&enable_stats=1" class="dashboard-stats-view2" id="feed_0" target="_blank"><img src="./dashboard_files/rssfeed.png" alt="View as an RSS Feed" width="16" height="16"></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?page=account&enable_stats=1" class="dashboard-stats-view2" id="xml_1" target="_blank"><img src="./dashboard_files/view-as-xml.png" alt="Export as XML" width="16" height="16"></a></li>
+												
+											</ul>
+										</div>
+									</div>
+									
+									<div class="display-content"><img src="./dashboard_files/loading.gif" class="loading" id="stats-loading" style="display: none;"><div id="dashboard-stats">
+										
+										<table class="table-container" cellpadding="0" cellspacing="0">
+											<tbody><tr class="header-row2">
+												<td class="tab-column tab-break header-first orderby-field">Date</td>
+												
+												
+												<td class="tab-column nohover">Page Views</td>
+												
+												<td class="tab-column nohover">Uniques</td>
+												
+												<td class="tab-column nohover">Conversions</td>
+												
+												<td class="tab-column nohover">Conversion Rate</td>
+												<td class="tab-column nohover">Continuity</td>
+												
+												<td class="tab-column nohover">Refunds</td>
+												
+												<td class="tab-column nohover">Other Income</td>
+												<td class="tab-column nohover">EPC</td>
+												<td class="tab-column nohover">Total Income</td>
+												<td class="tab-column nohover header-last">Breakdown</td>
+											</tr>
+											
+											
+											<tr class="data-row-odd hover-row">
+												<td class="tab-column tab-break">June  1, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even hover-row">
+												<td class="tab-column tab-break">June  2, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd hover-row">
+												<td class="tab-column tab-break">June  3, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even hover-row hover-next-row">
+												<td class="tab-column tab-break">June  4, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-nextoff hover-row">
+												<td class="tab-column tab-break">June  5, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even-off hover-row">
+												<td class="tab-column tab-break">June  6, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-off hover-row">
+												<td class="tab-column tab-break">June  7, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even-off hover-row">
+												<td class="tab-column tab-break">June  8, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-off hover-row">
+												<td class="tab-column tab-break">June  9, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even-off hover-row">
+												<td class="tab-column tab-break">June 10, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-off hover-row">
+												<td class="tab-column tab-break">June 11, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even-off hover-row">
+												<td class="tab-column tab-break">June 12, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-off hover-row">
+												<td class="tab-column tab-break">June 13, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-even-off hover-row">
+												<td class="tab-column tab-break">June 14, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="data-row-odd-off last-row">
+												<td class="tab-column tab-break">June 15, 2015</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+											<tr class="footer-row">
+												<td class="tab-column tab-break">Total</td>
+												
+												
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">0:0</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													0
+												</td>
+												
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">
+													$0.00
+												</td>
+												<td class="tab-column">$0.00</td>
+												<td class="tab-column breakdown-column">
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<ul>
+															
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=date">Date</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=offer">Offer</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=landing_page">Landing Page</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=campaign">Campaign</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=tag">SubID</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=country">Demographic</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=refurl">Referring URL</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=additional_tracking">Sub Affiliate</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											
+										</tbody></table>	</div></div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clear-separator"></div>
+						<div class="threeblocks">
+							<div class="c">
+								<div class="box-hold">
+									
+									<div class="box first-child" id="dash-bottom-left-box">
+										<div class="heading">
+											<div class="hold">
+												<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-left_set-options"><span>OPTIONS</span></a>
+												<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_left"><span>-</span></a>
+												<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+												<h2>OFFERIT News</h2>
+											</div>
+										</div>
+										<div class="content" id="blboxCont_1_news" style="opacity: 1;">
+											
+											
+											
+											
+											
+											<ul class="icons-list">
+												
+												<li class="list-first">
+													<a href="http://staging.offerit.com/internal.php?page=news&newsid=11" class="news-headline_dash-bottom-left">
+														<img src="./dashboard_files/ico-news.gif" alt="Rob Test News">
+													<strong>Rob Test News</strong></a>
+												</li>
+												
+												
+												<li>
+													<a href="http://staging.offerit.com/internal.php?page=news&newsid=10" class="news-headline_dash-bottom-left">
+														<img src="./dashboard_files/ico-news.gif" alt="Small Image, sweet">
+													<strong>Small Image, sweet</strong></a>
+												</li>
+												
+												
+												<li>
+													<a href="http://staging.offerit.com/internal.php?page=news&newsid=9" class="news-headline_dash-bottom-left">
+														<img src="./dashboard_files/ico-news.gif" alt="More News, No Image">
+													<strong>More News, No Image</strong></a>
+												</li>
+												
+												
+												<li>
+													<a href="http://staging.offerit.com/internal.php?page=news&newsid=8" class="news-headline_dash-bottom-left">
+														<img src="./dashboard_files/ico-news.gif" alt="New With News Photo - Sweet">
+													<strong>New With News Photo - Sweet</strong></a>
+												</li>
+												
+												
+												<li class="list-last"></li>
+											</ul>
+											<div class="dashbox-link">
+												<a href="http://staging.offerit.com/internal.php?page=news">View All News</a>
+											</div></div>
+										</div>
+										
+										<div class="box" id="dash-bottom-middle-box">
+											<div class="heading">
+												<div class="hold">
+													<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-middle_set-options"><span>OPTIONS</span></a>
+													<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_middle"><span>-</span></a>
+													<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+													<h2>My Account</h2>
+												</div>
+											</div>
+											<div class="content" id="bmboxCont_3_account_preview" style="opacity: 1;">
+												<div class="user-box">
+													<div class="info">
+														<strong class="name">Patrick Wu</strong>
+														<p><a href="mailto:patrick.wu@toomuchmedia.com">patrick.wu@toomuchmedia.com</a></p>
+													<address>West Caldwell, NJ</address>
+												</div>
+											</div>
+											<ul class="info-list">
+												<li>
+													<dl>
+														<dt>Payment Method:</dt>
+														<dd>Check (Cost $0.00)</dd>
+													</dl>
+													<div class="link"><a href="http://staging.offerit.com/internal.php?page=account#PayViaForm">Change</a></div>
+												</li>
+												<li>
+													<dl>
+														<dt>Account Balance:</dt>
+														<dd>$0.00</dd>
+													</dl>
+													<div class="link"><a href="http://staging.offerit.com/internal.php?page=payments">View more</a></div>
+												</li>
+												<li>
+													<dl>
+														<dt>Minimum Payout:</dt>
+														<dd>$10.00</dd>
+													</dl>
+													<div class="link"><a href="http://staging.offerit.com/internal.php?page=account#PayViaForm">Change</a></div>
+												</li>
+												<li>
+													<dl>
+														<dt>Last Login:</dt>
+														<dd>June  5, 2015</dd>
+													</dl>
+													<div class="login">75.99.182.234</div>
+												</li>
+												<li>
+													<dl>
+														<dt>Last Payment:</dt>
+														<dd>Never</dd>
+													</dl>
+													<div class="price">$0.00</div>
+												</li>
+												<li class="list-last"></li>
+											</ul>
+											<div class="dashbox-link">
+												<a href="http://staging.offerit.com/internal.php?page=account">View My Account</a>
+											</div></div>
+										</div>
+										
+										<div class="box" id="dash-bottom-right-box">
+											<div class="heading">
+												<div class="hold">
+													<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-right_set-options"><span>OPTIONS</span></a>
+													<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_right"><span>-</span></a>
+													<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+													<h2>Payment History</h2>
+												</div>
+											</div>
+											<div class="content" id="brboxCont_4_payment_history" style="opacity: 1;">
+												
+												<table class="table-container2 small-font" cellpadding="0" cellspacing="0">
+													<tbody><tr class="header-row2">
+														<td class="tab-column orderby-field header-first">Date</td>
+														<td class="tab-column nohover">Status</td>
+														<td class="tab-column nohover">Amount</td>
+														<td class="tab-column nohover header-last">Method</td>
+													</tr>
+													<tr class="data-row-even"><td class="tab-column left-align" colspan="4">No Payments</td></tr>
+												</tbody></table>
+												<div class="dashbox-link">
+													<a href="http://staging.offerit.com/internal.php?page=payments">View All Payments</a>
+												</div></div>
+											</div>
+										</div>
+									</div>
+									<div class="b"></div>
+								</div>
+								<!-- BEGIN FOOTER -->
+								
+								<!-- BEGIN ADMIN LINKS -->
+								<div id="footer">
+									<div class="slide-block active">
+										<div class="title">
+											<p class="info"></p>
+											<div class="head">
+												<h5><a class="open-close" href="http://staging.offerit.com/internal.php#">Administration and Management</a></h5>
+											</div>
+										</div>
+										<div class="block">
+											<div class="c">
+												<ul class="icons-list">
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_overview.php"><img src="./dashboard_files/about_16.gif" alt="Dashboard"><span>Dashboard</span></a></li>
+													<li><a href="http://staging.offerit.com/admin_reporting.php"><img src="./dashboard_files/reports_16.gif" alt="Reporting"><span>Reporting</span></a></li>
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_offers.php"><img src="./dashboard_files/addbk_16.gif" alt="Offers"><span>Offers</span></a></li>
+													<li><a href="http://staging.offerit.com/admin_affiliates.php"><img src="./dashboard_files/user_16.gif" alt="Affiliates"><span>Affiliates</span></a></li>
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_advertisers.php"><img src="./dashboard_files/advertisor_16.gif" alt="Advertisers"><span>Advertisers</span></a></li>
+													<li><a href="http://staging.offerit.com/admin_members.php"><img src="./dashboard_files/group_16.gif" alt="Customers"><span>Customers</span></a></li>
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_payments.php"><img src="./dashboard_files/checking_16x16.gif" alt="Payments"><span>Payments</span></a></li>
+													<li><a href="http://staging.offerit.com/admin_adtools.php"><img src="./dashboard_files/tools_16.gif" alt="Creatives"><span>Creatives</span></a></li>
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_news.php"><img src="./dashboard_files/edittrans_16x16.gif" alt="Communications"><span>Communications</span></a></li>
+													<li><a href="http://staging.offerit.com/admin_config.php"><img src="./dashboard_files/confg_16.gif" alt="Config"><span>Config</span></a></li>
+												</ul>
+												<ul class="icons-list">
+													<li><a href="http://staging.offerit.com/admin_skins_templates.php?view=css_colors&skin[id]=1002&skin[type]=advance"><img src="./dashboard_files/paint_16.gif" alt="CSS Color Picker"><span>CSS Color Picker</span></a></li>
+													<div style="height:60px;">&nbsp;</div>
+												</ul></div>
+											</div>
+										</div>
+									</div>
+									<!-- END ADMIN LINKS -->
+								</div>
+								</div><div class="bkrmrk_tooltip small-tooltip" style="display: none; visibility: visible; position: absolute; top: 288px; left: 596px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>Remove Quick Link</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1302px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>View as a Graph</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1329px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>View as an RSS Feed</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1356px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>Export as XML</div></body>
+								<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+							</html>
