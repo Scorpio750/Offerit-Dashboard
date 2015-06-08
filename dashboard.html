@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0039)http://staging.offerit.com/internal.php -->
+<!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=8">
@@ -12,7 +12,7 @@
 	
 	
 	<script>
-		var linkurl = "/internal.php";
+		var linkurl = "/internal.php?skin=1006";
 		var linkname = "Dashboard";
 		
 		function removeBookmarkAction(bkmrkid){
@@ -144,7 +144,9 @@
 		});
 	</script>
 	
-</head>
+	<style>#content > #right > .dose > .dosesingle,
+	#content > #center > .dose > .dosesingle
+{display:none !important;}</style></head>
 <body>
 	<div id="wrapper">
 		<div id="header">
@@ -155,7 +157,7 @@
 						<div class="box">
 							<h4>Too Much Media</h4>
 							<ul>
-								<li>Logged in as as <strong>fdkihfdfefdk Wu</strong></li>							<li><a href="http://staging.offerit.com/internal.php?page=account&view=display_settings">Settings</a></li>
+								<li>Logged in as <strong>Patrick Wu</strong></li>							<li><a href="http://staging.offerit.com/internal.php?page=account&view=display_settings">Settings</a></li>
 								<li><a href="http://staging.offerit.com/index.php?logout=1">Log out</a></li>
 							</ul>
 							<p class="messages"><span>You have 0 unread messages | 0 new notifications</span></p>
@@ -164,7 +166,7 @@
 							
 							<div id="quicklink-button-container">
 								<button class="quicklink-button left-button" id="create_bkmrk">+ Quick Link This Page</button><button class="quicklink-button right-button" id="bkmrkid_"><span class="quicklink-caret"></span></button>
-								<ul id="quicklink-dropdown" class="bookmark-set">
+								<ul id="quicklink-dropdown" class="bookmark-set" style="display: none;">
 									<li class="quicklink" id="link-32"><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl">This Period Referring URL Stats</a></li>
 									<li class="quicklink" id="link-33"><a href="http://staging.offerit.com/internal.php?page=referrals">Affiliate Referrals</a></li>
 									<li class="quicklink" id="link-34"><a href="http://staging.offerit.com/internal.php?page=payments">Payment History</a></li>
@@ -176,7 +178,7 @@
 						<div class="hold">
 							<ul id="nav" class=" scaling-active scaling-ready">
 								<li class=" first-child">
-									<a style="width: 246px;" href="./dashboard_files/dashboard.html" class=" first-child-a"><strong>Dashboard</strong><span>Welcome</span></a>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php" class=" first-child-a"><strong>Dashboard</strong><span>Welcome</span></a>
 								</li>
 								<li>
 									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=offers"><strong>Offers</strong><span>View Our Offers</span></a>
@@ -203,7 +205,7 @@
 									<ul class="sub-nav" style="display: none;">
 										<li>
 											<a href="http://staging.offerit.com/internal.php?page=stats&view=date" class="isParent"><strong>By Date<span class="parent-triangle"></span></strong></a>
-											<ul class="sub-nav-child" style="left: 243px; display: none;">
+											<ul class="sub-nav-child">
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=2"><strong>Today</strong></a></li>
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=3"><strong>Yesterday</strong></a></li>
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=date&period=0"><strong>This Period</strong></a></li>
@@ -219,7 +221,7 @@
 										</li>
 										<li>
 											<a href="http://staging.offerit.com/internal.php?page=stats&view=offer" class="isParent"><strong>By Offer<span class="parent-triangle"></span></strong></a>
-											<ul class="sub-nav-child" style="left: 243px; display: none;">
+											<ul class="sub-nav-child">
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=offer"><strong>By Offer</strong></a></li>
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=landing_page"><strong>By Landing Page</strong></a></li>
 											</ul>
@@ -227,7 +229,7 @@
 										<li>
 											
 											<a href="http://staging.offerit.com/internal.php?page=stats&view=subid" class="isParent"><strong>By SubID<span class="parent-triangle"></span></strong></a>
-											<ul class="sub-nav-child" style="left: 243px; display: none;">
+											<ul class="sub-nav-child">
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=subidset"><strong>By SubID Set</strong></a></li>
 												<li><a href="http://staging.offerit.com/internal.php?page=stats&view=subid"><strong>By SubID</strong></a></li>
 											</ul>
@@ -242,10 +244,10 @@
 									</li>
 									<li>
 										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=adtools"><strong>Creatives</strong><span>Set up promotional materials</span></a>
-										<ul class="sub-nav">
+										<ul class="sub-nav" style="display: none;">
 											<li>
 												<a href="http://staging.offerit.com/internal.php?page=adtools&category=1" class="isParent"><strong>Banner Creatives<span class="parent-triangle"></span></strong></a>
-												<ul class="sub-nav-child">
+												<ul class="sub-nav-child" style="left: 243px; display: none;">
 													<li><div class="mopad-up"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=1"><strong>Image Banners</strong></a></li>
 													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=9"><strong>Flash Banners</strong></a></li>
 													<li><div class="mopad-left"></div><a href="http://staging.offerit.com/internal.php?page=adtools&category=1&typeid=8"><strong>Geo Targeted Banners</strong></a></li>
@@ -650,32 +652,32 @@
 						});
 					</script>
 					<div class="text-block">
-						<h1>Dashboard<a href="http://staging.offerit.com/internal.php#" id="default_minimize_page_description" class="min-page-desc">-</a></h1>
+						<h1>Dashboard<a href="http://staging.offerit.com/internal.php?skin=1006#" id="default_minimize_page_description" class="min-page-desc">-</a></h1>
 						
 					</div>
-					<div class="twothirds">
+					<div class="twothirds flex-container">
 						<div class="c">
 							<div class="box-hold">
 								
 								<div class="box first-child" id="dash-top-left-box">
+									<h3>Total Number of Offers: </h3>
+									
 									
 									
 								</div>
 								<div class="box" id="dash-top-right-box">
-									
-									
+										
+										
 								</div>
-								
 							</div>
 						</div>
 					</div>
-					
 					<div class="clear-separator"></div>
 					<div class="mainblock">
 						<div class="heading">
 							<div class="hold">
-								<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_period_stats"><span>-</span></a>
-								<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+								<a href="http://staging.offerit.com/internal.php?skin=1006#" class="open-close" id="default_dashboard_minimize_period_stats"><span>-</span></a>
+								<a href="http://staging.offerit.com/internal.php?skin=1006#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
 								<h2>This Period's Statistics</h2>
 							</div>
 						</div>
@@ -688,8 +690,8 @@
 										<div class="view">
 											<span>View as:</span>
 											<ul>
-												<li><a href="http://staging.offerit.com/internal.php#" class="dashboard-stats-view function_display_stats_dashboard_table" id="table_0"><img src="./dashboard_files/view-as-table.png" alt="View as a Table" width="16" height="16" class="current-view"></a></li>
-												<li><a href="http://staging.offerit.com/internal.php#" class="dashboard-stats-view function_display_stats_dashboard_multichart" id="multichart_5"><img src="./dashboard_files/view-as-bar.png" alt="View as a Graph" width="16" height="16"></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?skin=1006#" class="dashboard-stats-view function_display_stats_dashboard_table" id="table_0"><img src="./dashboard_files/view-as-table.png" alt="View as a Table" width="16" height="16" class="current-view"></a></li>
+												<li><a href="http://staging.offerit.com/internal.php?skin=1006#" class="dashboard-stats-view function_display_stats_dashboard_multichart" id="multichart_5"><img src="./dashboard_files/view-as-bar.png" alt="View as a Graph" width="16" height="16"></a></li>
 												
 												<li><a href="http://staging.offerit.com/internal.php?page=account&enable_stats=1" class="dashboard-stats-view2" id="feed_0" target="_blank"><img src="./dashboard_files/rssfeed.png" alt="View as an RSS Feed" width="16" height="16"></a></li>
 												<li><a href="http://staging.offerit.com/internal.php?page=account&enable_stats=1" class="dashboard-stats-view2" id="xml_1" target="_blank"><img src="./dashboard_files/view-as-xml.png" alt="Export as XML" width="16" height="16"></a></li>
@@ -761,7 +763,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-01&view=landing_page">Landing Page</a></li>
@@ -814,7 +816,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-02&period_end=2015-06-02&view=landing_page">Landing Page</a></li>
@@ -867,7 +869,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-03&period_end=2015-06-03&view=landing_page">Landing Page</a></li>
@@ -882,7 +884,7 @@
 												</td>
 											</tr>
 											
-											<tr class="data-row-even hover-row hover-next-row">
+											<tr class="data-row-even hover-row">
 												<td class="tab-column tab-break">June  4, 2015</td>
 												
 												
@@ -920,7 +922,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-04&period_end=2015-06-04&view=landing_page">Landing Page</a></li>
@@ -935,7 +937,7 @@
 												</td>
 											</tr>
 											
-											<tr class="data-row-odd-nextoff hover-row">
+											<tr class="data-row-odd hover-row">
 												<td class="tab-column tab-break">June  5, 2015</td>
 												
 												
@@ -973,7 +975,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-05&period_end=2015-06-05&view=landing_page">Landing Page</a></li>
@@ -988,7 +990,7 @@
 												</td>
 											</tr>
 											
-											<tr class="data-row-even-off hover-row">
+											<tr class="data-row-even hover-row">
 												<td class="tab-column tab-break">June  6, 2015</td>
 												
 												
@@ -1025,8 +1027,8 @@
 												</td>
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
-													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-06&period_end=2015-06-06&view=landing_page">Landing Page</a></li>
@@ -1041,7 +1043,7 @@
 												</td>
 											</tr>
 											
-											<tr class="data-row-odd-off hover-row">
+											<tr class="data-row-odd hover-row">
 												<td class="tab-column tab-break">June  7, 2015</td>
 												
 												
@@ -1078,8 +1080,8 @@
 												</td>
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
-													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-07&period_end=2015-06-07&view=landing_page">Landing Page</a></li>
@@ -1094,7 +1096,7 @@
 												</td>
 											</tr>
 											
-											<tr class="data-row-even-off hover-row">
+											<tr class="data-row-even-nextoff hover-row">
 												<td class="tab-column tab-break">June  8, 2015</td>
 												
 												
@@ -1131,8 +1133,8 @@
 												</td>
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
-													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+													<div class="breakdown-btn break-btn-on">
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-08&period_end=2015-06-08&view=landing_page">Landing Page</a></li>
@@ -1185,7 +1187,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-09&period_end=2015-06-09&view=landing_page">Landing Page</a></li>
@@ -1238,7 +1240,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-10&period_end=2015-06-10&view=landing_page">Landing Page</a></li>
@@ -1291,14 +1293,14 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=landing_page">Landing Page</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=campaign">Campaign</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=tag">SubID</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=country">Demographic</a></li>
-															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=adtool">Creative</a></li>
+															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&perioperiod_start=2015-06-11&period_end=2015-06-11&view=adtool">Creative</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=refurl">Referring URL</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-11&period_end=2015-06-11&view=additional_tracking">Sub Affiliate</a></li>
 														</ul>
@@ -1344,7 +1346,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-12&period_end=2015-06-12&view=landing_page">Landing Page</a></li>
@@ -1397,7 +1399,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-13&period_end=2015-06-13&view=landing_page">Landing Page</a></li>
@@ -1450,7 +1452,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-14&period_end=2015-06-14&view=landing_page">Landing Page</a></li>
@@ -1503,7 +1505,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=offer">Offer</a></li>
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-15&period_end=2015-06-15&view=landing_page">Landing Page</a></li>
@@ -1554,7 +1556,7 @@
 												<td class="tab-column">$0.00</td>
 												<td class="tab-column breakdown-column">
 													<div class="breakdown-btn break-btn-on">
-														<a href="http://staging.offerit.com/internal.php#" class="noLink">Breakdown By</a>
+														<a href="http://staging.offerit.com/internal.php?skin=1006#" class="noLink">Breakdown By</a>
 														<ul>
 															
 															<li><a href="http://staging.offerit.com/internal.php?page=stats&period=8&period_start=2015-06-01&period_end=2015-06-15&view=date">Date</a></li>
@@ -1585,9 +1587,9 @@
 									<div class="box first-child" id="dash-bottom-left-box">
 										<div class="heading">
 											<div class="hold">
-												<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-left_set-options"><span>OPTIONS</span></a>
-												<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_left"><span>-</span></a>
-												<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+												<a href="http://staging.offerit.com/internal.php?skin=1006#" class="btn box-set-options" id="dash-bottom-left_set-options"><span>OPTIONS</span></a>
+												<a href="http://staging.offerit.com/internal.php?skin=1006#" class="open-close" id="default_dashboard_minimize_bottom_left"><span>-</span></a>
+												<a href="http://staging.offerit.com/internal.php?skin=1006#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
 												<h2>OFFERIT News</h2>
 											</div>
 										</div>
@@ -1637,9 +1639,9 @@
 										<div class="box" id="dash-bottom-middle-box">
 											<div class="heading">
 												<div class="hold">
-													<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-middle_set-options"><span>OPTIONS</span></a>
-													<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_middle"><span>-</span></a>
-													<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" class="btn box-set-options" id="dash-bottom-middle_set-options"><span>OPTIONS</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" class="open-close" id="default_dashboard_minimize_bottom_middle"><span>-</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
 													<h2>My Account</h2>
 												</div>
 											</div>
@@ -1676,7 +1678,7 @@
 												<li>
 													<dl>
 														<dt>Last Login:</dt>
-														<dd>June  5, 2015</dd>
+														<dd>June  8, 2015</dd>
 													</dl>
 													<div class="login">75.99.182.234</div>
 												</li>
@@ -1697,9 +1699,9 @@
 										<div class="box" id="dash-bottom-right-box">
 											<div class="heading">
 												<div class="hold">
-													<a href="http://staging.offerit.com/internal.php#" class="btn box-set-options" id="dash-bottom-right_set-options"><span>OPTIONS</span></a>
-													<a href="http://staging.offerit.com/internal.php#" class="open-close" id="default_dashboard_minimize_bottom_right"><span>-</span></a>
-													<a href="http://staging.offerit.com/internal.php#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" class="btn box-set-options" id="dash-bottom-right_set-options"><span>OPTIONS</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" class="open-close" id="default_dashboard_minimize_bottom_right"><span>-</span></a>
+													<a href="http://staging.offerit.com/internal.php?skin=1006#" target="_self" class="helpbtn" onclick="return false;"><span>?</span></a>
 													<h2>Payment History</h2>
 												</div>
 											</div>
@@ -1730,7 +1732,7 @@
 										<div class="title">
 											<p class="info"></p>
 											<div class="head">
-												<h5><a class="open-close" href="http://staging.offerit.com/internal.php#">Administration and Management</a></h5>
+												<h5><a class="open-close" href="http://staging.offerit.com/internal.php?skin=1006#">Administration and Management</a></h5>
 											</div>
 										</div>
 										<div class="block">
@@ -1765,7 +1767,8 @@
 										</div>
 									</div>
 									<!-- END ADMIN LINKS -->
+									<!--Script for enabling LiveReload-->
+									<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 								</div>
-								</div><div class="bkrmrk_tooltip small-tooltip" style="display: none; visibility: visible; position: absolute; top: 288px; left: 596px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>Remove Quick Link</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1302px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>View as a Graph</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1329px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>View as an RSS Feed</div><div class="small-tooltip" style="display: none; visibility: visible; position: absolute; top: 237px; left: 1356px;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>Export as XML</div></body>
-								<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-							</html>
+							</div><style>#header + #content > #left > #rlblock_left
+							{display:none !important;}</style><div class="tooltip" style="display: block; visibility: visible; position: absolute; top: 407px; left: 839px; opacity: 0.593690657292862;"><div class="tooltip-arrow-border"></div><div class="tooltip-arrow"></div>These are the number of visitors that made a recurring purchase.</div></body></html>
