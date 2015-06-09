@@ -476,7 +476,6 @@ form, fieldset{
 	width: 1232px;
 	height: 62px;
 	text-align: center;
-	
 }
 .nav-bar .hold{
 	padding: 0 1px 3px;
@@ -494,29 +493,36 @@ form, fieldset{
 	list-style: none;
 	width: 100%;
 	position: relative;
+
 }
 #nav ul{
 	position: absolute;
+	font-size: 100px;
 }
 #nav li{
-	margin-left: -2px;
-	padding-left: 2px;
+	margin-left: -3px;
+	padding-left: 1px;
 	float: left;
-	display: inline;
+	display: flex;
 	background: url(../product_images/sep-nav.png) repeat-y;
 	vertical-align: top;
 	height: 59px;
 	position: relative;
+	font-size: 30px;
+	border-right: solid #ccc 1px;
 }
 #nav li.first-child{
 	margin: 0;
 	padding: 0;
 	background: none;
 }
+#nav li.last-child {
+	border-right: none;	
+}
 #nav li a{
 	float: left;
 	padding: 13px 0px 0px 0px;
-	font-size: 11px;
+	font-size: 24px;
 	line-height: 16px;
 	color: #FFFFFF;
 	height: 46px;
