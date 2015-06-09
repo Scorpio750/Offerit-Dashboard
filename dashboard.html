@@ -150,9 +150,10 @@
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<div class="bar">
+			<div class="bar flex">
 				<div class="holder">
 					<strong class="logo"><a href="http://staging.offerit.com/index.php">OFFERIT</a></strong>
+					<img src="dashboard_files/h1.logo1.png">
 					<div class="info-box">
 						<div class="box">
 							<h4>Too Much Media</h4>
@@ -178,10 +179,10 @@
 						<div class="hold">
 							<ul id="nav" class=" scaling-active scaling-ready">
 								<li class=" first-child">
-									<a style="width: 246px;" href="http://staging.offerit.com/internal.php" class=" first-child-a"><strong>Dashboard</strong><span>Welcome</span></a>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php" class=" first-child-a"><strong>Dashboard</strong></a>
 								</li>
 								<li>
-									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=offers"><strong>Offers</strong><span>View Our Offers</span></a>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=offers"><strong>Offers</strong></a>
 									<ul style="width: 99%; display: none;" class="sub-nav">
 										<li>
 											<a href="http://staging.offerit.com/internal.php?page=offers&view=offer"><strong>List All Offers</strong></a>
@@ -201,7 +202,7 @@
 									</ul>
 								</li>
 								<li>
-									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=stats"><strong>Statistics</strong><span>View detailed statistics</span></a>
+									<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=stats"><strong>Statistics</strong></a>
 									<ul class="sub-nav" style="display: none;">
 										<li>
 											<a href="http://staging.offerit.com/internal.php?page=stats&view=date" class="isParent"><strong>By Date<span class="parent-triangle"></span></strong></a>
@@ -243,7 +244,7 @@
 										<li><a href="http://staging.offerit.com/internal.php?page=referrals"><strong>Affiliate Referrals</strong></a></li>				</ul>
 									</li>
 									<li>
-										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=adtools"><strong>Creatives</strong><span>Set up promotional materials</span></a>
+										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=adtools"><strong>Creatives</strong></a>
 										<ul class="sub-nav" style="display: none;">
 											<li>
 												<a href="http://staging.offerit.com/internal.php?page=adtools&category=1" class="isParent"><strong>Banner Creatives<span class="parent-triangle"></span></strong></a>
@@ -284,7 +285,7 @@
 										</ul>
 									</li>
 									<li class=" last-child">
-										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=account" class=" last-child-a"><strong>My Account</strong><span>View Account Settings</span></a>
+										<a style="width: 246px;" href="http://staging.offerit.com/internal.php?page=account" class=" last-child-a"><strong>My Account</strong></a>
 									</li>
 								</ul>
 							</div>
@@ -652,7 +653,7 @@
 						});
 					</script>
 					<div class="text-block">
-						<h1>Dashboard<a href="http://staging.offerit.com/internal.php?skin=1006#" id="default_minimize_page_description" class="min-page-desc">-</a></h1>
+						<h1>Dashboard</h1>
 						
 					</div>
 					<div class="twothirds">
@@ -660,19 +661,24 @@
 							<div class="box-hold flex-container">
 								
 								<div class="box first-child flex-item flex-container" id="dash-top-left-box">
-									<h1 class="twothirds-label">Total Number of Offers: [Ø]</h3>
-
-									
-									
+									<div class="flex-container flex-item top-box" id="offer-top-box">
+										<h1 class="twothirds-label">Total Number of Offers: [Ø]</h1>
+									</div>
+									<div class="flex-item flex-container bottom-box" id="offer-bottom-box">
+									</div>
 								</div>
 								<div class="box flex-item" id="dash-top-right-box">
-										
-										
+									<div class="flex-item list-box top-box">
+
+									</div>
+									<div class="flex-container flex-item" id="hourly table">
+										<img src="dashboard_files/line-graph.gif">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="clear-separator"></div>
+					<br><br><br><br><br><br>
 					<div class="mainblock">
 						<div class="heading">
 							<div class="hold">
