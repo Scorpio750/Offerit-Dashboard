@@ -4,7 +4,7 @@ body{
 	color: #333333;
 	font: 12px Helvetica, sans-serif;
 	min-width: 1240px;
-	background: #E6E6E6;
+	background: #e6e6e6;
 			
 }
 img{
@@ -508,7 +508,6 @@ form, fieldset{
 	vertical-align: top;
 	height: 59px;
 	position: relative;
-	font-size: 30px;
 	border-right: solid #ccc 1px;
 }
 #nav li.first-child{
@@ -537,8 +536,9 @@ form, fieldset{
 #nav li a strong{
 	display: flex
 	padding: 0 10px 0 18px;
-	font-size: 14px;
-	line-height: 18px;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 28px;
 	color: #FFFFFF;
 }
 #nav li a:hover strong{
