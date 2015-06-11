@@ -1,9 +1,17 @@
-body {
+$font-stack: Helvetica, sans-serif;
+$off-white: #E6E6E6;
+$primary-green: #A1E75E;
+$secondary-green: #70A141;
+
+html, body {
     margin: 0;
     color: #333333;
-    font: 12px Helvetica, sans-serif;
+    font: $font-stack;
     min-width: 1240px;
-    background: #E6E6E6;
+    background: $off-white;
+    height: 100%;
+    min-height: 100%;
+    font: 100% Arial, Helvetica, sans-serif;
 }
 
 img {
@@ -39,10 +47,9 @@ form, fieldset {
 }
 
 #wrapper {
+    height: 100%;
+    min-height: 100%;
     width: 100%;
-    padding: 0px 0px 100px 0px;
-    position: relative;
-    overflow: hidden;
     #header {
         flex-basis: 100%;
     }
@@ -368,7 +375,8 @@ form, fieldset {
 #main {
     margin: 0 auto;
     width: 1240px;
-    padding-bottom: 120px;
+    padding-top: 120px;
+    text-align: center;
 }
 
 .flex-container {
@@ -378,8 +386,35 @@ form, fieldset {
     justify-content: space-around;
     align-items: stretch;
     align-content: stretch;
+    .row {
+        width: 300px;
+        height: 300px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 100%;
+        .two-box {
+            width: 25%;
+        }
+    }
 }
 
-.row {
-    flex-basis: 100%;
+.top-box, .bottom-box {
+  padding: 5px;
 }
+
+.top-box {
+  height: 25%;
+  background-color: $primary-green;
+  h1 {
+    color: white;
+
+  }
+  
+}
+
+.bottom-box {
+  height: 75%;
+  background-color: $secondary-green;
+}
+
+#two-column {}

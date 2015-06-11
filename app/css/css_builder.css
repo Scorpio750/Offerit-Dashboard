@@ -1,9 +1,12 @@
-body {
+html, body {
   margin: 0;
   color: #333333;
-  font: 12px Helvetica, sans-serif;
+  font: Helvetica, sans-serif;
   min-width: 1240px;
-  background: #E6E6E6; }
+  background: #E6E6E6;
+  height: 100%;
+  min-height: 100%;
+  font: 100% Arial, Helvetica, sans-serif; }
 
 img {
   border-style: none; }
@@ -33,10 +36,9 @@ form, fieldset {
   border-style: none; }
 
 #wrapper {
-  width: 100%;
-  padding: 0px 0px 100px 0px;
-  position: relative;
-  overflow: hidden; }
+  height: 100%;
+  min-height: 100%;
+  width: 100%; }
   #wrapper #header {
     flex-basis: 100%; }
 
@@ -311,7 +313,8 @@ form, fieldset {
 #main {
   margin: 0 auto;
   width: 1240px;
-  padding-bottom: 120px; }
+  padding-top: 120px;
+  text-align: center; }
 
 .flex-container {
   display: flex;
@@ -320,6 +323,24 @@ form, fieldset {
   justify-content: space-around;
   align-items: stretch;
   align-content: stretch; }
+  .flex-container .row {
+    width: 300px;
+    height: 300px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 100%; }
+    .flex-container .row .two-box {
+      width: 25%; }
 
-.row {
-  flex-basis: 100%; }
+.top-box, .bottom-box {
+  padding: 5px; }
+
+.top-box {
+  height: 25%;
+  background-color: #A1E75E; }
+  .top-box h1 {
+    color: white; }
+
+.bottom-box {
+  height: 75%;
+  background-color: #70A141; }
