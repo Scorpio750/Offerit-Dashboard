@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>OFFERIT</title>
+	<link rel="stylesheet" type="text/css" href="./dashboard_files/css_builder.css">
+	<script type="text/javascript" src="./dashboard_files/aff_all.js"></script>
+	<script type="text/javascript" src="./dashboard_files/jquery.main.js"></script>
+	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
+	
+	
+	<script>
+		var linkurl = "/internal.php?skin=1006";
+		var linkname = "Dashboard";
+		
+		function removeBookmarkAction(bkmrkid){
+			//remove the bookmark
+			$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_bookmark', 'bookmark_id': bkmrkid }, function(data){
+				if(data == 'OK'){
+					$("#bkmrk_"+bkmrkid).remove();
+					$("#link_"+bkmrkid).remove();
+					$(".quicklink-button.left-button").attr("id", 'create_bkmrk');
+					$("#create_bkmrk").html('+ Quick Link This Page');
+					$(".bookmark-set").removeClass('bookmark-unset');
+					
+				}
+			});
+			return false;
+		}
+		
+		function notificationPopup(url, subject,body,notification)
+		{
+			//display the popup to submit the bookmark
+			var txt = {
+				state0: {
+					html:'<div class="title">'+notification+' '+subject+'</div><table class="prompt-table" sty;e="width:500px;"><tr><td align="left">'+body+'</td></tr></table>',
+					buttons: { 'CLOSE': true },
+					focus: 1,
+					submit:function(v,m,f){
+						$.prompt.close();
+						return true;
+					}
+				}
+			}
+			$.prompt(txt);
+		}
+			
+		$(document).ready(function(){
+			//set/remove bookmark
+			$(".quicklink-button").click(function(){
+				var curId = $(this).attr("id");
+				if(curId == 'create_bkmrk'){
+					
+					//display the popup to submit the bookmark
+					var txt = {
+						state0: {
+							html:'<div class="title">Quicklink Details</div><table class="prompt-table"><tr><td align="left" colspan="2"><span id="title_error" class="error-text"></span></td></tr><tr><td align="right">Title:</td><td><input type="text" id="titleField" name="title" value="'+linkname+'" style="width: 200px;"></td></tr><tr><td align="right">Icon:</td><td><div class="quick-icon-option"><input type="radio" name="icon" value="1"></div><div class="quick-icon-opt-img"><img src="product_images/ico1-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="2"></div><div class="quick-icon-opt-img"><img src="product_images/ico2-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="3"></div><div class="quick-icon-opt-img"><img src="product_images/ico3-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="4"></div><div class="quick-icon-opt-img"><img src="product_images/ico4-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="5"></div><div class="quick-icon-opt-img"><img src="product_images/ico5-quicklinks.gif"></div><div class="quick-icon-option"><input type="radio" name="icon" value="6"></div><div class="quick-icon-opt-img"><img src="product_images/ico6-quicklinks.gif"></div></td></tr></table>',
+							buttons: { 'CANCEL': false, 'SAVE QUICKLINK': true },
+							focus: 1,
+							submit:function(v,m,f){
+								if(!v) $.prompt.close();
+								else if(!f.title){
+									$("#titleField").addClass('edit-form-error');
+									$("#title_error").html('Title Required');
+									return false;
+								}
+								else{
+									$.post('ajax_data.php', { 'function': 'ajax_update_affiliate_bookmark', 'url': linkurl, 'name': f.title, 'icon': f.icon }, function(data){
+										if(data == 'FAIL URL'){
+											$.prompt.getStateContent('state0').find('#titleField').addClass('edit-form-error');
+											$.prompt.getStateContent('state0').find('#title_error').html('');
+											
+											return false;
+										}
+										else if(data == 'FAIL TITLE'){
+											
+											$.prompt.getStateContent('state0').find('#titleField').addClass('edit-form-error');
+											$.prompt.getStateContent('state0').find('#title_error').html('Title may only be alphanumeric character(s) and underscores!');
+											
+											return false;
+										}
+										else if(data != 'EXISTS' && data != 'FAIL'){
+											if(f.icon) var linkImage = 'ico'+f.icon+'-quicklinks.gif';
+											else var linkImage = 'bookmark-list.png';
+											//Add the bookmarks to the quicklinks section in the dashboard
+											$(".bookmark-ul").append('<li id="bkmrk_'+data+'"><a href="'+linkurl+'" title="'+f.title+'"><img src="product_images/'+linkImage+'" /><strong>'+f.title.substring(0,36)+'</strong></a><a href="#" class="remove_bookmark" onClick="removeBookmarkAction('+"'"+data+"'"+')" id="remove_'+data+'" title="Remove Quick Link">X</a></li>');
+											var new_li = '<li class="quicklink" id="link_' + data +'"><a href="' + linkurl + '">' + f.title.substring(0,36) +'</a></li>';
+											$('#quicklink-dropdown').append(new_li);
+											$("#create_bkmrk").html('- Remove Quick Link');
+											$("#create_bkmrk").attr("id", 'bkmrkid_'+data);
+											$(".bookmark-set").addClass('bookmark-unset');
+											if($("#bkmrk_0")) $("#bkmrk_0").remove();
+											
+											$.prompt.close();
+										}
+									});
+									return false;
+								}
+								$.prompt.close();
+								return false;
+							}
+						}
+					}
+					$.prompt(txt);
+					
+				}
+				else{
+					var idParts = curId.split('_');
+					removeBookmarkAction(idParts[1]);
+				}
+				return false;
+			});
+			$('.quicklink-button.right-button').hover(function(){
+				$('#quicklink-dropdown').show();
+			}, function(){
+				//Check if we are mousing over the dropdown menu
+				window.setTimeout(function(){
+					if(!$('#quicklink-button-container:hover').length){
+						$('#quicklink-dropdown').hide();
+					}
+				}, 100);
+			});
+			$('#quicklink-dropdown').hover(function(){}, function(){
+				window.setTimeout(function(){
+					if(!$('#quicklink-button-container:hover').length){
+						$('#quicklink-dropdown').hide();
+					}
+				}, 100);
+			});
+		});
+		
+		var status_time=0
+		setInterval(function() {
+		status_time = status_time+1;
+		}, 1000);
+		
+		function status_check(){ if (status_time < 130) var re=1; else var re=0; $.get("/status.php?url="+encodeURI(window.location.href+"&refresh="+re),function(e){if(e=="FALSE"){document.location.href="/"}})}setInterval(status_check,120000)
+		$(document).ready(function(){
+			$( "body" ).mousemove(function( event ) {
+			status_time=0;
+			});
+		});
+	</script>
+	
+	<style>#content > #right > .dose > .dosesingle,
+	#content > #center > .dose > .dosesingle
+{display:none !important;}</style></head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<div class="bar">
+				<div class="holder">
+					<strong class="logo"><a href="http://staging.offerit.com/index.php">OFFERIT</a></strong>
+					<a href="http://staging.offerit.com/index.php"><img src="dashboard_files/h1.logo1.png"></a>
+					<div class="info-box">
+						<div class="box">
+							<h4>Too Much Media</h4>
+							<ul>
+								<li>Logged in as <strong>Patrick Wu</strong></li>							<li><a href="http://staging.offerit.com/internal.php?page=account&view=display_settings">Settings</a></li>
+								<li><a href="http://staging.offerit.com/index.php?logout=1">Log out</a></li>
+							</ul>
+							<p class="messages"><span>You have 0 unread messages | 0 new notifications</span></p>
+							
+							
+							
+							<div id="quicklink-button-container">
+								<button class="quicklink-button left-button" id="create_bkmrk">+ Quick Link This Page</button><button class="quicklink-button right-button" id="bkmrkid_"><span class="quicklink-caret"></span></button>
+								<ul id="quicklink-dropdown" class="bookmark-set" style="display: none;">
+									<li class="quicklink" id="link-32"><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl">This Period Referring URL Stats</a></li>
+									<li class="quicklink" id="link-33"><a href="http://staging.offerit.com/internal.php?page=referrals">Affiliate Referrals</a></li>
+									<li class="quicklink" id="link-34"><a href="http://staging.offerit.com/internal.php?page=payments">Payment History</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="main">
+			<div class="row">
+			</div>
+			<div class="row">
+			</div>
+			<div class="row">
+			</div>
+		</div>
+
+	</div>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>
