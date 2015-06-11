@@ -1,10 +1,10 @@
 var gulp 		= require('gulp');
 var sass		= require('gulp-ruby-sass');
-var browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
 gulp.task('sass', function() {
-	return sass('scss/*.scss')
+	return sass('./app/scss/css_builder.scss')
 				.pipe(gulp.dest('app/css'))
 				.pipe(reload({ stream:true }));
 });
@@ -17,8 +17,8 @@ gulp.task('serve', ['sass'], function() {
 		}
 	});
 	
-	gulp.watch("app/scss/css_builder.scss", ['sass']);
-	gulp.watch("app/*.html").on('change', browserSync.reload);
+	gulp.watch('app/scss/css_builder.scss', ['sass']);
+	gulp.watch(['*.html', 'css/**/*.css', 'scripts/**/*.js'], {cwd: 'app'}, reload);
 });
 
 
