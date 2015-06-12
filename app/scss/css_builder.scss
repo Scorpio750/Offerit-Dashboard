@@ -6,16 +6,16 @@ $prim-triad-1: #5ea1e7;
 $sec-triad-1: #4b80b8;
 $prim-triad-2: #e75ea1;
 $sec-triad-2: #b84b80;
-$prim-anal-1: #5EE75f;
-$sec-anal-1: #4BB84C;
-$prim-anal-2: #e6e75e;
-$sec-anal-2: #b8b84b;
+$prim-anal-1: #54cf55;
+$sec-anal-1: #41a142;
+$prim-anal-2: #d7d75d;
+$sec-anal-2: #a8a84a;
 $prim-comp: #a45ee7;
 $sec-comp: #834bb8;
 
 html, body {
     margin: 0;
-    color: #333333;
+    color: white;
     font: $font-stack;
     min-width: 1240px;
     background: $off-white;
@@ -33,6 +33,10 @@ a {
         text-decoration: none;
         color: #133917;
     }
+}
+
+li {
+    text-align: left;
 }
 
 input, textarea, select {
@@ -388,9 +392,8 @@ form, fieldset {
 
 .flex-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: space-between;
     align-items: stretch;
     align-content: space-between;
     .row {
@@ -408,24 +411,23 @@ form, fieldset {
 }
 
 .top-box, .bottom-box {
+    margin: auto;
     padding: 5px;
-    line-height: 45px;
+    line-height: 25px;
 }
 
 .top-box {
     height: 25%;
     background-color: $prim-green;
     line-height: 25px;
-    h1 {
-        color: white;
-    }
-    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 12px;
 }
 
 .bottom-box {
     height: 75%;
     background-color: $sec-green;
-    -webkit-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 12px;
+    overflow: auto;
 }
 
 #two-column {}
@@ -433,46 +435,59 @@ form, fieldset {
 #offer-box {
     flex-grow: 1;
     flex-basis: 30%;
-    padding-right: 1.5em;
+    margin-right: 1.5em;
+	/*    .bottom-box {
+    	background-color: $off-white;
+    }*/
 }
 
 #hs-box {
-	.top-box {
-		background-color: $prim-anal-2;
-	}
-	.bottom-box {
-		background-color: $sec-anal-2;
-	}
-    flex-grow: 5;
-    #stats-box {
-        flex-grow: 1;
-        .stats-item {
-            text-align: left;
-            width: 10%;
-        }
+    flex-grow: 3;
+    margin-left: 1.5em;
+    .top-box {
+        background-color: $prim-anal-2;
     }
-    #graph-box {
-        flex-grow: 3;
-        height: 100%;
-        img {
-            width: 100%;
-            height: 100%;
-        }
+    .bottom-box {
+        background-color: $sec-anal-2;
     }
+}
+
+.stats-bar {
+    flex-grow: 1;
+    flex-basis: 1em;
+    margin: 10px;
+    /* background-color: $off-white; */
 }
 
 .two-box {}
 
 #main-column {
+	box-sizing: border-box;
+	border: 15px solid slategray;
+	background-color: #ccc;
+	height: auto;
+	margin-bottom: 4em;
+
     .top-box {
         background-color: $prim-anal-1;
     }
     .bottom-box {
         background-color: $sec-anal-1;
     }
-    padding-bottom: 4em;
+
     .top-box, .bottom-box {
         flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    #graph-box {
+        padding: 1em;
+        flex-grow: 1;
+        flex-basis: 1em;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 
@@ -481,6 +496,8 @@ form, fieldset {
     align-content: stretch;
     .three-box {
         margin: 0 10 10 0;
+        width: 30%;
+        height: 70%;
     }
     #paysum {
         .top-box {

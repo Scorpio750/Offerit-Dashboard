@@ -1,6 +1,6 @@
 html, body {
   margin: 0;
-  color: #333333;
+  color: white;
   font: 100% Helvetica, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
@@ -15,6 +15,9 @@ a {
   a:hover {
     text-decoration: none;
     color: #133917; }
+
+li {
+  text-align: left; }
 
 input, textarea, select {
   font: 100% Arial, Helvetica, sans-serif;
@@ -315,9 +318,8 @@ form, fieldset {
 
 .flex-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-flow: row wrap;
+  justify-content: space-between;
   align-items: stretch;
   align-content: space-between; }
   .flex-container .row {
@@ -332,59 +334,73 @@ form, fieldset {
       height: 80%; }
 
 .top-box, .bottom-box {
+  margin: auto;
   padding: 5px;
-  line-height: 45px; }
+  line-height: 25px; }
 
 .top-box {
   height: 25%;
   background-color: #A1E75E;
   line-height: 25px;
-  -webkit-border-top-left-radius: 10px; }
-  .top-box h1 {
-    color: white; }
+  border-top-left-radius: 12px; }
 
 .bottom-box {
   height: 75%;
   background-color: #70A141;
-  -webkit-border-bottom-right-radius: 10px; }
+  border-bottom-right-radius: 12px;
+  overflow: auto; }
 
 #offer-box {
   flex-grow: 1;
   flex-basis: 30%;
-  padding-right: 1.5em; }
+  margin-right: 1.5em;
+  	/*    .bottom-box {
+      	background-color: $off-white;
+      }*/ }
 
 #hs-box {
-  flex-grow: 5; }
+  flex-grow: 3;
+  margin-left: 1.5em; }
   #hs-box .top-box {
-    background-color: #e6e75e; }
+    background-color: #d7d75d; }
   #hs-box .bottom-box {
-    background-color: #b8b84b; }
-  #hs-box #stats-box {
-    flex-grow: 1; }
-    #hs-box #stats-box .stats-item {
-      text-align: left;
-      width: 10%; }
-  #hs-box #graph-box {
-    flex-grow: 3;
-    height: 100%; }
-    #hs-box #graph-box img {
-      width: 100%;
-      height: 100%; }
+    background-color: #a8a84a; }
+
+.stats-bar {
+  flex-grow: 1;
+  flex-basis: 1em;
+  margin: 10px;
+  /* background-color: $off-white; */ }
 
 #main-column {
-  padding-bottom: 4em; }
+  box-sizing: border-box;
+  border: 15px solid slategray;
+  background-color: #ccc;
+  height: auto;
+  margin-bottom: 4em; }
   #main-column .top-box {
-    background-color: #5EE75f; }
+    background-color: #54cf55; }
   #main-column .bottom-box {
-    background-color: #4BB84C; }
+    background-color: #41a142; }
   #main-column .top-box, #main-column .bottom-box {
-    flex-basis: 100%; }
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center; }
+  #main-column #graph-box {
+    padding: 1em;
+    flex-grow: 1;
+    flex-basis: 1em; }
+    #main-column #graph-box img {
+      width: 100%;
+      height: 100%; }
 
 #three-column {
   align-items: stretch;
   align-content: stretch; }
   #three-column .three-box {
-    margin: 0 10 10 0; }
+    margin: 0 10 10 0;
+    width: 30%;
+    height: 70%; }
   #three-column #paysum .top-box {
     background-color: #5ea1e7; }
   #three-column #paysum .bottom-box {
