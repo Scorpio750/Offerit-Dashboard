@@ -1,12 +1,10 @@
 html, body {
   margin: 0;
   color: #333333;
-  font: Helvetica, sans-serif;
+  font: 100% Helvetica, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
-  height: 100%;
-  min-height: 100%;
-  font: 100% Arial, Helvetica, sans-serif; }
+  font: 100% Helvetica, sans-serif; }
 
 img {
   border-style: none; }
@@ -320,33 +318,78 @@ form, fieldset {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: space-around;
-  align-content: space-around; }
+  align-items: stretch;
+  align-content: space-between; }
   .flex-container .row {
-    width: 300px;
     height: 300px;
     flex-grow: 1;
     flex-shrink: 0;
-    flex-basis: 100%; }
+    flex-basis: 100%;
+    align-items: stretch;
+    align-content: stretch; }
     .flex-container .row .two-box {
       width: 40%;
       height: 80%; }
 
 .top-box, .bottom-box {
-  padding: 5px; }
+  padding: 5px;
+  line-height: 45px; }
 
 .top-box {
   height: 25%;
   background-color: #A1E75E;
   line-height: 25px;
-  -webkit-border-top-left-radius: 20px; }
+  -webkit-border-top-left-radius: 10px; }
   .top-box h1 {
     color: white; }
 
 .bottom-box {
   height: 75%;
   background-color: #70A141;
-  -webkit-border-bottom-right-radius: 20px; }
+  -webkit-border-bottom-right-radius: 10px; }
 
-#main-column .top-box, #main-column .bottom-box {
-  flex-basis: 100%; }
+#offer-box {
+  flex-grow: 1;
+  flex-basis: 30%;
+  padding-right: 1.5em; }
+
+#hs-box {
+  flex-grow: 5; }
+  #hs-box .top-box {
+    background-color: #e6e75e; }
+  #hs-box .bottom-box {
+    background-color: #b8b84b; }
+  #hs-box #stats-box {
+    flex-grow: 1; }
+    #hs-box #stats-box .stats-item {
+      text-align: left;
+      width: 10%; }
+  #hs-box #graph-box {
+    flex-grow: 3;
+    height: 100%; }
+    #hs-box #graph-box img {
+      width: 100%;
+      height: 100%; }
+
+#main-column {
+  padding-bottom: 4em; }
+  #main-column .top-box {
+    background-color: #5EE75f; }
+  #main-column .bottom-box {
+    background-color: #4BB84C; }
+  #main-column .top-box, #main-column .bottom-box {
+    flex-basis: 100%; }
+
+#three-column {
+  align-items: stretch;
+  align-content: stretch; }
+  #three-column .three-box {
+    margin: 0 10 10 0; }
+  #three-column #paysum .top-box {
+    background-color: #5ea1e7; }
+  #three-column #paysum .bottom-box {
+    background-color: #4b80b8; }
+  #three-column #contact .top-box {
+    background-color: #e75ea1; }
+  #three-column #contact .bottom-box {
+    background-color: #b84b80; }
