@@ -12,7 +12,6 @@ img {
   border-style: none; }
 
 a {
-  text-decoration: none;
   font-weight: bolder;
   color: #224A12; }
   a:hover {
@@ -321,8 +320,8 @@ form, fieldset {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: stretch;
-  align-content: stretch; }
+  align-items: space-around;
+  align-content: space-around; }
   .flex-container .row {
     width: 300px;
     height: 300px;
@@ -330,17 +329,24 @@ form, fieldset {
     flex-shrink: 0;
     flex-basis: 100%; }
     .flex-container .row .two-box {
-      width: 25%; }
+      width: 40%;
+      height: 80%; }
 
 .top-box, .bottom-box {
   padding: 5px; }
 
 .top-box {
   height: 25%;
-  background-color: #A1E75E; }
+  background-color: #A1E75E;
+  line-height: 25px;
+  -webkit-border-top-left-radius: 20px; }
   .top-box h1 {
     color: white; }
 
 .bottom-box {
   height: 75%;
-  background-color: #70A141; }
+  background-color: #70A141;
+  -webkit-border-bottom-right-radius: 20px; }
+
+#main-column .top-box, #main-column .bottom-box {
+  flex-basis: 100%; }
