@@ -35,83 +35,197 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="flex-container" id="main">
-				<div class="row flex-container" id="two-column">
-					<div class="two-box" id="offer-box">
-						<div class="top-box"><h1>Offers</h1></div>
-						<div class="bottom-box">
-							<ol class="stats-bar" id="offer-list">
-								<li class="stats-item" id="offer-item">Lorem ipsum.</li>
-								<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
-								<li class="stats-item" id="offer-item">Eaque, cumque?</li>
-								<li class="stats-item" id="offer-item">Tempora, minima!</li>
-								<li class="stats-item" id="offer-item">Ea, nostrum!</li>
-							</ol>
+						<div class="nav-bar">
+							<div class="hold">
+								<ul id="nav">
+									<li>
+										<a style="width:150px" href="internal.php"><strong>Dashboard</strong></a>
+									</li>
+									<li>
+										<a style="width:150px" href="internal.php?page=offers"><strong>Offers</strong></a>
+										<ul style="width:99%" class="sub-nav">
+											<li>
+												<a href="internal.php?page=offers&view=offer"><strong>List All Offers</strong></a>
+											</li>
+											<li>
+												<a href="internal.php?page=campaigns"><strong>List My Campaigns</strong></a>
+											</li>
+											<li>
+												<a href="internal.php?page=referrals"><strong>Affiliate Referrals</strong></a>
+											</li>
+											<li>
+												<a href="internal.php?page=requestable"><strong>Request Private Offers</strong></a>
+											</li>
+											<li>
+												<a href="internal.php?page=link_groups"><strong>Manage Link Groups</strong></a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a style="width:150px" href="internal.php?page=stats"><strong>Statistics</strong></a>
+										<ul class="sub-nav">
+											<li>
+												<a href="internal.php?page=stats&view=date" class="isParent"><strong>By Date<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><a href="internal.php?page=stats&view=date&period=2"><strong>Today</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=3"><strong>Yesterday</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=0"><strong>This Period</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=1"><strong>Last Period</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=5"><strong>This Month</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=11"><strong>Last Month</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=17"><strong>Past 30 Days</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=12"><strong>Past 60 Days</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=13"><strong>Past 90 Days</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=6"><strong>This Year</strong></a></li>
+													<li><a href="internal.php?page=stats&view=date&period=7"><strong>All Time</strong></a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="internal.php?page=stats&view=offer" class="isParent"><strong>By Offer<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><a href="internal.php?page=stats&view=offer"><strong>By Offer</strong></a></li>
+													<li><a href="internal.php?page=stats&view=landing_page"><strong>By Landing Page</strong></a></li>
+												</ul>
+											</li>
+											<li>
+												
+												<a href="internal.php?page=stats&view=subid" class="isParent"><strong>By SubID<span class="parent-triangle"></span></strong></a>
+												<ul class="sub-nav-child">
+													<li><a href="internal.php?page=stats&view=subidset"><strong>By SubID Set</strong></a></li>
+													<li><a href="internal.php?page=stats&view=subid"><strong>By SubID</strong></a></li>
+												</ul>
+											</li>
+											<li><a style="width:150px" href="internal.php?page=stats&view=country"><strong>By Demographic</strong></a></li>
+											<li>
+												<a href="internal.php?page=stats&view=adtool"><strong>By Creative</strong></a>
+											</li>
+											<li><a href="internal.php?page=stats&view=refurl"><strong>By Referring URL</strong></a></li>					<li><a href="internal.php?page=stats&view=additional_tracking"><strong>By Sub Affiliate</strong></a></li>
+											<li><a href="internal.php?page=stats&view=other"><strong>Other Income</strong></a></li>
+											<li><a href="internal.php?page=referrals"><strong>Affiliate Referrals</strong></a></li>				</ul>
+										</li>
+										<li>
+											<a style="width:150px" href="internal.php?page=adtools"><strong>Creatives</strong></a>
+											<ul class="sub-nav">
+												<li>
+													<a href="internal.php?page=adtools&category=1" class="isParent"><strong>Banner Creatives<span class="parent-triangle"></span></strong></a>
+													<ul class="sub-nav-child">
+														<li><div class="mopad-up"></div><a href="internal.php?page=adtools&category=1&typeid=1"><strong>Image Banners</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=1&typeid=9"><strong>Flash Banners</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=1&typeid=8"><strong>Geo Targeted Banners</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=1&typeid=1000"><strong>Text Link Creative</strong></a></li>
+													</ul>
+												</li>
+												<li>
+													<a href="internal.php?page=adtools&category=3" class="isParent"><strong>Content<span class="parent-triangle"></span></strong></a>
+													<ul class="sub-nav-child">
+														<li><div class="mopad-up"></div><a href="internal.php?page=adtools&category=3&typeid=5"><strong>Feeds</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=4"><strong>Content Zips</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=6"><strong>Mailing Ads</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=11"><strong>Custom Dynamic Text Banners</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=12"><strong>Downloadable Videos</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=23"><strong>Embedded Videos</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=3&typeid=22"><strong>Hosted Videos</strong></a></li>
+													</ul>
+												</li>
+												<li>
+													<a href="internal.php?page=adtools&category=5" class="isParent"><strong>Interactives<span class="parent-triangle"></span></strong></a>
+													<ul class="sub-nav-child">
+														<li><div class="mopad-up"></div><a href="internal.php?page=adtools&category=5&typeid=7"><strong>Page Peel Ads</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=5&typeid=18"><strong>IM Popups</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=5&typeid=19"><strong>Footer Ads</strong></a></li>
+													</ul>
+												</li>
+												<li>
+													<a href="internal.php?page=adtools&category=6" class="isParent"><strong>Page Advertisements<span class="parent-triangle"></span></strong></a>
+													<ul class="sub-nav-child">
+														<li><div class="mopad-up"></div><a href="internal.php?page=adtools&category=6&typeid=3"><strong>Half Page / Full Page Ads</strong></a></li>
+														<li><div class="mopad-left"></div><a href="internal.php?page=adtools&category=6&typeid=21"><strong>Page Overlay Ads</strong></a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a style="width:150px"  href="internal.php?page=account"><strong>My Account</strong></a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="two-box" id="hs-box">
-						<div class="top-box" id="list-box"><h1>Today's Stats</h1></div>
-						<div class="bottom-box">
-						<div class="stats-container">
-								<div class="stats-box">
-									<h2>Hits</h2>
-									<h1>8</h1>
-
+					<div class="flex-container" id="main">
+						<div class="row flex-container" id="two-column">
+							<div class="two-box" id="offer-box">
+								<div class="top-box"><h1>Offers</h1></div>
+								<div class="bottom-box">
+									<ol class="stats-bar" id="offer-list">
+										<li class="stats-item" id="offer-item">Lorem ipsum.</li>
+										<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
+										<li class="stats-item" id="offer-item">Eaque, cumque?</li>
+										<li class="stats-item" id="offer-item">Tempora, minima!</li>
+										<li class="stats-item" id="offer-item">Ea, nostrum!</li>
+									</ol>
 								</div>
-								<div class="stats-box">
-									<h2>Convs</h2>
-									<h1>3</h1>
+							</div>
+							<div class="two-box" id="hs-box">
+								<div class="top-box" id="list-box"><h1>Today's Stats</h1></div>
+								<div class="bottom-box">
+									<div class="stats-container">
+										<div class="stats-box">
+											<h1>Hits</h1>
+											<h1>8</h1>
+										</div>
+										<div class="stats-box">
+											<h1>Convs</h1>
+											<h1>3</h1>
+										</div>
+										<div class="stats-box">
+											<h1>Payout</h1>
+											<h1>$189</h1>
+										</div>
+										<div class="stats-box">
+											<h1>EPC</h1>
+											<h1>8</h1>
+										</div>
+									</div>
 								</div>
-								<div class="stats-box">
-									<h2>Payout</h2>
-									<h1>$189</h1>
-								</div>
-								<div class="stats-box">
-									<h2>EPC</h2>
-									<h1>8</h1>
-								</div>
-							</div>	
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row flex-container" id="main-column">
-					<div id="graph-box">
-						<img src="img/line-graph.png">
-					</div>
-				</div>
-				<div class="row flex-container" id="three-column">
-					<div class="three-box" id="news">
-						<div class="top-box"><h1>News</h1></div>
-						<div class="bottom-box">
-							<ul class="news">
-								<li class="news-item">Lorem ipsum dolor sit.</li>
-								<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
-								<li class="news-item">Voluptatum veritatis iste ab.</li>
-								<li class="news-item">Laudantium et veniam asperiores?</li>
-								<li class="news-item">Voluptatum consectetur, pariatur optio?</li>
-							</ul>
+						<div class="row flex-container" id="main-column">
+							<div class="graph-box" id="period-graph">
+								<img src="img/line-graph.png">
+							</div>
+							<div class="graph-box" id="hourly-graph"></div>
 						</div>
-					</div>
-					<div class="three-box" id="paysum">
-						<div class="top-box"><h1>Payment Summary</h1></div>
-						<div class="bottom-box">
-						<ol class="stats-bar" id="offer-list">
-								<li class="stats-item" id="offer-item">Lorem ipsum.</li>
-								<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
-								<li class="stats-item" id="offer-item">Eaque, cumque?</li>
-								<li class="stats-item" id="offer-item">Tempora, minima!</li>
-								<li class="stats-item" id="offer-item">Ea, nostrum!</li>
-							</ol></div>
-					</div>
-					<div class="three-box" id="contact">
-						<div class="top-box"><h1>Agent Contact</h1></div>
-						<div class="bottom-box"><h2>Lorem ipsum dolorum</h2></div>
-					</div>
-				</div>
-			</div>
-			<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-		</body>
-	</html>
+						<div class="row flex-container" id="three-column">
+							<div class="three-box" id="news">
+								<div class="top-box"><h1>News</h1></div>
+								<div class="bottom-box">
+									<ul class="news">
+										<li class="news-item">Lorem ipsum dolor sit.</li>
+										<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
+										<li class="news-item">Voluptatum veritatis iste ab.</li>
+										<li class="news-item">Laudantium et veniam asperiores?</li>
+										<li class="news-item">Voluptatum consectetur, pariatur optio?</li>
+									</ul>
+								</div>
+							</div>
+							<div class="three-box" id="paysum">
+								<div class="top-box"><h1>Payment Summary</h1></div>
+								<div class="bottom-box">
+									<ol class="stats-bar" id="offer-list">
+										<li class="stats-item" id="offer-item">Lorem ipsum.</li>
+										<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
+										<li class="stats-item" id="offer-item">Eaque, cumque?</li>
+										<li class="stats-item" id="offer-item">Tempora, minima!</li>
+										<li class="stats-item" id="offer-item">Ea, nostrum!</li>
+									</ol></div>
+								</div>
+								<div class="three-box" id="contact">
+									<div class="top-box"><h1>Agent Contact</h1></div>
+									<div class="bottom-box"><h2>Lorem ipsum dolorum</h2></div>
+								</div>
+							</div>
+						</div>
+						<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+					</body>
+				</html>

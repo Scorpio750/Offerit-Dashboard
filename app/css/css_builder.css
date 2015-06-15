@@ -310,6 +310,144 @@ form, fieldset {
 .quicklink-title.startpage {
   font-weight: bold; }
 
+.nav-bar {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 1232px;
+  height: 62px; }
+
+.nav-bar .hold {
+  padding: 0 1px 3px;
+  width: 1230px;
+  height: 56px;
+  background: url(../product_images/bg-nav-gradient.png) repeat-x #8CC63F;
+  border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px; }
+
+#nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  position: relative; }
+
+#nav ul {
+  position: absolute; }
+
+#nav li {
+  margin-left: -2px;
+  padding-left: 2px;
+  float: left;
+  display: inline;
+  background: url(../product_images/sep-nav.png) repeat-y;
+  vertical-align: top;
+  height: 59px;
+  position: relative; }
+
+#nav li.first-child {
+  margin: 0;
+  padding: 0;
+  background: none; }
+
+#nav li a {
+  float: left;
+  padding: 13px 0px 0px 0px;
+  font-size: 11px;
+  line-height: 16px;
+  color: #FFFFFF;
+  height: 46px;
+  cursor: pointer;
+  position: relative;
+  width: 246px; }
+
+#nav li a:hover {
+  text-decoration: none;
+  color: #FFFFFF; }
+
+#nav li a strong {
+  display: block;
+  padding: 0 10px 0 18px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFFFFF; }
+
+#nav li a:hover strong {
+  color: #FFFFFF; }
+
+#nav li a span {
+  display: block;
+  padding: 1px 10px 0 18px;
+  line-height: 13px; }
+
+#nav .sub-nav,
+#nav .sub-nav-child {
+  position: absolute;
+  float: none;
+  display: none;
+  background: url("../product_images/sub-nav-gradient.png") repeat #8CC63F;
+  border: 1px #5A8128 solid;
+  padding: 0px;
+  font-size: 11px; }
+
+#nav .sub-nav {
+  top: 59px;
+  z-index: 1000;
+  left: 2px;
+  padding-top: 2px;
+  width: 98%; }
+
+#nav .sub-nav-child {
+  top: -1px;
+  left: 0px;
+  padding-top: 0px; }
+
+#nav .sub-nav li,
+#nav .sub-nav-child li {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin-left: 0px;
+  background: url(../product_images/sub-nav-sep.png) repeat-x; }
+
+#nav .sub-nav li:first-child,
+#nav .sub-nav-child li:first-child {
+  background: none; }
+
+#nav .sub-nav li a,
+#nav .sub-nav-child li a {
+  height: 18px;
+  padding: 6px 0px 6px 0px;
+  width: 100%; }
+
+#nav .sub-nav li .isParent {
+  background: url(../product_images/sub-nav-arrow.png) no-repeat 95% center; }
+
+#nav .sub-nav-child li a {
+  min-width: 150px; }
+
+#nav .sub-nav-child li a {
+  padding-right: 12px; }
+
+#nav .sub-nav li:hover,
+#nav .sub-nav-child li:hover {
+  background: #8CC63F; }
+
+#nav .sub-nav li a strong,
+#nav .sub-nav-child li a strong {
+  padding: 0 0px 0 18px;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  color: #FFFFFF; }
+
+#nav .sub-nav li a:hover,
+#nav .sub-nav-child li a:hover {
+  color: #FFFFFF;
+  text-decoration: none; }
+
 #main {
   margin: 0 auto;
   width: 1240px;
@@ -340,12 +478,12 @@ form, fieldset {
 
 .top-box {
   height: 25%;
-  background-color: #A1E75E;
+  background-color: #90cf54;
   border-top-left-radius: 13px; }
 
 .bottom-box {
   height: 75%;
-  background-color: #70A141;
+  background-color: #73a543;
   border-bottom-right-radius: 13px;
   overflow: auto; }
 
@@ -374,9 +512,9 @@ form, fieldset {
   flex-grow: 3;
   margin-left: 1em; }
   #two-column #hs-box .top-box {
-    background-color: #d7d75d; }
+    background-color: #ff6666; }
   #two-column #hs-box .bottom-box {
-    background-color: #a8a84a;
+    background-color: #cc5151;
     line-height: 2em; }
   #two-column #hs-box .stats-container {
     align-items: stretch;
@@ -396,11 +534,11 @@ form, fieldset {
     flex-basis: 100%;
     display: flex;
     justify-content: center; }
-  #main-column #graph-box {
+  #main-column .graph-box {
     padding: 1em;
     flex-grow: 1;
     flex-basis: 1em; }
-    #main-column #graph-box img {
+    #main-column .graph-box img {
       width: 100%;
       height: 100%; }
 
@@ -411,11 +549,15 @@ form, fieldset {
     margin: 0 10 10 0;
     width: 30%;
     height: 70%; }
+  #three-column #news .top-box {
+    background-color: #90cf54; }
+  #three-column #news .bottom-box {
+    background-color: #73a543; }
   #three-column #paysum .top-box {
-    background-color: #5ea1e7; }
+    background-color: #5490cf; }
   #three-column #paysum .bottom-box {
-    background-color: #4b80b8; }
+    background-color: #4373a5; }
   #three-column #contact .top-box {
-    background-color: #e75ea1; }
+    background-color: #9354cf; }
   #three-column #contact .bottom-box {
-    background-color: #b84b80; }
+    background-color: #7543a5; }
