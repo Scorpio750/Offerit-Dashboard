@@ -5,8 +5,39 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
 		<title>OFFERIT</title>
 		<link rel="stylesheet" type="text/css" href="css/css_builder.css">
-		<link rel="stylesheet" href="img/font-awesome-4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 		<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
+		<!--Load the AJAX API-->
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+		// Load the Visualization API and the piechart package.
+		google.load('visualization', '1.0', {'packages':['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.setOnLoadCallback(drawChart);
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		function drawChart() {
+		// Create the data table.
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Topping');
+		data.addColumn('number', 'Slices');
+		data.addRows([
+		['Mushrooms', 3],
+		['Onions', 1],
+		['Olives', 1],
+		['Zucchini', 1],
+		['Pepperoni', 2]
+		]);
+		// Set chart options
+		var options = {'title':'How Much Pizza I Ate Last Night',
+		'width':400,
+		'height':300};
+		// Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
+		}
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -161,101 +192,109 @@
 											<i class="fa fa-square-o fa-stack-2x"></i>
 											<i class="fa fa-exchange fa-stack-1x"></i>
 										</span>
-										<h1>Offers</h1>
-									</header>
-								</div>
-								<div class="bottom-box">
-									<ol class="stats-bar" id="offer-list">
-										<li class="stats-item" id="offer-item">Lorem ipsum.</li>
-										<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
-										<li class="stats-item" id="offer-item">Eaque, cumque?</li>
-										<li class="stats-item" id="offer-item">Tempora, minima!</li>
-										<li class="stats-item" id="offer-item">Ea, nostrum!</li>
-									</ol>
-								</div>
-							</div>
-							<div class="two-box" id="hs-box">
-								<div class="top-box" id="list-box">
-									<header>
-										<span class="icon fa-stack fa-lg">
-											<i class="fa fa-square-o fa-stack-2x"></i>
-											<i class="fa fa-bars fa-stack-1x"></i>
-										</span>
-										<h2>Today's Stats</h2>
-									</header>
-								</div>
-								<div class="bottom-box">
-									<div class="stats-container">
-										<div class="stats-box">
-											<h2>Hits</h2>
-											<h2>8</h2>
-										</div>
-										<div class="stats-box">
-											<h2>Convs</h2>
-											<h2>3</h2>
-										</div>
-										<div class="stats-box">
-											<h2>Payout</h2>
-											<h2>$189</h2>
-										</div>
-										<div class="stats-box">
-											<h2>EPC</h2>
-											<h2>8</h2>
-										</div>
+										<a href="">
+											<h2>Offers</h2>
+										</a>									</header>
+									</div>
+									<div class="bottom-box">
+										<ol class="stats-bar" id="offer-list">
+											<li class="stats-item" id="offer-item">Lorem ipsum.</li>
+											<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
+											<li class="stats-item" id="offer-item">Eaque, cumque?</li>
+											<li class="stats-item" id="offer-item">Tempora, minima!</li>
+											<li class="stats-item" id="offer-item">Ea, nostrum!</li>
+										</ol>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row flex-container" id="main-column">
-							<div class="graph-box" id="period-graph">
-								<img src="img/line-graph.png">
-							</div>
-							<div class="graph-box" id="hourly-graph">
-								<img src="img/line-graph.png" alt="" />
-							</div>
-						</div>
-						<div class="row flex-container" id="three-column">
-							<div class="three-box" id="news">
-								<div class="top-box">
-									<header>
-										<h2>News</h2>
-									</header>
-								</div>
-								<div class="bottom-box">
-									<ul class="news">
-										<li class="news-item">Lorem ipsum dolor sit.</li>
-										<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
-										<li class="news-item">Voluptatum veritatis iste ab.</li>
-										<li class="news-item">Laudantium et veniam asperiores?</li>
-										<li class="news-item">Voluptatum consectetur, pariatur optio?</li>
-									</ul>
-								</div>
-							</div>
-							<div class="three-box" id="paysum">
-								<div class="top-box">
-									<header>
-										<h2>Payment Summary</h2>
-									</header>
-								</div>
-								<div class="bottom-box">
-									<ol class="stats-bar" id="offer-list">
-										<li class="stats-item" id="offer-item">Lorem ipsum.</li>
-										<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
-										<li class="stats-item" id="offer-item">Eaque, cumque?</li>
-										<li class="stats-item" id="offer-item">Tempora, minima!</li>
-										<li class="stats-item" id="offer-item">Ea, nostrum!</li>
-									</ol></div>
-								</div>
-								<div class="three-box" id="contact">
-									<div class="top-box">
+								<div class="two-box" id="hs-box">
+									<div class="top-box" id="list-box">
 										<header>
-											<h2>Agent Contact</h2>
-										</header>
+											<span class="icon fa-stack fa-lg">
+												<i class="fa fa-square-o fa-stack-2x"></i>
+												<i class="fa fa-bars fa-stack-1x"></i>
+											</span>
+											<a href="">
+												<h2>Today's Stats</h2>
+											</a>									</header>
+										</div>
+										<div class="bottom-box">
+											<div class="stats-container">
+												<div class="stats-box">
+													<h2>Hits</h2>
+													<h2>8</h2>
+												</div>
+												<div class="stats-box">
+													<h2>Convs</h2>
+													<h2>3</h2>
+												</div>
+												<div class="stats-box">
+													<h2>Payout</h2>
+													<h2>$189</h2>
+												</div>
+												<div class="stats-box">
+													<h2>EPC</h2>
+													<h2>8</h2>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="bottom-box"><h2>Lorem ipsum dolorum</h2></div>
 								</div>
-							</div>
-						</div>
-						<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-					</body>
-				</html>
+								<div class="row flex-container" id="main-column">
+									<div class="graph-box" id="period-graph">
+										<div id="chart_div"></div>
+									</div>
+									<div class="graph-box" id="hourly-graph">
+										<div id="chart_div"></div>
+									</div>
+								</div>
+								<div class="row flex-container" id="three-column">
+									<div class="three-box" id="news">
+										<div class="top-box">
+											<header>
+												<a href="">
+													<h2>News</h2>
+												</a>
+											</header>
+										</div>
+										<div class="bottom-box">
+											<ul class="news">
+												<li class="news-item">Lorem ipsum dolor sit.</li>
+												<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
+												<li class="news-item">Voluptatum veritatis iste ab.</li>
+												<li class="news-item">Laudantium et veniam asperiores?</li>
+												<li class="news-item">Voluptatum consectetur, pariatur optio?</li>
+											</ul>
+										</div>
+									</div>
+									<div class="three-box" id="paysum">
+										<div class="top-box">
+											<header>
+												<a href="">
+													<h2>Payment Summary</h2>
+												</a>
+											</header>
+										</div>
+										<div class="bottom-box">
+											<ol class="stats-bar" id="offer-list">
+												<li class="stats-item" id="offer-item">Lorem ipsum.</li>
+												<li class="stats-item" id="offer-item">Fugiat, sequi!</li>
+												<li class="stats-item" id="offer-item">Eaque, cumque?</li>
+												<li class="stats-item" id="offer-item">Tempora, minima!</li>
+												<li class="stats-item" id="offer-item">Ea, nostrum!</li>
+											</ol></div>
+										</div>
+										<div class="three-box" id="contact">
+											<div class="top-box">
+												<header>
+													<a href="">
+														<h2>Agent Contact</h2>
+													</a>
+												</header>
+											</div>
+											<div class="bottom-box"><h2>Lorem ipsum dolorum</h2></div>
+										</div>
+									</div>
+								</div>
+								<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+							</body>
+						</html>

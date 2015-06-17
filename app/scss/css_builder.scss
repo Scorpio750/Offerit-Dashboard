@@ -1,4 +1,4 @@
-$font-stack: 100% Helvetica, sans-serif;
+$font-stack: 100% white Helvetica, sans-serif;
 $font-color: #ccc;
 $off-white: #E6E6E6;
 $prim-green: #90cf54;
@@ -19,6 +19,7 @@ $prim-bada55: #bada55;
 $sec-bada55: #94ae44;
 
 body {
+    font: $font-stack;
     margin: 0;
     color: white;
     font: $font-stack;
@@ -29,11 +30,13 @@ body {
 }
 
 a {
+    color: white;
     font-weight: bolder;
-    color: #224A12;
+    text-decoration: none;
+    transition: color .2s ease-in-out;
     &:hover {
-        text-decoration: none;
-        color: #133917;
+        color: black;
+        padding: 0.5rem;
     }
 }
 
@@ -416,9 +419,9 @@ form, fieldset {
                 transition: color .5s, font-size .5s;
             }
             &:hover strong {
-               color: white;
-               //color: $prim-bada55;
-               font-size: 22px;
+                color: white;
+                //color: $prim-bada55;
+                font-size: 22px;
             }
             span {
                 display: block;
@@ -515,24 +518,13 @@ form, fieldset {
 }
 
 .top-box {
-    &:before {
-        content: " ";
-    }
     height: 25%;
     background-color: $prim-green;
     border-top-left-radius: 13px;
     header {
+        height: 100%;
         text-align: center;
         position: relative;
-        h2, h1 {
-            transition: all .2s ease-in-out;
-            width: auto;
-            &:hover {
-                transform: scale(1.05);
-                cursor: pointer;
-                color: black;
-            }
-        }
     }
     .icon {
         position: absolute;
@@ -541,7 +533,7 @@ form, fieldset {
         bottom: 1em;
         transition: all .2s ease-in-out;
         &:hover {
-            transform: scale(1.1);
+            // transform: scale(1.1);
             cursor: pointer;
             color: black;
         }
@@ -574,20 +566,20 @@ form, fieldset {
 
 #two-column {
     margin-bottom: 3em;
-    height: 100%;
+    height: 200px;
     #offer-box {
         flex-grow: 1;
         flex-basis: 30%;
         margin-right: 1.5em;
         .top-box {
-            background-color: $prim-bada55;
+            background-color: $prim-green;
         }
         .bottom-box {
-            background-color: $sec-bada55;
+            background-color: $sec-green;
         }
     }
     #hs-box {
-        flex-grow: 9;
+        flex-grow: 4;
         margin-left: 1em;
         .top-box {
             flex-basis: 100%;
@@ -620,8 +612,8 @@ form, fieldset {
     }
     .graph-box {
         box-sizing: border-box;
-        background-color: #ccc;
-        padding: 10px;
+        background-color: #aaa;
+        padding: 1em;
         // border: 15px solid slategray;
         flex-grow: 1;
         flex-basis: 1em;
