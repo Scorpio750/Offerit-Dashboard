@@ -8,68 +8,7 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 		<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
 		<!--Load the AJAX API-->
-		<script type="text/javascript"
-		src="https://www.google.com/jsapi?autoload={
-		'modules':[{
-		'name':'visualization',
-		'version':'1',
-		'packages':['line']
-		}]
-		}"></script>
-		<script type="text/javascript">
-		google.setOnLoadCallback(drawChart);
-		function drawChart() {
-		var p_data = google.visualization.arrayToDataTable([
-		['Year', 'Sales', 'Expenses'],
-		['2004',  1000,      400],
-		['2005',  1170,      460],
-		['2006',  660,       1120],
-		['2007',  1030,      540]
-		]);
-		var h_data = new google.visualization.DataTable();
-		h_data.addColumn('number', 'Day');
-		h_data.addColumn('number', 'Guardians of the Galaxy');
-		h_data.addColumn('number', 'The Avengers');
-		h_data.addColumn('number', 'Transformers: Age of Extinction');
-		h_data.addRows([
-		[1,  37.8, 80.8, 41.8],
-		[2,  30.9, 69.5, 32.4],
-		[3,  25.4,   57, 25.7],
-		[4,  11.7, 18.8, 10.5],
-		[5,  11.9, 17.6, 10.4],
-		[6,   8.8, 13.6,  7.7],
-		[7,   7.6, 12.3,  9.6],
-		[8,  12.3, 29.2, 10.6],
-		[9,  16.9, 42.9, 14.8],
-		[10, 12.8, 30.9, 11.6],
-		[11,  5.3,  7.9,  4.7],
-		[12,  6.6,  8.4,  5.2],
-		[13,  4.8,  6.3,  3.6],
-		[14,  4.2,  6.2,  3.4]
-		]);
-		var p_options = {
-			chart: { 
-				title: 'Period Statistics'
-			},
-			legend: { 'position': 'right' },
-		}
-		var h_options = {
-			chart: {
-				title: 'Hourly Statistics'
-			},
-			chartArea: {
-				width: 200,
-				height: '80%'
-			},
-			legend: { 'position': 'right' }
-		};
-		var p_chart = new google.charts.Line(document.getElementById('p_chart'));
-		var h_chart = new google.charts.Line(document.getElementById('h_chart'));
-		
-		p_chart.draw(p_data, p_options);
-		h_chart.draw(h_data, h_options);
-		}
-		</script>
+
 	</head>
 	<body>
 		<div id="wrapper">

@@ -35,7 +35,6 @@ a {
     text-decoration: none;
     transition: all .2s ease-in-out;
     &:hover {
-        padding: 0.5rem;
         color: black;
     }
 }
@@ -520,7 +519,7 @@ form, fieldset {
 .top-box {
     height: 25%;
     background-color: $prim-green;
-    border-top-left-radius: 12px;
+    border-top-left-radius: .8em;
     header {
         height: 100%;
         text-align: center;
@@ -528,7 +527,7 @@ form, fieldset {
     }
     .icon {
         position: absolute;
-        top: -12px;
+        top: -.5em;
         right: .5em;
         bottom: 1em;
         transition: all .2s ease-in-out;
@@ -543,7 +542,7 @@ form, fieldset {
 .bottom-box {
     height: 75%;
     background-color: $sec-green;
-    border-bottom-right-radius: 12px;
+    border-bottom-right-radius: .8em;
     overflow: auto;
 }
 
