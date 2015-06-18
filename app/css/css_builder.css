@@ -12,10 +12,10 @@ a {
   color: white;
   font-weight: bolder;
   text-decoration: none;
-  transition: color .2s ease-in-out; }
+  transition: all .2s ease-in-out; }
   a:hover {
-    color: black;
-    padding: 0.5rem; }
+    padding: 0.5rem;
+    color: black; }
 
 li {
   text-align: left; }
@@ -340,7 +340,7 @@ form, fieldset {
         transition: color .5s, font-size .5s; }
       #nav li a:hover strong {
         color: white;
-        font-size: 22px; }
+        font-size: 24px; }
       #nav li a span {
         display: block;
         padding: 1px 10px 0 18px;
@@ -394,14 +394,14 @@ form, fieldset {
 
 #main {
   margin: 0 auto;
-  width: 1240px;
+  width: 77.5em;
   padding-top: 5em;
   text-align: center; }
 
 .flex-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: stretch;
   align-content: space-between; }
   .flex-container .row {
@@ -419,7 +419,7 @@ form, fieldset {
 .top-box {
   height: 25%;
   background-color: #90cf54;
-  border-top-left-radius: 13px; }
+  border-top-left-radius: 12px; }
   .top-box header {
     height: 100%;
     text-align: center;
@@ -437,13 +437,12 @@ form, fieldset {
 .bottom-box {
   height: 75%;
   background-color: #73a543;
-  border-bottom-right-radius: 13px;
+  border-bottom-right-radius: 12px;
   overflow: auto; }
 
 .stats-bar {
   flex-grow: 1;
   flex-basis: 1em;
-  margin: 10px;
   /* background-color: $off-white; */ }
 
 .stats-container {
@@ -479,25 +478,31 @@ form, fieldset {
 
 #main-column {
   height: auto;
-  margin-bottom: 3em; }
-  #main-column .top-box {
-    background-color: #54cf55; }
-  #main-column .bottom-box {
-    background-color: #41a142; }
-  #main-column .top-box, #main-column .bottom-box {
-    flex-basis: 100%;
-    display: flex;
-    justify-content: center; }
+  margin-bottom: 3em;
+  /*.top-box {
+      background-color: $prim-anal-1;
+  }
+  .bottom-box {
+      background-color: $sec-anal-1;
+  }
+  .top-box, .bottom-box {
+      flex-basis: 100%;
+      display: flex;
+      justify-content: center;
+  }*/ }
   #main-column .graph-box {
     box-sizing: border-box;
-    background-color: #aaa;
-    padding: 1em;
+    background-color: #ccc;
+    padding: 1.25em;
+    height: 300px;
     flex-grow: 1;
     flex-basis: 1em; }
-    #main-column .graph-box img {
+    #main-column .graph-box #p_chart, #main-column .graph-box #h_chart {
       width: 100%;
-      height: 100%;
-      margin-bottom: -2px; }
+      height: 100%; }
+  #main-column #v_divider {
+    width: .5em;
+    background-color: #bbb; }
 
 #three-column {
   align-items: stretch;

@@ -33,10 +33,10 @@ a {
     color: white;
     font-weight: bolder;
     text-decoration: none;
-    transition: color .2s ease-in-out;
+    transition: all .2s ease-in-out;
     &:hover {
-        color: black;
         padding: 0.5rem;
+        color: black;
     }
 }
 
@@ -421,7 +421,7 @@ form, fieldset {
             &:hover strong {
                 color: white;
                 //color: $prim-bada55;
-                font-size: 22px;
+                font-size: 24px;
             }
             span {
                 display: block;
@@ -491,7 +491,7 @@ form, fieldset {
 
 #main {
     margin: 0 auto;
-    width: 1240px;
+    width: 77.5em;
     padding-top: 5em;
     text-align: center;
 }
@@ -499,7 +499,7 @@ form, fieldset {
 .flex-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: stretch;
     align-content: space-between;
     .row {
@@ -520,7 +520,7 @@ form, fieldset {
 .top-box {
     height: 25%;
     background-color: $prim-green;
-    border-top-left-radius: 13px;
+    border-top-left-radius: 12px;
     header {
         height: 100%;
         text-align: center;
@@ -543,14 +543,13 @@ form, fieldset {
 .bottom-box {
     height: 75%;
     background-color: $sec-green;
-    border-bottom-right-radius: 13px;
+    border-bottom-right-radius: 12px;
     overflow: auto;
 }
 
 .stats-bar {
     flex-grow: 1;
     flex-basis: 1em;
-    margin: 10px;
     /* background-color: $off-white; */
 }
 
@@ -599,7 +598,7 @@ form, fieldset {
 #main-column {
     height: auto;
     margin-bottom: 3em;
-    .top-box {
+    /*.top-box {
         background-color: $prim-anal-1;
     }
     .bottom-box {
@@ -609,19 +608,23 @@ form, fieldset {
         flex-basis: 100%;
         display: flex;
         justify-content: center;
-    }
+    }*/
     .graph-box {
         box-sizing: border-box;
-        background-color: #aaa;
-        padding: 1em;
+        background-color: #ccc;
+        padding: 1.25em;
         // border: 15px solid slategray;
+        height: 300px;
         flex-grow: 1;
         flex-basis: 1em;
-        img {
+        #p_chart, #h_chart {
             width: 100%;
             height: 100%;
-            margin-bottom: -2px;
         }
+    }
+    #v_divider {
+        width: .5em;
+        background-color: #bbb;
     }
 }
 
