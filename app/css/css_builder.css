@@ -339,7 +339,7 @@ form, fieldset {
         transition: color .5s, font-size .5s; }
       #nav li a:hover strong {
         color: white;
-        font-size: 24px; }
+        font-size: 1.35em; }
       #nav li a span {
         display: block;
         padding: 1px 10px 0 18px;
