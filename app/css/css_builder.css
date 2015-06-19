@@ -12,9 +12,9 @@ a {
   color: white;
   font-weight: bolder;
   text-decoration: none;
-  transition: all .2s ease-in-out; }
+  transition: all .3s ease-in-out; }
   a:hover {
-    color: black; }
+    color: #222; }
 
 li {
   text-align: left; }
@@ -339,7 +339,8 @@ form, fieldset {
         transition: color .5s, font-size .5s; }
       #nav li a:hover strong {
         color: white;
-        font-size: 1.35em; }
+        font-size: 1.35em;
+        opacity: 1; }
       #nav li a span {
         display: block;
         padding: 1px 10px 0 18px;
@@ -428,7 +429,7 @@ form, fieldset {
     top: -.5em;
     right: .5em;
     bottom: 1em;
-    transition: all .2s ease-in-out; }
+    transition: all .3s ease-in-out; }
     .top-box .icon:hover {
       cursor: pointer;
       color: black; }
@@ -450,7 +451,21 @@ form, fieldset {
   justify-content: space-around; }
 
 .stats-box {
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  transition: all .4s ease-in-out; }
+  .stats-box .left-stats-box {
+    flex-grow: 1;
+    padding-top: 1.5em;
+    padding-right: 1.2em; }
+    .stats-box .left-stats-box i {
+      opacity: 0.4; }
+  .stats-box .right-stats-box {
+    flex-grow: 1; }
+  .stats-box:hover {
+    color: black;
+    opacity: 0.6; }
 
 #two-column {
   margin-bottom: 3em;

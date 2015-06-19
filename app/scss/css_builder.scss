@@ -33,9 +33,9 @@ a {
     color: white;
     font-weight: bolder;
     text-decoration: none;
-    transition: all .2s ease-in-out;
+    transition: all .3s ease-in-out;
     &:hover {
-        color: black;
+        color: #222;
     }
 }
 
@@ -421,6 +421,7 @@ form, fieldset {
                 color: white;
                 //color: $prim-bada55;
                 font-size: 1.35em;
+                opacity: 1;
             }
             span {
                 display: block;
@@ -530,9 +531,9 @@ form, fieldset {
         top: -.5em;
         right: .5em;
         bottom: 1em;
-        transition: all .2s ease-in-out;
+        transition: all .3s ease-in-out;
         &:hover {
-            // transform: scale(1.1);
+            // transform: scale(1.05);
             cursor: pointer;
             color: black;
         }
@@ -560,6 +561,24 @@ form, fieldset {
 
 .stats-box {
     text-align: center;
+    display: flex;
+    justify-content: space-around;
+    .left-stats-box {
+        flex-grow: 1;
+        padding-top: 1.5em;
+        padding-right: 1.2em;
+        i {
+            opacity: 0.4;
+        }
+    }
+    .right-stats-box {
+        flex-grow: 1;
+    }
+    transition: all .4s ease-in-out;
+    &:hover {
+            color: black;
+            opacity: 0.6;
+    }
 }
 
 #two-column {
