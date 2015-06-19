@@ -11,10 +11,7 @@ body {
 a {
   color: white;
   font-weight: bolder;
-  text-decoration: none;
-  transition: all .3s ease-in-out; }
-  a:hover {
-    color: #222; }
+  text-decoration: none; }
 
 li {
   text-align: left; }
@@ -395,7 +392,7 @@ form, fieldset {
 #main {
   margin: 0 auto;
   width: 77.5em;
-  padding-top: 5em;
+  padding-top: 12em;
   text-align: center; }
 
 .flex-container {
@@ -405,7 +402,7 @@ form, fieldset {
   align-items: stretch;
   align-content: space-between; }
   .flex-container .row {
-    height: 300px;
+    height: 18em;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 100%;
@@ -414,7 +411,7 @@ form, fieldset {
 
 .top-box, .bottom-box {
   padding: 5px;
-  line-height: 20px; }
+  line-height: 1.25em; }
 
 .top-box {
   height: 25%;
@@ -433,6 +430,10 @@ form, fieldset {
     .top-box .icon:hover {
       cursor: pointer;
       color: black; }
+  .top-box a {
+    transition: all .3s ease-in-out; }
+    .top-box a:hover {
+      transform: scale(1.1); }
 
 .bottom-box {
   height: 75%;
@@ -454,18 +455,16 @@ form, fieldset {
   text-align: center;
   display: flex;
   justify-content: space-around;
+  opacity: 0.6;
   transition: all .4s ease-in-out; }
   .stats-box .left-stats-box {
     flex-grow: 1;
     padding-top: 1.5em;
     padding-right: 1.2em; }
-    .stats-box .left-stats-box i {
-      opacity: 0.4; }
   .stats-box .right-stats-box {
     flex-grow: 1; }
   .stats-box:hover {
-    color: black;
-    opacity: 0.6; }
+    opacity: 1; }
 
 #two-column {
   margin-bottom: 3em;
@@ -483,37 +482,26 @@ form, fieldset {
     margin-left: 1em; }
     #two-column #hs-box .top-box {
       flex-basis: 100%;
-      background-color: #ff5656; }
+      background-color: #7ac5cd; }
     #two-column #hs-box .bottom-box {
       flex-basis: 100%;
       height: 100%;
       padding: 15px;
-      background-color: #cc4444; }
+      background-color: #619da4; }
 
 #main-column {
   height: auto;
-  margin-bottom: 3em;
-  /*.top-box {
-      background-color: $prim-anal-1;
-  }
-  .bottom-box {
-      background-color: $sec-anal-1;
-  }
-  .top-box, .bottom-box {
-      flex-basis: 100%;
-      display: flex;
-      justify-content: center;
-  }*/ }
+  margin-bottom: 3em; }
   #main-column .graph-box {
     box-sizing: border-box;
     background-color: #ccc;
     padding: 1.25em;
-    height: 300px;
+    height: 18em;
     flex-grow: 1;
     flex-basis: 1em; }
     #main-column .graph-box #p_chart, #main-column .graph-box #h_chart {
-      width: 100%;
-      height: 100%; }
+      width: 25em;
+      height: 16em; }
   #main-column #v_divider {
     width: .5em;
     background-color: #bbb; }
@@ -534,6 +522,6 @@ form, fieldset {
   #three-column #paysum .bottom-box {
     background-color: #4373a5; }
   #three-column #contact .top-box {
-    background-color: #9354cf; }
+    background-color: #a48961; }
   #three-column #contact .bottom-box {
-    background-color: #7543a5; }
+    background-color: #7b6749; }

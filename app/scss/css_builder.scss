@@ -11,10 +11,10 @@ $prim-anal-1: #54cf55;
 $sec-anal-1: #41a142;
 $prim-anal-2: #cecf54;
 $sec-anal-2: #a4a543;
-$prim-comp: #9354cf;
-$sec-comp: #7543a5;
-$prim-red: #ff5656;
-$sec-red: #cc4444;
+$prim-beige: #a48961;
+$sec-beige: #7b6749;
+$prim-cadet: #7ac5cd;
+$sec-cadet: #619da4;
 $prim-bada55: #bada55;
 $sec-bada55: #94ae44;
 
@@ -33,10 +33,6 @@ a {
     color: white;
     font-weight: bolder;
     text-decoration: none;
-    transition: all .3s ease-in-out;
-    &:hover {
-        color: #222;
-    }
 }
 
 li {
@@ -492,7 +488,7 @@ form, fieldset {
 #main {
     margin: 0 auto;
     width: 77.5em;
-    padding-top: 5em;
+    padding-top: 12em;
     text-align: center;
 }
 
@@ -503,7 +499,7 @@ form, fieldset {
     align-items: stretch;
     align-content: space-between;
     .row {
-        height: 300px;
+        height: 18em;
         flex-grow: 1;
         flex-shrink: 0;
         flex-basis: 100%;
@@ -514,7 +510,7 @@ form, fieldset {
 
 .top-box, .bottom-box {
     padding: 5px;
-    line-height: 20px;
+    line-height: 1.25em;
 }
 
 .top-box {
@@ -536,6 +532,12 @@ form, fieldset {
             // transform: scale(1.05);
             cursor: pointer;
             color: black;
+        }
+    }
+    a {
+        transition: all .3s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
         }
     }
 }
@@ -563,12 +565,12 @@ form, fieldset {
     text-align: center;
     display: flex;
     justify-content: space-around;
+            opacity: 0.6;
     .left-stats-box {
         flex-grow: 1;
         padding-top: 1.5em;
         padding-right: 1.2em;
         i {
-            opacity: 0.4;
         }
     }
     .right-stats-box {
@@ -576,8 +578,8 @@ form, fieldset {
     }
     transition: all .4s ease-in-out;
     &:hover {
-            color: black;
-            opacity: 0.6;
+            opacity: 1;
+
     }
 }
 
@@ -600,44 +602,34 @@ form, fieldset {
         margin-left: 1em;
         .top-box {
             flex-basis: 100%;
-            background-color: $prim-red;
+            background-color: $prim-cadet;
         }
         .bottom-box {
             flex-basis: 100%;
             height: 100%;
             padding: 15px;
-            background-color: $sec-red;
+            background-color: $sec-cadet;
         }
         .stats-container {}
     }
-    .two-box {}
+    .two-box {
+    }
 }
 
 #main-column {
     height: auto;
     margin-bottom: 3em;
-    /*.top-box {
-        background-color: $prim-anal-1;
-    }
-    .bottom-box {
-        background-color: $sec-anal-1;
-    }
-    .top-box, .bottom-box {
-        flex-basis: 100%;
-        display: flex;
-        justify-content: center;
-    }*/
-    .graph-box {
+   .graph-box {
         box-sizing: border-box;
         background-color: #ccc;
         padding: 1.25em;
         // border: 15px solid slategray;
-        height: 300px;
+        height: 18em;
         flex-grow: 1;
         flex-basis: 1em;
         #p_chart, #h_chart {
-            width: 100%;
-            height: 100%;
+            width: 25em;
+            height: 16em;
         }
     }
     #v_divider {
@@ -672,10 +664,10 @@ form, fieldset {
     }
     #contact {
         .top-box {
-            background-color: $prim-comp;
+            background-color: $prim-beige;
         }
         .bottom-box {
-            background-color: $sec-comp;
+            background-color: $sec-beige;
         }
     }
 }
