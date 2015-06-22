@@ -1,17 +1,19 @@
 body {
-  font: 100% white Helvetica, sans-serif;
+  font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif;
   margin: 0;
   color: white;
-  font: 100% white Helvetica, sans-serif;
+  font: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
-  font: 100% white Helvetica, sans-serif;
+  font: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif;
   animation: bg-move 5s; }
 
 a {
   color: white;
   font-weight: bolder;
   text-decoration: none; }
+  a:hover {
+    color: #333; }
 
 li {
   text-align: left; }
@@ -492,19 +494,25 @@ form, fieldset {
 #main-column {
   height: auto;
   margin-bottom: 3em; }
-  #main-column .graph-box {
+  #main-column .graph-box .top-box {
+    border-radius: 0em;
+    background-color: #aaa; }
+    #main-column .graph-box .top-box h2 {
+      color: #ddd; }
+  #main-column .graph-box .bottom-box {
+    border-radius: 0em;
     box-sizing: border-box;
     background-color: #ccc;
     padding: 1.25em;
     height: 18em;
     flex-grow: 1;
     flex-basis: 1em; }
-    #main-column .graph-box #p_chart, #main-column .graph-box #h_chart {
-      width: 25em;
-      height: 16em; }
+    #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
+      width: 35em;
+      height: 15.5em; }
   #main-column #v_divider {
     width: .5em;
-    background-color: #bbb; }
+    background-color: #888; }
 
 #three-column {
   align-items: stretch;

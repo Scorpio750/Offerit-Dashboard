@@ -1,4 +1,4 @@
-$font-stack: 100% white Helvetica, sans-serif;
+$font-stack: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $off-white: #E6E6E6;
 $prim-green: #90cf54;
@@ -19,7 +19,7 @@ $prim-bada55: #bada55;
 $sec-bada55: #94ae44;
 
 body {
-    font: $font-stack;
+    font-family: $font-stack;
     margin: 0;
     color: white;
     font: $font-stack;
@@ -33,6 +33,9 @@ a {
     color: white;
     font-weight: bolder;
     text-decoration: none;
+    &:hover {
+        color: #333;
+    }
 }
 
 li {
@@ -565,21 +568,19 @@ form, fieldset {
     text-align: center;
     display: flex;
     justify-content: space-around;
-            opacity: 0.6;
+    opacity: 0.6;
     .left-stats-box {
         flex-grow: 1;
         padding-top: 1.5em;
         padding-right: 1.2em;
-        i {
-        }
+        i {}
     }
     .right-stats-box {
         flex-grow: 1;
     }
     transition: all .4s ease-in-out;
     &:hover {
-            opacity: 1;
-
+        opacity: 1;
     }
 }
 
@@ -612,29 +613,38 @@ form, fieldset {
         }
         .stats-container {}
     }
-    .two-box {
-    }
+    .two-box {}
 }
 
 #main-column {
     height: auto;
     margin-bottom: 3em;
-   .graph-box {
-        box-sizing: border-box;
-        background-color: #ccc;
-        padding: 1.25em;
-        // border: 15px solid slategray;
-        height: 18em;
-        flex-grow: 1;
-        flex-basis: 1em;
-        #p_chart, #h_chart {
-            width: 25em;
-            height: 16em;
+    .graph-box {
+        .top-box {
+            border-radius: 0em;
+            background-color: #aaa;
+            h2 {
+                color: #ddd;
+            }
+        }
+        .bottom-box {
+            border-radius: 0em;
+            box-sizing: border-box;
+            background-color: #ccc;
+            padding: 1.25em;
+            // border: 15px solid slategray;
+            height: 18em;
+            flex-grow: 1;
+            flex-basis: 1em;
+            #p_chart, #h_chart {
+                width: 35em;
+                height: 15.5em;
+            }
         }
     }
     #v_divider {
         width: .5em;
-        background-color: #bbb;
+        background-color: #888;
     }
 }
 
