@@ -12,8 +12,6 @@ a {
   color: white;
   font-weight: bolder;
   text-decoration: none; }
-  a:hover {
-    color: #333; }
 
 li {
   text-align: left; }
@@ -403,13 +401,14 @@ form, fieldset {
   justify-content: space-around;
   align-items: stretch;
   align-content: space-between; }
-  .flex-container .row {
-    height: 18em;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 100%;
-    align-items: stretch;
-    align-content: stretch; }
+
+.row {
+  height: 18em;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 100%;
+  align-items: stretch;
+  align-content: stretch; }
 
 .top-box, .bottom-box {
   padding: 5px;
@@ -423,6 +422,12 @@ form, fieldset {
     height: 100%;
     text-align: center;
     position: relative; }
+    .top-box header a {
+      opacity: 0.8;
+      transition: all .3s ease-in-out; }
+      .top-box header a:hover {
+        transform: scale(1.1);
+        opacity: 1; }
   .top-box .icon {
     position: absolute;
     top: -.5em;
@@ -432,10 +437,6 @@ form, fieldset {
     .top-box .icon:hover {
       cursor: pointer;
       color: black; }
-  .top-box a {
-    transition: all .3s ease-in-out; }
-    .top-box a:hover {
-      transform: scale(1.1); }
 
 .bottom-box {
   height: 75%;
@@ -493,7 +494,8 @@ form, fieldset {
 
 #main-column {
   height: auto;
-  margin-bottom: 3em; }
+  margin-bottom: 3em;
+  justify-content: center; }
   #main-column .graph-box .top-box {
     border-radius: 0em;
     background-color: #aaa; }
@@ -511,8 +513,8 @@ form, fieldset {
       width: 35em;
       height: 15.5em; }
   #main-column #v_divider {
-    width: .5em;
-    background-color: #888; }
+    width: 1em;
+    background-color: #999; }
 
 #three-column {
   align-items: stretch;

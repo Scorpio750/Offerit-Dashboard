@@ -9,7 +9,8 @@
 	<script src="js/bower_components/flot/jquery.js"></script>
 	<script src="js/bower_components/flot/jquery.flot.js"></script>
 	<script src="js/bower_components/flot.curvedlines/curvedLines.js"></script>
-
+	<!-- <script src="js/flotanimator/jquery.flot.animator.js"</script>
+	 -->
 	<script>
 		$(document).ready(function() {
 			var hits = [];
@@ -49,7 +50,15 @@
 						clickable: true
 					}
 				});
-			var h_plot = $.plot($("#h_chart"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });
+			var h_plot = $.plot($("#h_chart"), [ 
+					[[0, 0], [1, 1]] 
+					], { 
+						grid: {
+							backgroundColor: "#E6E6E6",
+							hoverable: true,
+							clickable: true
+						} 
+				});
 			$("<div id='tooltip'></div>").css({
 				position: "absolute",
 				display: "none",
@@ -349,22 +358,22 @@
 					</div>
 					<div id="v_divider"></div>
 					<div class="graph-box">
-					<div class="top-box">
-						<h2>Period Graph</h2>
-					</div>
-					<div class=" bottom-box" id="hourly-graph">
-						<div id="h_chart"></div>
-					</div>
+						<div class="top-box">
+							<h2>Period Graph</h2>
+						</div>
+						<div class=" bottom-box" id="hourly-graph">
+							<div id="h_chart"></div>
+						</div>
 					</div>
 				</div>
 				<!--Info Boxes-->
 				<div class="row flex-container" id="three-column">
 					<div class="three-box" id="news">
 						<div class="top-box">
-						<a href="">
-							<header>
-								<h2>News</h2>
-							</header>
+							<a href="">
+								<header>
+									<h2>News</h2>
+								</header>
 							</a>
 						</div>
 						<div class="bottom-box">

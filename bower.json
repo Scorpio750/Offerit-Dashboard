@@ -22,5 +22,6 @@
   ],
   "dependencies": {
     "flot.curvedlines": "~1.1.1"
+
   }
 }
