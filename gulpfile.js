@@ -1,16 +1,25 @@
 var gulp 		= require('gulp');
 var sass		= require('gulp-ruby-sass');
+var concat		= require('gulp-concat');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
+var debug = require('gulp-debug');
 
 gulp.task('sass', function() {
-	return sass('./app/scss/css_builder.scss')
-				.pipe(gulp.dest('app/css'))
+	return sass('./app/src/scss/css_builder.scss')
+				.pipe(gulp.dest('app/dist'))
 				.pipe(reload({ stream:true }));
 });
 
-// Static server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+
+gulp.task('scripts', function() {
+	return gulp.src(['app/src/js/bower_components/flot/jquery.js','app/src/js/bower_components/flot/jquery.flot.js', 'app/src/js/bower_components/flot/jquery.flot.*.js', 'app/src/js/flotanimator/jquery.flot.animator.js'])
+		.pipe(debug({title : 'unicorn'}))
+		.pipe(concat('app.js'))
+		.pipe(gulp.dest('app/dist'));
+});
+
+gulp.task('serve', ['sass', 'scripts'], function() {
 	browserSync.init({
 		server: {
 			baseDir: 'app'
@@ -18,12 +27,10 @@ gulp.task('serve', ['sass'], function() {
 		ghostMode: { scroll: false }
 	});
 
-	gulp.watch('app/scss/*.scss', ['sass']);
-	gulp.watch(['*.html', 'css/**/*.css', 'scripts/**/*.js'], {cwd: 'app'}, reload);
+	gulp.watch('app/src/scss/*.scss', ['sass']);
+	gulp.watch('app/src/js/**/*.js', ['scripts']);
+	gulp.watch(['dist/*.html', 'dist/css/**/*.css', 'scripts/**/*.js'], {cwd: 'app'}, reload);
 });
 
 gulp.task('ghostMode');
-
-
 gulp.task('default', ['serve']);
-
