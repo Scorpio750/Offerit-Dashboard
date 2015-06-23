@@ -496,11 +496,14 @@ form, fieldset {
   height: auto;
   margin-bottom: 3em;
   justify-content: center; }
+  #main-column .graph-box .top-box, #main-column .graph-box .bottom-box {
+    transition: all .15s ease-in-out; }
   #main-column .graph-box .top-box {
     border-radius: 0em;
     background-color: #aaa; }
     #main-column .graph-box .top-box h2 {
-      color: #ddd; }
+      color: #ddd;
+      transition: all .5s ease-in-out; }
   #main-column .graph-box .bottom-box {
     border-radius: 0em;
     box-sizing: border-box;
@@ -512,9 +515,20 @@ form, fieldset {
     #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
       width: 35em;
       height: 15.5em; }
+  #main-column .graph-box:hover .top-box {
+    background-color: #a6a6a6; }
+    #main-column .graph-box:hover .top-box h2 {
+      transform: scale(1.01);
+      transform: skew(720deg);
+      color: #E6E6E6; }
+  #main-column .graph-box:hover .bottom-box {
+    background-color: #c6c6c6; }
   #main-column #v_divider {
     width: 1em;
-    background-color: #999; }
+    background-color: #999;
+    transition: all .15s ease-in-out; }
+    #main-column #v_divider:hover {
+      background-color: #969696; }
 
 #three-column {
   align-items: stretch;

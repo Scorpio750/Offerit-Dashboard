@@ -621,11 +621,15 @@ form, fieldset {
     margin-bottom: 3em;
     justify-content: center;
     .graph-box {
+        .top-box, .bottom-box {
+            transition: all .15s ease-in-out;
+        }
         .top-box {
             border-radius: 0em;
             background-color: #aaa;
             h2 {
                 color: #ddd;
+                transition: all .5s ease-in-out;
             }
         }
         .bottom-box {
@@ -642,10 +646,29 @@ form, fieldset {
                 height: 15.5em;
             }
         }
+        
+        &:hover {
+
+            .top-box {
+                background-color: #a6a6a6;
+                h2 {
+                    transform: scale(1.01);
+                    transform: skew(720deg);
+                    color: $off-white;
+                }
+            }
+            .bottom-box {
+                background-color: #c6c6c6;
+            }
+        }
     }
     #v_divider {
         width: 1em;
         background-color: #999;
+        transition: all .15s ease-in-out;
+        &:hover {
+            background-color: #969696;
+        }
     }
 }
 

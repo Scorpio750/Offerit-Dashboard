@@ -15,9 +15,9 @@
 			var epc = [];
 			for (var i = 0; i < 14 ; i+= 2) {
 				hits.push([i, Math.sin(i) * 10]);
-				conv.push([i, Math.sqrt(i) * 4]);
-				payout.push([i, Math.sqrt(i) * Math.sin(-i) * 10]);
-				epc.push([i, 2 * i]);
+				conv.push([i, Math.pow(i, 1.5)]);
+				payout.push([i, Math.sqrt(i) * Math.cos(-i) * 2]);
+				epc.push([i, 15]);
 			}
 			var p_plot = $.plot("#p_chart", [
 				{ data: hits, label: "Hits" },
@@ -26,35 +26,61 @@
 				{ data: epc, label: "EPC" }
 				], {
 					series: {
+						animator: {
+							start: 0,
+							steps: 99,
+							duration: 1000
+						},
 						stack: true,
+						group: true,
+						groupInterval: 1,
 						lines: {
 							show: true,
-							fill: true
+							fill: false
 						},
 						stack: true,
-						curvedLines: {
-							active: true,
-							apply: false,
-							monotonicFit: true
-						},
 						points: {
-							show: true
+							show: true,
 						}
 					},
 					grid: {
+						color: "slategray",
+						borderWidth: 0,
 						backgroundColor: "#E6E6E6",
 						hoverable: true,
 						clickable: true
 					}
 				});
-			var h_plot = $.plot($("#h_chart"), [ 
-					[[0, 0], [1, 1]] 
-					], { 
-						grid: {
-							backgroundColor: "#E6E6E6",
-							hoverable: true,
-							clickable: true
-						} 
+			var h_plot =  $.plot("#h_chart", [
+				{ data: hits, label: "Hits" },
+				{ data: conv, label: "Conv" },
+				{ data: payout, label: "Payout" },
+				{ data: epc, label: "EPC" }
+				], {
+					series: {
+						animator: {
+							start: 0,
+							steps: 99,
+							duration: 1000
+						},
+						stack: true,
+						group: true,
+						groupInterval: 1,
+						lines: {
+							show: true,
+							fill: true
+						},
+						points: {
+							show: true,
+						}
+					},
+					grid: {
+						color: "slategray",
+						borderWidth: 0,
+						backgroundColor: "#E6E6E6",
+						hoverable: true,
+						clickable: true
+					}
 				});
 			$("<div id='tooltip'></div>").css({
 				position: "absolute",
@@ -64,7 +90,7 @@
 				"background-color": "slategray",
 				opacity: 0.80
 			}).appendTo("body");
-			
+
 			function plotHover(event, pos, item) {
 				if ($("#enablePosition:checked").length > 0) {
 					var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
@@ -349,7 +375,7 @@
 						<div class="top-box">
 							<h2>Hourly Graph</h2>
 						</div>
-						<div class="graph-box bottom-box" id="period-graph">
+						<div class="bottom-box" id="period-graph">
 							<div id="p_chart">
 							</div>
 						</div>
