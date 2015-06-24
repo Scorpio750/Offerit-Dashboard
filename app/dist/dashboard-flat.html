@@ -51,7 +51,7 @@
 						clickable: true
 					}
 				});
-			var h_plot =  $.plot("#h_chart", [
+			var h_plot =  $.plotAnimator("#h_chart", [
 				{ data: hits, label: "Hits" },
 				{ data: conv, label: "Conv" },
 				{ data: payout, label: "Payout" },
@@ -131,8 +131,8 @@
 			alert("You clicked a point!");
 		}
 	});
-				//$("#h_chart").bind("plothover", plotHover);
-				//$("#h_chart").bind("plotclick", plotClick);
+				$("#h_chart").bind("plothover", plotHover());
+				$("#h_chart").bind("plotclick", plotClick);
 
 
 			});

@@ -629,7 +629,7 @@ form, fieldset {
             background-color: #aaa;
             h2 {
                 color: #ddd;
-                transition: all .5s ease-in-out;
+                transition: all .5s ease-in;
             }
         }
         .bottom-box {
@@ -653,7 +653,7 @@ form, fieldset {
                 background-color: #a6a6a6;
                 h2 {
                     transform: scale(1.01);
-                    transform: skew(720deg);
+                    transform: skew(360deg);
                     color: $off-white;
                 }
             }

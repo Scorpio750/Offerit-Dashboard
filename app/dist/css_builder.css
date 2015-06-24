@@ -503,7 +503,7 @@ form, fieldset {
     background-color: #aaa; }
     #main-column .graph-box .top-box h2 {
       color: #ddd;
-      transition: all .5s ease-in-out; }
+      transition: all .5s ease-in; }
   #main-column .graph-box .bottom-box {
     border-radius: 0em;
     box-sizing: border-box;
@@ -519,7 +519,7 @@ form, fieldset {
     background-color: #a6a6a6; }
     #main-column .graph-box:hover .top-box h2 {
       transform: scale(1.01);
-      transform: skew(720deg);
+      transform: skew(360deg);
       color: #E6E6E6; }
   #main-column .graph-box:hover .bottom-box {
     background-color: #c6c6c6; }
