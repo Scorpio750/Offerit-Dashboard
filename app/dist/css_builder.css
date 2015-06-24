@@ -45,8 +45,7 @@ form, fieldset {
   left: 0;
   width: 100%;
   height: 95px;
-  background-color: #8CC63F;
-  z-index: 9000; }
+  background-color: #8CC63F; }
   #header .bar {
     height: 90px;
     background: linear-gradient(black, #444 99%); }
@@ -88,9 +87,9 @@ form, fieldset {
     color: #eee;
     height: 100%; }
   #header .info-box {
-    margin: 16px 1px 0 0;
+    margin: 1em 1px 0 0;
     float: right;
-    display: inline;
+    display: inline-block;
     width: 800px;
     color: #eee;
     height: 100%; }
@@ -109,8 +108,8 @@ form, fieldset {
   margin-top: 19px; }
 #header .info-box h4 {
   margin: 0 0 5px;
-  font-size: 14px;
-  line-height: 16px; }
+  font-size: 1em;
+  line-height: 1em; }
 #header .info-box ul {
   margin: 0 0 3px;
   padding: 0;
@@ -422,21 +421,23 @@ form, fieldset {
     height: 100%;
     text-align: center;
     position: relative; }
-    .top-box header a {
+    .top-box header h2 {
+      display: inline-block;
       opacity: 0.8;
       transition: all .3s ease-in-out; }
-      .top-box header a:hover {
+      .top-box header h2:hover {
         transform: scale(1.1);
         opacity: 1; }
   .top-box .icon {
     position: absolute;
-    top: -.5em;
+    top: .4em;
     right: .5em;
-    bottom: 1em;
-    transition: all .3s ease-in-out; }
+    opacity: .6;
+    display: inline-block;
+    transition: all .2s ease-in-out; }
     .top-box .icon:hover {
       cursor: pointer;
-      color: black; }
+      opacity: 1; }
 
 .bottom-box {
   height: 75%;
@@ -459,7 +460,7 @@ form, fieldset {
   display: flex;
   justify-content: space-around;
   opacity: 0.6;
-  transition: all .4s ease-in-out; }
+  transition: all .3s ease-in-out; }
   .stats-box .left-stats-box {
     flex-grow: 1;
     padding-top: 1.5em;
@@ -478,6 +479,12 @@ form, fieldset {
     margin-right: 1.5em; }
     #two-column #offer-box .top-box {
       background-color: #90cf54; }
+      #two-column #offer-box .top-box .icon {
+        transition: all .2s ease-in-out; }
+        #two-column #offer-box .top-box .icon:hover {
+          transform: rotateY(180deg);
+          cursor: pointer;
+          opacity: 1; }
     #two-column #offer-box .bottom-box {
       background-color: #73a543; }
   #two-column #hs-box {
@@ -496,39 +503,40 @@ form, fieldset {
   height: auto;
   margin-bottom: 3em;
   justify-content: center; }
-  #main-column .graph-box .top-box, #main-column .graph-box .bottom-box {
-    transition: all .15s ease-in-out; }
-  #main-column .graph-box .top-box {
-    border-radius: 0em;
-    background-color: #aaa; }
-    #main-column .graph-box .top-box h2 {
-      color: #ddd;
-      transition: all .5s ease-in; }
-  #main-column .graph-box .bottom-box {
-    border-radius: 0em;
-    box-sizing: border-box;
-    background-color: #ccc;
-    padding: 1.25em;
-    height: 18em;
-    flex-grow: 1;
-    flex-basis: 1em; }
-    #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
-      width: 35em;
-      height: 15.5em; }
-  #main-column .graph-box:hover .top-box {
-    background-color: #a6a6a6; }
-    #main-column .graph-box:hover .top-box h2 {
-      transform: scale(1.01);
-      transform: skew(360deg);
-      color: #E6E6E6; }
-  #main-column .graph-box:hover .bottom-box {
-    background-color: #c6c6c6; }
+  #main-column .graph-box {
+    /* .top-box, .bottom-box {
+        transition: all .15s ease-in-out;
+    } */ }
+    #main-column .graph-box .top-box {
+      border-radius: 0em;
+      background-color: #aaa; }
+      #main-column .graph-box .top-box h2 {
+        color: #ddd;
+        transition: all .5s; }
+    #main-column .graph-box .bottom-box {
+      border-radius: 0em;
+      box-sizing: border-box;
+      background-color: #ccc;
+      padding: 1.25em;
+      height: 18em;
+      flex-grow: 1;
+      flex-basis: 1em; }
+      #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
+        width: 35em;
+        height: 15.5em; }
+    #main-column .graph-box:hover .top-box {
+      background-color: #a6a6a6; }
+      #main-column .graph-box:hover .top-box h2 {
+        transform: skew(360deg);
+        color: #E6E6E6; }
+    #main-column .graph-box:hover .bottom-box {
+      background-color: #c6c6c6; }
   #main-column #v_divider {
     width: 1em;
     background-color: #999;
     transition: all .15s ease-in-out; }
     #main-column #v_divider:hover {
-      background-color: #969696; }
+      background-color: #909090; }
 
 #three-column {
   align-items: stretch;

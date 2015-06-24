@@ -2,8 +2,9 @@ var gulp 		= require('gulp');
 var sass		= require('gulp-ruby-sass');
 var concat		= require('gulp-concat');
 var browserSync = require('browser-sync').create();
-var reload = browserSync.reload;
-var debug = require('gulp-debug');
+var reload 		= browserSync.reload;
+var debug 		= require('gulp-debug');
+var uglify		= require('gulp-uglify');
 
 gulp.task('sass', function() {
 	return sass('./app/src/scss/css_builder.scss')
@@ -13,7 +14,7 @@ gulp.task('sass', function() {
 
 
 gulp.task('scripts', function() {
-	return gulp.src(['app/src/js/bower_components/flot/jquery.js','app/src/js/bower_components/flot/jquery.flot.js', 'app/src/js/bower_components/flot/jquery.flot.*.js', 'app/src/js/flotanimator/jquery.flot.animator.js'])
+	return gulp.src(['app/src/js/bower_components/flot/jquery.js','app/src/js/bower_components/flot/jquery.flot.js', 'app/src/js/bower_components/flot/jquery.flot.*.js', 'app/src/js/bower_components/flot.curvedlines/curvedLines.js', 'app/src/js/flotanimator/jquery.flot.animator.js'])
 		.pipe(debug({title : 'unicorn'}))
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest('app/dist'));
