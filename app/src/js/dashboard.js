@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.menu').menu({
-		disabled: true
+		disabled: false
 	});
 
 });
