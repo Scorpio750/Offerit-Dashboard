@@ -526,11 +526,9 @@ form, fieldset {
         }
         h2 {
             display: inline-block;
-            opacity: 0.8;
             transition: all .3s ease-in-out;
             &:hover {
-                transform: scale(1.1);
-                opacity: 1;
+                transform: scale(1.01);
             }
         }
     }
@@ -597,7 +595,7 @@ form, fieldset {
         .top-box {
             background-color: $prim-green;
             .icon {
-                transition: all .2s ease-in-out;
+                transition: all .25s ease-in-out;
                 &:hover {
                     transform: rotateY(180deg);
                     cursor: pointer;
@@ -624,7 +622,6 @@ form, fieldset {
         }
         .stats-container {}
     }
-    .two-box {}
 }
 
 #main-column {
@@ -632,9 +629,9 @@ form, fieldset {
     margin-bottom: 3em;
     justify-content: center;
     .graph-box {
-        /* .top-box, .bottom-box {
+         .top-box, .bottom-box {
             transition: all .15s ease-in-out;
-        } */
+        } 
         .top-box {
             border-radius: 0em;
             background-color: #aaa;
