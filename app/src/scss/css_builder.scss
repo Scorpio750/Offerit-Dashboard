@@ -1,4 +1,23 @@
-$font-stack: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif;
+@font-face {
+    font-family: "Expressway";
+    src: url('../src/img/ExpressWay/exprswy_free.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url('../src/img/Roboto/Roboto-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: CaviarDreams;
+    src: url('../src/img/CaviarDreams/CaviarDreams.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-stack: LemonMilk, Roboto, Expressway, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $off-white: #E6E6E6;
 $prim-green: #90cf54;
@@ -528,7 +547,8 @@ form, fieldset {
             display: inline-block;
             transition: all .3s ease-in-out;
             &:hover {
-                transform: scale(1.01);
+                transform: scale(1.1);
+                opacity: .8
             }
         }
     }
