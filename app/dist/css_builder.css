@@ -433,14 +433,16 @@ form, fieldset {
     position: relative; }
     .top-box header h2 {
       display: inline-block;
+      font-weight: bolder;
       transition: all .3s ease-in-out; }
       .top-box header h2:hover {
-        transform: scale(1.1);
-        opacity: 0.8; }
+        transform: scale(1.05);
+        opacity: 0.8;
+        font-weight: bolder; }
   .top-box .icon {
     position: absolute;
     top: .4em;
-    right: .5em;
+    right: .3em;
     opacity: .6;
     display: inline-block;
     transition: all .2s ease-in-out; }
@@ -452,7 +454,7 @@ form, fieldset {
   height: 75%;
   background-color: #73a543;
   border-bottom-right-radius: .8em;
-  overflow: auto; }
+  overflow: hidden; }
 
 .stats-bar {
   flex-grow: 1;
@@ -478,6 +480,39 @@ form, fieldset {
     flex-grow: 1; }
   .stats-box:hover {
     opacity: 1; }
+
+.menu {
+  position: absolute;
+  background: #ddd;
+  width: 9em;
+  margin: auto;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border-radius: 5px;
+  top: 3em;
+  right: 0em;
+  z-index: 1;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+  .menu li {
+    padding-left: 2em;
+    line-height: 3em;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #686868;
+    transition: all 0.1s linear; }
+    .menu li:hover {
+      background-color: #bbb;
+      color: white;
+      cursor: pointer;
+      font-weight: bold; }
+
+.hidden {
+  display: none; }
 
 #two-column {
   margin-bottom: 3em;

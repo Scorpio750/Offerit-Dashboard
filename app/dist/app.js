@@ -34021,5 +34021,8 @@ $(document).ready(function() {
 		});
 	});
 $(document).ready(function() {
-	$('.menu').hide();
+	$(".menu-btn").click(function(event) {
+		$(event.target).next(".menu").toggleClass("hidden");
+		console.log("FUCK THIS");
+	});
 });

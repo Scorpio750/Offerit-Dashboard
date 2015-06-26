@@ -1,18 +1,22 @@
 @font-face {
     font-family: "Expressway";
-    src: url('../src/img/ExpressWay/exprswy_free.ttf') format('truetype');
+    src: url("../src/img/ExpressWay/exprswy_free.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
+
+
 @font-face {
     font-family: "Roboto";
-    src: url('../src/img/Roboto/Roboto-Light.ttf') format('truetype');
+    src: url("../src/img/Roboto/Roboto-Light.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
+
 $font-stack: Roboto, Expressway, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
+$font-menu-color: #686868;
 $off-white: #E6E6E6;
 $prim-green: #90cf54;
 $sec-green: #73a543;
@@ -497,6 +501,7 @@ form, fieldset {
     }
 }
 
+// Generic Selectors
 #main {
     margin: 0 auto;
     width: 77.5em;
@@ -534,22 +539,22 @@ form, fieldset {
         height: 100%;
         text-align: center;
         position: relative;
-        a {
-            
-        }
+        a {}
         h2 {
             display: inline-block;
+            font-weight: bolder;
             transition: all .3s ease-in-out;
             &:hover {
-                transform: scale(1.1);
-                opacity: .8
+                transform: scale(1.05);
+                opacity: 0.8;
+                font-weight: bolder;
             }
         }
     }
     .icon {
         position: absolute;
         top: .4em;
-        right: .5em;
+        right: .3em;
         opacity: .6;
         display: inline-block;
         transition: all .2s ease-in-out;
@@ -564,7 +569,7 @@ form, fieldset {
     height: 75%;
     background-color: $sec-green;
     border-bottom-right-radius: .8em;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .stats-bar {
@@ -599,6 +604,44 @@ form, fieldset {
     }
 }
 
+.menu {
+    position: absolute;
+    background: #ddd;
+    width: 9em;
+    margin: auto;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    border-radius: 5px;
+    top: 3em;
+    right: 0em;
+    z-index: 1;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .5);
+    li {
+        padding-left: 2em;
+        line-height: 3em;
+        display: block;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: $font-menu-color;
+        transition: all 0.1s linear;
+        &:hover {
+            background-color: #bbb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+// Main Area Selectors
 #two-column {
     margin-bottom: 3em;
     height: 200px;
@@ -643,15 +686,15 @@ form, fieldset {
     margin-bottom: 3em;
     justify-content: center;
     .graph-box {
-         .top-box, .bottom-box {
+        .top-box, .bottom-box {
             transition: all .15s ease-in-out;
-        } 
+        }
         .top-box {
             border-radius: 0em;
             background-color: #aaa;
             h2 {
                 color: #ddd;
-                transition: all .5s; 
+                transition: all .5s;
             }
         }
         .bottom-box {
@@ -668,9 +711,7 @@ form, fieldset {
                 height: 15.5em;
             }
         }
-        
         &:hover {
-
             .top-box {
                 background-color: #a6a6a6;
                 h2 {
