@@ -34021,8 +34021,5 @@ $(document).ready(function() {
 		});
 	});
 $(document).ready(function() {
-	$('.menu').menu({
-		disabled: false
-	});
-
+	$('.menu').hide();
 });

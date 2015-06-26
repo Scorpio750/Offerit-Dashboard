@@ -8,19 +8,14 @@
   src: url("../src/img/Roboto/Roboto-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
-@font-face {
-  font-family: CaviarDreams;
-  src: url("../src/img/CaviarDreams/CaviarDreams.ttf");
-  font-weight: normal;
-  font-style: normal; }
 body {
-  font-family: LemonMilk, Roboto, Expressway, Tahoma, Arial, sans-serif;
+  font-family: Roboto, Expressway, Tahoma, Arial, sans-serif;
   margin: 0;
   color: white;
-  font: LemonMilk, Roboto, Expressway, Tahoma, Arial, sans-serif;
+  font: Roboto, Expressway, Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
-  font: LemonMilk, Roboto, Expressway, Tahoma, Arial, sans-serif;
+  font: Roboto, Expressway, Tahoma, Arial, sans-serif;
   animation: bg-move 5s; }
 
 a {
