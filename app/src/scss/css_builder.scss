@@ -5,12 +5,18 @@
     font-style: normal;
 }
 
-
 @font-face {
     font-family: "Roboto";
-    src: url("../src/img/Roboto/Roboto-Light.ttf") format("truetype");
+    src: url("../src/img/Roboto/Roboto-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto-Thin";
+	src: url("../src/img/Roboto/Roboto-Thin.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
 
 
@@ -605,6 +611,7 @@ form, fieldset {
 }
 
 .menu {
+	//font-family: Roboto-Thin;
     position: absolute;
     background: #ddd;
     width: 9em;
