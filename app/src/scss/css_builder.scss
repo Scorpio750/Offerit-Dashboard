@@ -19,7 +19,6 @@
 	font-style: normal;
 }
 
-
 $font-stack: Roboto, Expressway, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
@@ -413,10 +412,7 @@ form, fieldset {
         padding: 1em;
         text-align: center;
         box-sizing: border-box;
-        border-left: 2px solid $off-white;
-        &:first-child {
-            border-left: none;
-        }
+        
         a {
             padding: 13px 0px 0px 0px;
             font-size: 18px;
@@ -448,6 +444,7 @@ form, fieldset {
             }
         }
     }
+    li~li { border-left: 2px solid $off-white; }
     .sub-nav, .sub-nav-child {
         position: absolute;
         float: none;
@@ -541,6 +538,7 @@ form, fieldset {
     height: 25%;
     background-color: $prim-green;
     border-top-left-radius: .8em;
+    font-weight: bolder;
     header {
         height: 100%;
         text-align: center;
@@ -611,7 +609,8 @@ form, fieldset {
 }
 
 .menu {
-	//font-family: Roboto-Thin;
+	// font-family: Roboto-Thin;
+    font-weight: 300;
     position: absolute;
     background: #ddd;
     width: 9em;
@@ -624,6 +623,7 @@ form, fieldset {
     right: 0em;
     z-index: 1;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, .5);
+    li~li {  border-top: 1px solid #bbb; }
     li {
         padding-left: 2em;
         line-height: 3em;
@@ -635,6 +635,7 @@ form, fieldset {
         font-size: 14px;
         color: $font-menu-color;
         transition: all 0.1s linear;
+
         &:hover {
             background-color: #bbb;
             color: white;
@@ -648,7 +649,7 @@ form, fieldset {
     display: none;
 }
 
-// Main Area Selectors
+// Panel Selectors
 #two-column {
     margin-bottom: 3em;
     height: 200px;

@@ -328,10 +328,7 @@ form, fieldset {
     flex-grow: 1;
     padding: 1em;
     text-align: center;
-    box-sizing: border-box;
-    border-left: 2px solid #E6E6E6; }
-    #nav li:first-child {
-      border-left: none; }
+    box-sizing: border-box; }
     #nav li a {
       padding: 13px 0px 0px 0px;
       font-size: 18px;
@@ -356,6 +353,8 @@ form, fieldset {
         display: block;
         padding: 1px 10px 0 18px;
         line-height: 13px; }
+  #nav li ~ li {
+    border-left: 2px solid #E6E6E6; }
   #nav .sub-nav, #nav .sub-nav-child {
     position: absolute;
     float: none;
@@ -431,7 +430,8 @@ form, fieldset {
 .top-box {
   height: 25%;
   background-color: #90cf54;
-  border-top-left-radius: .8em; }
+  border-top-left-radius: .8em;
+  font-weight: bolder; }
   .top-box header {
     height: 100%;
     text-align: center;
@@ -487,6 +487,7 @@ form, fieldset {
     opacity: 1; }
 
 .menu {
+  font-weight: 300;
   position: absolute;
   background: #ddd;
   width: 9em;
@@ -499,6 +500,8 @@ form, fieldset {
   right: 0em;
   z-index: 1;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+  .menu li ~ li {
+    border-top: 1px solid #bbb; }
   .menu li {
     padding-left: 2em;
     line-height: 3em;

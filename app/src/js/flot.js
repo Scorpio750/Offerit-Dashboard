@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-			$('.menu').menu({
-				disabled: true
-			});
-
 			// flot chart code
 			var hits = [];
 			var conv = [];
@@ -166,7 +162,7 @@ $(document).ready(function() {
 		// axis coordinates for other axes, if present, are in pos.x2, pos.x3, ...
 		// if you need global screen coordinates, they are pos.pageX, pos.pageY
 		if (item) {
-			p_plot.highlight(item.series, item.datapoint);
+			h_plot.highlight(item.series, item.datapoint);
 			alert("You clicked a point!");
 		}
 	});

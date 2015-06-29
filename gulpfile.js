@@ -14,12 +14,12 @@ gulp.task('sass', function() {
 
 
 gulp.task('scripts', function() {
-	return gulp.src(['app/src/js/bower_components/flot/jquery.js',
+	return gulp.src([
+		'app/src/js/bower_components/flot/jquery.js',
 		'app/src/js/bower_components/flot/jquery.flot.js',
 		'app/src/js/bower_components/flot/jquery.flot.*.js',
 		'app/src/js/bower_components/flot.curvedlines/curvedLines.js',
 		'app/src/js/flotanimator/jquery.flot.animator.js',
-		'app/src/js/bower_components/jquery-ui/jquery-ui.js',
 		'app/src/js/flot.js',
 		'app/src/js/dashboard.js'])
 		.pipe(debug({title : 'unicorn'}))
@@ -37,7 +37,7 @@ gulp.task('serve', ['sass', 'scripts'], function() {
 
 	gulp.watch('app/src/scss/*.scss', ['sass']);
 	gulp.watch('app/src/js/**/*.js', ['scripts']);
-	gulp.watch(['dist/*.html', 'dist/*.css', 'dist/*.js', '*.js'], {cwd: 'app'}, reload);
+	gulp.watch(['dist/*.html', 'dist/*.css', 'dist/*.js'], {cwd: 'app'}, reload);
 });
 
 gulp.task('ghostMode');
