@@ -23,20 +23,36 @@ $font-stack: Roboto, Expressway, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
+
 $prim-green: #90cf54;
+$prim-green-hover: #8AC750;
 $sec-green: #73a543;
+$sec-green-hover: #6A962B;
+
 $prim-triad-1: #5490cf;
+$prim-triad-1-hover: #498ACE;
 $sec-triad-1: #4373a5;
+$sec-triad-1-hover: #36689C;
+
 $prim-triad-2: #cf5490;
 $sec-triad-2: #a54373;
+
 $prim-anal-1: #54cf55;
 $sec-anal-1: #41a142;
+
 $prim-anal-2: #cecf54;
 $sec-anal-2: #a4a543;
+
 $prim-beige: #a48961;
+$prim-beige-hover: #987F58;
 $sec-beige: #7b6749;
+$sec-beige-hover: #705C3D;
+
 $prim-cadet: #7ac5cd;
+$prim-cadet-hover: #75c0c9;
 $sec-cadet: #619da4;
+$sec-cadet-hover: #5B949C;
+
 $prim-bada55: #bada55;
 $sec-bada55: #94ae44;
 
@@ -529,6 +545,12 @@ form, fieldset {
     align-content: stretch;
 }
 
+.panel {
+    .top-box, .bottom-box {
+        transition: all .15s ease-in-out;
+    }
+}
+
 .top-box, .bottom-box {
     padding: 5px;
     line-height: 1.25em;
@@ -540,18 +562,18 @@ form, fieldset {
     border-top-left-radius: .8em;
     font-weight: bolder;
     header {
+        box-sizing: border-box;
         height: 100%;
         text-align: center;
         position: relative;
-        a {}
         h2 {
             display: inline-block;
             font-weight: bolder;
-            transition: all .3s ease-in-out;
+            transition: all .2s linear;
             &:hover {
-                transform: scale(1.05);
-                opacity: 0.8;
-                font-weight: bolder;
+                color: #333;
+                // opacity: 0.8;
+                font-weight: 900;
             }
         }
     }
@@ -643,6 +665,12 @@ form, fieldset {
             font-weight: bold;
         }
     }
+    #hs-menu {
+        z-index: 100;
+    }
+    #p_graph-menu {
+        z-index: -100;
+    }
 }
 
 .hidden {
@@ -671,6 +699,14 @@ form, fieldset {
         .bottom-box {
             background-color: $sec-green;
         }
+        &:hover{
+            .top-box {
+                background-color: $prim-green-hover;
+            }
+            .bottom-box {
+                background-color: $sec-green-hover;
+            }
+        }
     }
     #hs-box {
         flex-grow: 4;
@@ -685,7 +721,14 @@ form, fieldset {
             padding: 15px;
             background-color: $sec-cadet;
         }
-        .stats-container {}
+        &:hover{
+            .top-box {
+                background-color: $prim-cadet-hover;
+            }
+            .bottom-box {
+                background-color: $sec-cadet-hover;
+            }
+        }
     }
 }
 
@@ -694,9 +737,6 @@ form, fieldset {
     margin-bottom: 3em;
     justify-content: center;
     .graph-box {
-        .top-box, .bottom-box {
-            transition: all .15s ease-in-out;
-        }
         .top-box {
             border-radius: 0em;
             background-color: #aaa;
@@ -737,7 +777,7 @@ form, fieldset {
         background-color: #999;
         transition: all .15s ease-in-out;
         &:hover {
-            background-color: #909090;
+            background-color: #969696;
         }
     }
 }
@@ -757,6 +797,14 @@ form, fieldset {
         .bottom-box {
             background-color: $sec-green;
         }
+        &:hover{
+            .top-box {
+                background-color: $prim-green-hover;
+            }
+            .bottom-box {
+                background-color: $sec-green-hover;
+            }
+        }
     }
     #paysum {
         .top-box {
@@ -765,6 +813,14 @@ form, fieldset {
         .bottom-box {
             background-color: $sec-triad-1;
         }
+        &:hover{
+            .top-box {
+                background-color: $prim-triad-1-hover;
+            }
+            .bottom-box {
+                background-color: $sec-triad-1-hover;
+            }
+        }
     }
     #contact {
         .top-box {
@@ -772,6 +828,14 @@ form, fieldset {
         }
         .bottom-box {
             background-color: $sec-beige;
+        }
+        &:hover{
+            .top-box {
+                background-color: $prim-beige-hover;
+            }
+            .bottom-box {
+                background-color: $sec-beige-hover;
+            }
         }
     }
 }

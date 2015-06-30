@@ -423,6 +423,9 @@ form, fieldset {
   align-items: stretch;
   align-content: stretch; }
 
+.panel .top-box, .panel .bottom-box {
+  transition: all .15s ease-in-out; }
+
 .top-box, .bottom-box {
   padding: 5px;
   line-height: 1.25em; }
@@ -433,17 +436,17 @@ form, fieldset {
   border-top-left-radius: .8em;
   font-weight: bolder; }
   .top-box header {
+    box-sizing: border-box;
     height: 100%;
     text-align: center;
     position: relative; }
     .top-box header h2 {
       display: inline-block;
       font-weight: bolder;
-      transition: all .3s ease-in-out; }
+      transition: all .2s linear; }
       .top-box header h2:hover {
-        transform: scale(1.05);
-        opacity: 0.8;
-        font-weight: bolder; }
+        color: #333;
+        font-weight: 900; }
   .top-box .icon {
     position: absolute;
     top: .4em;
@@ -518,6 +521,10 @@ form, fieldset {
       color: white;
       cursor: pointer;
       font-weight: bold; }
+  .menu #hs-menu {
+    z-index: 100; }
+  .menu #p_graph-menu {
+    z-index: -100; }
 
 .hidden {
   display: none; }
@@ -539,6 +546,10 @@ form, fieldset {
           opacity: 1; }
     #two-column #offer-box .bottom-box {
       background-color: #73a543; }
+    #two-column #offer-box:hover .top-box {
+      background-color: #8AC750; }
+    #two-column #offer-box:hover .bottom-box {
+      background-color: #6A962B; }
   #two-column #hs-box {
     flex-grow: 4;
     margin-left: 1em; }
@@ -550,13 +561,15 @@ form, fieldset {
       height: 100%;
       padding: 15px;
       background-color: #619da4; }
+    #two-column #hs-box:hover .top-box {
+      background-color: #75c0c9; }
+    #two-column #hs-box:hover .bottom-box {
+      background-color: #5B949C; }
 
 #main-column {
   height: auto;
   margin-bottom: 3em;
   justify-content: center; }
-  #main-column .graph-box .top-box, #main-column .graph-box .bottom-box {
-    transition: all .15s ease-in-out; }
   #main-column .graph-box .top-box {
     border-radius: 0em;
     background-color: #aaa; }
@@ -586,7 +599,7 @@ form, fieldset {
     background-color: #999;
     transition: all .15s ease-in-out; }
     #main-column #v_divider:hover {
-      background-color: #909090; }
+      background-color: #969696; }
 
 #three-column {
   align-items: stretch;
@@ -599,11 +612,23 @@ form, fieldset {
     background-color: #90cf54; }
   #three-column #news .bottom-box {
     background-color: #73a543; }
+  #three-column #news:hover .top-box {
+    background-color: #8AC750; }
+  #three-column #news:hover .bottom-box {
+    background-color: #6A962B; }
   #three-column #paysum .top-box {
     background-color: #5490cf; }
   #three-column #paysum .bottom-box {
     background-color: #4373a5; }
+  #three-column #paysum:hover .top-box {
+    background-color: #498ACE; }
+  #three-column #paysum:hover .bottom-box {
+    background-color: #36689C; }
   #three-column #contact .top-box {
     background-color: #a48961; }
   #three-column #contact .bottom-box {
     background-color: #7b6749; }
+  #three-column #contact:hover .top-box {
+    background-color: #987F58; }
+  #three-column #contact:hover .bottom-box {
+    background-color: #705C3D; }
