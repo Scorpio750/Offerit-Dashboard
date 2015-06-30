@@ -564,7 +564,6 @@ form, fieldset {
     height: 25%;
     background-color: $prim-green;
     border-top-left-radius: .8em;
-    font-weight: bolder;
     header {
         box-sizing: border-box;
         height: 100%;
@@ -574,11 +573,11 @@ form, fieldset {
             display: inline-block;
             font-weight: bolder;
             transition: all .1s linear;
+            opacity: 0.8;
             &:hover {
                 color: white;
-                // opacity: 0.8;
+                opacity: 1;
                 font-weight: 900;
-                // font-family: Expressway;
             }
         }
     }
@@ -586,7 +585,7 @@ form, fieldset {
         position: absolute;
         top: .4em;
         right: .3em;
-        opacity: .6;
+        opacity: .75;
         display: inline-block;
         transition: all .15s ease-in-out;
         &:hover {
@@ -681,6 +680,10 @@ form, fieldset {
 
 .hidden {
     display: none;
+}
+
+.rotated {
+    transform: rotateY(180deg);
 }
 
 // Panel Selectors

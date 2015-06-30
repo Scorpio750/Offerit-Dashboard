@@ -16,12 +16,11 @@ $(document).ready(function() {
             }
         });
 	});
+
+	var degrees = 0;
 	$('.optn-btn').click(function() {
-		$(this).css({
-			transform: 'rotateY(180deg)'
-		});
+		$(this).toggleClass('rotated');
 		$('#top-o').toggleClass('hidden');	
-		$('#new-o').toggleClass('hidden');	
 		$('#top-offer-list').toggleClass('hidden');
 		$('#new-offer-list').toggleClass('hidden');
 	});

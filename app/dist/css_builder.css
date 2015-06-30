@@ -436,8 +436,7 @@ form, fieldset {
 .top-box {
   height: 25%;
   background-color: #90cf54;
-  border-top-left-radius: .8em;
-  font-weight: bolder; }
+  border-top-left-radius: .8em; }
   .top-box header {
     box-sizing: border-box;
     height: 100%;
@@ -446,15 +445,17 @@ form, fieldset {
     .top-box header h2 {
       display: inline-block;
       font-weight: bolder;
-      transition: all .1s linear; }
+      transition: all .1s linear;
+      opacity: 0.8; }
       .top-box header h2:hover {
         color: white;
+        opacity: 1;
         font-weight: 900; }
   .top-box .icon {
     position: absolute;
     top: .4em;
     right: .3em;
-    opacity: .6;
+    opacity: .75;
     display: inline-block;
     transition: all .15s ease-in-out; }
     .top-box .icon:hover {
@@ -532,6 +533,9 @@ form, fieldset {
 
 .hidden {
   display: none; }
+
+.rotated {
+  transform: rotateY(180deg); }
 
 #two-column {
   margin-bottom: 3em;
