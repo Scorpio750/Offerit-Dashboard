@@ -587,13 +587,10 @@ form, fieldset {
         right: .3em;
         opacity: .75;
         display: inline-block;
-        transition: all .15s ease-in-out;
+        transition: hover .15s ease-in-out;
         &:hover {
             cursor: pointer;
             opacity: 1;
-        }
-        &:active {
-            color: #333;
         }
     }
 }
@@ -634,6 +631,9 @@ form, fieldset {
     transition: all .3s ease-in-out;
     &:hover {
         opacity: 1;
+    }
+    &:active {
+        color: #333;
     }
 }
 
@@ -691,9 +691,10 @@ form, fieldset {
 }
 
 // Panel Selectors
-#two-column {
+#reminder {
     margin-bottom: 3em;
     height: 200px;
+    z-index: 100;
     #offer-box {
         flex-grow: 1;
         flex-basis: 30%;
@@ -736,7 +737,7 @@ form, fieldset {
         }
     }
     #hs-box {
-        flex-grow: 4;
+        flex-grow: 1;
         margin-left: 1em;
         .top-box {
             flex-basis: 100%;
