@@ -17,11 +17,27 @@ $(document).ready(function() {
         });
 	});
 
-	var degrees = 0;
-	$('.optn-btn').click(function() {
-		$(this).toggleClass('rotated');
-		$('#top-o').toggleClass('hidden');	
-		$('#top-offer-list').toggleClass('hidden');
-		$('#new-offer-list').toggleClass('hidden');
-	});
+      var   txt = ['Top ', 'New '],
+            n = txt.length;
+            $swap = $('#swap'),
+            $span = undefined,
+            c = -1;
+
+      // create spans inside span
+      for (var i = 0; i < txt.length; i++) {
+            $swap.append($('<span />', {text:txt[i]}));
+      }
+      // hide and collect spans
+      $span = $('span', $swap).hide();
+
+      $('.optn-btn').click(function() {
+          $(this).toggleClass('rotated');
+
+          c = ++c % n;
+          $swap.animate({width: $span.eq( c ).width() });
+          $span.stop().fadeOut().eq(c).delay(200).fadeIn();
+
+          $('#top-offer-list').toggleClass('hidden');
+          $('#new-offer-list').toggleClass('hidden');
+    });
 });

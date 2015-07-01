@@ -6,7 +6,7 @@
 @font-face {
   font-family: "Roboto";
   src: url("../src/img/Roboto/Roboto-Regular.ttf") format("truetype");
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: "Roboto-Thin";
@@ -436,7 +436,7 @@ form, fieldset {
 .top-box {
   height: 25%;
   background-color: #90cf54;
-  border-top-left-radius: .8em; }
+  border-top-left-radius: 1em; }
   .top-box header {
     box-sizing: border-box;
     height: 100%;
@@ -461,11 +461,13 @@ form, fieldset {
     .top-box .icon:hover {
       cursor: pointer;
       opacity: 1; }
+    .top-box .icon:active {
+      color: #333; }
 
 .bottom-box {
   height: 75%;
   background-color: #73a543;
-  border-bottom-right-radius: .8em;
+  border-bottom-right-radius: 1em;
   overflow: hidden; }
 
 .stats-bar {
@@ -510,7 +512,8 @@ form, fieldset {
   .menu li ~ li {
     border-top: 1px solid #bbb; }
   .menu li {
-    padding-left: 1.5rem;
+    box-sizing: border-box;
+    padding-left: 1.1rem;
     line-height: 3em;
     display: block;
     overflow: hidden;
@@ -546,8 +549,13 @@ form, fieldset {
     margin-right: 1.5em; }
     #two-column #offer-box .top-box {
       background-color: #90cf54; }
-      #two-column #offer-box .top-box .swap {
-        padding-right: .25em; }
+      #two-column #offer-box .top-box .swap-wrapper {
+        display: inline-block;
+        perspective: 20em; }
+        #two-column #offer-box .top-box .swap-wrapper #swap {
+          vertical-align: top; }
+          #two-column #offer-box .top-box .swap-wrapper #swap span {
+            position: absolute; }
       #two-column #offer-box .top-box .icon {
         transition: all .25s ease-in-out; }
         #two-column #offer-box .top-box .icon:hover {
