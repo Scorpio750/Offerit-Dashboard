@@ -9,18 +9,18 @@
   font-weight: normal;
   font-style: normal; }
 @font-face {
-  font-family: "Roboto-Thin";
-  src: url("../src/img/Roboto/Roboto-Thin.ttf") format("truetype");
+  font-family: "Roboto-Light";
+  src: url("../src/img/Roboto/Roboto-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 body {
-  font-family: Roboto, Expressway, Tahoma, Arial, sans-serif;
+  font-family: Roboto-Light, Expressway, Tahoma, Arial, sans-serif;
   margin: 0;
   color: #E6E6E6;
-  font: Roboto, Expressway, Tahoma, Arial, sans-serif;
+  font: Roboto-Light, Expressway, Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
-  font: Roboto, Expressway, Tahoma, Arial, sans-serif; }
+  font: Roboto-Light, Expressway, Tahoma, Arial, sans-serif; }
 
 a {
   color: white;
@@ -430,16 +430,14 @@ form, fieldset {
   transition: all .1s ease-in-out; }
 
 .top-box, .bottom-box {
-  padding: 5px;
-  line-height: 1.25em; }
+  padding: 5px; }
 
 .top-box {
-  height: 25%;
   background-color: #90cf54;
-  border-top-left-radius: 1em; }
+  border-top-left-radius: 1em;
+  line-height: 1em; }
   .top-box header {
     box-sizing: border-box;
-    height: 100%;
     text-align: center;
     position: relative; }
     .top-box header h2 {
@@ -453,7 +451,7 @@ form, fieldset {
         font-weight: 900; }
   .top-box .icon {
     position: absolute;
-    top: .4em;
+    top: .3em;
     right: .3em;
     opacity: .75;
     display: inline-block;
@@ -464,6 +462,7 @@ form, fieldset {
 
 .bottom-box {
   height: 75%;
+  line-height: 1.25em;
   background-color: #73a543;
   border-bottom-right-radius: 1em;
   overflow: hidden; }
@@ -546,7 +545,6 @@ form, fieldset {
   z-index: 100; }
   #reminder #offer-box {
     flex-grow: 1;
-    flex-basis: 30%;
     margin-right: 1.5em; }
     #reminder #offer-box .top-box {
       background-color: #90cf54; }
@@ -571,7 +569,8 @@ form, fieldset {
     #reminder #offer-box .hidden {
       display: none; }
   #reminder #hs-box {
-    flex-grow: 1;
+    flex-grow: 2;
+    flex-basis: 30%;
     margin-left: 1em; }
     #reminder #hs-box .top-box {
       flex-basis: 100%;

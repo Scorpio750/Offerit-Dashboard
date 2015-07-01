@@ -17418,7 +17418,7 @@ $(document).ready(function() {
         });
 	});
 
-      var   txt = ['Top ', 'New '],
+      var   txt = ['Top ', 'New ', 'Australopithecine'],
             n = txt.length;
             $swap = $('#swap'),
             $span = undefined,
