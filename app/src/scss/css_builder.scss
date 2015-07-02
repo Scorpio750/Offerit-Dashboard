@@ -581,7 +581,7 @@ form, fieldset {
         h2 {
             display: inline-block;
             font-weight: bolder;
-            transition: all .1s linear;
+            transition: all .1s ease-in-out;
             opacity: 0.8;
             &:hover {
                 color: white;
@@ -596,7 +596,7 @@ form, fieldset {
         right: .3em;
         opacity: .75;
         display: inline-block;
-        transition: hover .15s ease-in-out;
+        transition: all .15s linear;
         &:hover {
             cursor: pointer;
             opacity: 1;
@@ -723,13 +723,6 @@ form, fieldset {
                     }
                 }
             }
-            .icon {
-                transition: all .25s ease-in-out;
-                &:hover {
-                    cursor: pointer;
-                    opacity: 1;
-                }
-            }
         }
         .bottom-box {
         }
@@ -763,7 +756,6 @@ form, fieldset {
     }
     #hs-box {
         flex-grow: 2;
-        flex-basis: 30%;
         margin-left: 1em;
         .top-box {
             flex-basis: 100%;

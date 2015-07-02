@@ -135,7 +135,7 @@ $(document).ready(function() {
 			{ data: d, label: "poops", color: "darkorchid", animator: { start: 100 } } ], options);
 
 		// chart tooltip
-		$("<div id='tooltip'></div>").css({
+		$("<div id='tooltip' style='font-weight: bold'></div>").css({
 			position: "absolute",
 			display: "none",
 			border: ".1em solid #fdd",
