@@ -17367,7 +17367,6 @@ $(document).ready(function() {
 
 		$("#h_chart").bind("plothover", function (event, pos, item) {
 			if (item) {
-
 				var x = item.datapoint[0].toFixed(2),
 				y = item.datapoint[1].toFixed(2);
 				$("#tooltip").html(item.series.label + " of " + x + " = " + y)
@@ -17400,45 +17399,80 @@ $(document).ready(function() {
 		});
 	});
 $(document).ready(function() {
-	$('.menu-btn').click(function() {
-		var notThisOne = $(this);
-		$('.menu-btn').each(function() {
-            // ensures only one dropdown is active at any given time
-            if ($(this).attr('id') !== notThisOne.attr('id')) {
-            	$(this).next('.menu').slideUp({ 
-            		duration: 300,
-            		easing: "swing" 
-            	});
-            } else {
-            	$(event.currentTarget).next('.menu').slideToggle({ 
-            		duration: 300,
-            		easing: "swing" 
-            	});
-            }
-        });
-	});
+      $('.menu-btn').click(function() {
+            var notThisOne = $(this);
+            $('.menu-btn').each(function() {
+                  // ensures only one dropdown is active at any given time
+                  if ($(this).attr('id') !== notThisOne.attr('id')) {
+                        $(this).next('.menu').slideUp({
+                              duration: 300,
+                              easing: "swing"
+                        });
+                  } else {
+                        $(event.currentTarget).next('.menu').slideToggle({
+                              duration: 300,
+                              easing: "swing"
+                        });
+                  }
+            });
+      });
 
-      var   txt = ['Top ', 'New ', 'Australopithecine'],
-            n = txt.length;
-            $swap = $('#swap'),
-            $span = undefined,
-            c = -1;
-
+      var   txt  = ['Top ', 'New ', 'by Network'],
+            n     = txt.length + 1;
+            $swap = [$('#swap1'), $('#swap2')],
+            $span = [],
+            c     = -1;
       // create spans inside span
-      for (var i = 0; i < txt.length; i++) {
-            $swap.append($('<span />', {text:txt[i]}));
+      for (var i = 0; i < 2; i++) {
+            $swap[0].append($('<span />', {
+                  text: txt[i]
+            }));
       }
+      $swap[1].append($('<span />', {
+            text: txt[i]
+      }));
+
+      // shifts header base 
+      function shiftBase(n, flag) {
+            var $width;
+
+            switch (flag) {
+                  case 0:
+                        $width = 0;
+                        break;
+                  case 1:
+                        $width = $span[n].width();
+                        break;
+            }
+
+            $swap[n].animate({
+                  width: $width 
+            });
+            $span[n].stop().fadeOut();
+      }
+
       // hide and collect spans
-      $span = $('span', $swap).hide();
-
+      $span[0] = $('span', $swap[0]).hide();
+      $span[1] = $('span', $swap[1]).hide();
       $('.optn-btn').click(function() {
-          $(this).toggleClass('rotated');
-
-          c = ++c % n;
-          $swap.animate({width: $span.eq( c ).width() });
-          $span.stop().fadeOut().eq(c).delay(200).fadeIn();
-
-          $('#top-offer-list').toggleClass('hidden');
-          $('#new-offer-list').toggleClass('hidden');
-    });
+            c = ++c % n;
+            console.log(c);
+            $(this).toggleClass('rotated');
+            $swap[0].animate({
+                  width: $span[0].eq(c % 2).width()
+            });
+            $span[0].stop().fadeOut('fast').eq(c % 2).delay(200).fadeIn('fast');
+            if (c > 1) {
+                  // change color of Offer box to red
+                  console.log('adding network');
+                  $(this).closest('.offer-box').addClass('network');
+                  shiftBase(1);
+            } else {
+                  console.log('removing network');
+                  $(this).closest('.offer-box').removeClass('network');
+                  shiftBase(1);
+            }
+            $('#top-offer-list').toggleClass('hidden');
+            $('#new-offer-list').toggleClass('hidden');
+      });
 });

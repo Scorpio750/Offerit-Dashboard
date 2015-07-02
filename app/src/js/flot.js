@@ -146,7 +146,6 @@ $(document).ready(function() {
 
 		$("#h_chart").bind("plothover", function (event, pos, item) {
 			if (item) {
-
 				var x = item.datapoint[0].toFixed(2),
 				y = item.datapoint[1].toFixed(2);
 				$("#tooltip").html(item.series.label + " of " + x + " = " + y)
