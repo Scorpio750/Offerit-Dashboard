@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// Offer Panel functions
-	var txt = ['Top ', 'New ', 'by Network'],
+	var txt = ['Top ', 'New ', ' (Network)'],
 		n = txt.length + 1;
 	$swap = [$('#swap1'), $('#swap2')],
 	$span = [],
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	function shift(n, flag) {
 		var $width;
 		var options = {
-			duration: 200
+			duration: 600
 		};
 		switch (flag) {
 			case 0:
