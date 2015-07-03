@@ -427,7 +427,7 @@ form, fieldset {
   align-content: stretch; }
 
 .panel .top-box, .panel .bottom-box {
-  transition: all .1s ease-in-out; }
+  transition: all .2s ease-in-out; }
 
 .top-box, .bottom-box {
   padding: 5px; }
@@ -522,6 +522,7 @@ form, fieldset {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
+    font-family: Roboto;
     color: #686868;
     transition: all 0.1s linear; }
     .menu li:hover {
@@ -529,7 +530,7 @@ form, fieldset {
       color: white;
       cursor: pointer;
       font-size: 1em;
-      font-weight: bold; }
+      font-weight: 900; }
   .menu #hs-menu {
     z-index: 100; }
   .menu #p_graph-menu {

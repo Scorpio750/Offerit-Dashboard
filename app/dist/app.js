@@ -17429,7 +17429,7 @@ $(document).ready(function() {
 				$width = 0;
 				break;
 			case 1:
-				$width = $span[n].width();
+				$width = $span[n].eq(0).width();
 				break;
 		}
 
@@ -17438,6 +17438,8 @@ $(document).ready(function() {
 		});
 		(flag == 1) ? $span[n].stop().fadeIn(options) : $span[n].stop().fadeOut(options);
 	}
+
+      // Initialize initial prefix before header base
 	$swap[0].animate({
 		width: $span[0].eq(0).width()
 	});
