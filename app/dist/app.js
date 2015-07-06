@@ -17414,6 +17414,8 @@ $(document).ready(function() {
 	$swap[1].append($('<span />', {
 		text: txt[i]
 	}));
+      $swap[1].css('font-size', '.75em');
+
 	// hide and collect spans
 	$span[0] = $('span', $swap[0]).hide();
 	$span[1] = $('span', $swap[1]).hide();
@@ -17422,7 +17424,7 @@ $(document).ready(function() {
 	function shift(n, flag) {
 		var $width;
 		var options = {
-			duration: 600
+			duration: 300
 		};
 		switch (flag) {
 			case 0:
@@ -17448,7 +17450,6 @@ $(document).ready(function() {
 	$('.optn-btn').click(function() {
 		c = ++c % n;
 		console.log(c);
-		$(this).toggleClass('rotated');
 		$swap[0].animate({
 			width: $span[0].eq(c % 2).width()
 		});
