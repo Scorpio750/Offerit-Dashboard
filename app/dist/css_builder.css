@@ -521,7 +521,7 @@ form, fieldset {
     transition: all 0.1s linear; }
     .menu li .subnav {
       margin: 0;
-      padding: 0.1em; }
+      padding: 0; }
       .menu li .subnav li {
         padding-left: -1em;
         border-top: 1px solid #bbb; }
@@ -530,6 +530,7 @@ form, fieldset {
       color: white;
       cursor: pointer;
       font-size: 1em;
+      border-left: 6px solid white;
       font-weight: 900; }
       .menu li:hover li {
         background: #ddd;
@@ -539,7 +540,7 @@ form, fieldset {
           color: white;
           cursor: pointer;
           font-size: 1em;
-          border-left: 6px solid white; }
+          border-left: none; }
     .menu li:after {
       background-color: green; }
   .menu #hs-menu {
@@ -587,7 +588,7 @@ form, fieldset {
   #reminder .network:hover .bottom-box {
     background-color: #A04343; }
   #reminder #hs-box {
-    flex-grow: 2;
+    flex-grow: 3;
     margin-left: 1em; }
     #reminder #hs-box .top-box {
       flex-basis: 100%;

@@ -675,7 +675,7 @@ form, fieldset {
         transition: all 0.1s linear;
         .subnav {
             margin: 0;
-            padding: 0.1em;
+            padding: 0;
             li {
                 padding-left: -1em;
                 border-top: 1px solid #bbb;
@@ -686,6 +686,7 @@ form, fieldset {
             color: white;
             cursor: pointer;
             font-size: 1em;
+            border-left: 6px solid white;
             font-weight: 900;
             li {
                 background: #ddd;
@@ -695,7 +696,7 @@ form, fieldset {
                     color: white;
                     cursor: pointer;
                     font-size: 1em;
-                    border-left: 6px solid white;
+                    border-left: none;
                 }
             }
         }
@@ -710,7 +711,6 @@ form, fieldset {
         z-index: -100;
     }
 }
-
 
 .hidden {
     display: none;
@@ -776,7 +776,7 @@ form, fieldset {
         }
     }
     #hs-box {
-        flex-grow: 2;
+        flex-grow: 3;
         margin-left: 1em;
         .top-box {
             flex-basis: 100%;
