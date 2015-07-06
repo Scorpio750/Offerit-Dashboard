@@ -17087,7 +17087,6 @@ ____________________________________________________
 })(jQuery);
 
 
->>>>>>> flot
 /* jQuery Flot Animator version 1.0.
 
 Flot Animator is a free jQuery Plugin that will add fluid animations to Flot charts.
@@ -17219,8 +17218,6 @@ $.extend({
     return plot;
   }
 });
-<<<<<<< HEAD
-=======
 
 $(document).ready(function() {
 
