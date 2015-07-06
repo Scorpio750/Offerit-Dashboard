@@ -405,12 +405,6 @@ form, fieldset {
     color: #FFFFFF;
     text-decoration: none; }
 
-#main {
-  margin: 0 auto;
-  width: 77.5em;
-  padding-top: 12em;
-  text-align: center; }
-
 .flex-container {
   display: flex;
   flex-flow: row wrap;
@@ -513,9 +507,8 @@ form, fieldset {
   .menu li ~ li {
     border-top: 1px solid #bbb; }
   .menu li {
-    padding-left: 1.3rem;
+    padding-left: 1em;
     box-sizing: border-box;
-    padding-left: 1.1rem;
     line-height: 3em;
     display: block;
     overflow: hidden;
@@ -526,12 +519,29 @@ form, fieldset {
     font-family: Roboto;
     color: #686868;
     transition: all 0.1s linear; }
+    .menu li .subnav {
+      margin: 0;
+      padding: 0.1em; }
+      .menu li .subnav li {
+        padding-left: -1em;
+        border-top: 1px solid #bbb; }
     .menu li:hover {
-      background-color: #b0b0b0;
+      background-color: #bbb;
       color: white;
       cursor: pointer;
       font-size: 1em;
       font-weight: 900; }
+      .menu li:hover li {
+        background: #ddd;
+        font-weight: normal; }
+        .menu li:hover li:hover {
+          background-color: #c6c6c6;
+          color: white;
+          cursor: pointer;
+          font-size: 1em;
+          border-left: 6px solid white; }
+    .menu li:after {
+      background-color: green; }
   .menu #hs-menu {
     z-index: 100; }
   .menu #p_graph-menu {
@@ -543,14 +553,19 @@ form, fieldset {
 .rotated {
   transform: rotateY(180deg); }
 
+#main {
+  margin: 0 auto;
+  width: 77.5em;
+  padding-top: 12em;
+  text-align: center; }
+
 #reminder {
   margin-bottom: 3em;
   height: 200px;
   z-index: 100; }
   #reminder .offer-box {
-    flex-grow: 1;
-    margin-right: 1.5em;
-    perspective: 20em; }
+    flex-grow: 2;
+    margin-right: 1.5em; }
     #reminder .offer-box .top-box .swap-wrapper {
       display: inline-block; }
       #reminder .offer-box .top-box .swap-wrapper .swap {

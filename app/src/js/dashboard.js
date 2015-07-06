@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$swap[1].append($('<span />', {
 		text: txt[i]
 	}));
-      $swap[1].css('font-size', '.75em');
+	$swap[1].css('font-size', '.75em');
 
 	// hide and collect spans
 	$span[0] = $('span', $swap[0]).hide();
@@ -41,13 +41,23 @@ $(document).ready(function() {
 		(flag == 1) ? $span[n].stop().fadeIn(options) : $span[n].stop().fadeOut(options);
 	}
 
-      // Initialize initial prefix before header base
-	$swap[0].animate({
+	// Initialize initial prefix before header base
+	/*$swap[0].animate({
 		width: $span[0].eq(0).width()
 	});
       $span[0].eq(0).delay(200).fadeIn('fast');
+*/
+	$('.dropdown').click(function() {
+            /* Finding the drop down list that corresponds to the current section: */
+		var dropDown = $(this).find('.subnav');
+            $('.subnav').not(dropDown).slideUp('slow');
+            dropDown.slideToggle('slow');
+	});
 
-	$('.optn-btn').click(function() {
+      $('.sub-menu-item').click(function() {
+      });
+
+	function offerSwitch() {
 		c = ++c % n;
 		console.log(c);
 		$swap[0].animate({
@@ -66,22 +76,11 @@ $(document).ready(function() {
 		}
 		$('#top-offer-list').toggleClass('hidden');
 		$('#new-offer-list').toggleClass('hidden');
-	});
+	}
+
 	$('.menu-btn').click(function() {
-		var notThisOne = $(this);
-		$('.menu-btn').each(function() {
-			// ensures only one dropdown is active at any given time
-			if ($(this).attr('id') !== notThisOne.attr('id')) {
-				$(this).next('.menu').slideUp({
-					duration: 300,
-					easing: "swing"
-				});
-			} else {
-				$(event.currentTarget).next('.menu').slideToggle({
-					duration: 300,
-					easing: "swing"
-				});
-			}
-		});
+		var notThisOne = $(this).next();
+		$('.menu').not(notThisOne).slideUp();
+            notThisOne.slideToggle();
 	});
 });
