@@ -427,7 +427,7 @@ form, fieldset {
   align-content: stretch; }
 
 .panel .top-box, .panel .bottom-box {
-  transition: all .20s ease-in-out; }
+  transition: all .15s ease-in-out; }
 
 .top-box, .bottom-box {
   padding: 5px; }
