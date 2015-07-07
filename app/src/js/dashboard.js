@@ -41,11 +41,12 @@ $(document).ready(function() {
 		$swap[n].animate({
 			width: $width
 		});
-		if (n == 0) {
-			$span[0].stop().fadeOut('fast').eq(k).delay(200).fadeIn('fast');
-		} else {
-			(flag == 1) ? $span[n].stop().fadeIn(options) : $span[n].stop().fadeOut(options);
-		}
+            if (n == 0) {
+                  if (span[n].eq(k).css('display', 'block') == true) {
+                        $span[n].stop().eq(k).fadeOut(options);
+                  }
+            }
+		(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
 	}
 	// Initialize initial prefix before header base
 	/*$swap[0].animate({
@@ -66,28 +67,24 @@ $(document).ready(function() {
 			case 'tu':
 				$('#new-offer-list').addClass('hidden');
 				$('#top-offer-list').removeClass('hidden');
-				$(this).closest('.offer-box').removeClass('network');
 				shift(0, 1, 0);
 				shift(1, 0, 0);
 				break;
 			case 'tn':
 				$('#new-offer-list').addClass('hidden');
 				$('#top-offer-list').removeClass('hidden');
-				$(this).closest('.offer-box').addClass('network');
 				shift(0, 1, 0);
 				shift(1, 1, 0);
 				break;
 			case 'nu':
 				$('#new-offer-list').removeClass('hidden');
 				$('#top-offer-list').addClass('hidden');
-				$(this).closest('.offer-box').removeClass('network');
 				shift(0, 1, 1);
 				shift(1, 0, 0);
 				break;
 			case 'nn':
 				$('#new-offer-list').removeClass('hidden');
 				$('#top-offer-list').addClass('hidden');
-				$(this).closest('.offer-box').addClass('network');
 				shift(0, 1, 1);
 				shift(1, 1, 0);
 				break;

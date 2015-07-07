@@ -539,7 +539,7 @@ form, fieldset {
 .flex-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: stretch;
     align-content: space-between;
 }
@@ -686,17 +686,17 @@ form, fieldset {
             color: white;
             cursor: pointer;
             font-size: 1em;
-            border-left: 6px solid white;
+            border-left: 1em inset white;
+            padding-left: .75em;
             font-weight: 900;
             li {
                 background: #ddd;
                 font-weight: normal;
                 &:hover {
                     background-color: #c6c6c6;
-                    color: white;
-                    cursor: pointer;
-                    font-size: 1em;
+                    font-size: 14px;
                     border-left: none;
+                    font-weight: 900;
                 }
             }
         }
@@ -746,7 +746,8 @@ form, fieldset {
                 }
             }
         }
-        .bottom-box {}
+        .bottom-box {
+        }
         &:hover {
             .top-box {
                 background-color: $prim-green-hover;
@@ -822,7 +823,7 @@ form, fieldset {
             flex-grow: 1;
             flex-basis: 1em;
             #p_chart, #h_chart {
-                width: 35em;
+                width: 35.75em;
                 height: 15.5em;
             }
         }
@@ -859,17 +860,17 @@ form, fieldset {
     }
     #news {
         .top-box {
-            background-color: $prim-green;
+            background-color: $prim-red;
         }
         .bottom-box {
-            background-color: $sec-green;
+            background-color: $sec-red;
         }
         &:hover {
             .top-box {
-                background-color: $prim-green-hover;
+                background-color: $prim-red-hover;
             }
             .bottom-box {
-                background-color: $sec-green-hover;
+                background-color: $sec-red-hover;
             }
         }
     }

@@ -408,7 +408,7 @@ form, fieldset {
 .flex-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: stretch;
   align-content: space-between; }
 
@@ -530,17 +530,17 @@ form, fieldset {
       color: white;
       cursor: pointer;
       font-size: 1em;
-      border-left: 6px solid white;
+      border-left: 1em inset white;
+      padding-left: .75em;
       font-weight: 900; }
       .menu li:hover li {
         background: #ddd;
         font-weight: normal; }
         .menu li:hover li:hover {
           background-color: #c6c6c6;
-          color: white;
-          cursor: pointer;
-          font-size: 1em;
-          border-left: none; }
+          font-size: 14px;
+          border-left: none;
+          font-weight: 900; }
     .menu li:after {
       background-color: green; }
   .menu #hs-menu {
@@ -622,7 +622,7 @@ form, fieldset {
     flex-grow: 1;
     flex-basis: 1em; }
     #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
-      width: 35em;
+      width: 35.75em;
       height: 15.5em; }
   #main-column .graph-box:hover .top-box {
     background-color: #a6a6a6; }
@@ -646,13 +646,13 @@ form, fieldset {
     width: 30%;
     height: 70%; }
   #three-column #news .top-box {
-    background-color: #8AC750; }
+    background-color: #d56565; }
   #three-column #news .bottom-box {
-    background-color: #6A962B; }
+    background-color: #aa5050; }
   #three-column #news:hover .top-box {
-    background-color: #81C044; }
+    background-color: #CD5959; }
   #three-column #news:hover .bottom-box {
-    background-color: #5F8C1F; }
+    background-color: #A04343; }
   #three-column #paysum .top-box {
     background-color: #5490cf; }
   #three-column #paysum .bottom-box {
