@@ -421,14 +421,12 @@ form, fieldset {
   align-content: stretch; }
 
 .panel .top-box, .panel .bottom-box {
-  transition: all .15s ease-in-out; }
-
-.top-box, .bottom-box {
-  padding: 5px; }
+  transition: all .1s ease-in-out;
+  padding: .33em; }
 
 .top-box {
   background-color: #8AC750;
-  border-top-left-radius: 1em;
+  border-top-left-radius: .8em;
   line-height: 1em; }
   .top-box header {
     box-sizing: border-box;
@@ -455,10 +453,10 @@ form, fieldset {
       opacity: 1; }
 
 .bottom-box {
-  height: 75%;
+  max-height: 75%;
   line-height: 1.25em;
   background-color: #6A962B;
-  border-bottom-right-radius: 1em;
+  border-bottom-right-radius: .8em;
   overflow: hidden; }
 
 .stats-bar {
@@ -519,33 +517,28 @@ form, fieldset {
     font-family: Roboto;
     color: #686868;
     transition: all 0.1s linear; }
-    .menu li .subnav {
-      margin: 0;
-      padding: 0; }
-      .menu li .subnav li {
-        padding-left: -1em;
-        border-top: 1px solid #bbb; }
     .menu li:hover {
-      background-color: #bbb;
+      background-color: #c0c0c0;
       color: white;
       cursor: pointer;
-      border-left: .75em inset white;
+      border-left: .85em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }
-      .menu li:hover li {
-        background: #ddd;
-        font-weight: normal; }
-        .menu li:hover li:hover {
-          background-color: #c6c6c6;
-          font-size: 14px;
-          border-left: none;
-          font-weight: 900; }
     .menu li:after {
       background-color: green; }
   .menu #hs-menu {
     z-index: 100; }
   .menu #p_graph-menu {
     z-index: -100; }
+
+.subnav {
+  margin: 0;
+  padding: 0; }
+  .subnav li {
+    background: #ccc;
+    font-size: 12px; }
+    .subnav li:first-child {
+      border-top: 1px solid #bbb; }
 
 .hidden {
   display: none; }

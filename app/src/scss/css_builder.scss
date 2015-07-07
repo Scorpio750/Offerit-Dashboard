@@ -535,7 +535,11 @@ form, fieldset {
     }
 }
 
-// Generic Selectors
+///////////////////////////
+//                       //
+//   GENERIC SELECTORS   //
+//                       //
+///////////////////////////
 .flex-container {
     display: flex;
     flex-flow: row wrap;
@@ -555,17 +559,14 @@ form, fieldset {
 
 .panel {
     .top-box, .bottom-box {
-        transition: all .15s ease-in-out;
+        transition: all .1s ease-in-out;
+        padding: .33em;
     }
-}
-
-.top-box, .bottom-box {
-    padding: 5px;
 }
 
 .top-box {
     background-color: $prim-green;
-    border-top-left-radius: 1em;
+    border-top-left-radius: .8em;
     line-height: 1em;
     header {
         box-sizing: border-box;
@@ -598,10 +599,10 @@ form, fieldset {
 }
 
 .bottom-box {
-    height: 75%;
+    max-height: 75%;
     line-height: 1.25em;
     background-color: $sec-green;
-    border-bottom-right-radius: 1em;
+    border-bottom-right-radius: .8em;
     overflow: hidden;
 }
 
@@ -673,32 +674,14 @@ form, fieldset {
         font-family: Roboto;
         color: $font-menu-color;
         transition: all 0.1s linear;
-        .subnav {
-            margin: 0;
-            padding: 0;
-            li {
-                padding-left: -1em;
-                border-top: 1px solid #bbb;
-            }
-        }
         &:hover {
-            background-color: #bbb;
+            background-color: #c0c0c0;
             color: white;
             cursor: pointer;
             // font-size: 15px;
-            border-left: .75em inset white;
+            border-left: .85em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
-            li {
-                background: #ddd;
-                font-weight: normal;
-                &:hover {
-                    background-color: #c6c6c6;
-                    font-size: 14px;
-                    border-left: none;
-                    font-weight: 900;
-                }
-            }
         }
         &:after {
             background-color: green;
@@ -712,6 +695,20 @@ form, fieldset {
     }
 }
 
+.subnav {
+    margin: 0;
+    padding: 0;
+    li {
+        &:first-child {
+            border-top: 1px solid #bbb;
+        }
+        background: #ccc;
+        font-size: 12px;
+        &:hover {
+        }
+    }
+}
+
 .hidden {
     display: none;
 }
@@ -720,7 +717,11 @@ form, fieldset {
     transform: rotateY(180deg);
 }
 
-// Panel Selectors
+/////////////////////////
+//                     //
+//   PANEL SELECTORS   //
+//                     //
+/////////////////////////
 #main {
     margin: 0 auto;
     width: 77.5em;
@@ -746,8 +747,7 @@ form, fieldset {
                 }
             }
         }
-        .bottom-box {
-        }
+        .bottom-box {}
         &:hover {
             .top-box {
                 background-color: $prim-green-hover;

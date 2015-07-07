@@ -19,16 +19,16 @@ $(document).ready(function() {
 	// hide and collect spans
 	$span[0] = $('span', $swap[0]).hide();
 	$span[1] = $('span', $swap[1]).hide();
-
 	// shifts header base 
 	// @params:
 	// n - index in span array
-	// k - boolean option
+	// k - span array subindex
 	// flag - if 0, fades in, else fades out
 	function shift(n, flag, k) {
+            console.log('value of n passed in is ' + n);
 		var $width;
 		var options = {
-			duration: 300
+			duration: 200
 		};
 		switch (flag) {
 			case 0:
@@ -42,7 +42,9 @@ $(document).ready(function() {
 			width: $width
 		});
             if (n == 0) {
-                  if (span[n].eq(k).css('display', 'block') == true) {
+                  console.log($span[n]);
+                  if ($span[n].eq(k).css('display', 'block') == true) {
+                        console.log('fading out ')
                         $span[n].stop().eq(k).fadeOut(options);
                   }
             }
@@ -57,7 +59,7 @@ $(document).ready(function() {
 
 	$('.dropdown').click(function() {
 		/* Finding the drop down list that corresponds to the current section: */
-		var dropDown = $(this).find('.subnav');
+		var dropDown = $(this).next('.subnav');
 		$('.subnav').not(dropDown).slideUp('slow');
 		dropDown.slideToggle('slow');
 	});
