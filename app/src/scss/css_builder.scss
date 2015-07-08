@@ -1,3 +1,6 @@
+// @import "bootstrap";
+@import "font-awesome";
+
 @font-face {
     font-family: "Expressway";
     src: url("../src/img/ExpressWay/exprswy_free.ttf") format("truetype");
@@ -632,7 +635,7 @@ form, fieldset {
     .right-stats-box {
         flex-grow: 1;
     }
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
     &:hover {
         opacity: 1;
         /* i {

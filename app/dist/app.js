@@ -17449,7 +17449,7 @@ $(document).ready(function() {
 			var dispNoneCounter = 0;
 
 			for (var $i of $swap) {
-                        console.log('The value of $i is ' + $i);
+                        console.log('The value of $i is ' + $i.text());
 				if ($i.find('span').css('display') == 'none') {
 					dispNoneCounter++;
 					$spanVisible.push($i);
@@ -17463,6 +17463,7 @@ $(document).ready(function() {
 					return;
 				case 1:
 					if ($spanVisible[0].text() != $span[n].eq(k).text()) {
+                                    console.log('The value of k is ' + k);
 						$span[n].stop().fadeOut(options).eq(k).delay(200).fadeIn(options);
 					}
                               return;
