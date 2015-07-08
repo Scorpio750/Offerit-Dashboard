@@ -1,0 +1,28 @@
+{
+  "name": "Offerit Dashboard",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Scorpio750/Offerit-Dashboard",
+  "authors": [
+    "Patrick Wu <scorpio7500@gmail.com>"
+  ],
+  "main": [
+    "app/dashboard-flat.html",
+    "app/css/css_builder.css"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "flot.curvedlines": "~1.1.1",
+    "bootstrap-sass": "~3.3.5",
+    "fontawesome": "~4.3.0"
+  }
+}

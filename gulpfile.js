@@ -22,7 +22,7 @@ gulp.task('bower', function() {
 // move fonts into dist directory
 gulp.task('icons', function() {
 	return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*')
-		.pipe(gulp.dest('./dist/fonts'));
+		.pipe(gulp.dest('./app/dist/fonts'));
 });
 
 // sets up sass, links bootstrap and fontawesome into path for access

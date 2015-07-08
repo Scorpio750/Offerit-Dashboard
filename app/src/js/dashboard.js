@@ -40,16 +40,17 @@ $(document).ready(function() {
 		$swap[n].animate({
 			width: $width
 		});
-            console.log('The value of n is ' + n);
+		console.log('------------\n\nThe value of n is ' + n);
 		if (n == 0) {
 			/* retrieves swap element from document
 			 * if different than requested swap elem,
 			 * swap the two */
 			var $spanVisible = [];
 			var dispNoneCounter = 0;
-
 			for (var $i of $swap) {
-                        console.log('The value of $i is ' + $i.text());
+				console.log('The value of $i is ' + $i.text());
+				if ($i.text() == ' (Network') break;
+
 				if ($i.find('span').css('display') == 'none') {
 					dispNoneCounter++;
 					$spanVisible.push($i);
@@ -63,10 +64,10 @@ $(document).ready(function() {
 					return;
 				case 1:
 					if ($spanVisible[0].text() != $span[n].eq(k).text()) {
-                                    console.log('The value of k is ' + k);
+						console.log('The value of k is ' + k);
 						$span[n].stop().fadeOut(options).eq(k).delay(200).fadeIn(options);
 					}
-                              return;
+					return;
 				case 0:
 					$('*').css('color', 'red');
 					return;
