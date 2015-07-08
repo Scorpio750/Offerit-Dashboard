@@ -518,10 +518,10 @@ form, fieldset {
     color: #686868;
     transition: all 0.1s linear; }
     .menu li:hover {
-      background-color: #c0c0c0;
+      background-color: #bcbcbc;
       color: white;
       cursor: pointer;
-      border-left: .85em solid #aaa;
+      border-left: .75em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }
     .menu li:after {

@@ -675,11 +675,11 @@ form, fieldset {
         color: $font-menu-color;
         transition: all 0.1s linear;
         &:hover {
-            background-color: #c0c0c0;
+            background-color: #bcbcbc;
             color: white;
             cursor: pointer;
             // font-size: 15px;
-            border-left: .85em solid #aaa;
+            border-left: .75em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
         }

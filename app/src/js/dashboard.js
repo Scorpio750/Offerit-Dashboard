@@ -25,7 +25,6 @@ $(document).ready(function() {
 	// k - span array subindex
 	// flag - if 0, fades in, else fades out
 	function shift(n, flag, k) {
-            console.log('value of n passed in is ' + n);
 		var $width;
 		var options = {
 			duration: 200
@@ -41,14 +40,39 @@ $(document).ready(function() {
 		$swap[n].animate({
 			width: $width
 		});
-            if (n == 0) {
-                  console.log($span[n]);
-                  if ($span[n].eq(k).css('display', 'block') == true) {
-                        console.log('fading out ')
-                        $span[n].stop().eq(k).fadeOut(options);
-                  }
-            }
-		(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
+            console.log('The value of n is ' + n);
+		if (n == 0) {
+			/* retrieves swap element from document
+			 * if different than requested swap elem,
+			 * swap the two */
+			var $spanVisible = [];
+			var dispNoneCounter = 0;
+
+			for (var $i of $swap) {
+                        console.log('The value of $i is ' + $i);
+				if ($i.find('span').css('display') == 'none') {
+					dispNoneCounter++;
+					$spanVisible.push($i);
+					console.log($spanVisible);
+				}
+			}
+
+			switch (dispNoneCounter) {
+				case 2:
+					$span[n].eq(k).fadeIn(options);
+					return;
+				case 1:
+					if ($spanVisible[0].text() != $span[n].eq(k).text()) {
+						$span[n].stop().fadeOut(options).eq(k).delay(200).fadeIn(options);
+					}
+                              return;
+				case 0:
+					$('*').css('color', 'red');
+					return;
+			}
+		} else {
+			(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
+		}
 	}
 	// Initialize initial prefix before header base
 	/*$swap[0].animate({
@@ -60,8 +84,8 @@ $(document).ready(function() {
 	$('.dropdown').click(function() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
-		$('.subnav').not(dropDown).slideUp('slow');
-		dropDown.slideToggle('slow');
+		$('.subnav').not(dropDown).slideUp();
+		dropDown.slideToggle();
 	});
 
 	$('.dropdown-item').click(function() {
