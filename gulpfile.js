@@ -22,13 +22,12 @@ gulp.task('bower', function() {
 // move fonts into dist directory
 gulp.task('icons', function() {
 	return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*')
-		.pipe(gulp.dest('./app/dist/fonts'));
+		.pipe(gulp.dest('app/dist/fonts'));
 });
 
 // sets up sass, links bootstrap and fontawesome into path for access
 gulp.task('sass', function() {
 	return sass(config.sassPath + '/css_builder.scss', {
-			style: 'compressed',
 			loadPath: [
 				config.sassPath,
 				config.bowerDir + '/bootstrap-sass/assets/stylesheets',
@@ -38,7 +37,7 @@ gulp.task('sass', function() {
 			.on('error', notify.onError(function (error) {
 				return 'Error: ' + error.message;
 				}))
-		.pipe(gulp.dest('app/dist'))
+		.pipe(gulp.dest('app/dist/css'))
 		.pipe(reload({ stream:true }));
 });
 
@@ -54,10 +53,10 @@ gulp.task('scripts', function() {
 			'app/src/js/dashboard.js'])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
-		.pipe(gulp.dest('app/dist'));
+		.pipe(gulp.dest('app/dist/js'));
 });
 
-gulp.task('watch', ['sass', 'scripts', 'icons'], function() {
+gulp.task('serve', ['sass', 'scripts', 'icons'], function() {
 	browserSync.init({
 		server: {
 			baseDir: 'app',
@@ -68,8 +67,8 @@ gulp.task('watch', ['sass', 'scripts', 'icons'], function() {
 
 	gulp.watch(config.sassPath + '/*.scss', ['sass']);
 	gulp.watch('app/src/js/**/*.js', ['scripts']);
-	gulp.watch(['dist/*.html', 'dist/*.css', 'dist/*.js'], {cwd: 'app'}, reload);
+	gulp.watch(['dist/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
 });
 
 	gulp.task('ghostMode');
-	gulp.task('default', ['watch']);
+	gulp.task('default', ['serve']);

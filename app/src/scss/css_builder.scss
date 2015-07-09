@@ -2,16 +2,8 @@
 @import "font-awesome";
 
 @font-face {
-    font-family: "Expressway";
-    src: url("../src/img/ExpressWay/exprswy_free.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
-}
-
-
-@font-face {
     font-family: "Roboto";
-    src: url("../src/img/Roboto/Roboto-Regular.ttf") format("truetype");
+    src: url("../../src/img/Roboto/Roboto-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -19,13 +11,13 @@
 
 @font-face {
     font-family: "Roboto-Light";
-    src: url("../src/img/Roboto/Roboto-Light.ttf") format("truetype");
+    src: url("../../src/img/Roboto/Roboto-Light.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 
-$font-stack: Roboto, Expressway, Tahoma, Arial, sans-serif;
+$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -577,7 +569,6 @@ form, fieldset {
         position: relative;
         h2 {
             display: inline-block;
-            font-weight: bolder;
             transition: all .1s ease-in-out;
             opacity: 0.8;
             &:hover {
@@ -643,7 +634,7 @@ form, fieldset {
         } */
     }
     &:active {
-        color: #333;
+        color: #282828;
     }
 }
 
@@ -681,7 +672,7 @@ form, fieldset {
             background-color: #bcbcbc;
             color: white;
             cursor: pointer;
-            // font-size: 15px;
+            font-size: 15px;
             border-left: .75em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
@@ -708,6 +699,7 @@ form, fieldset {
         background: #ccc;
         font-size: 12px;
         &:hover {
+            font-size: 13px;
         }
     }
 }

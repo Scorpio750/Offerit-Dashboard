@@ -49,7 +49,10 @@ $(document).ready(function() {
 			var dispNoneCounter = 0;
 			for (var $i of $swap) {
 				console.log('The value of $i is ' + $i.text());
-				if ($i.text() == ' (Network') break;
+				if ($i.text() === ' (Network') {
+					console.log('found (Network), breaking...');
+					break;
+				}
 
 				if ($i.find('span').css('display') == 'none') {
 					dispNoneCounter++;
@@ -143,6 +146,11 @@ $(document).ready(function() {
 
 	$('.menu-btn').click(function() {
 		var notThisOne = $(this).next();
+
+		if ($(this).attr('id') == 'dropdown-btn') {
+			this.next('.menu').find('.subnav').slideUp();
+		}
+
 		$('.menu').not(notThisOne).slideUp();
 		notThisOne.slideToggle();
 	});
