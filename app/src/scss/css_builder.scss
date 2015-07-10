@@ -1,4 +1,4 @@
-// @import "bootstrap";
+@import "bootstrap";
 @import "font-awesome";
 
 @font-face {
@@ -632,7 +632,7 @@ form, fieldset {
     transition: all .2s ease-in-out;
     &:hover {
         opacity: 1;
-        // cursor: pointer;
+        cursor: default;
     }
      &:active {
         // background-color: $prim-cadet-hover;
@@ -675,7 +675,7 @@ form, fieldset {
             color: white;
             cursor: pointer;
             font-size: 15px;
-            border-left: .75em solid #aaa;
+            border-left: .67em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
         }
@@ -734,6 +734,10 @@ form, fieldset {
         flex-grow: 2;
         margin-right: 1.5em;
         .top-box {
+            #metric-btn {
+                top: 1.26em;
+                right: 5em;
+            }
             .swap-wrapper {
                 display: inline-block;
                 .swap {
@@ -741,7 +745,13 @@ form, fieldset {
                     span {
                         position: absolute;
                     }
+                    display: none;
                 }
+            }
+            .swap-item {
+            }
+            #swap-network {
+                font-size: .75em;
             }
         }
         .bottom-box {}

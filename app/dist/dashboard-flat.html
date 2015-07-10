@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<head><meta name="viewport" http-equiv="Content-Type" content="text/html; charset=UTF-8, width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
 		<title>OFFERIT</title>
 		<link rel="stylesheet" type="text/css" href="css/css_builder.css">
@@ -154,13 +154,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex-container" id="main">
+				<div class="container flex-container" id="main">
 					<!--Reminder Boxes-->
 					<div class="row flex-container" id="reminder">
 						<div class="two-box panel offer-box">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
+									<!-- <span class="icon fa-stack menu-btn" id="metric-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-asterisk fa-stack-1x"></i>
+									</span>
+ -->									<span class="icon fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
@@ -180,7 +184,15 @@
 									</ul>
 									<a href="">
 										<div class="swap-wrapper">
-											<h2><span class="swap" id="swap1"></span> Offers <span class="swap" id="swap2"></span></h2>
+											<h2>
+											<span class="swap" id="swap1">
+												<span class="swap-item" id="swap-top">Top </span>
+												<span class="swap-item" id="swap-new">New</span>
+											</span>
+											Offers
+											<span class="swap" id="swap-network">(Network)
+											</span>
+											</h2>
 										</div>
 									</a>
 								</header>
@@ -290,7 +302,6 @@
 								</div>
 							</div>
 						</div>
-						<div id="v_divider"></div>
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>

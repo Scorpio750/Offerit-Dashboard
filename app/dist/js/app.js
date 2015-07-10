@@ -17450,14 +17450,16 @@ $(document).ready(function() {
 			var dispNoneCounter = 0;
 			for (var $i of $swap) {
 				console.log('The value of $i is ' + $i.text());
-				if ($i.text() == ' (Network') {
+				if ($i.find('span').text() == ' (Network') {
 					console.log('found (Network), breaking...');
 					break;
 				}
 				console.log('display of ' + $i.find('span').text() + ' is ' + $i.find('span').css('display'));
-				if ($i.find('span').css('display') == 'none') {
-					dispNoneCounter++;
-					$spanVisible.push($i);
+				for (var j = 0; j < 2; j++) {
+					if ($i.find('span').eq(j).css('display') == 'none') {
+						dispNoneCounter++;
+						$spanVisible.push($i);
+					}
 				}
 			}
 
@@ -17488,14 +17490,14 @@ $(document).ready(function() {
       $span[0].eq(0).delay(200).fadeIn('fast');
       */
 
-	$('.dropdown').click(function() {
+	$('.dropdown').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
 		$('.subnav').not(dropDown).slideUp();
 		dropDown.slideToggle();
 	});
 
-	$('.dropdown-item').click(function() {
+	$('.dropdown-item').click(function switch_offers() {
 		switch ($(this).attr('id')) {
 			case 'tu':
 				$('#new-offer-list').addClass('hidden');
@@ -17549,10 +17551,9 @@ $(document).ready(function() {
 	$('.menu-btn').click(function() {
 		var notThisOne = $(this).next();
 
-		console.log($(this).attr('class'));
-		if ($(this).attr('class') == 'dropdown-btn') {
-			alert('FUCK YOU');
-			this.next('.menu').find('.subnav').slideUp();
+		// closes any open subnavs upon opening the main nav
+		if ($(this).hasClass('dropdown-btn')) {
+			$(this).next('.menu').find('.subnav').slideUp();
 		}
 
 		$('.menu').not(notThisOne).slideUp();

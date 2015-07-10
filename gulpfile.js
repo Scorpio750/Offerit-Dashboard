@@ -7,10 +7,11 @@ var gulp 		= require('gulp'),
 	uglify		= require('gulp-uglify'),
 	notify 		= require('gulp-notify'),
 	bower		= require('gulp-bower');
+	autoprefixer= require('gulp-autoprefixer');
 
 var config = {
 	sassPath: './app/src/scss',
-	bowerDir: './app/src/js/bower_components'
+	bowerDir: 'bower_components'
 }
 
 // runs bower install
@@ -37,8 +38,18 @@ gulp.task('sass', function() {
 			.on('error', notify.onError(function (error) {
 				return 'Error: ' + error.message;
 				}))
-		.pipe(gulp.dest('app/dist/css'))
+		.pipe(gulp.dest('app/src/css'))
 		.pipe(reload({ stream:true }));
+});
+
+// autoprefixes css
+gulp.task('autoprefixer', function() {
+	return gulp.src('app/src/css/*.css')
+		.pipe(autoprefixer({
+			browsers: ['last 2 version'],
+			cascade: false
+			}))
+			.pipe(gulp.dest('dist/css'));
 });
 
 // concatenates all js scripts into one file
