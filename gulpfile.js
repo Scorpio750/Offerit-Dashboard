@@ -38,18 +38,8 @@ gulp.task('sass', function() {
 			.on('error', notify.onError(function (error) {
 				return 'Error: ' + error.message;
 				}))
-		.pipe(gulp.dest('app/src/css'))
+		.pipe(gulp.dest('app/dist/css'))
 		.pipe(reload({ stream:true }));
-});
-
-// autoprefixes css
-gulp.task('autoprefixer', function() {
-	return gulp.src('app/src/css/*.css')
-		.pipe(autoprefixer({
-			browsers: ['last 2 version'],
-			cascade: false
-			}))
-			.pipe(gulp.dest('dist/css'));
 });
 
 // concatenates all js scripts into one file

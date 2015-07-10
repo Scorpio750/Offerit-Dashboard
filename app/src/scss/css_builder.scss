@@ -1,5 +1,5 @@
-@import "bootstrap";
-@import "font-awesome";
+// @import "bootstrap";
+// @import "font-awesome";
 
 @font-face {
     font-family: "Roboto";
@@ -63,6 +63,7 @@ $sec-red-hover: #A04343;
 
 body {
     font-family: $font-stack;
+    font-weight: 900;
     margin: 0;
     color: $off-white;
     font: $font-stack;
@@ -543,15 +544,6 @@ form, fieldset {
     align-content: space-between;
 }
 
-.row {
-    height: 18em;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 100%;
-    align-items: stretch;
-    align-content: stretch;
-}
-
 .panel {
     .top-box, .bottom-box {
         transition: all .1s ease-in-out;
@@ -616,18 +608,16 @@ form, fieldset {
     text-align: center;
     display: flex;
     box-sizing: border-box;
-    justify-content: space-around;
     opacity: 0.6;
     padding: 0 1em 0 1em;
     border-radius: 1em;
     .left-stats-box {
-        flex-grow: 1;
         padding-top: 1.5em;
         padding-right: 1.2em;
         i {}
     }
     .right-stats-box {
-        flex-grow: 1;
+        margin: 0;
     }
     transition: all .2s ease-in-out;
     &:hover {

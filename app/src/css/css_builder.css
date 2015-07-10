@@ -8190,13 +8190,11 @@ form, fieldset {
   margin-bottom: 3em;
   justify-content: center; }
   #main-column .graph-box .top-box {
-    border-radius: 0em;
     background-color: #aaa; }
     #main-column .graph-box .top-box h2 {
       color: #ddd;
       transition: all .5s; }
   #main-column .graph-box .bottom-box {
-    border-radius: 0em;
     background-color: #ccc;
     padding: 1.25em;
     height: 18em;
