@@ -17419,6 +17419,7 @@ $(document).ready(function() {
 	// hide and collect spans
 	$span[0] = $('span', $swap[0]).hide();
 	$span[1] = $('span', $swap[1]).hide();
+
 	// shifts header base 
 	// @params:
 	// n - index in span array
@@ -17449,30 +17450,31 @@ $(document).ready(function() {
 			var dispNoneCounter = 0;
 			for (var $i of $swap) {
 				console.log('The value of $i is ' + $i.text());
-				if ($i.text() === ' (Network') {
+				if ($i.text() == ' (Network') {
 					console.log('found (Network), breaking...');
 					break;
 				}
-
+				console.log('display of ' + $i.find('span').text() + ' is ' + $i.find('span').css('display'));
 				if ($i.find('span').css('display') == 'none') {
 					dispNoneCounter++;
 					$spanVisible.push($i);
-					console.log($spanVisible);
 				}
 			}
 
 			switch (dispNoneCounter) {
-				case 2:
+				case 3:
 					$span[n].eq(k).fadeIn(options);
 					return;
-				case 1:
+				case 2:
 					if ($spanVisible[0].text() != $span[n].eq(k).text()) {
 						console.log('The value of k is ' + k);
+						console.log('Removing ' + $spanVisible[0].text());		
+						console.log('Adding ' + $spanVisible[1].text());		
 						$span[n].stop().fadeOut(options).eq(k).delay(200).fadeIn(options);
 					}
 					return;
 				case 0:
-					$('*').css('color', 'red');
+					console.log('YOU FUCKED UP');
 					return;
 			}
 		} else {
@@ -17547,7 +17549,9 @@ $(document).ready(function() {
 	$('.menu-btn').click(function() {
 		var notThisOne = $(this).next();
 
-		if ($(this).attr('id') == 'dropdown-btn') {
+		console.log($(this).attr('class'));
+		if ($(this).attr('class') == 'dropdown-btn') {
+			alert('FUCK YOU');
 			this.next('.menu').find('.subnav').slideUp();
 		}
 

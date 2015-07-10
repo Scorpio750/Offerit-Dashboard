@@ -1806,7 +1806,8 @@ body {
   font: Roboto-Light, Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6;
-  font: Roboto-Light, Tahoma, Arial, sans-serif; }
+  font: Roboto-Light, Tahoma, Arial, sans-serif;
+  box-sizing: border-box; }
 
 a {
   color: white;
@@ -2116,8 +2117,7 @@ form, fieldset {
   #nav li {
     flex-grow: 1;
     padding: 1em;
-    text-align: center;
-    box-sizing: border-box; }
+    text-align: center; }
     #nav li a {
       padding: 13px 0px 0px 0px;
       font-size: 18px;
@@ -2215,7 +2215,6 @@ form, fieldset {
   border-top-left-radius: .8em;
   line-height: 1em; }
   .top-box header {
-    box-sizing: border-box;
     text-align: center;
     position: relative; }
     .top-box header h2 {
@@ -2238,7 +2237,8 @@ form, fieldset {
       opacity: 1; }
 
 .bottom-box {
-  max-height: 75%;
+  height: 75%;
+  max-height: 100%;
   line-height: 1.25em;
   background-color: #6A962B;
   border-bottom-right-radius: .8em;
@@ -2257,8 +2257,11 @@ form, fieldset {
 .stats-box {
   text-align: center;
   display: flex;
+  box-sizing: border-box;
   justify-content: space-around;
   opacity: 0.6;
+  padding: 0 1em 0 1em;
+  border-radius: 1em;
   transition: all .2s ease-in-out; }
   .stats-box .left-stats-box {
     flex-grow: 1;
@@ -2267,12 +2270,9 @@ form, fieldset {
   .stats-box .right-stats-box {
     flex-grow: 1; }
   .stats-box:hover {
-    opacity: 1;
-    /* i {
-        cursor: pointer;
-    } */ }
+    opacity: 1; }
   .stats-box:active {
-    color: #282828; }
+    color: #2a2a2a; }
 
 .menu {
   position: absolute;
@@ -2291,7 +2291,6 @@ form, fieldset {
     border-top: 1px solid #bbb; }
   .menu li {
     padding-left: 1em;
-    box-sizing: border-box;
     line-height: 3em;
     display: block;
     overflow: hidden;
@@ -2395,7 +2394,6 @@ form, fieldset {
       transition: all .5s; }
   #main-column .graph-box .bottom-box {
     border-radius: 0em;
-    box-sizing: border-box;
     background-color: #ccc;
     padding: 1.25em;
     height: 18em;

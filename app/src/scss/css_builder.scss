@@ -69,6 +69,7 @@ body {
     min-width: 1240px;
     background: $off-white;
     font: $font-stack;
+    box-sizing: border-box;
 }
 
 a {
@@ -436,7 +437,6 @@ form, fieldset {
         flex-grow: 1;
         padding: 1em;
         text-align: center;
-        box-sizing: border-box;
         a {
             padding: 13px 0px 0px 0px;
             font-size: 18px;
@@ -564,7 +564,6 @@ form, fieldset {
     border-top-left-radius: .8em;
     line-height: 1em;
     header {
-        box-sizing: border-box;
         text-align: center;
         position: relative;
         h2 {
@@ -593,7 +592,8 @@ form, fieldset {
 }
 
 .bottom-box {
-    max-height: 75%;
+    height: 75%;
+    max-height: 100%;
     line-height: 1.25em;
     background-color: $sec-green;
     border-bottom-right-radius: .8em;
@@ -615,8 +615,11 @@ form, fieldset {
 .stats-box {
     text-align: center;
     display: flex;
+    box-sizing: border-box;
     justify-content: space-around;
     opacity: 0.6;
+    padding: 0 1em 0 1em;
+    border-radius: 1em;
     .left-stats-box {
         flex-grow: 1;
         padding-top: 1.5em;
@@ -629,12 +632,12 @@ form, fieldset {
     transition: all .2s ease-in-out;
     &:hover {
         opacity: 1;
-        /* i {
-            cursor: pointer;
-        } */
+        // cursor: pointer;
     }
-    &:active {
-        color: #282828;
+     &:active {
+        // background-color: $prim-cadet-hover;
+        // border: .5em inset $sec-cadet;
+        color: #2a2a2a;
     }
 }
 
@@ -657,7 +660,6 @@ form, fieldset {
     }
     li {
         padding-left: 1em;
-        box-sizing: border-box;
         line-height: 3em;
         display: block;
         overflow: hidden;
@@ -810,7 +812,6 @@ form, fieldset {
         }
         .bottom-box {
             border-radius: 0em;
-            box-sizing: border-box;
             background-color: #ccc;
             padding: 1.25em;
             // border: 15px solid slategray;
