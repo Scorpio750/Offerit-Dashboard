@@ -418,16 +418,16 @@ form, fieldset {
 
 .panel {
   margin-bottom: auto;
-  border-radius: 1em 1em 0 0;
+  border-radius: 16px 16px 0 0;
   border: transparent;
   background-color: transparent;
-  box-shadow: 3px 3px 10px 1px #aaa; }
+  box-shadow: 4px 4px 10px 1px #aaa; }
   .panel .top-box, .panel .bottom-box {
     transition: all .1s ease-in-out; }
 
 .top-box {
   background-color: #8AC750;
-  border-radius: 1em 1em 0 0;
+  border-radius: 16px 16px 0 0;
   padding-bottom: .25em; }
   .top-box header {
     text-align: center;
@@ -439,21 +439,21 @@ form, fieldset {
       .top-box header h2:hover {
         color: white;
         opacity: 1; }
-  .top-box .btn {
+  .top-box .icon {
     padding-top: 0;
     position: absolute;
-    top: .6em;
+    top: .67em;
     right: .7em;
     opacity: .7;
     display: inline-block;
     transition: all .15s linear; }
-    .top-box .btn:hover {
+    .top-box .icon:hover {
       cursor: pointer;
       opacity: 1;
       color: #E6E6E6; }
 
 .bottom-box {
-  height: 75%;
+  min-height: 100%;
   padding: 1em;
   background-color: #6A962B;
   overflow: auto; }
@@ -489,9 +489,9 @@ form, fieldset {
   .stats-box:active {
     color: #2a2a2a; }
 
-.menu {
+.dropdown-menu {
   display: none;
-  position: absolute;
+  top: 90%;
   background: #ddd;
   width: 9em;
   margin: auto;
@@ -499,13 +499,11 @@ form, fieldset {
   list-style: none;
   overflow: hidden;
   border-radius: 5px;
-  top: 3.5em;
-  right: 0em;
-  z-index: 1;
+  z-index: 1000;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
-  .menu li ~ li {
+  .dropdown-menu li ~ li {
     border-top: 1px solid #bbb; }
-  .menu li {
+  .dropdown-menu li {
     padding-left: 1em;
     line-height: 3em;
     display: block;
@@ -517,7 +515,7 @@ form, fieldset {
     font-family: Roboto;
     color: #686868;
     transition: all 0.1s linear; }
-    .menu li:hover {
+    .dropdown-menu li:hover {
       background-color: #bcbcbc;
       color: white;
       cursor: pointer;
@@ -525,11 +523,11 @@ form, fieldset {
       border-left: .67em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }
-    .menu li:after {
+    .dropdown-menu li:after {
       background-color: green; }
-  .menu #hs-menu {
+  .dropdown-menu #hs-menu {
     z-index: 100; }
-  .menu #p_graph-menu {
+  .dropdown-menu #p_graph-menu {
     z-index: -100; }
 
 .subnav {
@@ -555,84 +553,92 @@ form, fieldset {
   padding: 12em 0 2em;
   text-align: center; }
 
-#reminder {
+#metric-btn button {
+  background-color: #8AC750;
+  color: #E6E6E6; }
+  #metric-btn button span {
+    opacity: .7; }
+  #metric-btn button:hover {
+    opacity: 1; }
+
+#reminders {
   margin-bottom: 3em;
   height: 200px;
   z-index: 100; }
-  #reminder .offer-box {
-    flex-grow: 1;
-    margin-right: 1.5em; }
-    #reminder .offer-box .top-box #metric-btn {
-      top: 1.26em;
-      right: 5em; }
-    #reminder .offer-box .top-box .swap-wrapper {
-      display: inline-block; }
-      #reminder .offer-box .top-box .swap-wrapper .swap {
-        vertical-align: top;
-        display: none; }
-        #reminder .offer-box .top-box .swap-wrapper .swap span {
-          position: absolute; }
-    #reminder .offer-box .top-box #swap-network {
-      font-size: .75em; }
-    #reminder .offer-box:hover .top-box {
-      background-color: #81C044; }
-    #reminder .offer-box:hover .bottom-box {
-      background-color: #5F8C1F; }
-    #reminder .offer-box .hidden {
-      display: none; }
-  #reminder .network .top-box {
+  #reminders .network .top-box {
     background-color: #d56565; }
-  #reminder .network .bottom-box {
+  #reminders .network .bottom-box {
     background-color: #aa5050; }
-  #reminder .network:hover .top-box {
+  #reminders .network:hover .top-box {
     background-color: #CD5959; }
-  #reminder .network:hover .bottom-box {
+  #reminders .network:hover .bottom-box {
     background-color: #A04343; }
-  #reminder #hs-box {
-    flex-grow: 2;
-    flex-basis: 30%;
-    margin-left: 1em;
-    z-index: 200; }
-    #reminder #hs-box .top-box {
-      flex-basis: 100%;
-      background-color: #7ac5cd; }
-    #reminder #hs-box .bottom-box {
-      flex-basis: 100%;
-      height: 100%;
-      padding: 15px;
-      background-color: #619da4; }
-    #reminder #hs-box:hover .top-box {
-      background-color: #7ABdC4; }
-    #reminder #hs-box:hover .bottom-box {
-      background-color: #558E96; }
+
+#offer-box {
+  flex-grow: 2;
+  margin-right: 1.5em; }
+  #offer-box .top-box .swap-wrapper {
+    display: inline-block; }
+    #offer-box .top-box .swap-wrapper .swap {
+      vertical-align: top;
+      display: none; }
+      #offer-box .top-box .swap-wrapper .swap span {
+        position: absolute; }
+  #offer-box .top-box #swap-network {
+    font-size: .75em; }
+  #offer-box:hover .top-box {
+    background-color: #81C044; }
+  #offer-box:hover .bottom-box {
+    background-color: #5F8C1F; }
+  #offer-box .hidden {
+    display: none; }
+
+#hs-box {
+  flex-grow: 3;
+  flex-basis: 30%;
+  margin-left: 1em;
+  z-index: 200; }
+  #hs-box .top-box {
+    flex-basis: 100%;
+    background-color: #7ac5cd; }
+  #hs-box .bottom-box {
+    flex-basis: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: #619da4; }
+  #hs-box:hover .top-box {
+    background-color: #7ABdC4; }
+  #hs-box:hover .bottom-box {
+    background-color: #558E96; }
 
 #main-column {
   height: auto;
-  margin-bottom: 3em;
-  justify-content: center; }
-  #main-column .graph-box .top-box {
-    border-radius: 0em;
-    background-color: #aaa; }
-    #main-column .graph-box .top-box h2 {
-      color: #ddd;
-      transition: all .5s; }
-  #main-column .graph-box .bottom-box {
-    border-radius: 0em;
-    background-color: #ccc;
-    padding: 1.25em;
-    height: 18em;
-    flex-grow: 1;
-    flex-basis: 1em; }
-    #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
-      width: 35.75em;
-      height: 15.5em; }
-  #main-column .graph-box:hover .top-box {
-    background-color: #a6a6a6; }
-    #main-column .graph-box:hover .top-box h2 {
-      transform: skew(180deg);
-      color: #E6E6E6; }
-  #main-column .graph-box:hover .bottom-box {
-    background-color: #c6c6c6; }
+  margin-bottom: 3em; }
+  #main-column .graph-box {
+    width: 50%; }
+    #main-column .graph-box .top-box {
+      border-radius: 0;
+      background-color: #aaa; }
+      #main-column .graph-box .top-box h2 {
+        color: #ddd;
+        transition: all .5s; }
+    #main-column .graph-box .bottom-box {
+      border-radius: 0;
+      background-color: #ccc;
+      padding: 1.25em;
+      height: 18em;
+      flex-grow: 1;
+      flex-basis: 1em; }
+      #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
+        width: 35.75em;
+        height: 15.5em; }
+    #main-column .graph-box:hover .top-box {
+      background-color: #a6a6a6; }
+      #main-column .graph-box:hover .top-box h2 {
+        transform: skew(180deg);
+        color: #E6E6E6; }
+    #main-column .graph-box:hover .bottom-box {
+      background-color: #c6c6c6; }
   #main-column #v_divider {
     width: 1px;
     background-color: #ccc;

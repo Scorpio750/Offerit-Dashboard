@@ -158,30 +158,38 @@
 				</div>
 				<div class="container" id="main">
 					<!--Reminder Boxes-->
-					<div class="row flex-container" id="reminder">
-						<div class="two-box panel offer-box">
+					<div class="row flex-container" id="reminders">
+						<div class="two-box panel" id="offer-box">
 							<div class="top-box">
 								<header>
-									<!-- <span class="btn fa-stack menu-btn" id="metric-btn">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-asterisk fa-stack-1x"></i>
-									</span>
- -->									<span class="btn fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
+									<div class="btn-group dropdown " id="metric-btn">
+										<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li>Hits</li>
+											<li>Conversions</li>
+											<li>Payout</li>
+											<li>EPC</li>
+										</ul>
+									</div>
+									<span class="icon fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu " id="offer-menu">
+									<ul class="dropdown-menu " id="offer-menu">
 										<li class="dropdown" id="top-offers">Top Offers
 										</li>
 										<ul class="subnav ">
-											<li class="dropdown-item" id="tu">By User</li>
-											<li class="dropdown-item" id="tn">By Network</li>
+											<li id="tu">By User</li>
+											<li id="tn">By Network</li>
 										</ul>
 										<li class="dropdown" id="new-offers">New Offers
 										</li>
 										<ul class="subnav ">
-											<li class="dropdown-item" id="nu">By User</li>
-											<li class="dropdown-item" id="nn">By Network</li>
+											<li id="nu">By User</li>
+											<li id="nn">By Network</li>
 										</ul>
 									</ul>
 									<a href="">
@@ -219,11 +227,11 @@
 						<div class="two-box panel" id="hs-box">
 							<div class="top-box" id="list-box">
 								<header>
-									<span class="btn fa-stack fa-lg menu-btn" id="hs-btn">
+									<span class="icon fa-stack fa-lg menu-btn" id="hs-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu " id="hs-menu">
+									<ul class="dropdown-menu " id="hs-menu">
 										<li>This Period</li>
 										<li>Last Period</li>
 										<li>This Month</li>
@@ -286,11 +294,11 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="btn fa-stack fa-lg menu-btn" id="h_chart-btn">
+									<span class="icon fa-stack fa-lg menu-btn" id="h_chart-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu " id="h_graph-menu">
+									<ul class="dropdown-menu " id="h_graph-menu">
 										<li>Hits</li>
 										<li>Conversions</li>
 										<li>Payout</li>
@@ -307,11 +315,11 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="btn fa-stack fa-lg menu-btn" id="p_chart-btn">
+									<span class="icon fa-stack fa-lg menu-btn" id="p_chart-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu " id="p_graph-menu">
+									<ul class="dropdown-menu " id="p_graph-menu">
 										<li>This Period</li>
 										<li>Last Period</li>
 										<li>This Month</li>

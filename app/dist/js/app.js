@@ -17537,11 +17537,11 @@ $(document).ready(function() {
 		if (c > 1) {
 			// change color of offer panel to red
 			console.log('adding network');
-			$(this).closest('.offer-box').addClass('network');
+			$(this).closest('#offer-box').addClass('network');
 			shift(1, 1);
 		} else {
 			console.log('removing network');
-			$(this).closest('.offer-box').removeClass('network');
+			$(this).closest('#offer-box').removeClass('network');
 			shift(1, 0);
 		}
 		$('#top-offer-list').toggleClass('hidden');
@@ -17554,10 +17554,10 @@ $(document).ready(function() {
 		// closes any open subnavs upon opening the main nav
 		if ($(this).hasClass('dropdown-btn')) {
 			console.log('also dropdown');
-			$(this).next('.menu').find('.subnav').slideUp();
+			$(this).next('.dropdown-menu').find('.subnav').slideUp();
 		}
 
-		$('.menu').not(notThisOne).slideUp();
+		$('.dropdown-menu').not(notThisOne).slideUp();
 		notThisOne.slideToggle();
 	});
 });
