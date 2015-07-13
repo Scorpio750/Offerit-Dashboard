@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head><meta name="viewport" http-equiv="Content-Type" content="text/html; charset=UTF-8, width=device-width, initial-scale=1">
+	<head><meta name="viewport" http-equiv="Content-Type" content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
 		<title>OFFERIT</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -29,8 +29,8 @@
 									<li><a href="http://staging.offerit.com/index.php?logout=1">Log out</a></li>
 								</ul>
 								<p class="messages"><span>You have 0 unread messages | 0 new notifications</span></p>
-								<div id="quicklink-btn-container">
-									<btn class="quicklink-btn left-btn" id="create_bkmrk">+ Quick Link This Page</btn><btn class="quicklink-btn right-btn" id="bkmrkid_"><span class="quicklink-caret"></span></btn>
+								<div id="quicklink-icon-container">
+									<icon class="quicklink-icon left-icon" id="create_bkmrk">+ Quick Link This Page</icon><icon class="quicklink-icon right-icon" id="bkmrkid_"><span class="quicklink-caret"></span></icon>
 									<ul id="quicklink-dropdown" class="bookmark-set" style="display: none;">
 										<li class="quicklink" id="link-32"><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl">This Period Referring URL Stats</a></li>
 										<li class="quicklink" id="link-33"><a href="http://staging.offerit.com/internal.php?page=referrals">Affiliate Referrals</a></li>
@@ -162,11 +162,24 @@
 						<div class="two-box panel offer-box">
 							<div class="top-box">
 								<header>
-									<!-- <span class="icon fa-stack menu-btn" id="metric-btn">
+									<a href="">
+										<div class="swap-wrapper">
+											<h2>
+											<span class="swap" id="swap1">
+												<span class="swap-item" id="swap-top">Top </span>
+												<span class="swap-item" id="swap-new">New</span>
+											</span>
+											Offers
+											<span class="swap" id="swap-network">(Network)
+											</span>
+											</h2>
+										</div>
+									</a>
+									<!-- <span class="icon fa-stack menu-icon" id="metric-icon">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-asterisk fa-stack-1x"></i>
 									</span>
- -->									<span class="icon fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
+ -->									<span class="icon fa-stack fa-lg dropdown-icon menu-icon" id="offer-toggle-icon">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
@@ -184,19 +197,6 @@
 											<li class="dropdown-item" id="nn">By Network</li>
 										</ul>
 									</ul>
-									<a href="">
-										<div class="swap-wrapper">
-											<h2>
-											<span class="swap" id="swap1">
-												<span class="swap-item" id="swap-top">Top </span>
-												<span class="swap-item" id="swap-new">New</span>
-											</span>
-											Offers
-											<span class="swap" id="swap-network">(Network)
-											</span>
-											</h2>
-										</div>
-									</a>
 								</header>
 							</div>
 							<div class="bottom-box">
@@ -219,7 +219,7 @@
 						<div class="two-box panel" id="hs-box">
 							<div class="top-box" id="list-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="hs-btn">
+									<span class="icon fa-stack fa-lg menu-icon" id="hs-icon">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
@@ -286,7 +286,7 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="h_chart-btn">
+									<span class="icon fa-stack fa-lg menu-icon" id="h_chart-icon">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
@@ -307,7 +307,7 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="p_chart-btn">
+									<span class="icon fa-stack fa-lg menu-icon" id="p_chart-icon">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>

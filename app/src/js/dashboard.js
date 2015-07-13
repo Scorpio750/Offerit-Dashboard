@@ -150,13 +150,13 @@ $(document).ready(function() {
 
 	$('.menu-btn').click(function() {
 		var notThisOne = $(this).next();
-
+		console.log('clicked ' + $(this).next().attr('class'));
 		// closes any open subnavs upon opening the main nav
 		if ($(this).hasClass('dropdown-btn')) {
 			$(this).next('.menu').find('.subnav').slideUp();
 		}
 
-		$('.menu').not(notThisOne).slideUp();
+		$('.menu').not(notThisOne).slide();
 		notThisOne.slideToggle();
 	});
 });

@@ -8,6 +8,12 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Expressway";
+    src: url("../../src/img/ExpressWay/exprswy_free.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
 
 @font-face {
     font-family: "Roboto-Light";
@@ -53,30 +59,27 @@ $sec-cadet: #619da4;
 $prim-cadet-hover: #7ABdC4;
 $sec-cadet-hover: #558E96;
 
-$prim-bada55: #bada55;
-$sec-bada55: #94ae44;
-
 $prim-red: #d56565;
 $sec-red: #aa5050;
 $prim-red-hover: #CD5959;
 $sec-red-hover: #A04343;
 
 body {
-    font-family: $font-stack;
-    font-weight: 900;
+    // font-family: $font-stack;
+    font-size: 16px;
     margin: 0;
     color: $off-white;
     font: $font-stack;
     min-width: 1240px;
     background: $off-white;
-    font: $font-stack;
-    box-sizing: border-box;
 }
 
 a {
+    transition: all .5s linear;
     color: white;
-    font-weight: bolder;
-    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 li {
@@ -544,10 +547,19 @@ form, fieldset {
     align-content: space-between;
 }
 
+.row {
+    margin: auto;
+    &:before, &:after {
+        content: none;
+    }
+}
+
 .panel {
+    margin-bottom: auto;
+    border: none;
+    background-color: transparent;
     .top-box, .bottom-box {
         transition: all .1s ease-in-out;
-        padding: .33em;
     }
 }
 
@@ -555,6 +567,7 @@ form, fieldset {
     background-color: $prim-green;
     border-top-left-radius: .8em;
     line-height: 1em;
+    padding-bottom: .2em;
     header {
         text-align: center;
         position: relative;
@@ -565,20 +578,21 @@ form, fieldset {
             &:hover {
                 color: white;
                 opacity: 1;
-                font-weight: 900;
             }
         }
     }
     .icon {
+        padding-top: 0;
         position: absolute;
-        top: .3em;
-        right: .3em;
+        top: 12px;
+        right: 12px;
         opacity: .7;
         display: inline-block;
         transition: all .15s linear;
         &:hover {
             cursor: pointer;
             opacity: 1;
+            color: $off-white;
         }
     }
 }
@@ -586,7 +600,7 @@ form, fieldset {
 .bottom-box {
     height: 75%;
     max-height: 100%;
-    line-height: 1.25em;
+    padding: 1em 1em 1em .8em;
     background-color: $sec-green;
     border-bottom-right-radius: .8em;
     overflow: hidden;
@@ -617,14 +631,17 @@ form, fieldset {
         i {}
     }
     .right-stats-box {
-        margin: 0;
+        h3 {
+            margin-top: .75em;
+        }
+        padding: auto;
     }
     transition: all .2s ease-in-out;
     &:hover {
         opacity: 1;
         cursor: default;
     }
-     &:active {
+    &:active {
         // background-color: $prim-cadet-hover;
         // border: .5em inset $sec-cadet;
         color: #2a2a2a;
@@ -712,7 +729,7 @@ form, fieldset {
 #main {
     margin: 0 auto;
     width: 77.5em;
-    padding-top: 12em;
+    padding: 12em 0 0 0;
     text-align: center;
 }
 
@@ -724,7 +741,7 @@ form, fieldset {
         flex-grow: 2;
         margin-right: 1.5em;
         .top-box {
-            #metric-btn {
+            #metric-icon {
                 top: 1.26em;
                 right: 5em;
             }
@@ -738,8 +755,7 @@ form, fieldset {
                     display: none;
                 }
             }
-            .swap-item {
-            }
+            .swap-item {}
             #swap-network {
                 font-size: .75em;
             }
@@ -827,7 +843,7 @@ form, fieldset {
             .top-box {
                 background-color: #a6a6a6;
                 h2 {
-                    transform: skew(360deg);
+                    transform: skew(180deg);
                     color: $off-white;
                 }
             }

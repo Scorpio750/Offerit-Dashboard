@@ -4,25 +4,28 @@
   font-weight: normal;
   font-style: normal; }
 @font-face {
+  font-family: "Expressway";
+  src: url("../../src/img/ExpressWay/exprswy_free.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+@font-face {
   font-family: "Roboto-Light";
   src: url("../../src/img/Roboto/Roboto-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 body {
-  font-family: Roboto-Light, Tahoma, Arial, sans-serif;
-  font-weight: 900;
+  font-size: 16px;
   margin: 0;
   color: #E6E6E6;
   font: Roboto-Light, Tahoma, Arial, sans-serif;
   min-width: 1240px;
-  background: #E6E6E6;
-  font: Roboto-Light, Tahoma, Arial, sans-serif;
-  box-sizing: border-box; }
+  background: #E6E6E6; }
 
 a {
-  color: white;
-  font-weight: bolder;
-  text-decoration: none; }
+  transition: all .5s linear;
+  color: white; }
+  a:hover {
+    text-decoration: none; }
 
 li {
   text-align: left; }
@@ -408,14 +411,23 @@ form, fieldset {
   align-items: stretch;
   align-content: space-between; }
 
-.panel .top-box, .panel .bottom-box {
-  transition: all .1s ease-in-out;
-  padding: .33em; }
+.row {
+  margin: auto; }
+  .row:before, .row:after {
+    content: none; }
+
+.panel {
+  margin-bottom: auto;
+  border: none;
+  background-color: transparent; }
+  .panel .top-box, .panel .bottom-box {
+    transition: all .1s ease-in-out; }
 
 .top-box {
   background-color: #8AC750;
   border-top-left-radius: .8em;
-  line-height: 1em; }
+  line-height: 1em;
+  padding-bottom: .2em; }
   .top-box header {
     text-align: center;
     position: relative; }
@@ -425,23 +437,24 @@ form, fieldset {
       opacity: 0.8; }
       .top-box header h2:hover {
         color: white;
-        opacity: 1;
-        font-weight: 900; }
+        opacity: 1; }
   .top-box .icon {
+    padding-top: 0;
     position: absolute;
-    top: .3em;
-    right: .3em;
+    top: 12px;
+    right: 12px;
     opacity: .7;
     display: inline-block;
     transition: all .15s linear; }
     .top-box .icon:hover {
       cursor: pointer;
-      opacity: 1; }
+      opacity: 1;
+      color: #E6E6E6; }
 
 .bottom-box {
   height: 75%;
   max-height: 100%;
-  line-height: 1.25em;
+  padding: 1em 1em 1em .8em;
   background-color: #6A962B;
   border-bottom-right-radius: .8em;
   overflow: hidden; }
@@ -468,7 +481,9 @@ form, fieldset {
     padding-top: 1.5em;
     padding-right: 1.2em; }
   .stats-box .right-stats-box {
-    margin: 0; }
+    padding: auto; }
+    .stats-box .right-stats-box h3 {
+      margin-top: .75em; }
   .stats-box:hover {
     opacity: 1;
     cursor: default; }
@@ -537,7 +552,7 @@ form, fieldset {
 #main {
   margin: 0 auto;
   width: 77.5em;
-  padding-top: 12em;
+  padding: 12em 0 0 0;
   text-align: center; }
 
 #reminder {
@@ -547,7 +562,7 @@ form, fieldset {
   #reminder .offer-box {
     flex-grow: 2;
     margin-right: 1.5em; }
-    #reminder .offer-box .top-box #metric-btn {
+    #reminder .offer-box .top-box #metric-icon {
       top: 1.26em;
       right: 5em; }
     #reminder .offer-box .top-box .swap-wrapper {
@@ -612,7 +627,7 @@ form, fieldset {
   #main-column .graph-box:hover .top-box {
     background-color: #a6a6a6; }
     #main-column .graph-box:hover .top-box h2 {
-      transform: skew(360deg);
+      transform: skew(180deg);
       color: #E6E6E6; }
   #main-column .graph-box:hover .bottom-box {
     background-color: #c6c6c6; }
