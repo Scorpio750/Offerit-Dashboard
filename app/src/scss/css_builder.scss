@@ -462,7 +462,7 @@ form, fieldset {
             &:hover strong {
                 color: white;
                 //color: $prim-bada55;
-                font-size: 1.35em;
+                font-size: 1.15em;
                 opacity: 1;
             }
             span {
@@ -556,8 +556,10 @@ form, fieldset {
 
 .panel {
     margin-bottom: auto;
-    border: none;
+    border-radius: 1em 1em 0 0; 
+    border: transparent;
     background-color: transparent;
+    box-shadow: 3px 3px 10px 1px #aaa;
     .top-box, .bottom-box {
         transition: all .1s ease-in-out;
     }
@@ -565,9 +567,8 @@ form, fieldset {
 
 .top-box {
     background-color: $prim-green;
-    border-top-left-radius: .8em;
-    line-height: 1em;
-    padding-bottom: .2em;
+    border-radius: 1em 1em 0 0; 
+    padding-bottom: .25em;
     header {
         text-align: center;
         position: relative;
@@ -581,11 +582,11 @@ form, fieldset {
             }
         }
     }
-    .icon {
+    .btn {
         padding-top: 0;
         position: absolute;
-        top: 12px;
-        right: 12px;
+        top: .6em;
+        right: .7em;
         opacity: .7;
         display: inline-block;
         transition: all .15s linear;
@@ -599,11 +600,9 @@ form, fieldset {
 
 .bottom-box {
     height: 75%;
-    max-height: 100%;
-    padding: 1em 1em 1em .8em;
+    padding: 1em;
     background-color: $sec-green;
-    border-bottom-right-radius: .8em;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .stats-bar {
@@ -623,16 +622,16 @@ form, fieldset {
     display: flex;
     box-sizing: border-box;
     opacity: 0.6;
-    padding: 0 1em 0 1em;
+    padding: .5em 1em;
     border-radius: 1em;
     .left-stats-box {
-        padding-top: 1.5em;
+        padding-top: 1.2em;
         padding-right: 1.2em;
         i {}
     }
     .right-stats-box {
         h3 {
-            margin-top: .75em;
+            margin-top: .5em;
         }
         padding: auto;
     }
@@ -650,6 +649,7 @@ form, fieldset {
 
 .menu {
     // font-family: Roboto-Light;
+    display: none;
     position: absolute;
     background: #ddd;
     width: 9em;
@@ -658,7 +658,7 @@ form, fieldset {
     list-style: none;
     overflow: hidden;
     border-radius: 5px;
-    top: 3em;
+    top: 3.5em;
     right: 0em;
     z-index: 1;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
@@ -729,7 +729,7 @@ form, fieldset {
 #main {
     margin: 0 auto;
     width: 77.5em;
-    padding: 12em 0 0 0;
+    padding: 12em 0 2em;
     text-align: center;
 }
 
@@ -738,10 +738,10 @@ form, fieldset {
     height: 200px;
     z-index: 100;
     .offer-box {
-        flex-grow: 2;
+        flex-grow: 1;
         margin-right: 1.5em;
         .top-box {
-            #metric-icon {
+            #metric-btn {
                 top: 1.26em;
                 right: 5em;
             }
@@ -790,8 +790,10 @@ form, fieldset {
         }
     }
     #hs-box {
-        flex-grow: 3;
+        flex-grow: 2;
+        flex-basis: 30%;
         margin-left: 1em;
+        z-index: 200;
         .top-box {
             flex-basis: 100%;
             background-color: $prim-cadet;
@@ -853,12 +855,9 @@ form, fieldset {
         }
     }
     #v_divider {
-        width: 1em;
-        background-color: #999;
+        width: 1px;
+        background-color: #ccc;
         transition: all .15s ease-in-out;
-        &:hover {
-            background-color: #969696;
-        }
     }
 }
 

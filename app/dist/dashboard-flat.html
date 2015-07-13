@@ -29,8 +29,8 @@
 									<li><a href="http://staging.offerit.com/index.php?logout=1">Log out</a></li>
 								</ul>
 								<p class="messages"><span>You have 0 unread messages | 0 new notifications</span></p>
-								<div id="quicklink-icon-container">
-									<icon class="quicklink-icon left-icon" id="create_bkmrk">+ Quick Link This Page</icon><icon class="quicklink-icon right-icon" id="bkmrkid_"><span class="quicklink-caret"></span></icon>
+								<div id="quicklink-btn-container">
+									<btn class="quicklink-btn left-btn" id="create_bkmrk">+ Quick Link This Page</btn><btn class="quicklink-btn right-btn" id="bkmrkid_"><span class="quicklink-caret"></span></btn>
 									<ul id="quicklink-dropdown" class="bookmark-set" style="display: none;">
 										<li class="quicklink" id="link-32"><a href="http://staging.offerit.com/internal.php?page=stats&view=refurl">This Period Referring URL Stats</a></li>
 										<li class="quicklink" id="link-33"><a href="http://staging.offerit.com/internal.php?page=referrals">Affiliate Referrals</a></li>
@@ -162,6 +162,28 @@
 						<div class="two-box panel offer-box">
 							<div class="top-box">
 								<header>
+									<!-- <span class="btn fa-stack menu-btn" id="metric-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-asterisk fa-stack-1x"></i>
+									</span>
+ -->									<span class="btn fa-stack fa-lg dropdown-btn menu-btn" id="offer-toggle-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-bars fa-stack-1x"></i>
+									</span>
+									<ul class="menu " id="offer-menu">
+										<li class="dropdown" id="top-offers">Top Offers
+										</li>
+										<ul class="subnav ">
+											<li class="dropdown-item" id="tu">By User</li>
+											<li class="dropdown-item" id="tn">By Network</li>
+										</ul>
+										<li class="dropdown" id="new-offers">New Offers
+										</li>
+										<ul class="subnav ">
+											<li class="dropdown-item" id="nu">By User</li>
+											<li class="dropdown-item" id="nn">By Network</li>
+										</ul>
+									</ul>
 									<a href="">
 										<div class="swap-wrapper">
 											<h2>
@@ -175,28 +197,6 @@
 											</h2>
 										</div>
 									</a>
-									<!-- <span class="icon fa-stack menu-icon" id="metric-icon">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-asterisk fa-stack-1x"></i>
-									</span>
- -->									<span class="icon fa-stack fa-lg dropdown-icon menu-icon" id="offer-toggle-icon">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-bars fa-stack-1x"></i>
-									</span>
-									<ul class="menu hidden" id="offer-menu">
-										<li class="dropdown" id="top-offers">Top Offers
-										</li>
-										<ul class="subnav hidden">
-											<li class="dropdown-item" id="tu">By User</li>
-											<li class="dropdown-item" id="tn">By Network</li>
-										</ul>
-										<li class="dropdown" id="new-offers">New Offers
-										</li>
-										<ul class="subnav hidden">
-											<li class="dropdown-item" id="nu">By User</li>
-											<li class="dropdown-item" id="nn">By Network</li>
-										</ul>
-									</ul>
 								</header>
 							</div>
 							<div class="bottom-box">
@@ -207,7 +207,7 @@
 									<li>Tempora, minima!</li>
 									<li>Ea, nostrum!</li>
 								</ol>
-								<ol class="stats-bar hidden" id="new-offer-list">
+								<ol class="stats-bar hidden " id="new-offer-list">
 									<li>Lorem ipsum.</li>
 									<li>Eaque, natus?</li>
 									<li>Ipsa, dolores.</li>
@@ -219,11 +219,11 @@
 						<div class="two-box panel" id="hs-box">
 							<div class="top-box" id="list-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-icon" id="hs-icon">
+									<span class="btn fa-stack fa-lg menu-btn" id="hs-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu hidden" id="hs-menu">
+									<ul class="menu " id="hs-menu">
 										<li>This Period</li>
 										<li>Last Period</li>
 										<li>This Month</li>
@@ -286,11 +286,11 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-icon" id="h_chart-icon">
+									<span class="btn fa-stack fa-lg menu-btn" id="h_chart-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu hidden" id="h_graph-menu">
+									<ul class="menu " id="h_graph-menu">
 										<li>Hits</li>
 										<li>Conversions</li>
 										<li>Payout</li>
@@ -307,11 +307,11 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-icon" id="p_chart-icon">
+									<span class="btn fa-stack fa-lg menu-btn" id="p_chart-btn">
 										<i class="fa fa-square-o fa-stack-2x"></i>
 										<i class="fa fa-bars fa-stack-1x"></i>
 									</span>
-									<ul class="menu hidden" id="p_graph-menu">
+									<ul class="menu " id="p_graph-menu">
 										<li>This Period</li>
 										<li>Last Period</li>
 										<li>This Month</li>
