@@ -739,19 +739,6 @@ form, fieldset {
     text-align: center;
 }
 
-#metric-btn {
-    button {
-        background-color: $prim-green;
-        color: $off-white;
-        span {
-            opacity: .7;
-        }
-        &:hover {
-            opacity: 1;
-        }
-    }
-}
-
 #reminders {
     margin-bottom: 3em;
     height: 200px;
@@ -785,10 +772,11 @@ form, fieldset {
                 span {
                     position: absolute;
                 }
-                display: none;
             }
         }
-        .swap-item {}
+        .swap-item {
+            display: none;
+        }
         #swap-network {
             font-size: .75em;
         }
@@ -804,6 +792,20 @@ form, fieldset {
     }
     .hidden {
         display: none;
+    }
+}
+
+#metric-btn {
+    display: none;
+    button {
+        background-color: $prim-green;
+        color: $off-white;
+        span {
+            opacity: .7;
+        }
+        &:hover {
+            opacity: 1;
+        }
     }
 }
 

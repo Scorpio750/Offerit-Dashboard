@@ -8015,13 +8015,7 @@ $(document).ready(function() {
 			(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
 		}
 	}
-	// Initialize initial prefix before header base
-	/*$swap[0].animate({
-		width: $span[0].eq(0).width()
-	});
-      $span[0].eq(0).delay(200).fadeIn('fast');
-      */
-
+	
 	$('.dropdown-item').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
@@ -8029,33 +8023,26 @@ $(document).ready(function() {
 		dropDown.slideToggle();
 	});
 
-	$('.dropdown-item').click(function switch_offers() {
-		switch ($(this).attr('id')) {
-			case 'tu':
-				$('#new-offer-list').addClass('hidden');
-				$('#top-offer-list').removeClass('hidden');
-				shift(0, 1, 0);
-				shift(1, 0, 0);
-				break;
-			case 'tn':
-				$('#new-offer-list').addClass('hidden');
-				$('#top-offer-list').removeClass('hidden');
-				shift(0, 1, 0);
-				shift(1, 1, 0);
-				break;
-			case 'nu':
-				$('#new-offer-list').removeClass('hidden');
-				$('#top-offer-list').addClass('hidden');
-				shift(0, 1, 1);
-				shift(1, 0, 0);
-				break;
-			case 'nn':
-				$('#new-offer-list').removeClass('hidden');
-				$('#top-offer-list').addClass('hidden');
-				shift(0, 1, 1);
-				shift(1, 1, 0);
-				break;
+	$('.offer-type').click(function switch_offers() {
+		var id = $(this).attr('id');
 
+		switch (id[0]) {
+			case 't':
+				$('#new-offer-list').addClass('hidden');
+				$('#top-offer-list').removeClass('hidden');
+				shift(0, 1, 0);
+				break;
+			case 'u':
+				$('#new-offer-list').removeClass('hidden');
+				$('#top-offer-list').addClass('hidden');
+				shift(0, 1, 1);
+		}
+
+		if (id[1] == 'u') {
+			shift(1, 0, 0);
+		}
+		if (id[1] == 'n') {
+			shift(1, 1, 0);
 		}
 	});
 
