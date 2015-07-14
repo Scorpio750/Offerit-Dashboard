@@ -45,7 +45,7 @@ gulp.task('sass', function() {
 // concatenates all js scripts into one file
 gulp.task('scripts', function() {
 	return gulp.src([
-			config.bowerDir + '/flot/jquery.js',
+			config.bowerDir + '/jquery/dist/jquery.min.js',
 			config.bowerDir + '/flot/jquery.flot.js',
 			config.bowerDir + '/flot/jquery.flot.*.js',
 			config.bowerDir + '/flot.curvedlines/curvedLines.js',

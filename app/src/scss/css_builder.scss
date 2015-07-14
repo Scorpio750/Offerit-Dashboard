@@ -605,6 +605,7 @@ form, fieldset {
 
 .bottom-box {
     min-height: 100%;
+    // border-radius: 0 0 16px 16px;
     padding: 1em;
     background-color: $sec-green;
     overflow: auto;
@@ -652,10 +653,12 @@ form, fieldset {
     }
 }
 
-.dropdown-menu {
+.menu {
     // font-family: Roboto-Light;
-    display: none;
+    position: absolute;
     top: 90%;
+    right: 0%;
+    display: none;
     background: #ddd;
     width: 9em;
     margin: auto;

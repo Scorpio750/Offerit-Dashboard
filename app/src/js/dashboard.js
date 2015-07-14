@@ -90,7 +90,7 @@ $(document).ready(function() {
       $span[0].eq(0).delay(200).fadeIn('fast');
       */
 
-	$('.dropdown').click(function slide() {
+	$('.dropdown-item').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
 		$('.subnav').not(dropDown).slideUp();
@@ -149,15 +149,13 @@ $(document).ready(function() {
 	}
 
 	$('.menu-btn').click(function() {
-		var notThisOne = $(this).next();
-		console.log('clicked: ' + notThisOne.attr('class'));
+		var notThisOne = $(this).next('.menu');
 		// closes any open subnavs upon opening the main nav
-		if ($(this).hasClass('dropdown-btn')) {
-			console.log('also dropdown');
-			$(this).next('.dropdown-menu').find('.subnav').slideUp();
+		if ($(this).hasClass('dropdown-toggle')) {
+			$(this).next('.menu').find('.subnav').slideUp();
 		}
 
-		$('.dropdown-menu').not(notThisOne).slideUp();
+		$('.menu').not(notThisOne).slideUp();
 		notThisOne.slideToggle();
 	});
 });

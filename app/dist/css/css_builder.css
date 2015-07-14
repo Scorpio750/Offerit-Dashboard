@@ -489,9 +489,11 @@ form, fieldset {
   .stats-box:active {
     color: #2a2a2a; }
 
-.dropdown-menu {
-  display: none;
+.menu {
+  position: absolute;
   top: 90%;
+  right: 0%;
+  display: none;
   background: #ddd;
   width: 9em;
   margin: auto;
@@ -501,9 +503,9 @@ form, fieldset {
   border-radius: 5px;
   z-index: 1000;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
-  .dropdown-menu li ~ li {
+  .menu li ~ li {
     border-top: 1px solid #bbb; }
-  .dropdown-menu li {
+  .menu li {
     padding-left: 1em;
     line-height: 3em;
     display: block;
@@ -515,7 +517,7 @@ form, fieldset {
     font-family: Roboto;
     color: #686868;
     transition: all 0.1s linear; }
-    .dropdown-menu li:hover {
+    .menu li:hover {
       background-color: #bcbcbc;
       color: white;
       cursor: pointer;
@@ -523,11 +525,11 @@ form, fieldset {
       border-left: .67em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }
-    .dropdown-menu li:after {
+    .menu li:after {
       background-color: green; }
-  .dropdown-menu #hs-menu {
+  .menu #hs-menu {
     z-index: 100; }
-  .dropdown-menu #p_graph-menu {
+  .menu #p_graph-menu {
     z-index: -100; }
 
 .subnav {
