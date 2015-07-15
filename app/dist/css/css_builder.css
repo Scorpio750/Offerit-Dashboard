@@ -14,10 +14,11 @@
   font-weight: normal;
   font-style: normal; }
 body {
+  font-family: "Roboto", Tahoma, Arial, sans-serif;
   font-size: 16px;
   margin: 0;
   color: #E6E6E6;
-  font: Roboto-Light, Tahoma, Arial, sans-serif;
+  font: "Roboto", Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6; }
 
@@ -573,10 +574,6 @@ form, fieldset {
   margin-right: 1.5em; }
   #offer-box .top-box .swap-wrapper {
     display: inline-block; }
-    #offer-box .top-box .swap-wrapper .swap {
-      vertical-align: top; }
-      #offer-box .top-box .swap-wrapper .swap span {
-        position: absolute; }
   #offer-box .top-box .swap-item {
     display: none; }
   #offer-box .top-box #swap-network {
@@ -640,7 +637,7 @@ form, fieldset {
     #main-column .graph-box:hover .top-box {
       background-color: #a6a6a6; }
       #main-column .graph-box:hover .top-box h2 {
-        transform: skew(180deg);
+        transform: skew(360deg);
         color: #E6E6E6; }
     #main-column .graph-box:hover .bottom-box {
       background-color: #c6c6c6; }

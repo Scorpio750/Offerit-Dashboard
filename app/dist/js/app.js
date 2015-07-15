@@ -7932,9 +7932,9 @@ $(document).ready(function() {
 	});
 $(document).ready(function() {
 	// Offer Panel functions
-	var txt = ['Top ', 'New ', ' (Network)'],
+	var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
 		n = txt.length + 1;
-	$swap = [$('#swap1'), $('#swap2')],
+	$swap = [$('#swap1'), $('#swap2'), $('#swap3')],
 	$span = [],
 	c = 0;
 	// create spans inside span
@@ -7943,22 +7943,27 @@ $(document).ready(function() {
 			text: txt[i]
 		}));
 	}
-	$swap[1].append($('<span />', {
-		text: txt[i]
-	}));
-	$swap[1].css('font-size', '.75em');
-
+	for (i = 2; i < 7; i++) {
+		var k;
+		(i < 6) ? k = 1 : k = 2;
+		$swap[k].append($('<span />', {
+			text: txt[i]
+		}));
+		$swap[k].css('font-size', '.75em');
+	}
 	// hide and collect spans
-	$span[0] = $('span', $swap[0]).hide();
-	$span[1] = $('span', $swap[1]).hide();
+	for (i in $swap) {
+		$span[i] = $('span', $swap[i]).hide();
+	}
 
-	// shifts header base 
-	// @params:
-	// n - index in span array
-	// k - span array subindex
-	// flag - if 0, fades in, else fades out
+	/*	shifts header base 
+	 *	@params:
+	 *	n - index in span array
+	 *	flag - if 0, fades in, else fades out
+	 *	k - span array subindex */
 	function shift(n, flag, k) {
 		var $width;
+		var currentPrefix = $span[n].eq(k);
 		var options = {
 			duration: 200
 		};
@@ -7967,55 +7972,27 @@ $(document).ready(function() {
 				$width = 0;
 				break;
 			case 1:
-				$width = $span[n].eq(k).width();
+				$width = currentPrefix.width();
 				break;
 		}
 		$swap[n].animate({
 			width: $width
 		});
-		console.log('------------\n\nThe value of n is ' + n);
-		if (n == 0) {
-			/* retrieves swap element from document
-			 * if different than requested swap elem,
-			 * swap the two */
-			var $spanVisible = [];
-			var dispNoneCounter = 0;
-			for (var $i of $swap) {
-				console.log('The value of $i is ' + $i.text());
-				if ($i.find('span').text() == ' (Network') {
-					console.log('found (Network), breaking...');
-					break;
+		switch (n) {
+			case 0:
+				var otherPrefix = $span[n].eq((k + 1) % 2);
+				// if selected prefix is not displayed, swap it in
+				if (currentPrefix.css('display') == 'none') {
+					otherPrefix.stop().fadeOut('options')
+					currentPrefix.delay(200).fadeIn('options');
 				}
-				console.log('display of ' + $i.find('span').text() + ' is ' + $i.find('span').css('display'));
-				for (var j = 0; j < 2; j++) {
-					if ($i.find('span').eq(j).css('display') == 'none') {
-						dispNoneCounter++;
-						$spanVisible.push($i);
-					}
-				}
-			}
-
-			switch (dispNoneCounter) {
-				case 3:
-					$span[n].eq(k).fadeIn(options);
-					return;
-				case 2:
-					if ($spanVisible[0].text() != $span[n].eq(k).text()) {
-						console.log('The value of k is ' + k);
-						console.log('Removing ' + $spanVisible[0].text());		
-						console.log('Adding ' + $spanVisible[1].text());		
-						$span[n].stop().fadeOut(options).eq(k).delay(200).fadeIn(options);
-					}
-					return;
-				case 0:
-					console.log('YOU FUCKED UP');
-					return;
-			}
-		} else {
-			(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
+				break;
+			case 2:
+				(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
+				break;
 		}
 	}
-	
+
 	$('.dropdown-item').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
@@ -8032,17 +8009,17 @@ $(document).ready(function() {
 				$('#top-offer-list').removeClass('hidden');
 				shift(0, 1, 0);
 				break;
-			case 'u':
+			case 'n':
 				$('#new-offer-list').removeClass('hidden');
 				$('#top-offer-list').addClass('hidden');
 				shift(0, 1, 1);
 		}
 
 		if (id[1] == 'u') {
-			shift(1, 0, 0);
+			shift(2, 0, 0);
 		}
 		if (id[1] == 'n') {
-			shift(1, 1, 0);
+			shift(2, 1, 0);
 		}
 	});
 

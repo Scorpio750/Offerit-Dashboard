@@ -25,7 +25,7 @@
 }
 
 
-$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
+$font-stack: "Roboto", Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -70,7 +70,7 @@ $prim-red-hover: #CD5959;
 $sec-red-hover: #A04343;
 
 body {
-    // font-family: $font-stack;
+    font-family: $font-stack;
     font-size: 16px;
     margin: 0;
     color: $off-white;
@@ -768,9 +768,7 @@ form, fieldset {
         .swap-wrapper {
             display: inline-block;
             .swap {
-                vertical-align: top;
                 span {
-                    position: absolute;
                 }
             }
         }
@@ -865,7 +863,7 @@ form, fieldset {
             .top-box {
                 background-color: #a6a6a6;
                 h2 {
-                    transform: skew(180deg);
+                    transform: skew(360deg);
                     color: $off-white;
                 }
             }
