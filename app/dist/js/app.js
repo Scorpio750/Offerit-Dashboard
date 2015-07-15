@@ -7975,6 +7975,7 @@ $(document).ready(function() {
 				$width = currentPrefix.width();
 				break;
 		}
+
 		$swap[n].animate({
 			width: $width
 		});
@@ -7984,11 +7985,25 @@ $(document).ready(function() {
 				// if selected prefix is not displayed, swap it in
 				if (currentPrefix.css('display') == 'none') {
 					otherPrefix.stop().fadeOut('options')
-					currentPrefix.delay(200).fadeIn('options');
+					currentPrefix.delay(400).fadeIn('options');
+				}
+				// toggle metric button
+				var $metric = $('#metric-btn'); 
+				if (k == 0) {
+					$metric.animate({
+						width: $metric.width() 
+					});
+					$metric.fadeIn();
+				}
+				else {
+					$metric.animate({
+						width: 0 
+					});
+					$metric.fadeOut();
 				}
 				break;
 			case 2:
-				(flag == 1) ? $span[n].delay(200).fadeIn(options) : $span[n].stop().fadeOut(options);
+				(flag == 1) ? $span[n].delay(400).fadeIn(options) : $span[n].stop().fadeOut(options);
 				break;
 		}
 	}
@@ -8013,13 +8028,16 @@ $(document).ready(function() {
 				$('#new-offer-list').removeClass('hidden');
 				$('#top-offer-list').addClass('hidden');
 				shift(0, 1, 1);
+				break;
 		}
 
-		if (id[1] == 'u') {
-			shift(2, 0, 0);
-		}
-		if (id[1] == 'n') {
-			shift(2, 1, 0);
+		switch (id[1]) {
+			case 'u':
+				shift(2, 0, 0);
+				break;
+			case 'n':
+				shift(2, 1, 0);
+				break;
 		}
 	});
 

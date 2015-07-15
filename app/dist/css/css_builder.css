@@ -431,7 +431,6 @@ form, fieldset {
   border-radius: 16px 16px 0 0;
   padding-bottom: .25em; }
   .top-box header {
-    text-align: center;
     position: relative; }
     .top-box header h2 {
       display: inline-block;
@@ -490,6 +489,9 @@ form, fieldset {
   .stats-box:active {
     color: #2a2a2a; }
 
+.dropdown {
+  right: 0; }
+
 .menu {
   position: absolute;
   top: 90%;
@@ -522,7 +524,6 @@ form, fieldset {
       background-color: #bcbcbc;
       color: white;
       cursor: pointer;
-      font-size: 15px;
       border-left: .67em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }

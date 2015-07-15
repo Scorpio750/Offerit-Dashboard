@@ -575,7 +575,6 @@ form, fieldset {
     border-radius: 16px 16px 0 0;
     padding-bottom: .25em;
     header {
-        text-align: center;
         position: relative;
         h2 {
             display: inline-block;
@@ -653,6 +652,10 @@ form, fieldset {
     }
 }
 
+.dropdown {
+    right: 0;
+}
+
 .menu {
     // font-family: Roboto-Light;
     position: absolute;
@@ -687,7 +690,7 @@ form, fieldset {
             background-color: #bcbcbc;
             color: white;
             cursor: pointer;
-            font-size: 15px;
+            // font-size: 15px;
             border-left: .67em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
