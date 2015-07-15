@@ -586,20 +586,6 @@ form, fieldset {
             }
         }
     }
-    .icon {
-        padding-top: 0;
-        position: absolute;
-        top: .67em;
-        right: .7em;
-        opacity: .7;
-        display: inline-block;
-        transition: all .15s linear;
-        &:hover {
-            cursor: pointer;
-            opacity: 1;
-            color: $off-white;
-        }
-    }
 }
 
 .bottom-box {
@@ -652,15 +638,30 @@ form, fieldset {
     }
 }
 
+.icon {
+    padding-top: 0;
+    opacity: .7;
+    display: inline-block;
+    transition: all .1s linear;
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+        color: $off-white;
+    }
+}
+
+/* MENU SELECTORS */
 .dropdown {
-    right: 0;
+    position: absolute;
+    display: inline-block;
+    top: 12px;
+    right: 12px;
+    .dropdown-menu {
+        top: 3em;
+    }
 }
 
 .menu {
-    // font-family: Roboto-Light;
-    position: absolute;
-    top: 90%;
-    right: 0%;
     display: none;
     background: #ddd;
     width: 9em;
@@ -712,7 +713,6 @@ form, fieldset {
     padding: 0;
     li {
         &:first-child {
-            border-top: 1px solid #bbb;
         }
         background: #ccc;
         font-size: 12px;
@@ -771,8 +771,7 @@ form, fieldset {
         .swap-wrapper {
             display: inline-block;
             .swap {
-                span {
-                }
+                span {}
             }
         }
         .swap-item {
@@ -797,17 +796,27 @@ form, fieldset {
 }
 
 #metric-btn {
+    margin: 0 0 0 .1em; 
+    top: -5px;
+    right: 0;
     display: none;
+    position: relative;
+    // vertical-align: middle;
     button {
         background-color: $prim-green;
-        color: $off-white;
+        // box-shadow: 0 0 0 2px $prim-green-hover;
+        color: white;
         span {
             opacity: .7;
         }
         &:hover {
             opacity: 1;
         }
+        &:active {
+            border: none;
+        }
     }
+
 }
 
 #hs-box {

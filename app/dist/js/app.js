@@ -7999,7 +7999,7 @@ $(document).ready(function() {
 					$metric.animate({
 						width: 0 
 					});
-					$metric.fadeOut();
+					$metric.stop().fadeOut();
 				}
 				break;
 			case 2:

@@ -163,24 +163,6 @@
 						<div class="two-box panel" id="offer-box">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" id="offer-toggle-btn">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-bars fa-stack-1x"></i>
-									</span>
-									<ul class="menu" id="offer-menu">
-										<li class="dropdown-item" id="top-offers">Top Offers
-										</li>
-										<ul class="subnav ">
-											<li class="offer-type" id="tu">By User</li>
-											<li class="offer-type" id="tn">By Network</li>
-										</ul>
-										<li class="dropdown-item" id="new-offers">New Offers
-										</li>
-										<ul class="subnav ">
-											<li class="offer-type" id="nu">By User</li>
-											<li class="offer-type" id="nn">By Network</li>
-										</ul>
-									</ul>
 									<a href="">
 										<div class="swap-wrapper">
 											<h2>
@@ -194,16 +176,36 @@
 											</h2>
 										</div>
 									</a>
+									<div class="dropdown">
+										<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
+											<i class="fa fa-square-o fa-stack-2x"></i>
+											<i class="fa fa-bars fa-stack-1x"></i>
+										</span>
+										<ul class="dropdown-menu menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
+											<li class="dropdown-item" id="top-offers">Top Offers
+											</li>
+											<ul class="subnav ">
+												<li class="offer-type" id="tu">By User</li>
+												<li class="offer-type" id="tn">By Network</li>
+											</ul>
+											<li class="dropdown-item" id="new-offers">New Offers
+											</li>
+											<ul class="subnav ">
+												<li class="offer-type" id="nu">By User</li>
+												<li class="offer-type" id="nn">By Network</li>
+											</ul>
+										</ul>
+									</div>
 									<span class="dropdown" id="metric-btn">
 										<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="caret"></span>
 										<span class="sr-only">Toggle Dropdown</span>
 										</button>
 										<ul class="dropdown-menu menu">
-											<li>Hits</li>
-											<li>Conversions</li>
-											<li>Payout</li>
-											<li>EPC</li>
+											<li>by Hits</li>
+											<li>by Conversions</li>
+											<li>by Payout</li>
+											<li>by EPC</li>
 										</ul>
 									</span>
 								</header>
@@ -228,24 +230,26 @@
 						<div class="two-box panel" id="hs-box">
 							<div class="top-box" id="list-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="hs-btn">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-bars fa-stack-1x"></i>
-									</span>
-									<ul class="menu " id="hs-menu">
-										<li>This Period</li>
-										<li>Last Period</li>
-										<li>This Month</li>
-										<li>Last Month</li>
-										<li>Past 30 Days</li>
-										<li>Past 60 Days</li>
-										<li>Past 90 Days</li>
-										<li>This Year</li>
-										<li>All Time</li>
-									</ul>
 									<a href="">
 										<h2>Today's Stats</h2>
 									</a>
+									<div class="dropdown">
+										<span class="icon fa-stack fa-lg menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
+											<i class="fa fa-square-o fa-stack-2x"></i>
+											<i class="fa fa-bars fa-stack-1x"></i>
+										</span>
+										<ul class="dropdown-menu menu" id="hs-menu">
+											<li>This Period</li>
+											<li>Last Period</li>
+											<li>This Month</li>
+											<li>Last Month</li>
+											<li>Past 30 Days</li>
+											<li>Past 60 Days</li>
+											<li>Past 90 Days</li>
+											<li>This Year</li>
+											<li>All Time</li>
+										</ul>
+									</div>
 								</header>
 							</div>
 							<div class="bottom-box">
@@ -295,17 +299,19 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="h_chart-btn">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-bars fa-stack-1x"></i>
-									</span>
-									<ul class="menu " id="h_graph-menu">
-										<li>Hits</li>
-										<li>Conversions</li>
-										<li>Payout</li>
-										<li>EPC</li>
-									</ul>
 									<h2>Hourly Graph</h2>
+									<div class="dropdown">
+										<span class="icon fa-stack fa-lg menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
+											<i class="fa fa-square-o fa-stack-2x"></i>
+											<i class="fa fa-bars fa-stack-1x"></i>
+										</span>
+										<ul class="dropdown-menu menu " id="h_graph-menu">
+											<li>Hits</li>
+											<li>Conversions</li>
+											<li>Payout</li>
+											<li>EPC</li>
+										</ul>
+									</div>
 								</header>
 							</div>
 							<div class="bottom-box" id="hourly-graph">
@@ -316,22 +322,24 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<span class="icon fa-stack fa-lg menu-btn" id="p_chart-btn">
-										<i class="fa fa-square-o fa-stack-2x"></i>
-										<i class="fa fa-bars fa-stack-1x"></i>
-									</span>
-									<ul class="menu " id="p_graph-menu">
-										<li>This Period</li>
-										<li>Last Period</li>
-										<li>This Month</li>
-										<li>Last Month</li>
-										<li>Past 30 Days</li>
-										<li>Past 60 Days</li>
-										<li>Past 90 Days</li>
-										<li>This Year</li>
-										<li>All Time</li>
-									</ul>
 									<h2>Period Graph</h2>
+									<div class="dropdown">
+										<span class="icon fa-stack fa-lg menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
+											<i class="fa fa-square-o fa-stack-2x"></i>
+											<i class="fa fa-bars fa-stack-1x"></i>
+										</span>
+										<ul class="dropdown-menu menu " id="p_graph-menu">
+											<li>This Period</li>
+											<li>Last Period</li>
+											<li>This Month</li>
+											<li>Last Month</li>
+											<li>Past 30 Days</li>
+											<li>Past 60 Days</li>
+											<li>Past 90 Days</li>
+											<li>This Year</li>
+											<li>All Time</li>
+										</ul>
+									</div>
 								</header>
 							</div>
 							<div class=" bottom-box" id="period-graph">
