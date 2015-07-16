@@ -419,16 +419,16 @@ form, fieldset {
 
 .panel {
   margin-bottom: auto;
-  border-radius: 16px 16px 0 0;
+  border-radius: 6px;
   border: transparent;
   background-color: transparent;
-  box-shadow: 4px 4px 10px 1px #aaa; }
+  box-shadow: 6px 6px 10px 1px #aaa; }
   .panel .top-box, .panel .bottom-box {
     transition: all .1s ease-in-out; }
 
 .top-box {
   background-color: #8AC750;
-  border-radius: 16px 16px 0 0;
+  border-radius: 6px 6px 0 0;
   padding-bottom: .25em; }
   .top-box header {
     position: relative; }
@@ -441,7 +441,7 @@ form, fieldset {
         opacity: 1; }
 
 .bottom-box {
-  min-height: 100%;
+  border-radius: 0 0 6px 6px;
   padding: 1em;
   background-color: #6A962B;
   overflow: auto; }
@@ -493,13 +493,12 @@ form, fieldset {
   display: inline-block;
   top: 12px;
   right: 12px; }
-  .dropdown .dropdown-menu {
+  .dropdown .dropdown-menu-right {
     top: 3em; }
 
 .menu {
   display: none;
   background: #ddd;
-  width: 9em;
   margin: auto;
   padding: 0;
   list-style: none;
@@ -525,7 +524,8 @@ form, fieldset {
       background-color: #bcbcbc;
       color: white;
       cursor: pointer;
-      border-left: .67em solid #aaa;
+      font-size: 15px;
+      border-left: .75em solid #aaa;
       padding-left: .75em;
       font-weight: 900; }
     .menu li:after {
@@ -560,6 +560,8 @@ form, fieldset {
   margin-bottom: 3em;
   height: 200px;
   z-index: 100; }
+  #reminders bottom-box {
+    max-height: 9em; }
   #reminders .network .top-box {
     background-color: #d56565; }
   #reminders .network .bottom-box {
@@ -570,7 +572,7 @@ form, fieldset {
     background-color: #A04343; }
 
 #offer-box {
-  flex-grow: 2;
+  flex-grow: 1;
   margin-right: 1.5em; }
   #offer-box .top-box .swap-wrapper {
     display: inline-block; }
@@ -585,24 +587,29 @@ form, fieldset {
   #offer-box .hidden {
     display: none; }
 
+#swap3 {
+  vertical-align: 10%; }
+
 #metric-btn {
-  margin: 0 0 0 .1em;
+  margin: auto;
   top: -5px;
   right: 0;
   display: none;
-  position: relative; }
+  position: relative;
+  z-index: 999; }
   #metric-btn button {
     background-color: #8AC750;
     color: white; }
     #metric-btn button span {
       opacity: .7; }
     #metric-btn button:hover {
-      opacity: 1; }
+      opacity: 1;
+      background-color: #8AC750; }
     #metric-btn button:active {
       border: none; }
 
 #hs-box {
-  flex-grow: 3;
+  flex-grow: 2;
   flex-basis: 30%;
   margin-left: 1em;
   z-index: 200; }
@@ -622,31 +629,26 @@ form, fieldset {
 #main-column {
   height: auto;
   margin-bottom: 3em; }
-  #main-column .graph-box {
-    width: 50%; }
-    #main-column .graph-box .top-box {
-      border-radius: 0;
-      background-color: #aaa; }
-      #main-column .graph-box .top-box h2 {
-        color: #ddd;
-        transition: all .5s; }
-    #main-column .graph-box .bottom-box {
-      border-radius: 0;
-      background-color: #ccc;
-      padding: 1.25em;
-      height: 18em;
-      flex-grow: 1;
-      flex-basis: 1em; }
-      #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
-        width: 35.75em;
-        height: 15.5em; }
-    #main-column .graph-box:hover .top-box {
-      background-color: #a6a6a6; }
-      #main-column .graph-box:hover .top-box h2 {
-        transform: skew(360deg);
-        color: #E6E6E6; }
-    #main-column .graph-box:hover .bottom-box {
-      background-color: #c6c6c6; }
+  #main-column .graph-box .top-box {
+    background-color: #aaa; }
+    #main-column .graph-box .top-box h2 {
+      color: #ddd;
+      transition: all .5s; }
+  #main-column .graph-box .bottom-box {
+    background-color: #ccc;
+    padding: 1.25em;
+    min-height: 18em;
+    flex-grow: 1;
+    flex-basis: 1em; }
+    #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
+      width: 35.75em;
+      height: 15.5em; }
+  #main-column .graph-box:hover .top-box {
+    background-color: #a6a6a6; }
+    #main-column .graph-box:hover .top-box h2 {
+      color: #E6E6E6; }
+  #main-column .graph-box:hover .bottom-box {
+    background-color: #c6c6c6; }
   #main-column #v_divider {
     width: 1px;
     background-color: #ccc;
@@ -657,8 +659,10 @@ form, fieldset {
   align-content: stretch; }
   #three-column .three-box {
     margin: 0 10 10 0;
-    width: 30%;
+    width: 31%;
     height: 70%; }
+    #three-column .three-box .bottom-box {
+      height: 11em; }
   #three-column #news .top-box {
     background-color: #d56565; }
   #three-column #news .bottom-box {

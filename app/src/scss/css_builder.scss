@@ -561,10 +561,10 @@ form, fieldset {
 
 .panel {
     margin-bottom: auto;
-    border-radius: 16px 16px 0 0;
+    border-radius: 6px;
     border: transparent;
     background-color: transparent;
-    box-shadow: 4px 4px 10px 1px #aaa;
+    box-shadow: 6px 6px 10px 1px #aaa;
     .top-box, .bottom-box {
         transition: all .1s ease-in-out;
     }
@@ -572,7 +572,7 @@ form, fieldset {
 
 .top-box {
     background-color: $prim-green;
-    border-radius: 16px 16px 0 0;
+    border-radius: 6px 6px 0 0;
     padding-bottom: .25em;
     header {
         position: relative;
@@ -589,8 +589,7 @@ form, fieldset {
 }
 
 .bottom-box {
-    min-height: 100%;
-    // border-radius: 0 0 16px 16px;
+    border-radius: 0 0 6px 6px;
     padding: 1em;
     background-color: $sec-green;
     overflow: auto;
@@ -656,7 +655,7 @@ form, fieldset {
     display: inline-block;
     top: 12px;
     right: 12px;
-    .dropdown-menu {
+    .dropdown-menu-right {
         top: 3em;
     }
 }
@@ -664,7 +663,6 @@ form, fieldset {
 .menu {
     display: none;
     background: #ddd;
-    width: 9em;
     margin: auto;
     padding: 0;
     list-style: none;
@@ -691,8 +689,8 @@ form, fieldset {
             background-color: #bcbcbc;
             color: white;
             cursor: pointer;
-            // font-size: 15px;
-            border-left: .67em solid #aaa;
+            font-size: 15px;
+            border-left: .75em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
         }
@@ -712,8 +710,7 @@ form, fieldset {
     margin: 0;
     padding: 0;
     li {
-        &:first-child {
-        }
+        &:first-child {}
         background: #ccc;
         font-size: 12px;
         &:hover {
@@ -746,6 +743,9 @@ form, fieldset {
     margin-bottom: 3em;
     height: 200px;
     z-index: 100;
+    bottom-box {
+        max-height: 9em;
+    }
     .network {
         .top-box {
             background-color: $prim-red;
@@ -765,14 +765,11 @@ form, fieldset {
 }
 
 #offer-box {
-    flex-grow: 2;
+    flex-grow: 1;
     margin-right: 1.5em;
     .top-box {
         .swap-wrapper {
             display: inline-block;
-            .swap {
-                span {}
-            }
         }
         .swap-item {
             display: none;
@@ -795,12 +792,17 @@ form, fieldset {
     }
 }
 
+#swap3 {
+    vertical-align: 10%;
+}
+
 #metric-btn {
-    margin: 0 0 0 .1em; 
+    margin: auto;
     top: -5px;
     right: 0;
     display: none;
     position: relative;
+    z-index: 999;
     // vertical-align: middle;
     button {
         background-color: $prim-green;
@@ -811,16 +813,16 @@ form, fieldset {
         }
         &:hover {
             opacity: 1;
+            background-color: $prim-green;
         }
         &:active {
             border: none;
         }
     }
-
 }
 
 #hs-box {
-    flex-grow: 3;
+    flex-grow: 2;
     flex-basis: 30%;
     margin-left: 1em;
     z-index: 200;
@@ -849,9 +851,7 @@ form, fieldset {
     margin-bottom: 3em;
     // justify-content: stretch;
     .graph-box {
-        width: 50%;
         .top-box {
-            border-radius: 0;
             background-color: #aaa;
             h2 {
                 color: #ddd;
@@ -859,11 +859,10 @@ form, fieldset {
             }
         }
         .bottom-box {
-            border-radius: 0;
             background-color: #ccc;
             padding: 1.25em;
             // border: 15px solid slategray;
-            height: 18em;
+            min-height: 18em;
             flex-grow: 1;
             flex-basis: 1em;
             #p_chart, #h_chart {
@@ -875,7 +874,6 @@ form, fieldset {
             .top-box {
                 background-color: #a6a6a6;
                 h2 {
-                    transform: skew(360deg);
                     color: $off-white;
                 }
             }
@@ -896,8 +894,11 @@ form, fieldset {
     align-content: stretch;
     .three-box {
         margin: 0 10 10 0;
-        width: 30%;
+        width: 31%;
         height: 70%;
+        .bottom-box {
+            height: 11em;
+        }
     }
     #news {
         .top-box {

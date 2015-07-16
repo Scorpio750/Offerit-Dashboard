@@ -7993,13 +7993,13 @@ $(document).ready(function() {
 					$metric.animate({
 						width: $metric.width() 
 					});
-					$metric.fadeIn();
+					$metric.delay(400).fadeIn('options');
 				}
 				else {
 					$metric.animate({
 						width: 0 
 					});
-					$metric.stop().fadeOut();
+					$metric.stop().delay(400).fadeOut('options');
 				}
 				break;
 			case 2:
@@ -8008,6 +8008,7 @@ $(document).ready(function() {
 		}
 	}
 
+	// triggers subnavs to open upon hovering over a menu item
 	$('.dropdown-item').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
 		var dropDown = $(this).next('.subnav');
