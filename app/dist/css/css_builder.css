@@ -587,8 +587,11 @@ form, fieldset {
   #offer-box .hidden {
     display: none; }
 
-#swap3 {
+#swap2, #swap3 {
   vertical-align: 10%; }
+
+#swap3 {
+  font-size: 24px; }
 
 #metric-btn {
   margin: auto;
@@ -607,6 +610,8 @@ form, fieldset {
       background-color: #8AC750; }
     #metric-btn button:active {
       border: none; }
+  #metric-btn .menu {
+    width: 8em; }
 
 #hs-box {
   flex-grow: 2;

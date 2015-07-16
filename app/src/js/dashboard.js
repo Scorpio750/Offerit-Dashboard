@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	// Offer Panel functions
+	if (undefined == 1) {
+		console.log('damn undefined is still broken');	
+	}
 	var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
 		n = txt.length + 1;
 	$swap = [$('#swap1'), $('#swap2'), $('#swap3')],
@@ -13,12 +16,13 @@ $(document).ready(function() {
 	}
 	for (i = 2; i < 7; i++) {
 		var k;
+
 		(i < 6) ? k = 1 : k = 2;
 		$swap[k].append($('<span />', {
 			text: txt[i]
 		}));
-		$swap[k].css('font-size', '.75em');
 	}
+	$swap[k].css('font-size', '.75em');
 	// hide and collect spans
 	for (i in $swap) {
 		$span[i] = $('span', $swap[i]).hide();
@@ -55,9 +59,12 @@ $(document).ready(function() {
 					otherPrefix.stop().fadeOut('options')
 					currentPrefix.delay(400).fadeIn('options');
 				}
-				// toggle metric button
+				// if selected prefix is 'Top'
 				var $metric = $('#metric-btn'); 
 				if (k == 0) {
+					// if there is no set metric prefix, set 'Hits' as default
+
+					console.log($metric.width());
 					$metric.animate({
 						width: $metric.width() 
 					});
@@ -69,6 +76,19 @@ $(document).ready(function() {
 					});
 					$metric.stop().delay(400).fadeOut('options');
 				}
+				break;
+			case 1:
+				var otherPrefix;
+				for (var i = 0; i < 4; i++) {
+					if ($span[n].eq(i).css('display') == 'inline') {
+						otherPrefix = $span[n].eq(i);
+					}
+					if (typeof otherPrefix != "undefined") {
+						console.log('fuck me');
+						otherPrefix.stop().fadeOut('options')
+					}
+					currentPrefix.delay(400).fadeIn('options');
+				}	
 				break;
 			case 2:
 				(flag == 1) ? $span[n].delay(400).fadeIn(options) : $span[n].stop().fadeOut(options);
@@ -108,6 +128,12 @@ $(document).ready(function() {
 				shift(2, 1, 0);
 				break;
 		}
+	});
+
+	// swaps metric type identifiers in header
+	$('.metric-type').click(function metric_switch() {
+		var id = $(this).attr('id');
+		shift(1, 1, id[0]);
 	});
 
 	function offerSwitch() {

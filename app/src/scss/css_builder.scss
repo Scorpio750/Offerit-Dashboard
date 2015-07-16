@@ -792,8 +792,12 @@ form, fieldset {
     }
 }
 
-#swap3 {
+#swap2, #swap3 {
     vertical-align: 10%;
+}
+
+#swap3 {
+    font-size: 24px;
 }
 
 #metric-btn {
@@ -818,6 +822,9 @@ form, fieldset {
         &:active {
             border: none;
         }
+    }
+    .menu {
+        width: 8em;
     }
 }
 
