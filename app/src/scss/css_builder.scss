@@ -820,7 +820,10 @@ form, fieldset {
             background-color: $prim-green;
         }
         &:active {
-            border: none;
+            border: 1px solid transparent;
+        }
+        &:focus {
+            border: 1px solid transparent;
         }
     }
     .menu {

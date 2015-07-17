@@ -609,7 +609,9 @@ form, fieldset {
       opacity: 1;
       background-color: #8AC750; }
     #metric-btn button:active {
-      border: none; }
+      border: 1px solid transparent; }
+    #metric-btn button:focus {
+      border: 1px solid transparent; }
   #metric-btn .menu {
     width: 8em; }
 
