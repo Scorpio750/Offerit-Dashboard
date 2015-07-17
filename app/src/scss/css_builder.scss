@@ -771,6 +771,15 @@ form, fieldset {
     .top-box {
         .swap-wrapper {
             display: inline-block;
+            .swap {
+                vertical-align: top;
+                span {
+                    position: absolute;
+                }
+            }
+            #swap3 {
+                vertical-align: 95%;
+            }
         }
         #swap-network {
             font-size: .75em;
@@ -788,10 +797,6 @@ form, fieldset {
     .hidden {
         display: none;
     }
-}
-
-#swap2, #swap3 {
-    vertical-align: 10%;
 }
 
 #swap3 {
