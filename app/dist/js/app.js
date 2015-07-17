@@ -7937,9 +7937,8 @@ $(document).ready(function() {
 	}
 	var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
 		n = txt.length + 1;
-	$swap = [$('#swap1'), $('#swap2'), $('#swap3')],
+	$swap = [$('#swap1'), $('#swap2'), $('#swap3'), $('#metric-btn-wrapper')],
 	$span = [],
-	$metric = $('#metric-btn');
 		c = 0;
 	// create spans inside span
 	for (var i = 0; i < 2; i++) {
@@ -7955,12 +7954,10 @@ $(document).ready(function() {
 			text: txt[i]
 		}));
 	}
-	$swap[k].css('font-size', '.75em');
 	// hide and collect spans
 	for (i in $swap) {
 		$span[i] = $('span', $swap[i]).hide();
 	}
-	$metric.hide();
 
 	/*	shifts header base 
 	 *	@params:
@@ -7992,7 +7989,7 @@ $(document).ready(function() {
 				otherPrefix.stop().fadeOut('options')
 				currentPrefix.delay(400).fadeIn('options');
 
-				// if selected prefix is 'Top'
+				/*// if selected prefix is 'Top'
 				if (k == 0) {
 					// if there is no set metric prefix, set 'Hits' as default
 
@@ -8010,7 +8007,7 @@ $(document).ready(function() {
 						width: 0
 					});
 						$metric.fadeOut('options');
-				}
+				}*/
 				break;
 			case 1:
 				var otherPrefix;
@@ -8025,9 +8022,10 @@ $(document).ready(function() {
 					currentPrefix.delay(400).fadeIn('options');
 				}
 				break;
-			case 2:
+			default:
 				(flag == 1) ? $span[n].delay(400).fadeIn(options) : $span[n].stop().fadeOut(options);
 				break;
+
 		}
 	}
 
@@ -8047,11 +8045,13 @@ $(document).ready(function() {
 				$('#new-offer-list').addClass('hidden');
 				$('#top-offer-list').removeClass('hidden');
 				shift(0, 1, 0);
+				shift(3, 1, 0);
 				break;
 			case 'n':
 				$('#new-offer-list').removeClass('hidden');
 				$('#top-offer-list').addClass('hidden');
 				shift(0, 1, 1);
+				shift(3, 0, 0);
 				break;
 		}
 

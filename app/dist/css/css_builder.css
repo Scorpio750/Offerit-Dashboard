@@ -575,16 +575,6 @@ form, fieldset {
 #offer-box {
   flex-grow: 1;
   margin-right: 1.5em; }
-  #offer-box .top-box .swap-wrapper {
-    display: inline-block; }
-    #offer-box .top-box .swap-wrapper .swap {
-      vertical-align: top; }
-      #offer-box .top-box .swap-wrapper .swap span {
-        position: absolute; }
-    #offer-box .top-box .swap-wrapper #swap3 {
-      vertical-align: 95%; }
-  #offer-box .top-box #swap-network {
-    font-size: .75em; }
   #offer-box:hover .top-box {
     background-color: #81C044; }
   #offer-box:hover .bottom-box {
@@ -592,14 +582,28 @@ form, fieldset {
   #offer-box .hidden {
     display: none; }
 
+.swap-wrapper {
+  display: inline-block; }
+  .swap-wrapper .swap {
+    vertical-align: top; }
+    .swap-wrapper .swap span {
+      position: absolute; }
+  .swap-wrapper #metric-btn-wrapper {
+    position: relative;
+    top: .5em;
+    right: -1em; }
+    .swap-wrapper #metric-btn-wrapper span {
+      position: relative; }
+  .swap-wrapper #swap3 {
+    vertical-align: 95%; }
+
+#swap-network {
+  font-size: .75em; }
+
 #swap3 {
   font-size: 24px; }
 
 #metric-btn {
-  margin: auto;
-  top: -5px;
-  right: 0;
-  position: relative;
   z-index: 999; }
   #metric-btn button {
     background-color: #8AC750;
