@@ -577,6 +577,7 @@ form, fieldset {
     header {
         position: relative;
         h2 {
+            margin-top: none;
             display: inline-block;
             transition: all .1s ease-in-out;
             opacity: 0.8;
@@ -771,9 +772,6 @@ form, fieldset {
         .swap-wrapper {
             display: inline-block;
         }
-        .swap-item {
-            display: none;
-        }
         #swap-network {
             font-size: .75em;
         }
@@ -804,7 +802,6 @@ form, fieldset {
     margin: auto;
     top: -5px;
     right: 0;
-    display: none;
     position: relative;
     z-index: 999;
     // vertical-align: middle;

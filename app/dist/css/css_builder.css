@@ -433,6 +433,7 @@ form, fieldset {
   .top-box header {
     position: relative; }
     .top-box header h2 {
+      margin-top: none;
       display: inline-block;
       transition: all .1s ease-in-out;
       opacity: 0.8; }
@@ -576,8 +577,6 @@ form, fieldset {
   margin-right: 1.5em; }
   #offer-box .top-box .swap-wrapper {
     display: inline-block; }
-  #offer-box .top-box .swap-item {
-    display: none; }
   #offer-box .top-box #swap-network {
     font-size: .75em; }
   #offer-box:hover .top-box {
@@ -597,7 +596,6 @@ form, fieldset {
   margin: auto;
   top: -5px;
   right: 0;
-  display: none;
   position: relative;
   z-index: 999; }
   #metric-btn button {

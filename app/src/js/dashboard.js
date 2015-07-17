@@ -3,11 +3,12 @@ $(document).ready(function() {
 	if (undefined == 1) {
 		console.log('damn undefined is still broken');
 	}
-	var txt 	= ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
-		n 		= txt.length + 1;
-		$swap 	= [$('#swap1'), $('#swap2'), $('#swap3')],
-		$span 	= [],
-		c 		= 0;
+	var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
+		n = txt.length + 1;
+	$swap = [$('#swap1'), $('#swap2'), $('#swap3')],
+	$span = [],
+	$metric = $('#metric-btn');
+		c = 0;
 	// create spans inside span
 	for (var i = 0; i < 2; i++) {
 		$swap[0].append($('<span />', {
@@ -27,6 +28,7 @@ $(document).ready(function() {
 	for (i in $swap) {
 		$span[i] = $('span', $swap[i]).hide();
 	}
+	$metric.hide();
 
 	/*	shifts header base 
 	 *	@params:
@@ -55,12 +57,10 @@ $(document).ready(function() {
 			case 0:
 				var otherPrefix = $span[n].eq((k + 1) % 2);
 				// if selected prefix is not displayed, swap it in
-				// if (currentPrefix.css('display') == 'none') {
 				otherPrefix.stop().fadeOut('options')
 				currentPrefix.delay(400).fadeIn('options');
-				// }
+
 				// if selected prefix is 'Top'
-				var $metric = $('#metric-btn');
 				if (k == 0) {
 					// if there is no set metric prefix, set 'Hits' as default
 
@@ -68,13 +68,16 @@ $(document).ready(function() {
 					$metric.animate({
 						width: $metric.width()
 					});
-					$metric.delay(400).fadeIn('options');
+					if ($metric.css('display') == 'none') {
+						$metric.delay(500).fadeIn('options');
+					}
 				}
 				if (k == 1) {
+					console.log($metric.width());
 					$metric.animate({
 						width: 0
 					});
-					$metric.stop().fadeOut('options');
+						$metric.fadeOut('options');
 				}
 				break;
 			case 1:
