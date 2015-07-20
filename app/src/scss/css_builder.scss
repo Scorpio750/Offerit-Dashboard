@@ -85,6 +85,12 @@ a {
     &:hover {
         text-decoration: none;
     }
+    &:active {
+        color: white;
+    }
+    &:visited {
+        color: white;
+    }
 }
 
 li {

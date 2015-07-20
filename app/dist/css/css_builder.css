@@ -27,6 +27,10 @@ a {
   color: white; }
   a:hover {
     text-decoration: none; }
+  a:active {
+    color: white; }
+  a:visited {
+    color: white; }
 
 li {
   text-align: left; }
