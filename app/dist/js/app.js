@@ -7758,8 +7758,7 @@ $(document).ready(function() {
 			if (data) {
 				if (queryVars['function'] == 'offerit_display_stats') {
 					retrieved_data = data.total;
-				}
-				else {
+				} else {
 					retrieved_data = data;
 				}
 			}
@@ -7769,7 +7768,16 @@ $(document).ready(function() {
 	}
 
 	function plot_graph(plot_name, data, options) {
-		return ($.plot(plot_name, data, options));
+		return ($.plotAnimator(plot_name, data, options));
+	}
+
+	function label_series(series, names) {
+		for (var i in names) {
+			series[i] = {
+				label: names[i]
+			};
+		}
+		return series;
 	}
 
 	// AJAX calls for plot data
@@ -7793,17 +7801,102 @@ $(document).ready(function() {
 	};
 	var hourly_hits = call_data(queryVars, hourly_hits);
 
-	queryVars = {
-		'function': 'offerit_display_hourly_sales',
-		'period': period,
-		'return_type': 'json',
-		'time_format': 'hour'
-	};
+	queryVars['function'] = 'offerit_display_hourly_sales';
 	var hourly_sales = call_data(queryVars, hourly_sales);
 
-	// h_plot
+	// Parsing JSON data into interpretable form
+	var h_series = [],
+		p_series = {
+			'This Period': [],
+			'Last Period': [],
+			'This Month': [],
+			'Last Month': [],
+			'Past 30 Days': [],
+			'Past 60 Days': [],
+			'Past 90 Days': [],
+			'This Year': [],
+			'All Time': []
+		};
 
-	// p_plot
+	var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
+	h_series = label_series(h_series, names);
+	Object.keys(p_series).forEach(function(key, index) {
+		this[key] = label_series(p_series, names);
+	}, p_series);
+
+	var data = [h_series, p_series],
+		options = [{
+			series: {
+				stack: true,
+				group: true,
+				groupInterval: 1,
+				lines: {
+					show: true,
+					fill: false
+				},
+				curvedLines: {
+					active: false,
+					apply: true,
+					monotonicFit: true
+				},
+				points: {
+					show: true
+				}
+				/*xaxis: {
+							max: 1000;
+							mode: "time",
+							tickLength: 5
+						},
+						selection: {
+							mode: "x"
+						},*/
+			},
+			grid: {
+				color: "slategray",
+				borderWidth: 0,
+				backgroundColor: "#E6E6E6",
+				hoverable: true,
+				clickable: true,
+				autoHighlight: true
+			}
+		}, {
+			series: {
+
+				lines: {
+					show: true,
+					fill: true
+				},
+				curvedLines: {
+					active: false,
+					apply: true,
+					monotonicFit: true
+				},
+				points: {
+					show: false
+				}
+			},
+			xaxis: {
+				mode: "time",
+				tickLength: 5
+			},
+			selection: {
+				mode: "x"
+			},
+			grid: {
+				color: "slategray",
+				borderWidth: 0,
+				backgroundColor: "#E6E6E6",
+				hoverable: true,
+				clickable: true,
+				autoHighlight: true,
+				markings: weekendAreas
+			}
+		}];
+
+
+	for (i in data) {
+		plot_graph('#h_chart', data[i], options[i]);
+	}
 
 	function flot_test() {
 		// flot chart code

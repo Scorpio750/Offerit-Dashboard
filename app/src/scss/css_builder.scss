@@ -25,7 +25,7 @@
 }
 
 
-$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
+// $font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -70,11 +70,10 @@ $prim-red-hover: #CD5959;
 $sec-red-hover: #A04343;
 
 body {
-    font-family: $font-stack;
+    // font-family: $font-stack;
     font-size: 16px;
     margin: 0;
     color: $off-white;
-    font: $font-stack;
     min-width: 1240px;
     background: $off-white;
 }
