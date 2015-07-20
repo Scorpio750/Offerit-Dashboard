@@ -14,11 +14,11 @@
   font-weight: normal;
   font-style: normal; }
 body {
-  font-family: "Roboto", Tahoma, Arial, sans-serif;
+  font-family: Roboto-Light, Tahoma, Arial, sans-serif;
   font-size: 16px;
   margin: 0;
   color: #E6E6E6;
-  font: "Roboto", Tahoma, Arial, sans-serif;
+  font: Roboto-Light, Tahoma, Arial, sans-serif;
   min-width: 1240px;
   background: #E6E6E6; }
 
@@ -468,6 +468,7 @@ form, fieldset {
   opacity: 0.6;
   padding: .5em 1em;
   border-radius: 1em;
+  font-family: Roboto;
   transition: all .2s ease-in-out; }
   .stats-box .left-stats-box {
     padding-top: 1.2em;

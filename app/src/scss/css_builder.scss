@@ -25,7 +25,7 @@
 }
 
 
-$font-stack: "Roboto", Tahoma, Arial, sans-serif;
+$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -621,6 +621,7 @@ form, fieldset {
     opacity: 0.6;
     padding: .5em 1em;
     border-radius: 1em;
+    font-family: Roboto;
     .left-stats-box {
         padding-top: 1.2em;
         padding-right: 1.2em;
