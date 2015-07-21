@@ -7780,18 +7780,21 @@ $(document).ready(function() {
 		return series;
 	}
 
-	function parse_period(ajax_data, series) {
-		for (var date in ajax_data) {
-			date *= 1000;
-		}
+	// FIX THIS TOMORROW
+	function zip(array1, array2) {
+		return array1.map(function(_, i) {
+			return array2.map(function(array) {return array[i]})
+		});
 	}
 
-	function parse_hourly(ajax_data, series) {
+	function parseJSON(ajax_data, series) {
 		var xaxis = [], yaxis = [];
 		for (var date in ajax_data) {
 			xaxis.push(date);
 			yaxis.push(ajax_Data[date]);
 		}	
+		// zip x-axis and y-axis values together
+		zip(xaxis, yaxis);	
 	}
 
 	// AJAX calls for plot data
@@ -7805,6 +7808,11 @@ $(document).ready(function() {
 		'dashboard_summary': 1
 	};
 	var summary_data = call_data(queryVars, summary_data);
+
+	// convertin from UNIX timestamps to JS timestamps
+	for (var date in summary_data) {
+		date *= 1000;
+	}
 
 	// Hourly data
 	period = 8;
