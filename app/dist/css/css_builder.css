@@ -562,18 +562,9 @@ form, fieldset {
 
 #reminders {
   margin-bottom: 3em;
-  height: 200px;
   z-index: 100; }
   #reminders bottom-box {
     max-height: 9em; }
-  #reminders .network .top-box {
-    background-color: #d56565; }
-  #reminders .network .bottom-box {
-    background-color: #aa5050; }
-  #reminders .network:hover .top-box {
-    background-color: #CD5959; }
-  #reminders .network:hover .bottom-box {
-    background-color: #A04343; }
 
 #offer-box {
   flex-grow: 1;
@@ -644,30 +635,32 @@ form, fieldset {
 #main-column {
   height: auto;
   margin-bottom: 3em; }
-  #main-column .graph-box .top-box {
-    background-color: #aaa; }
-    #main-column .graph-box .top-box h2 {
-      color: #ddd;
-      transition: all .5s; }
-  #main-column .graph-box .bottom-box {
-    background-color: #ccc;
-    padding: 1.25em;
-    min-height: 18em;
-    flex-grow: 1;
-    flex-basis: 1em; }
-    #main-column .graph-box .bottom-box #p_chart, #main-column .graph-box .bottom-box #h_chart {
-      width: 35.75em;
-      height: 15.5em; }
-  #main-column .graph-box:hover .top-box {
-    background-color: #a6a6a6; }
-    #main-column .graph-box:hover .top-box h2 {
-      color: #E6E6E6; }
-  #main-column .graph-box:hover .bottom-box {
-    background-color: #c6c6c6; }
-  #main-column #v_divider {
-    width: 1px;
-    background-color: #ccc;
-    transition: all .15s ease-in-out; }
+
+.graph-box .top-box {
+  background-color: #aaa; }
+  .graph-box .top-box h2 {
+    color: #ddd;
+    transition: all .5s; }
+.graph-box .bottom-box {
+  background-color: #ccc;
+  padding: 1.25em;
+  min-height: 18em;
+  flex-grow: 1;
+  flex-basis: 1em; }
+  .graph-box .bottom-box #p_chart, .graph-box .bottom-box #h_chart {
+    width: 35.75em;
+    height: 15.5em; }
+.graph-box:hover .top-box {
+  background-color: #a6a6a6; }
+  .graph-box:hover .top-box h2 {
+    color: #E6E6E6; }
+.graph-box:hover .bottom-box {
+  background-color: #c6c6c6; }
+
+#v_divider {
+  width: 1px;
+  background-color: #ccc;
+  transition: all .15s ease-in-out; }
 
 #three-column {
   align-items: stretch;
@@ -678,27 +671,30 @@ form, fieldset {
     height: 70%; }
     #three-column .three-box .bottom-box {
       height: 11em; }
-  #three-column #news .top-box {
-    background-color: #d56565; }
-  #three-column #news .bottom-box {
-    background-color: #aa5050; }
-  #three-column #news:hover .top-box {
-    background-color: #CD5959; }
-  #three-column #news:hover .bottom-box {
-    background-color: #A04343; }
-  #three-column #paysum .top-box {
-    background-color: #5490cf; }
-  #three-column #paysum .bottom-box {
-    background-color: #4373a5; }
-  #three-column #paysum:hover .top-box {
-    background-color: #498ACE; }
-  #three-column #paysum:hover .bottom-box {
-    background-color: #36689C; }
-  #three-column #contact .top-box {
-    background-color: #a48961; }
-  #three-column #contact .bottom-box {
-    background-color: #7b6749; }
-  #three-column #contact:hover .top-box {
-    background-color: #987F58; }
-  #three-column #contact:hover .bottom-box {
-    background-color: #705C3D; }
+
+#news .top-box {
+  background-color: #d56565; }
+#news .bottom-box {
+  background-color: #aa5050; }
+#news:hover .top-box {
+  background-color: #CD5959; }
+#news:hover .bottom-box {
+  background-color: #A04343; }
+
+#paysum .top-box {
+  background-color: #5490cf; }
+#paysum .bottom-box {
+  background-color: #4373a5; }
+#paysum:hover .top-box {
+  background-color: #498ACE; }
+#paysum:hover .bottom-box {
+  background-color: #36689C; }
+
+#contact .top-box {
+  background-color: #a48961; }
+#contact .bottom-box {
+  background-color: #7b6749; }
+#contact:hover .top-box {
+  background-color: #987F58; }
+#contact:hover .bottom-box {
+  background-color: #705C3D; }

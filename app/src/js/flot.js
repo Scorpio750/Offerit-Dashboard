@@ -27,6 +27,20 @@ $(document).ready(function() {
 		return series;
 	}
 
+	function parse_period(ajax_data, series) {
+		for (var date in ajax_data) {
+			date *= 1000;
+		}
+	}
+
+	function parse_hourly(ajax_data, series) {
+		var xaxis = [], yaxis = [];
+		for (var date in ajax_data) {
+			xaxis.push(date);
+			yaxis.push(ajax_Data[date]);
+		}	
+	}
+
 	// AJAX calls for plot data
 	var queryVars, period;
 
@@ -40,6 +54,7 @@ $(document).ready(function() {
 	var summary_data = call_data(queryVars, summary_data);
 
 	// Hourly data
+	period = 8;
 	queryVars = {
 		'function': 'offerit_display_hourly_hits',
 		'period': period,
@@ -47,13 +62,15 @@ $(document).ready(function() {
 		'time_format': 'hour'
 	};
 	var hourly_hits = call_data(queryVars, hourly_hits);
-
 	queryVars['function'] = 'offerit_display_hourly_sales';
 	var hourly_sales = call_data(queryVars, hourly_sales);
 
-	// Parsing JSON data into interpretable form
-	var h_series = [],
-		p_series = {
+	// creating data object to hold series information
+	// 1st element is hourly graph data
+	// 2nd element is period graph data
+	var series_data = {
+		h_series: [],
+		p_series: {
 			'This Period': [],
 			'Last Period': [],
 			'This Month': [],
@@ -63,16 +80,64 @@ $(document).ready(function() {
 			'Past 90 Days': [],
 			'This Year': [],
 			'All Time': []
-		};
+		}
+	};
 
 	var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
-	h_series = label_series(h_series, names);
-	Object.keys(p_series).forEach(function(key, index) {
-		this[key] = label_series(p_series, names);
-	}, p_series);
+	label_series(series_data['h_series'], names);
 
-	var data = [h_series, p_series],
-		options = [{
+	Object.keys(series_data['p_series']).forEach(function(key, index) {
+		label_series(series_data['p_series'], names);
+	}, series_data['p_series']);
+
+	// Parsing JSON data into interpretable form
+	// by default, displays # of hits per period
+	parseJSON(summary_data, series_data['p_series']['This Period']);
+	parseJSON(hourly_sales, series_data['h_series']);
+
+	// first correct the timestamps - they are recorded as the daily
+	// midnights in UTC+0100, but Flot always displays dates in UTC
+	// so we have to add one hour to hit the midnights in the plot
+
+	for (var i = 0; i < d.length; ++i) {
+		d[i][0] += 60 * 60 * 1000;
+	}
+
+	// helper for returning the weekends in a period
+
+	function weekendAreas(axes) {
+
+		var markings = [],
+			d = new Date(axes.xaxis.min);
+
+		// go to the first Saturday
+
+		d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
+		d.setUTCSeconds(0);
+		d.setUTCMinutes(0);
+		d.setUTCHours(0);
+
+		var i = d.getTime();
+
+		// when we don't set yaxis, the rectangle automatically
+		// extends to infinity upwards and downwards
+
+		do {
+			markings.push({
+				xaxis: {
+					from: i,
+					to: i + 2 * 24 * 60 * 60 * 1000
+				}
+			});
+			i += 7 * 24 * 60 * 60 * 1000;
+		} while (i < axes.xaxis.max);
+
+		return markings;
+	}
+
+	// plotting series_data
+	var series_options = {
+		h_series: {
 			series: {
 				stack: true,
 				group: true,
@@ -106,7 +171,8 @@ $(document).ready(function() {
 				clickable: true,
 				autoHighlight: true
 			}
-		}, {
+		},
+		p_series: {
 			series: {
 
 				lines: {
@@ -124,6 +190,7 @@ $(document).ready(function() {
 			},
 			xaxis: {
 				mode: "time",
+				timezone: "browser",
 				tickLength: 5
 			},
 			selection: {
@@ -138,11 +205,11 @@ $(document).ready(function() {
 				autoHighlight: true,
 				markings: weekendAreas
 			}
-		}];
+		}
+	};
 
-
-	for (i in data) {
-		plot_graph('#h_chart', data[i], options[i]);
+	for (i in series_data) {
+		plot_graph('#h_chart', series_data[i], series_options[i]);
 	}
 
 	function flot_test() {
