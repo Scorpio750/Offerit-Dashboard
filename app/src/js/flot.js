@@ -1,15 +1,22 @@
+// Flot rendering functions
 $(document).ready(function() {
 
-	function call_data(queryVars, retrieved_data) {
-		$.getJSON('http://demo.offerit.com/internal_data.php', queryVars, function(data) {
-			if (data) {
-				if (queryVars['function'] == 'offerit_display_stats') {
-					retrieved_data = data.total;
-				} else {
-					retrieved_data = data;
-				}
+	// FIX CALLBACK HELL
+	function call_data(queryVars) {
+		var retrieved_data;
+		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
+			queryVars,
+			store_ajax);
+	}
+
+	function store_ajax(data) {
+		if (data) {
+			if (queryVars['function'] == 'offerit_display_stats') {
+				retrieved_data = data.total;
+			} else {
+				retrieved_data = data;
 			}
-		});
+		}
 		console.log(retrieved_data);
 		return retrieved_data;
 	}
@@ -18,60 +25,46 @@ $(document).ready(function() {
 		return ($.plotAnimator(plot_name, data, options));
 	}
 
+	// constructs each series element
 	function label_series(series, names) {
 		for (var i in names) {
 			series[i] = {
-				label: names[i]
+				label: names[i],
+				data: []
 			};
 		}
 		return series;
 	}
 
-	// FIX THIS TOMORROW
-	function zip(array1, array2) {
-		return array1.map(function(_, i) {
-			return array2.map(function(array) {return array[i]})
+	// some magic javascript zipping bullshit
+	function zip(arrays) {
+		return arrays[0].map(function(_, i) {
+			return arrays.map(function(array) {
+				return array[i]
+			})
 		});
 	}
 
-	function parseJSON(ajax_data, series) {
-		var xaxis = [], yaxis = [];
+	// creates the axes from the ajax data and stores them in the appropriate series object
+	function create_axes(ajax_data, series) {
+		var axes = [
+			[],
+			[]
+		];
 		for (var date in ajax_data) {
-			xaxis.push(date);
-			yaxis.push(ajax_Data[date]);
-		}	
+			// multiply
+			axes[0].push(date * 1000);
+			axes[1].push(ajax_data[date]);
+		}
 		// zip x-axis and y-axis values together
-		zip(xaxis, yaxis);	
+		zip(axes);
+		console.log("Axes: " + axes);
+		series[data] = axes;
+		return series[data];
 	}
 
 	// AJAX calls for plot data
 	var queryVars, period;
-
-	// Period data
-	period = 1;
-	queryVars = {
-		'function': 'offerit_display_stats',
-		'period': period,
-		'dashboard_summary': 1
-	};
-	var summary_data = call_data(queryVars, summary_data);
-
-	// convertin from UNIX timestamps to JS timestamps
-	for (var date in summary_data) {
-		date *= 1000;
-	}
-
-	// Hourly data
-	period = 8;
-	queryVars = {
-		'function': 'offerit_display_hourly_hits',
-		'period': period,
-		'return_type': 'json',
-		'time_format': 'hour'
-	};
-	var hourly_hits = call_data(queryVars, hourly_hits);
-	queryVars['function'] = 'offerit_display_hourly_sales';
-	var hourly_sales = call_data(queryVars, hourly_sales);
 
 	// creating data object to hold series information
 	// 1st element is hourly graph data
@@ -91,6 +84,28 @@ $(document).ready(function() {
 		}
 	};
 
+	// Period data
+	period = 1;
+	queryVars = {
+		'function': 'offerit_display_stats',
+		'period': period,
+		'dashboard_summary': 1
+	};
+	var summary_data = call_data(queryVars);
+
+	// Hourly data
+	period = 8;
+	queryVars = {
+		'function': 'offerit_display_hourly_hits',
+		'period': period,
+		'return_type': 'json',
+		'time_format': 'hour'
+	};
+	var hourly_hits = call_data(queryVars);
+	queryVars['function'] = 'offerit_display_hourly_sales';
+	var hourly_sales = call_data(queryVars);
+
+
 	var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
 	label_series(series_data['h_series'], names);
 
@@ -99,9 +114,9 @@ $(document).ready(function() {
 	}, series_data['p_series']);
 
 	// Parsing JSON data into interpretable form
-	// by default, displays # of hits per period
-	parseJSON(summary_data, series_data['p_series']['This Period']);
-	parseJSON(hourly_sales, series_data['h_series']);
+	// by default, displays traffic volume for this period
+	create_axes(summary_data, series_data['p_series']['This Period']);
+	create_axes(hourly_sales, series_data['h_series']);
 
 	// first correct the timestamps - they are recorded as the daily
 	// midnights in UTC+0100, but Flot always displays dates in UTC
