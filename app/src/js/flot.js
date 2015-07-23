@@ -1,32 +1,47 @@
+{literal}
 // Flot rendering functions
 $(document).ready(function() {
+	var queryVars, period;
+	/* creating data array to hold series information
+	 * 1st element is hourly graph data
+	 * 2nd element is period graph data
+	 * Period graph elements are indexed in the following manner:
+	 * [0] This Period
+	 * [1] Last Period
+	 * [2] This Month
+	 * [3] Last Month
+	 * [4] Past 30 Days
+	 * [5] Past 60 Days
+	 * [6] Past 90 Days
+	 * [7] This Year
+	 * [8] All Time
+	 */
+	var series_data = {
+		'Hourly Data': [],
+		'Period Data': [
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			['']
+		]
+	};
 
-	// FIX CALLBACK HELL
-	function call_data(queryVars) {
-		var retrieved_data;
-		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
-			queryVars,
-			store_ajax);
+	label_series(series_data['Hourly Data']);
+	for (var i in series_data['Period Data']) {
+		label_series(series_data['Period Data'][i]);
 	}
 
-	function store_ajax(data) {
-		if (data) {
-			if (queryVars['function'] == 'offerit_display_stats') {
-				retrieved_data = data.total;
-			} else {
-				retrieved_data = data;
-			}
-		}
-		console.log(retrieved_data);
-		return retrieved_data;
-	}
-
-	function plot_graph(plot_name, data, options) {
-		return ($.plotAnimator(plot_name, data, options));
-	}
+	// maps menu period indices to database period indices
+	var period_map = [0, 1, 5, 11, 13, 12, 13, 6, 7];
 
 	// constructs each series element
-	function label_series(series, names) {
+	function label_series(series) {
+		var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
 		for (var i in names) {
 			series[i] = {
 				label: names[i],
@@ -36,98 +51,74 @@ $(document).ready(function() {
 		return series;
 	}
 
-	// some magic javascript zipping bullshit
-	function zip(arrays) {
-		return arrays[0].map(function(_, i) {
-			return arrays.map(function(array) {
-				return array[i]
-			})
-		});
+	// AJAX calls for plot data
+	function call_data(queryVars) {
+		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
+			queryVars, function store_data(data) {
+				if (data) {
+					var retrieved_data;
+					if (queryVars['function'] == 'offerit_display_stats') {
+						retrieved_data = data.total;
+						create_axes(retrieved_data, series_data['Period Data'][0]);
+					} else {
+						retrieved_data = data;
+						create_axes(retrieved_data, series_data['Hourly Data']);
+					}
+				}
+				console.log('RETREIVEAD ' + retrieved_data);
+
+			});
 	}
 
 	// creates the axes from the ajax data and stores them in the appropriate series object
 	function create_axes(ajax_data, series) {
-		var axes = [
-			[],
-			[]
-		];
+		var axes = []
 		for (var date in ajax_data) {
 			// multiply
-			axes[0].push(date * 1000);
-			axes[1].push(ajax_data[date]);
+			axes.push([date * 1000, ajax_data[date]]);
 		}
 		// zip x-axis and y-axis values together
-		zip(axes);
+		// zip(axes);
 		console.log("Axes: " + axes);
 		series[data] = axes;
 		return series[data];
 	}
 
-	// AJAX calls for plot data
-	var queryVars, period;
-
-	// creating data object to hold series information
-	// 1st element is hourly graph data
-	// 2nd element is period graph data
-	var series_data = {
-		h_series: [],
-		p_series: {
-			'This Period': [],
-			'Last Period': [],
-			'This Month': [],
-			'Last Month': [],
-			'Past 30 Days': [],
-			'Past 60 Days': [],
-			'Past 90 Days': [],
-			'This Year': [],
-			'All Time': []
+	function plot_graph(plot_name, data, options) {
+		var series_options = {
+			series: {
+				stack: true,
+				group: true,
+				groupInterval: 1,
+				lines: {
+					show: true,
+					fill: false
+				},
+				points: {
+					show: false
+				},
+			},
+			xaxis: {
+				mode: "time",
+				timezone: "browser",
+				tickLength: 5
+			},
+			selection: {
+				mode: "x"
+			},
+			grid: {
+				color: "slategray",
+				borderWidth: 0,
+				backgroundColor: "#E6E6E6",
+				hoverable: true,
+				clickable: false,
+				autoHighlight: true
+			}
 		}
-	};
-
-	// Period data
-	period = 1;
-	queryVars = {
-		'function': 'offerit_display_stats',
-		'period': period,
-		'dashboard_summary': 1
-	};
-	var summary_data = call_data(queryVars);
-
-	// Hourly data
-	period = 8;
-	queryVars = {
-		'function': 'offerit_display_hourly_hits',
-		'period': period,
-		'return_type': 'json',
-		'time_format': 'hour'
-	};
-	var hourly_hits = call_data(queryVars);
-	queryVars['function'] = 'offerit_display_hourly_sales';
-	var hourly_sales = call_data(queryVars);
-
-
-	var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
-	label_series(series_data['h_series'], names);
-
-	Object.keys(series_data['p_series']).forEach(function(key, index) {
-		label_series(series_data['p_series'], names);
-	}, series_data['p_series']);
-
-	// Parsing JSON data into interpretable form
-	// by default, displays traffic volume for this period
-	create_axes(summary_data, series_data['p_series']['This Period']);
-	create_axes(hourly_sales, series_data['h_series']);
-
-	// first correct the timestamps - they are recorded as the daily
-	// midnights in UTC+0100, but Flot always displays dates in UTC
-	// so we have to add one hour to hit the midnights in the plot
-
-	for (var i = 0; i < d.length; ++i) {
-		d[i][0] += 60 * 60 * 1000;
+		return ($.plotAnimator(plot_name, data, options));
 	}
 
 	// helper for returning the weekends in a period
-
 	function weekendAreas(axes) {
 
 		var markings = [],
@@ -158,82 +149,41 @@ $(document).ready(function() {
 		return markings;
 	}
 
-	// plotting series_data
-	var series_options = {
-		h_series: {
-			series: {
-				stack: true,
-				group: true,
-				groupInterval: 1,
-				lines: {
-					show: true,
-					fill: false
-				},
-				curvedLines: {
-					active: false,
-					apply: true,
-					monotonicFit: true
-				},
-				points: {
-					show: true
-				}
-				/*xaxis: {
-							max: 1000;
-							mode: "time",
-							tickLength: 5
-						},
-						selection: {
-							mode: "x"
-						},*/
-			},
-			grid: {
-				color: "slategray",
-				borderWidth: 0,
-				backgroundColor: "#E6E6E6",
-				hoverable: true,
-				clickable: true,
-				autoHighlight: true
-			}
-		},
-		p_series: {
-			series: {
+	///////////////////////////
+	//                       //
+	// Default display data  //
+	//                       //
+	///////////////////////////
 
-				lines: {
-					show: true,
-					fill: true
-				},
-				curvedLines: {
-					active: false,
-					apply: true,
-					monotonicFit: true
-				},
-				points: {
-					show: false
-				}
-			},
-			xaxis: {
-				mode: "time",
-				timezone: "browser",
-				tickLength: 5
-			},
-			selection: {
-				mode: "x"
-			},
-			grid: {
-				color: "slategray",
-				borderWidth: 0,
-				backgroundColor: "#E6E6E6",
-				hoverable: true,
-				clickable: true,
-				autoHighlight: true,
-				markings: weekendAreas
-			}
-		}
+	// Initially, display only hourly data 
+	// and data from this pay period
+
+	// Period data
+
+	period = 1;
+	queryVars = {
+		'function': 'offerit_display_stats',
+		'period': period,
+		'dashboard_summary': 1
 	};
+	var summary_data = call_data(queryVars);
 
-	for (i in series_data) {
-		plot_graph('#h_chart', series_data[i], series_options[i]);
-	}
+	// Hourly data
+	period = 8;
+	queryVars = {
+		'function': 'offerit_display_hourly_hits',
+		'period': period,
+		'return_type': 'json',
+		'time_format': 'hour'
+	};
+	var hourly_hits = call_data(queryVars);
+	queryVars['function'] = 'offerit_display_hourly_sales';
+	var hourly_sales = call_data(queryVars);
+
+
+	// Object.keys(series_data['p_series']).forEach(function(key, index) {
+	// 	label_series(series_data['p_series'], names);
+	// }, series_data['p_series']);
 
 	function flot_test() {
 		// flot chart code
@@ -531,3 +481,4 @@ $(document).ready(function() {
 		});
 	}
 });
+{/literal}
