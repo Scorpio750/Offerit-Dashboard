@@ -56,17 +56,20 @@ $(document).ready(function() {
 		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
 			queryVars, function store_data(data) {
 				if (data) {
-					var retrieved_data;
+					var retrieved_data, target_series, plot_name;
 					if (queryVars['function'] == 'offerit_display_stats') {
 						retrieved_data = data.total;
-						create_axes(retrieved_data, series_data['Period Data'][0]);
+						target_series = series_data['Period Data'][0];
+						plot_name = '#p_chart';
+
 					} else {
 						retrieved_data = data;
-						create_axes(retrieved_data, series_data['Hourly Data']);
+						series_data['Hourly Data'];
+						plot_name = '#h_chart';
 					}
+					target_series = create_axes(retrieved_data, target_series);
+					plot_graph(plot_name, target_series);
 				}
-				console.log('RETREIVEAD ' + retrieved_data);
-
 			});
 	}
 
@@ -80,11 +83,11 @@ $(document).ready(function() {
 		// zip x-axis and y-axis values together
 		// zip(axes);
 		console.log("Axes: " + axes);
-		series[data] = axes;
-		return series[data];
+		series = axes;
+		return series;
 	}
 
-	function plot_graph(plot_name, data, options) {
+	function plot_graph(plot_name, data) {
 		var series_options = {
 			series: {
 				stack: true,
@@ -115,7 +118,7 @@ $(document).ready(function() {
 				autoHighlight: true
 			}
 		}
-		return ($.plotAnimator(plot_name, data, options));
+		return ($.plot(plot_name, data, series_options));
 	}
 
 	// helper for returning the weekends in a period
