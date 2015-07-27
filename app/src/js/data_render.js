@@ -221,10 +221,10 @@ $(document).ready(function() {
 		var container = $('.stats-container');
 		var boxes = container.find('.stats-box');
 		var target_text, target_data, extracted_data;
-		$.each(boxes, function insert_data(index, box) {
-			console.log(box);
-			target_text = box.find('.right-stats-box:nth-child(1)');
-			target_data = box.find('.right-stats-box:nth-child(2)');
+		$.each(boxes, function insert_data() {
+			console.log($(this));
+			target_text = $(this).find('.right-stats-box:nth-child(1)');
+			target_data = $(this).find('.right-stats-box:nth-child(2)');
 			switch (target_text) {
 				case 'Hits:'
 					extracted_data = data['raw_hits'];

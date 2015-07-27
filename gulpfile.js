@@ -50,7 +50,7 @@ gulp.task('scripts', function() {
 			config.bowerDir + '/flot/jquery.flot.*.js',
 			config.bowerDir + '/flot.curvedlines/curvedLines.js',
 			'app/src/js/flotanimator/jquery.flot.animator.js',
-			'app/src/js/flot.js',
+			'app/src/js/data_render.js',
 			'app/src/js/dashboard.js'])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
