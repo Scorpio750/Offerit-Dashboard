@@ -223,10 +223,12 @@ $(document).ready(function() {
 		var target_text, target_data, extracted_data;
 		$.each(boxes, function insert_data() {
 			console.log($(this));
-			target_text = $(this).find('.right-stats-box:nth-child(1)');
-			target_data = $(this).find('.right-stats-box:nth-child(2)');
-			switch (target_text) {
-				case 'Hits:'
+			console.log($(this).find('.right-stats-box>h3:nth-child(1)'));
+			console.log($(this).find('.right-stats-box>h3:nth-child(2)'));
+			target_text = $(this).find('.right-stats-box>h3:nth-child(1)');
+			target_data = $(this).find('.right-stats-box>h3:nth-child(2)');
+			switch (target_text.text()) {
+				case 'Hits':
 					extracted_data = data['raw_hits'];
 					break;
 				case 'Convs':
@@ -234,13 +236,28 @@ $(document).ready(function() {
 					break;
 				case 'Payout':
 					extracted_data = data['total_payout'];
+					extracted_data = add_decimals(extracted_data);
+					extracted_data = '$ ' +  extracted_data;
 					break;
 				case 'EPC':
 					extracted_data = data['total_payout'] / data['raw_hits'];
+					extracted_data = add_decimals(extracted_data);
+					extracted_data = '$ ' +  extracted_data;
 					break;
 			}
 			target_data.text(extracted_data);
 		});
+	}
+
+	function add_decimals(n) {
+		if (!isInt(n)) {
+			n = n.toFixed(2);
+		}
+		return n;
+	}
+
+	function isInt(n) {
+		return n % 1 === 0;
 	}
 }); 
 { /literal }
