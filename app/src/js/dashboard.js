@@ -1,4 +1,5 @@
-$(document).ready(function() {
+//
+ $(document).ready(function() {
 	// Offer Panel functions
 	if (undefined == 1) {
 		console.log('damn undefined is still broken');
@@ -170,4 +171,9 @@ $(document).ready(function() {
 		$('.menu').not(notThisOne).slideUp();
 		notThisOne.slideToggle();
 	});
+
+	// toggle graphs
+	$('.metric-btn').click(function toggleMetric() {
+		
+	})
 });
