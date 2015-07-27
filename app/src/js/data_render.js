@@ -1,4 +1,4 @@
-{ literal }
+{literal}
 $(document).ready(function() {
 	// Flot rendering functions
 	var queryVars, period;
@@ -56,15 +56,18 @@ $(document).ready(function() {
 		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
 			queryVars, function store_data(data) {
 				if (data) {
-					var target_series, index, identifier, plot_name;
+					var target_series, plot_name;
+					var ident_index = map_identifier(queryVars.identifier);
 					switch (queryVars['function']) {
 						case 'offerit_display_stats':
 							// period graph data
 							if (typeof queryVars['dashboard_multi'] !== "undefined") {
-								identifier = 'raw_hits';
-								series_data['Period Data'][0][0] = create_axes(data['stats']['date'], series_data['Period Data'][0][0], identifier);
+								series_data['Period Data'][ident_index][queryVars.index] = create_axes(
+									data['stats']['date'],
+									series_data['Period Data'][ident_index][queryVars.index],
+									queryVars.identifier);
 								plot_name = '#p_chart';
-								plot_graph(plot_name, series_data['Period Data'][0][0].data);
+								plot_graph(plot_name, series_data['Period Data'][ident_index][queryVars.index]);
 								break;
 							}
 							// stats-box data
@@ -75,37 +78,89 @@ $(document).ready(function() {
 							}
 							break;
 						case 'offerit_display_hourly_hits':
-							identifier = 'raw_hits';
-							series_data['Hourly Data'][0] = create_axes(data, series_data['Hourly Data'][0], identifier);
+							series_data['Hourly Data'][queryVars.identifier] = create_axes(
+								data,
+								series_data['Hourly Data'][0],
+								queryVars['identifier']);
 							plot_name = '#h_chart';
-							plot_graph(plot_name, series_data['Hourly Data'][0].data);
+							plot_graph(plot_name, series_data['Hourly Data'][0]);
 							break;
 						case 'offerit_display_hourly_sales':
-							identifier = 'raw_hits';
-							series_data['Hourly Data'][1] = create_axes(data, series_data['Hourly Data'][1], identifier);
+							series_data['Hourly Data'][1] = create_axes(
+								data,
+								series_data['Hourly Data'][2],
+								queryVars['identifier']);
 							plot_name = '#h_chart';
-							plot_graph(plot_name, series_data['Hourly Data'][1].data);
+							plot_graph(plot_name, series_data['Hourly Data'][2]);
 							break;
 					}
 				}
 			});
 	}
 
+	// map identifier string to appropriate metric subindex
+	function map_identifier(identifier) {
+		var ident_index;
+		switch (identifier) {
+			case 'impression':
+				ident_index = 0;
+				break;
+			case 'raw_hits':
+				ident_index = 0;
+				break;
+			case 'conv_count':
+				ident_index = 1;
+				break;
+			case 'total_payout':
+				ident_index = 2;
+				break;
+			case 'EPC':
+				ident_index = 3;
+				break;
+		}
+		return ident_index;
+	}
+
 	// creates the axes from the ajax data and stores them in the appropriate series object
 	function create_axes(ajax_data, series, identifier) {
 		console.log('================\ncreating axes');
 		console.log(ajax_data);
-		for (var date in ajax_data) {
-			// if (typeof ajax_data[date][identifier] !== undefined) {
-				series.data.push([ date * 1000, ajax_data[date][identifier] ]);
-			// }
+		console.log("identifier: " + identifier);
+
+		// EPC has to be all *special*,
+		// making me do a fucking edgecase and shit
+		// Fuck you, EPC... fuck you.
+		if (identifier === 'EPC') {
+			var epc_val;
+			for (var i = 0; i < ajax_data.length; i++) {
+				if (typeof ajax_data[i]['total_payout'] === "undefined") {
+					epc_val = 0;
+				} else if (typeof ajax_data[i]['total_payout'] !== "undefined" &&
+					typeof ajax_data[i]['raw_hits'] === "undefined") {
+					epc_val = Number(ajax_data[i]['total_payout']);
+				} else if (typeof ajax_data[i]['total_payout'] !== "undefined" &&
+					typeof ajax_data[i]['raw_hits'] !== "undefined") {
+					epc_val = Number(ajax_data[i]['total_payout']) / Number(ajax_data[i]['raw_hits']);
+				}
+				series.data.push([ajax_data[i]['name'] * 1000, epc_val]);
+			}
 		}
-		console.log('plot data:');
+
+		// Everyone else who is not a goddamn special snowflake
+		for (var i in ajax_data) {
+			if (typeof ajax_data[i][identifier] === "undefined") {
+				ajax_data[i][identifier] = 0;
+			}
+			series.data.push([ajax_data[i]['name'] * 1000, Number(ajax_data[i][identifier])]);
+		}
+		console.log('series data:');
 		console.log(series);
 		return series;
 	}
 
 	function plot_graph(plot_name, data) {
+		console.log('plotting data...');
+		console.log(data);
 		var series_options = {
 			series: {
 				stack: true,
@@ -113,7 +168,12 @@ $(document).ready(function() {
 				groupInterval: 1,
 				lines: {
 					show: true,
-					fill: false
+					fill: true
+				},
+				curvedLines: {
+					active: false,
+					apply: true,
+					monotonicFit: true
 				},
 				points: {
 					show: false
@@ -163,14 +223,60 @@ $(document).ready(function() {
 					});
 					i += 7 * 24 * 60 * 60 * 1000;
 				} while (i < axes.xaxis.max);
-
+				console.log(markings);
 				return markings;
 			}
 			series_options.markings = weekendAreas;
 		}
-		return ($.plot(plot_name, data, series_options));
+		$.plot /*Animator*/ (plot_name, [{
+			data: data.data,
+			label: data.label,
+			color: "darkorchid",
+			animator: {
+				start: 1000,
+				steps: 200,
+				duration: 1000
+			}
+		}], series_options);
 	}
 
+	// chart tooltip
+	$("<div id='tooltip' style='font-weight: bold'></div>").css({
+		position: "absolute",
+		display: "none",
+		border: ".1em solid #fdd",
+		padding: ".5em",
+		"background-color": "slategray",
+		opacity: 0.80
+	}).appendTo("body");
+
+	$("#h_chart").bind("plotclick", function(event, pos, item) {
+		console.log(item);
+		// axis coordinates for other axes, if present, are in pos.x2, pos.x3, ...
+		// if you need global screen coordinates, they are pos.pageX, pos.pageY
+		if (item) {
+			h_plot.highlight(item.series, item.datapoint);
+			alert("You clicked a point!");
+		}
+	});
+
+	$("#p_chart").bind("plothover", plot_hover);
+	$("#h_chart").bind("plothover", plot_hover);
+
+	function plot_hover(event, pos, item) {
+		if (item) {
+			var x = item.datapoint[0];
+			y = item.datapoint[1];
+			$("#tooltip").html(y + " " + item.series.label)
+				.css({
+					top: item.pageY + 5,
+					left: item.pageX + 5
+				})
+				.fadeIn(200);
+		} else {
+			$("#tooltip").hide();
+		}
+	}
 	// Initially, display only hourly data 
 	// and data from this pay period
 
@@ -180,7 +286,7 @@ $(document).ready(function() {
 		'function': 'offerit_display_stats',
 		'period': period,
 		'dashboard_summary': 1,
-		'dashboard_multi': undefined
+		'dashboard_multi': undefined,
 	};
 	var stats_data = call_data(queryVars);
 	// Graph Data
@@ -189,7 +295,9 @@ $(document).ready(function() {
 		'function': 'offerit_display_stats',
 		'period': period,
 		'dashboard_summary': undefined,
-		'dashboard_multi': 1
+		'dashboard_multi': 1,
+		'index': 0,
+		'identifier': 'raw_hits'
 	};
 	var summary_data = call_data(queryVars);
 
@@ -199,7 +307,8 @@ $(document).ready(function() {
 		'function': 'offerit_display_hourly_hits',
 		'period': period,
 		'return_type': 'json',
-		'time_format': 'hour'
+		'time_format': 'hour',
+		'identifier': 'impression'
 	};
 	var hourly_hits = call_data(queryVars);
 	/*queryVars['function'] = 'offerit_display_hourly_sales';
@@ -217,14 +326,10 @@ $(document).ready(function() {
 	/////////////////////////////////////
 	function fill_stats(data) {
 		console.log('Filling stats-box...');
-		console.log(data);
 		var container = $('.stats-container');
 		var boxes = container.find('.stats-box');
 		var target_text, target_data, extracted_data;
 		$.each(boxes, function insert_data() {
-			console.log($(this));
-			console.log($(this).find('.right-stats-box>h3:nth-child(1)'));
-			console.log($(this).find('.right-stats-box>h3:nth-child(2)'));
 			target_text = $(this).find('.right-stats-box>h3:nth-child(1)');
 			target_data = $(this).find('.right-stats-box>h3:nth-child(2)');
 			switch (target_text.text()) {
@@ -237,12 +342,12 @@ $(document).ready(function() {
 				case 'Payout':
 					extracted_data = data['total_payout'];
 					extracted_data = add_decimals(extracted_data);
-					extracted_data = '$ ' +  extracted_data;
+					extracted_data = '$ ' + extracted_data;
 					break;
 				case 'EPC':
 					extracted_data = data['total_payout'] / data['raw_hits'];
 					extracted_data = add_decimals(extracted_data);
-					extracted_data = '$ ' +  extracted_data;
+					extracted_data = '$ ' + extracted_data;
 					break;
 			}
 			target_data.text(extracted_data);
@@ -260,4 +365,4 @@ $(document).ready(function() {
 		return n % 1 === 0;
 	}
 }); 
-{ /literal }
+{/literal}
