@@ -1,4 +1,4 @@
-{literal}
+{ literal }
 $(document).ready(function() {
 	// Flot rendering functions
 	var queryVars, period;
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 	// constructs each series element
 	function label_series(series) {
-	var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
+		var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
 		for (var i in names) {
 			series[i] = {
 				label: names[i],
@@ -136,7 +136,7 @@ $(document).ready(function() {
 		// EPC has to be all *special*
 		// making me do a fucking edgecase and shit
 		// Fuck you, EPC... fuck you.
-		if (identifier === 'EPC') {
+		if (identifier == 'EPC') {
 			var epc_val;
 			for (var i = 0; i < ajax_data.length; i++) {
 				console.log(ajax_data[i]['total_payout']);
@@ -154,13 +154,14 @@ $(document).ready(function() {
 				series.data.push([ajax_data[i]['name'] * 1000, epc_val]);
 			}
 		}
-
 		// Everyone else who is not a goddamn special snowflake
-		for (var i in ajax_data) {
-			if (typeof ajax_data[i][identifier] === "undefined") {
-				ajax_data[i][identifier] = 0;
+		else {
+			for (var i in ajax_data) {
+				if (typeof ajax_data[i][identifier] === "undefined") {
+					ajax_data[i][identifier] = 0;
+				}
+				series.data.push([ajax_data[i]['name'] * 1000, Number(ajax_data[i][identifier])]);
 			}
-			series.data.push([ajax_data[i]['name'] * 1000, Number(ajax_data[i][identifier])]);
 		}
 		console.log('series data:');
 		console.log(series);
@@ -205,7 +206,7 @@ $(document).ready(function() {
 				autoHighlight: true
 			}
 		}
-		
+
 		$.plot /*Animator*/ (plot_name, [{
 			data: data.data,
 			label: data.label,
@@ -247,15 +248,12 @@ $(document).ready(function() {
 			selection: {
 				mode: "x"
 			},
-			yaxes: [
-				{
-					/* first y-axis */
-				},
-				{
-					/* second y-axis */
-					position: "right"
-				}
-			],
+			yaxes: [{
+				/* first y-axis */
+			}, {
+				/* second y-axis */
+				position: "right"
+			}],
 			grid: {
 				color: "slategray",
 				borderWidth: 0,
@@ -306,21 +304,17 @@ $(document).ready(function() {
 			}
 			series_options.markings = weekendAreas;
 		}
-		$.plot/*Animator*/(plot_name, [
-		{
+		$.plot /*Animator*/ (plot_name, [{
 			label: data[0].label,
 			data: data[0].data
-		},
-		{
+		}, {
 			label: data[1].label,
 			data: data[1].data
-		},
-		{
+		}, {
 			label: data[2].label,
 			data: data[2].data,
 			yaxis: 2
-		},
-		{
+		}, {
 			label: data[3].label,
 			data: data[3].data,
 			yaxis: 2,
@@ -372,7 +366,7 @@ $(document).ready(function() {
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': period,
-		'period' : period_map[period],
+		'period': period_map[period],
 		'dashboard_summary': 1,
 		'dashboard_multi': undefined
 	};
@@ -382,7 +376,7 @@ $(document).ready(function() {
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': period,
-		'period' : period_map[period],
+		'period': period_map[period],
 		'dashboard_summary': undefined,
 		'dashboard_multi': 1,
 		'identifier': 'raw_hits'
@@ -393,7 +387,7 @@ $(document).ready(function() {
 	period = 8;
 	queryVars = {
 		'function': 'offerit_display_hourly_hits',
-		'period' : period, 
+		'period': period,
 		'return_type': 'json',
 		'time_format': 'hour',
 		'identifier': 'impression'
