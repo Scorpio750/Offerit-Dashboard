@@ -32,6 +32,7 @@ $(document).ready(function() {
 	};
 	var metrices = ['raw_hits', 'conv_count', 'total_payout', 'EPC'];
 
+	// add subseries for each metric option
 	label_series(series_data['Hourly Data']);
 	for (var i in series_data['Period Data']) {
 		label_series(series_data['Period Data'][i]);
@@ -138,6 +139,9 @@ $(document).ready(function() {
 		if (identifier === 'EPC') {
 			var epc_val;
 			for (var i = 0; i < ajax_data.length; i++) {
+				console.log(ajax_data[i]['total_payout']);
+				console.log(ajax_data[i]['raw_hits']);
+				console.log('--------------');
 				if (typeof ajax_data[i]['total_payout'] === "undefined") {
 					epc_val = 0;
 				} else if (typeof ajax_data[i]['total_payout'] !== "undefined" &&
@@ -219,9 +223,13 @@ $(document).ready(function() {
 
 		var series_options = {
 			series: {
-				stack: true,
+				// stack: true,
 				group: true,
 				groupInterval: 1,
+				lines: {
+					show: true,
+					fill: true
+				},
 				curvedLines: {
 					active: false,
 					apply: true,
@@ -301,32 +309,22 @@ $(document).ready(function() {
 		$.plot/*Animator*/(plot_name, [
 		{
 			label: data[0].label,
-			data: data[0].data,
-			lines: {
-				show: true,
-				fill: true
-			}
+			data: data[0].data
 		},
-		/*{
+		{
 			label: data[1].label,
-			data: data[1].data,
-			points: { show: true }
-		},*/
+			data: data[1].data
+		},
 		{
 			label: data[2].label,
 			data: data[2].data,
-			lines: {
-				show: true,
-				fill: true
-			},
 			yaxis: 2
 		},
-		/*{
+		{
 			label: data[3].label,
 			data: data[3].data,
-			yaxis: 4,
-			points: { show: true }
-		}*/], series_options);
+			yaxis: 2,
+		}], series_options);
 	}
 
 	// chart tooltip
