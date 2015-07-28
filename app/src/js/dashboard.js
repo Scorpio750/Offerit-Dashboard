@@ -1,5 +1,5 @@
 //
- $(document).ready(function() {
+$(document).ready(function() {
 	// Offer Panel functions
 	if (undefined == 1) {
 		console.log('damn undefined is still broken');
@@ -8,7 +8,7 @@
 		n = txt.length + 1;
 	$swap = [$('#swap1'), $('#swap2'), $('#swap3'), $('#metric-btn-wrapper')],
 	$span = [],
-		c = 0;
+	c = 0;
 	// create spans inside span
 	for (var i = 0; i < 2; i++) {
 		$swap[0].append($('<span />', {
@@ -84,7 +84,7 @@
 					if ($span[n].eq(i).css('display') == 'inline') {
 						otherPrefix = $span[n].eq(i);
 					}
-					if (typeof otherPrefix != "undefined") {
+					if (typeof otherPrefix !== "undefined") {
 						console.log('fuck me');
 						otherPrefix.stop().fadeOut('options')
 					}
@@ -173,7 +173,29 @@
 	});
 
 	// toggle graphs
-	$('.metric-btn').click(function toggleMetric() {
-		
+	$('.metric-btn > ul > li').click(function toggleMetric() {
+		var queryVars = {
+			'function': undefined,
+			'period': 8,
+			'return_type': 'json',
+			'time_format': 'hour',
+			'identifier': 'impression'
+		};
+		var tag;
+		switch ($(this).text()) {
+			case 'Hits':
+				tag = 'display_hourly_hits';
+				break;	
+			case 'Conversions':
+				tag = 'display_hourly'
+			case 'Payout':
+				tag = 'display_hourly_sales';
+				break;	
+			case 'EPC':
+				tag = 'display_hourly_epc';
+				break;	
+		}
+		queryVars.function = 'display_hourly_' + tag;
+		call_data(queryVars);
 	})
 });

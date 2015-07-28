@@ -6,12 +6,16 @@ var gulp 		= require('gulp'),
 	debug 		= require('gulp-debug'),
 	uglify		= require('gulp-uglify'),
 	notify 		= require('gulp-notify'),
-	bower		= require('gulp-bower');
+	bower		= require('gulp-bower'),
+	minify_css	= require('gulp-minify-css'),
 	autoprefixer= require('gulp-autoprefixer');
+	merge		= require('merge2');
 
 var config = {
-	sassPath: './app/src/scss',
-	bowerDir: 'bower_components'
+	sassPath: 'app/src/scss/css_builder.scss',
+	normalize: 'bower_components/normalize.css/normalize.css',
+	bowerDir: 'bower_components',
+	css: 'app/dist/css'
 }
 
 // runs bower install
@@ -28,7 +32,7 @@ gulp.task('icons', function() {
 
 // sets up sass, links bootstrap and fontawesome into path for access
 gulp.task('sass', function() {
-	return sass(config.sassPath + '/css_builder.scss', {
+	return sass(config.sassPath, {
 			loadPath: [
 				config.sassPath,
 				config.bowerDir + '/bootstrap-sass/assets/stylesheets',
@@ -38,8 +42,19 @@ gulp.task('sass', function() {
 			.on('error', notify.onError(function (error) {
 				return 'Error: ' + error.message;
 				}))
-		.pipe(gulp.dest('app/dist/css'))
+		.pipe(gulp.dest('app/src/css'))
 		.pipe(reload({ stream:true }));
+});
+
+// merge css streams
+gulp.task('styles', function() {
+	return merge(
+		gulp.src(config.normalize),
+		sass(config.sassPath)
+	)
+	.pipe(concat('style.css'))
+	.pipe(minify_css())
+	.pipe(gulp.dest(config.css));
 });
 
 // concatenates all js scripts into one file
@@ -54,10 +69,11 @@ gulp.task('scripts', function() {
 			'app/src/js/dashboard.js'])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
+		//.pipe(uglify())
 		.pipe(gulp.dest('app/dist/js'));
 });
 
-gulp.task('serve', ['sass', 'scripts', 'icons'], function() {
+gulp.task('serve', ['styles', 'scripts', 'icons'], function() {
 	browserSync.init({
 		server: {
 			baseDir: 'app',
