@@ -1,7 +1,22 @@
-{
+/*{
 	literal
-}
+}*/
 $(document).ready(function() {
+
+	var queryVars, period;
+
+	/////////////////////////////////
+	//                             //
+	//  OFFER RETRIEVAL FUNCTIONS  //
+    //                             //
+    /////////////////////////////////
+
+    queryVars = { 
+    	'function': 'ajax_get_affiliate_top_offers',
+    	'return_type': 'json',
+    	'type': 'impression'
+    };
+
 
 	//////////////////////////////////
 	//                              //
@@ -9,7 +24,6 @@ $(document).ready(function() {
 	//                              //
 	//////////////////////////////////
 
-	var queryVars, period;
 	/* creating data array to hold series information
 	 * 1st element is hourly graph data
 	 * 2nd element is period graph data
@@ -175,7 +189,6 @@ $(document).ready(function() {
 		}
 		console.log('series data:');
 		console.log(series);
-		console.log('================');
 		return series;
 	}
 
@@ -207,6 +220,9 @@ $(document).ready(function() {
 				/* second y-axis */
 				position: "right"
 			}],
+			yaxis: {
+				min: 0
+			},
 			grid: {
 				color: "slategray",
 				borderWidth: 0,
@@ -338,7 +354,6 @@ $(document).ready(function() {
 		'period': period_map[period],
 		'dashboard_summary': undefined,
 		'dashboard_multi': 1,
-		'identifier': 'raw_hits'
 	};
 	call_data(queryVars, url);
 
@@ -348,8 +363,6 @@ $(document).ready(function() {
 		'function': 'offerit_display_hourly_hits',
 		'period': period,
 		'return_type': 'json',
-		'time_format': 'hour',
-		'identifier': 'impression'
 	};
 	call_data(queryVars, url);
 
@@ -397,5 +410,5 @@ $(document).ready(function() {
 	function isInt(n) {
 		return n % 1 === 0;
 	}
-}); {
-	/literal }
+}); /*{
+	/literal }*/

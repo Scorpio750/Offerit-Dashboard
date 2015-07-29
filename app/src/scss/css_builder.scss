@@ -164,6 +164,7 @@ img {
 .bottom-box {
     border-radius: 0 0 6px 6px;
     padding: 1em;
+    max-height: 10em;
     background-color: $sec-green;
     overflow: auto;
 }
@@ -317,7 +318,7 @@ img {
     margin-bottom: 3em;
     z-index: 100;
     bottom-box {
-        max-height: 9em;
+        height: 8em;
     }
 }
 
@@ -470,7 +471,7 @@ img {
         width: 31%;
         height: 70%;
         .bottom-box {
-            height: 11em;
+            height: 10em;
         }
     }
 }

@@ -64,6 +64,7 @@ gulp.task('scripts', function() {
 			config.bowerDir + '/flot/jquery.flot.js',
 			config.bowerDir + '/flot/jquery.flot.*.js',
 			config.bowerDir + '/flot.curvedlines/curvedLines.js',
+			config.bowerDir + '/nicescroll/jquery.nicescroll.min.js',	
 			'app/src/js/flotanimator/jquery.flot.animator.js',
 			'app/src/js/data_render.js',
 			'app/src/js/dashboard.js'])
@@ -82,7 +83,7 @@ gulp.task('serve', ['styles', 'scripts', 'icons'], function() {
 		ghostMode: { scroll: false }
 	});
 
-	gulp.watch(config.sassPath + '/*.scss', ['sass']);
+	gulp.watch(config.sassPath, ['styles']);
 	gulp.watch('app/src/js/**/*.js', ['scripts']);
 	gulp.watch(['dist/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
 });

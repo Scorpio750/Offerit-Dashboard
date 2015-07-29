@@ -1,5 +1,19 @@
-//
 $(document).ready(function() {
+
+	// add nicescroll to all bottom-boxes
+	$('.bottom-box').niceScroll({
+		cursoropacitymax: .5,	
+		cursorwidth: '10px',
+		cursorcolor: '#555',
+		cursorborder: '0px',
+		railpadding: {
+			top: 0,
+			right: '5px',
+			left: 0,
+			bottom: 0
+		}
+	});
+
 	// Offer Panel functions
 	if (undefined == 1) {
 		console.log('damn undefined is still broken');
