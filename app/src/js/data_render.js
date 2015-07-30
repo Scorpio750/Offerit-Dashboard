@@ -70,7 +70,6 @@ $(document).ready(function() {
 					switch (queryVars['function']) {
 						// Offers panel data
 						case 'ajax_get_affiliate_top_offers':
-							console.log('parsing top offers data...');
 							display_offers(data, queryVars['type'], 'user');
 							break;
 

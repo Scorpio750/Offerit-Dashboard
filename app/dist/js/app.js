@@ -7459,7 +7459,6 @@ $(document).ready(function() {
 					switch (queryVars['function']) {
 						// Offers panel data
 						case 'ajax_get_affiliate_top_offers':
-							console.log('parsing top offers data...');
 							display_offers(data, queryVars['type'], 'user');
 							break;
 
@@ -7790,7 +7789,19 @@ $(document).ready(function() {
 		return n % 1 === 0;
 	}
 // add nicescroll to all bottom-boxes
-$('.bottom-box').niceScroll({
+$('#offer-box > .bottom-box').niceScroll({
+	cursoropacitymax: .5,
+	cursorwidth: '10px',
+	cursorcolor: '#555',
+	cursorborder: '0px',
+	railpadding: {
+		top: 0,
+		right: 0,
+		left: 0,
+		bottom: 0
+	}
+});
+$('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
 	cursorwidth: '10px',
 	cursorcolor: '#555',
@@ -8059,14 +8070,15 @@ function display_offers(offers, type, scope) {
 	target_list = '#' + scope + target_list;
 	$(target_list).empty();
 	for (var i in offers) {
-		console.log(offers[i]);
 		$(target_list).append($('<li />', {
 			text: offers[i]['name']
 		}));
 	}
+	$('#offers-area').animate({
+		height: 114
+	});
 	$(list_class).not(target_list).fadeOut();
-	console.log(target_list);
-	$(target_list).delay(250).fadeIn();
+	$(target_list).delay(400).fadeIn();
 }
 });
 { /literal }
