@@ -1,28 +1,24 @@
-$(document).ready(function() {
 
 	// add nicescroll to all bottom-boxes
 	$('.bottom-box').niceScroll({
-		cursoropacitymax: .5,	
+		cursoropacitymax: .5,
 		cursorwidth: '10px',
 		cursorcolor: '#555',
 		cursorborder: '0px',
 		railpadding: {
 			top: 0,
-			right: '5px',
+			right: 0,
 			left: 0,
 			bottom: 0
 		}
 	});
 
 	// Offer Panel functions
-	if (undefined == 1) {
-		console.log('damn undefined is still broken');
-	}
 	var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
 		n = txt.length + 1;
 	$swap = [$('#swap1'), $('#swap2'), $('#swap3'), $('#metric-btn-wrapper')],
-	$span = [],
-	c = 0;
+	$span = [];
+
 	// create spans inside span
 	for (var i = 0; i < 2; i++) {
 		$swap[0].append($('<span />', {
@@ -112,6 +108,10 @@ $(document).ready(function() {
 		}
 	}
 
+	// load top user offers by default
+	shift(0, 1, 0);
+	shift(3, 1, 0);
+
 	// triggers subnavs to open upon hovering over a menu item
 	$('.dropdown-item').click(function slide() {
 		/* Finding the drop down list that corresponds to the current section: */
@@ -122,58 +122,32 @@ $(document).ready(function() {
 
 	$('.offer-type').click(function switch_offers() {
 		var id = $(this).attr('id');
-
+		var list;
 		switch (id[0]) {
 			case 't':
-				$('#new-offer-list').addClass('hidden');
-				$('#top-offer-list').removeClass('hidden');
 				shift(0, 1, 0);
 				shift(3, 1, 0);
+				switch (id[1]) {
+					case 'u':
+						list = $('#top-offer-list-user')
+						shift(2, 0, 0);
+						break;
+					case 'n':
+						list = $('#top-offer-list-network')
+						shift(2, 1, 0);
+						break;
+				}
 				break;
 			case 'n':
-				$('#new-offer-list').removeClass('hidden');
-				$('#top-offer-list').addClass('hidden');
+				list = $('#new-offer-list')
 				shift(0, 1, 1);
 				shift(3, 0, 0);
-				break;
-		}
-
-		switch (id[1]) {
-			case 'u':
 				shift(2, 0, 0);
 				break;
-			case 'n':
-				shift(2, 1, 0);
-				break;
 		}
+		$('.offer-list').not(list).fadeOut();
+		$(list).delay(400).fadeIn();
 	});
-
-	// swaps metric type identifiers in header
-	$('.metric-type').click(function metric_switch() {
-		var id = $(this).attr('id');
-		shift(1, 1, id[0]);
-	});
-
-	function offerSwitch() {
-		c = ++c % n;
-		console.log(c);
-		$swap[0].animate({
-			width: $span[0].eq(c % 2).width()
-		});
-		$span[0].stop().fadeOut('fast').eq(c % 2).delay(200).fadeIn('fast');
-		if (c > 1) {
-			// change color of offer panel to red
-			console.log('adding network');
-			$(this).closest('#offer-box').addClass('network');
-			shift(1, 1);
-		} else {
-			console.log('removing network');
-			$(this).closest('#offer-box').removeClass('network');
-			shift(1, 0);
-		}
-		$('#top-offer-list').toggleClass('hidden');
-		$('#new-offer-list').toggleClass('hidden');
-	}
 
 	$('.menu-btn').click(function() {
 		var notThisOne = $(this).next('.menu');
@@ -187,29 +161,65 @@ $(document).ready(function() {
 	});
 
 	// toggle graphs
-	$('.metric-btn > ul > li').click(function toggleMetric() {
-		var queryVars = {
-			'function': undefined,
-			'period': 8,
-			'return_type': 'json',
-			'time_format': 'hour',
-			'identifier': 'impression'
-		};
+	$('#metric-btn > ul > li').click(function toggleTopMetric() {
+		url = 'http://jamesdev.offerit.com/ajax_data.php';
 		var tag;
 		switch ($(this).text()) {
-			case 'Hits':
-				tag = 'display_hourly_hits';
-				break;	
-			case 'Conversions':
-				tag = 'display_hourly'
-			case 'Payout':
-				tag = 'display_hourly_sales';
-				break;	
-			case 'EPC':
-				tag = 'display_hourly_epc';
-				break;	
+			case 'by Hits':
+				tag = 'impression';
+				break;
+			case 'by Conversions':
+				tag = 'conversion'
+			case 'by Payout':
+				tag = 'commission';
+				break;
+			case 'by EPC':
+				tag = 'epc';
+				break;
 		}
-		queryVars.function = 'display_hourly_' + tag;
-		call_data(queryVars);
-	})
+		var queryVars = {
+			'function': 'ajax_get_affiliate_top_offers',
+			'return_type': 'json',
+			'type': tag
+		};
+		call_data(queryVars, url);
+	});
+
+	function display_offers(offers, type, scope) {
+		console.log('--------------------')
+		var $list = $('#offer-list');
+		var target_list, 
+			list_class = '.' + scope + '-list', 
+			value;
+
+		switch (type) {
+			case 'impression':
+				target_list = 'hits';
+				value = 'hits';
+				break;
+			case 'conversion':
+				target_list = 'convs';
+				value = 'amount';
+				break;
+			case 'commission':
+				target_list = 'payouts';
+				value = 'amount';
+				break;
+			case 'epc':
+				target_list = 'epc';
+				value = 'amount';
+				break;
+		}
+		target_list = scope + '-' + target_list;
+		$(target_list).empty();
+
+		for (var i in offers) {
+			console.log(offers[i]);
+			console.log(offers[i]['name'] + ': ' + offers[i][value]);
+			target_list.append($('<li />', { text: offers[i]['name'] + ': ' + offers[i][value] }));
+		}
+		$(list_class).not(target_list).fadeOut();
+		console.log(target_list);
+		target_list.fadeIn();
+	} 
 });

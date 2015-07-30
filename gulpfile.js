@@ -15,7 +15,8 @@ var config = {
 	sassPath: 'app/src/scss/css_builder.scss',
 	normalize: 'bower_components/normalize.css/normalize.css',
 	bowerDir: 'bower_components',
-	css: 'app/dist/css'
+	css: 'app/dist/css',
+	jsPath: 'app/src/js'
 }
 
 // runs bower install
@@ -60,14 +61,16 @@ gulp.task('styles', function() {
 // concatenates all js scripts into one file
 gulp.task('scripts', function() {
 	return gulp.src([
+			config.jsPath + '/literalopen',
 			config.bowerDir + '/jquery/dist/jquery.min.js',
 			config.bowerDir + '/flot/jquery.flot.js',
 			config.bowerDir + '/flot/jquery.flot.*.js',
-			config.bowerDir + '/flot.curvedlines/curvedLines.js',
 			config.bowerDir + '/nicescroll/jquery.nicescroll.min.js',	
-			'app/src/js/flotanimator/jquery.flot.animator.js',
-			'app/src/js/data_render.js',
-			'app/src/js/dashboard.js'])
+			config.jsPath + '/flotanimator/jquery.flot.animator.js',
+			config.jsPath + '/data_render.js',
+			config.jsPath + '/dashboard.js',
+			config.jsPath + '/literalclose'	
+			])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
 		//.pipe(uglify())
@@ -84,7 +87,7 @@ gulp.task('serve', ['styles', 'scripts', 'icons'], function() {
 	});
 
 	gulp.watch(config.sassPath, ['styles']);
-	gulp.watch('app/src/js/**/*.js', ['scripts']);
+	gulp.watch(config.jsPath + '/**/*.js', ['scripts']);
 	gulp.watch(['dist/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
 });
 

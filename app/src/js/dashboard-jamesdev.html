@@ -1,0 +1,260 @@
+<!--Reminder Boxes-->
+<div class="row flex-container" id="reminders">
+	<div class="two-box panel" id="offer-box">
+		<div class="top-box">
+			<header>
+				<div class="swap-wrapper">
+					<a href="#offer-box">
+						<h2>
+						<span class="swap" id="swap1"></span>
+						<span>Offers</span>
+						<span class="swap" id="swap3"></span>
+						</h2>
+						
+					</a>
+					<span class="swap" id="metric-btn-wrapper">
+						<span class="dropdown swap" id="metric-btn">
+							<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu menu">
+								<li class="metric-type" id="0h">by Hits</li>
+								<li class="metric-type" id="1c">by Conversions</li>
+								<li class="metric-type" id="2p">by Payout</li>
+								<li class="metric-type" id="3e">by EPC</li>
+							</ul>
+						</span>
+					</span>
+				</div>
+				<div class="dropdown">
+					<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
+						<i class="fa fa-square-o fa-stack-2x"></i>
+						<i class="fa fa-bars fa-stack-1x"></i>
+					</span>
+					<ul class="dropdown-menu dropdown-menu-right menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
+						<li class="dropdown-item" id="top-offers">Top Offers
+						</li>
+						<ul class="subnav ">
+							<li class="offer-type" id="tu">By User</li>
+							<li class="offer-type" id="tn">By Network</li>
+						</ul>
+						<li class="dropdown-item offer-type" id="new-offers">New Offers
+						</li>
+						<!-- <ul class="subnav ">
+												<li class="offer-type" id="nu">By User</li>
+												<li class="offer-type" id="nn">By Network</li>
+						</ul> -->
+					</ul>
+				</div>
+				
+			</header>
+		</div>
+		<div class="bottom-box">
+			<!-- <span class="swap" id="swap2"></span> -->
+		<ol class="offer-list" id="top-offer-list-user">
+			<ol class="user-list" id="user-hits"></ol>
+			<ol class="user-list" id="user-convs"></ol>
+			<ol class="user-list" id="user-payouts"></ol>
+			<ol class="user-list" id="user-epc"></ol>
+		</ol>
+	<ol class="offer-list" id="top-offer-list-network">
+			<ol class="network-list" id="network-hits"></ol>
+			<ol class="network-list" id="network-convs"></ol>
+			<ol class="network-list" id="network-payouts"></ol>
+			<ol class="network-list" id="network-epc"></ol>
+	</ol>
+<ol class="offer-list" id="new-offer-list"></ol>
+
+</div>
+</div>
+<div class="two-box panel" id="hs-box">
+<div class="top-box" id="list-box">
+<header>
+	<a href="#hs-box">
+		<h2>Today's Stats</h2>
+	</a>
+	<div class="dropdown">
+		<span class="icon fa-stack fa-lg menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
+			<i class="fa fa-square-o fa-stack-2x"></i>
+			<i class="fa fa-bars fa-stack-1x"></i>
+		</span>
+		<ul class="dropdown-menu dropdown-menu-right menu" id="hs-menu">
+			<li>This Period</li>
+			<li>Last Period</li>
+			<li>This Month</li>
+			<li>Last Month</li>
+			<li>Past 30 Days</li>
+			<li>Past 60 Days</li>
+			<li>Past 90 Days</li>
+			<li>This Year</li>
+			<li>All Time</li>
+		</ul>
+	</div>
+</header>
+</div>
+<div class="bottom-box">
+<div class="stats-container">
+	<div class="stats-box">
+		<div class="left-stats-box">
+			<i class="fa fa-exclamation fa-3x"></i>
+		</div>
+		<div class="right-stats-box">
+			<h3>Hits</h3>
+			<h3>8</h3>
+		</div>
+	</div>
+	<div class="stats-box">
+		<div class="left-stats-box">
+			<i class="fa fa-sign-out fa-3x"></i>
+		</div>
+		<div class="right-stats-box">
+			<h3>Convs</h3>
+			<h3>3</h3>
+		</div>
+	</div>
+	<div class="stats-box">
+		<div class="left-stats-box">
+			<i class="fa fa-money fa-3x"></i>
+		</div>
+		<div class="right-stats-box">
+			<h3>Payout</h3>
+			<h3>$189</h3>
+		</div>
+	</div>
+	<div class="stats-box">
+		<div class="left-stats-box">
+			<i class="fa fa-cart-arrow-down fa-3x"></i>
+		</div>
+		<div class="right-stats-box">
+			<h3>EPC</h3>
+			<h3>$.08</h3>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<!--Graph Box-->
+<div class="row flex-container" id="main-column">
+<div class="graph-box panel">
+<div class="top-box">
+<header>
+	<a href="#main-column"><h2>Hourly Graph</h2></a>
+	<!-- <div class="dropdown">
+							<span class="icon fa-stack fa-lg menu-btn metric-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
+													<i class="fa fa-square-o fa-stack-2x"></i>
+													<i class="fa fa-bars fa-stack-1x"></i>
+							</span>
+							<ul class="dropdown-menu dropdown-menu-right menu " id="h_graph-menu">
+													<li>Hits</li>
+													<li>Conversions</li>
+													<li>Payout</li>
+													<li>EPC</li>
+							</ul>
+	</div> -->
+</header>
+</div>
+<div class="bottom-box" id="hourly-graph">
+<div id="h_chart">
+</div>
+</div>
+</div>
+<div class="graph-box panel">
+<div class="top-box">
+<header>
+	<a href="#main-column"><h2>Period Graph</h2></a>
+	<div class="dropdown">
+		<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
+			<i class="fa fa-square-o fa-stack-2x"></i>
+			<i class="fa fa-bars fa-stack-1x"></i>
+		</span>
+		<ul class="dropdown-menu dropdown-menu-right menu" id="p_graph-menu">
+			<li>This Period</li>
+			<li>Last Period</li>
+			<li>This Month</li>
+			<li>Last Month</li>
+			<li>Past 30 Days</li>
+			<li>Past 60 Days</li>
+			<li>Past 90 Days</li>
+			<li>This Year</li>
+			<li>All Time</li>
+		</ul>
+	</div>
+</header>
+</div>
+<div class=" bottom-box" id="period-graph">
+<div id="p_chart"></div>
+</div>
+</div>
+</div>
+<!--Info Boxes-->
+<div class="row flex-container" id="three-column">
+<div class="three-box panel" id="news">
+<div class="top-box">
+<header>
+	<a href="#news">
+		<h2>News</h2>
+	</a>
+</header>
+</div>
+<div class="bottom-box">
+<ul id="news">
+	<li class="news-item">Lorem ipsum dolor sit.</li>
+	<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
+	<li class="news-item">Voluptatum veritatis iste ab.</li>
+	<li class="news-item">Laudantium et veniam asperiores?</li>
+	<li class="news-item">Lorem ipsum dolor sit.</li>
+</ul>
+</div>
+</div>
+<div class="three-box panel" id="paysum">
+<div class="top-box">
+<header>
+	<a href="#paysum">
+		<h2>Payment Summary</h2>
+	</a>
+</header>
+</div>
+<div class="bottom-box">
+<ol id="paysum-list">
+	<li>Lorem ipsum dolor sit.</li>
+	<li>Aliquam dolorem consequuntur hic.</li>
+	<li>Eius voluptate, hic dicta.</li>
+	<li>Ea, consectetur nulla sint!</li>
+	<li>Iste officiis commodi cupiditate!</li>
+	<li>Aliquid eum cum exercitationem.</li>
+</ol>
+</div>
+</div>
+<div class="three-box panel" id="contact">
+<div class="top-box">
+<header>
+	<a href="#contact">
+		<h2>Agent Contact</h2>
+	</a>
+</header>
+</div>
+<div class="bottom-box">
+<table>
+	<tr>
+		<td>Lorem ipsum.</td>
+		<td>Numquam, blanditiis.</td>
+		<td>Magnam, ea!</td>
+	</tr>
+	<tr>
+		<td>Lorem ipsum.</td>
+		<td>Ea, incidunt.</td>
+		<td>Ea, incidunt.</td>
+	</tr>
+	<tr>
+		<td>Lorem ipsum.</td>
+		<td>Ea, incidunt.</td>
+		<td>Lorem ipsum.</td>
+	</tr>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</html>

@@ -1,22 +1,4 @@
-/*{
-	literal
-}*/
 $(document).ready(function() {
-
-	var queryVars, period;
-
-	/////////////////////////////////
-	//                             //
-	//  OFFER RETRIEVAL FUNCTIONS  //
-    //                             //
-    /////////////////////////////////
-
-    queryVars = { 
-    	'function': 'ajax_get_affiliate_top_offers',
-    	'return_type': 'json',
-    	'type': 'impression'
-    };
-
 
 	//////////////////////////////////
 	//                              //
@@ -83,12 +65,17 @@ $(document).ready(function() {
 		$.getJSON(url,
 			queryVars, function store_data(data) {
 				if (data) {
-					console.log(queryVars['function']);
 					console.log(data);
 					var timespan;
 					switch (queryVars['function']) {
 						// Offers panel data
 						case 'ajax_get_affiliate_top_offers':
+							console.log('parsing top offers data...');
+							display_offers(data, queryVars['type'], 'user');
+							break;
+
+						case 'ajax_get_network_top_offers':
+							display_offers(data, queryVars['type'], 'network');
 							break;
 
 						case 'offerit_display_stats':
@@ -136,8 +123,6 @@ $(document).ready(function() {
 		queryVars.function = 'offerit_display_hourly_sales';
 		$.getJSON(url, queryVars, function store_hourly_data(data) {
 			if (data) {
-				console.log('retrieved hourly sales');
-				console.log(data);
 
 				// build conversions series
 				for (var i = 1; i < 4; i++) {
@@ -155,10 +140,6 @@ $(document).ready(function() {
 
 	// creates the axes from the ajax data and stores them in the appropriate series object
 	function create_axes(ajax_data, series, identifier) {
-		console.log('================');
-		console.log('creating axes');
-		console.log(ajax_data);
-		console.log("identifier: " + identifier);
 
 		// EPC has to be all *special*
 		// making me do a fucking edgecase and shit
@@ -187,15 +168,10 @@ $(document).ready(function() {
 				series.data.push([ajax_data[i]['name'] * 1000, Number(ajax_data[i][identifier])]);
 			}
 		}
-		console.log('series data:');
-		console.log(series);
 		return series;
 	}
 
 	function plot_graph(plot_name, data) {
-		console.log('plotting data...');
-		console.log(data);
-
 		var series_options = {
 			series: {
 				lines: {
@@ -333,11 +309,20 @@ $(document).ready(function() {
 	//                     //
 	/////////////////////////
 
+	var queryVars, period = 0, url = 'http://jamesdev.offerit.com/internal_data.php';
+
+
+	//Offer Data
+	queryVars = {
+		'function': 'ajax_get_affiliate_top_offers',
+		'return_type': 'json',
+		'type': 'impression'
+	};
+	call_data(queryVars, url);
+
 	// Initially, display only hourly data 
 	// and data from this pay period
-
 	// Stats Data
-	period = 0, url = 'http://jamesdev.offerit.com/internal_data.php';
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': period,
@@ -346,6 +331,7 @@ $(document).ready(function() {
 		'dashboard_multi': undefined
 	};
 	call_data(queryVars, url);
+
 	// Graph Data
 	// Period data
 	queryVars = {
@@ -388,12 +374,12 @@ $(document).ready(function() {
 				case 'Payout':
 					extracted_data = data['total_payout'];
 					extracted_data = add_decimals(extracted_data);
-					extracted_data = '$ ' + extracted_data;
+					extracted_data = '$' + extracted_data;
 					break;
 				case 'EPC':
 					extracted_data = data['total_payout'] / data['raw_hits'];
 					extracted_data = add_decimals(extracted_data);
-					extracted_data = '$ ' + extracted_data;
+					extracted_data = '$' + extracted_data;
 					break;
 			}
 			target_data.text(extracted_data);
@@ -410,5 +396,3 @@ $(document).ready(function() {
 	function isInt(n) {
 		return n % 1 === 0;
 	}
-}); /*{
-	/literal }*/
