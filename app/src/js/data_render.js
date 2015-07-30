@@ -78,6 +78,10 @@ $(document).ready(function() {
 							display_offers(data, queryVars['type'], 'network');
 							break;
 
+						case 'ajax_get_new_offers':
+							display_offers(data, 'new', '');
+							break;
+
 						case 'offerit_display_stats':
 							// period graph data
 							if (typeof queryVars['dashboard_multi'] !== "undefined") {
