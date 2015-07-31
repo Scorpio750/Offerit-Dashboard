@@ -7919,7 +7919,7 @@ $('.offer-type').click(function switch_offers() {
 				case 'n':
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
-					$('#swap3').css('vertical-align', '88%');
+					$('#swap3').css('vertical-align', '87.5%');
 					shift(2, 1, 0);
 					toggleTopMetric('by Hits');
 					break;
@@ -8014,7 +8014,6 @@ function toggleNewMetric() {
 function display_offers(offers, type, scope) {
 	console.log('--------------------');
 	console.log(type);
-	var $list = $('#offer-list');
 	var target_list, target_list_id,
 		list_class = '.' + scope + '-list',
 		value,
@@ -8046,17 +8045,19 @@ function display_offers(offers, type, scope) {
 			alert('Error: cannot build list; type undefined.');
 	}
 	target_list_id = '#' + scope + target_list;
+	$('#offers-table').find('th').eq(1).text(target_list);	
 	$(target_list_id).empty();
 	for (var i in offers) {
-		if (type != 'new') {
-			$(target_list_id).append($('<li />', {
-				text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name'] + ' (' + target_list + ' : ' + offers[i][value] + ')'
-			}));
-		} else {
-			$(target_list_id).append($('<li />', {
-				text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name']
-			}));
-		}
+		// if (type != 'new') {
+		// 	$(target_list_id).append($('<li />', {
+		// 		text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name'] + ' (' + target_list + ' : ' + offers[i][value] + ')'
+		// 	}));
+		// } else {
+		// 	$(target_list_id).append($('<li />', {
+		// 		text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name']
+		// 	}));
+		// }
+
 	}
 	console.log($(target_list_id).width());
 	console.log($(target_list_id).height());
@@ -8068,8 +8069,7 @@ function display_offers(offers, type, scope) {
 	$(target_list_id).delay(400).fadeIn('fast');
 }
 
-$()
-
+// adjusts data displayed to match selected period
 $('.period-menu li').click(function getPeriod() {
 url = 'http://jamesdev.offerit.com/internal_data.php';
 var index = $(this).index();

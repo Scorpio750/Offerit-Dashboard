@@ -70,7 +70,7 @@ $prim-red-hover: #CD5959;
 $sec-red-hover: #A04343;
 
 body {
-    // font-family: $font-stack;
+    font-family: $font-stack;
     font-size: 16px;
     margin: 0;
     color: $off-white;
@@ -347,7 +347,7 @@ img {
 }
 
 #swap3 {
-    font-size: 24px;
+    font-size: .8em;
 }
 
 #metric-btn {
@@ -380,7 +380,14 @@ img {
 
 #new-offer-list {
     padding-left: 3em;
-    font-size: 1.2em;
+    font-size: 1.1em;
+}
+
+#offers-table {
+    td, th {
+        padding: 1em;
+        width: 50%;
+    }
 }
 
 #hs-box {
@@ -404,6 +411,7 @@ img {
     }
 }
 
+// Graph Panel Selectors
 #main-column {
     height: auto;
     margin-bottom: 3em;
@@ -458,9 +466,6 @@ img {
         height: 70%;
         .bottom-box {
             height: 10em;
-            ul {
-                list-style-type: none;
-            }
         }
     }
 }
@@ -471,6 +476,9 @@ img {
     }
     .bottom-box {
         background-color: $sec-red;
+        ul {
+            list-style-type: square;
+        }
     }
     &:hover {
         .top-box {
@@ -490,6 +498,7 @@ img {
         background-color: $sec-triad-1;
         ul {
             display: flex;
+            list-style-type: none;
         }
     }
     &:hover {
