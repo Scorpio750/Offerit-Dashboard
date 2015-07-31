@@ -48,7 +48,6 @@ $(document).ready(function() {
 
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
-			console.log('in call data...');
 			$.getJSON(url,
 				queryVars, function store_data(data) {
 					if (data) {
@@ -260,7 +259,6 @@ $(document).ready(function() {
 			// clear data before replotting
 			data[2].yaxis = 2;
 			data[3].yaxis = 2;
-			console.log(plots[plot_name]);
 			if (typeof plots[plot_name] === 'undefined') {
 				plots[plot_name] = $.plot(plot_name, data, series_options);
 			}
@@ -387,6 +385,7 @@ $(document).ready(function() {
 						extracted_data = '$' + extracted_data;
 						break;
 				}
+				target_data.animate()
 				target_data.text(extracted_data);
 			});
 		}
