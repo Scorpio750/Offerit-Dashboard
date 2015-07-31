@@ -8,7 +8,8 @@ var gulp 		= require('gulp'),
 	notify 		= require('gulp-notify'),
 	bower		= require('gulp-bower'),
 	minify_css	= require('gulp-minify-css'),
-	autoprefixer= require('gulp-autoprefixer');
+	autoprefixer= require('gulp-autoprefixer'),
+	modernizr	= require('gulp-modernizr'),
 	merge		= require('merge2');
 
 var config = {
@@ -73,7 +74,8 @@ gulp.task('scripts', function() {
 			])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
-		//.pipe(uglify())
+		// .pipe(modernizr())
+		// .pipe(uglify())
 		.pipe(gulp.dest('app/dist/js'));
 });
 

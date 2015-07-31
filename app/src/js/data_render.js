@@ -62,6 +62,7 @@ $(document).ready(function() {
 
 	// AJAX calls for plot data
 	function call_data(queryVars, url) {
+		console.log('in call data...');
 		$.getJSON(url,
 			queryVars, function store_data(data) {
 				if (data) {

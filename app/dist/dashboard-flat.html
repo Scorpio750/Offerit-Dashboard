@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html  xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head><meta name="viewport" http-equiv="Content-Type" content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
 		<title>OFFERIT</title>
@@ -14,85 +14,81 @@
 	</head>
 	<body>
 		<div id="wrapper">
-				<div class="container" id="main">
-					<!--Reminder Boxes-->
-					<div class="row flex-container" id="reminders">
-						<div class="two-box panel" id="offer-box">
-							<div class="top-box">
-								<header>
-									<div class="swap-wrapper">
-										<a href="#">
-											<h2>
-											<span class="swap" id="swap1"></span>
-											<span>Offers</span>
-											<span class="swap" id="swap3"></span>
-											</h2>
-											
-										</a>
-										<span class="swap" id="metric-btn-wrapper">
-											<span class="dropdown swap" id="metric-btn">
-												<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												<span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu menu">
-													<li class="metric-type" id="0h">by Hits</li>
-													<li class="metric-type" id="1c">by Conversions</li>
-													<li class="metric-type" id="2p">by Payout</li>
-													<li class="metric-type" id="3e">by EPC</li>
-												</ul>
-											</span>
-										</span>
-									</div>
-									<div class="dropdown">
-										<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
-											<i class="fa fa-square-o fa-stack-2x"></i>
-											<i class="fa fa-bars fa-stack-1x"></i>
-										</span>
-										<ul class="dropdown-menu dropdown-menu-right menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
-											<li class="dropdown-item" id="top-offers">Top Offers
-											</li>
-											<ul class="subnav ">
-												<li class="offer-type" id="tu">By User</li>
-												<li class="offer-type" id="tn">By Network</li>
-											</ul>
-											<li class="dropdown-item offer-type" id="new-offers">New Offers
-											</li>
-											<!-- <ul class="subnav ">
+			<div class="container" id="main">
+				<!--Reminder Boxes-->
+<div class="row flex-container" id="reminders">
+	<div class="two-box panel" id="offer-box">
+		<div class="top-box">
+			<header>
+				<div class="swap-wrapper">
+					<a href="#offer-box">
+						<h2>
+							<span class="swap" id="swap1"></span>
+							<span>Offers</span>
+							<span class="swap" id="swap3"></span>
+						</h2>
+					</a>
+					<span class="swap" id="metric-btn-wrapper">
+						<span class="dropdown swap" id="metric-btn">
+							<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu menu">
+								<li class="metric-type" id="0h">by Hits</li>
+								<li class="metric-type" id="1c">by Convs</li>
+								<li class="metric-type" id="2p">by Payout</li>
+								<li class="metric-type" id="3e">by EPC</li>
+							</ul>
+						</span>
+					</span>
+				</div>
+				<div class="dropdown">
+					<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
+						<i class="fa fa-square-o fa-stack-2x"></i>
+						<i class="fa fa-bars fa-stack-1x"></i>
+					</span>
+					<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
+						<li class="dropdown-item" id="top-offers">Top Offers
+						</li>
+						<ul class="subnav ">
+							<li class="offer-type" id="tu">By User</li>
+							<li class="offer-type" id="tn">By Network</li>
+						</ul>
+						<li class="dropdown-item offer-type" id="new-offers">New Offers
+						</li>
+						<!-- <ul class="subnav ">
 												<li class="offer-type" id="nu">By User</li>
 												<li class="offer-type" id="nn">By Network</li>
 											</ul> -->
 										</ul>
 									</div>
-									
+
 								</header>
 							</div>
-							<div class="bottom-box" >
+							<div class="bottom-box">
 								<!-- <span class="swap" id="swap2"></span> -->
-								<ol class="offer-list" id="top-offer-list-user">
-									<li>Lorem ipsum.</li>
-									<li>Fugiat, sequi!</li>
-									<li>Eaque, cumque?</li>
-									<li>Tempora, minima!</li>
-								</ol>
-								<ol class="offer-list" style="display: none;" id="top-offer-list-network">
-									<li>Lorem ipsum.</li>
-									<li>Fugiat, sequi!</li>
-									<li>Eaque, cumque?</li>
-									<li>Tempora, minima!</li>
-								</ol>
-								<ol class="offer-list" style="display: none" id="new-offer-list">
-									<li>Lorem ipsum.</li>
-									<li>Fugiat, sequi!</li>
-									<li>Eaque, cumque?</li>
-									<li>Tempora, minima!</li>
-								</ol>
-								
+								<div id="offers-area">
+									<ol class="offer-list" id="top-offer-list-user">
+										<ol class="user-list" id="userHits"></ol>
+										<ol class="user-list" id="userConvs"></ol>
+										<ol class="user-list" id="userPayouts"></ol>
+										<ol class="user-list" id="userEpc"></ol>
+									</ol>
+									<ol class="offer-list" id="top-offer-list-network">
+										<ol class="network-list" id="networkHits"></ol>
+										<ol class="network-list" id="networkConvs"></ol>
+										<ol class="network-list" id="networkPayouts"></ol>
+										<ol class="network-list" id="networkEpc"></ol>
+									</ol>
+									<ol class="offer-list" id="new-offer-list"></ol>
+								</div>
+
 							</div>
 						</div>
 						<div class="two-box panel" id="hs-box">
 							<div class="top-box" id="list-box">
 								<header>
-									<a href="#">
+									<a href="#hs-box">
 										<h2>Today's Stats</h2>
 									</a>
 									<div class="dropdown">
@@ -100,7 +96,7 @@
 											<i class="fa fa-square-o fa-stack-2x"></i>
 											<i class="fa fa-bars fa-stack-1x"></i>
 										</span>
-										<ul class="dropdown-menu dropdown-menu-right menu" id="hs-menu">
+										<ul class="dropdown-menu  menu" id="hs-menu">
 											<li>This Period</li>
 											<li>Last Period</li>
 											<li>This Month</li>
@@ -161,122 +157,122 @@
 						<div class="graph-box panel">
 							<div class="top-box">
 								<header>
-									<a href="#"><h2>Hourly Graph</h2></a>
-									<!-- <div class="dropdown">
-										<span class="icon fa-stack fa-lg menu-btn metric-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
-											<i class="fa fa-square-o fa-stack-2x"></i>
-											<i class="fa fa-bars fa-stack-1x"></i>
-										</span>
-										<ul class="dropdown-menu dropdown-menu-right menu " id="h_graph-menu">
-											<li>Hits</li>
-											<li>Conversions</li>
-											<li>Payout</li>
-											<li>EPC</li>
-										</ul>
-									</div> -->
-								</header>
-							</div>
-							<div class="bottom-box" id="hourly-graph">
-								<div id="h_chart">
-								</div>
-							</div>
-						</div>
-						<div class="graph-box panel">
-							<div class="top-box">
-								<header>
-									<a href="#"><h2>Period Graph</h2></a>
-									<div class="dropdown">
-										<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
-											<i class="fa fa-square-o fa-stack-2x"></i>
-											<i class="fa fa-bars fa-stack-1x"></i>
-										</span>
-										<ul class="dropdown-menu dropdown-menu-right menu" id="p_graph-menu">
-											<li>This Period</li>
-											<li>Last Period</li>
-											<li>This Month</li>
-											<li>Last Month</li>
-											<li>Past 30 Days</li>
-											<li>Past 60 Days</li>
-											<li>Past 90 Days</li>
-											<li>This Year</li>
-											<li>All Time</li>
-										</ul>
-									</div>
-								</header>
-							</div>
-							<div class=" bottom-box" id="period-graph">
-								<div id="p_chart"></div>
-							</div>
-						</div>
-					</div>
-					<!--Info Boxes-->
-					<div class="row flex-container" id="three-column">
-						<div class="three-box panel" id="news">
-							<div class="top-box">
-								<header>
-									<a href="#">
-										<h2>News</h2>
-									</a>
-								</header>
-							</div>
-							<div class="bottom-box">
-								<ul class="news">
-									<li class="news-item">Lorem ipsum dolor sit.</li>
-									<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
-									<li class="news-item">Voluptatum veritatis iste ab.</li>
-									<li class="news-item">Laudantium et veniam asperiores?</li>
-									<li class="news-item">Lorem ipsum dolor sit.</li>
-								</ul>
-							</div>
-						</div>
-						<div class="three-box panel" id="paysum">
-							<div class="top-box">
-								<header>
-									<a href="#">
-										<h2>Payment Summary</h2>
-									</a>
-								</header>
-							</div>
-							<div class="bottom-box">
-								<ol class="offer-list" id="offer-list">
-									<li>Lorem ipsum dolor sit.</li>
-									<li>Aliquam dolorem consequuntur hic.</li>
-									<li>Eius voluptate, hic dicta.</li>
-									<li>Ea, consectetur nulla sint!</li>
-									<li>Iste officiis commodi cupiditate!</li>
-									<li>Aliquid eum cum exercitationem.</li>
-								</ol>
-							</div>
-						</div>
-						<div class="three-box panel" id="contact">
-							<div class="top-box">
-								<header>
-									<a href="#">
-										<h2>Agent Contact</h2>
-									</a>
-								</header>
-							</div>
-							<div class="bottom-box">
-								<table>
-									<tr>
-										<td>Lorem ipsum.</td>
-										<td>Numquam, blanditiis.</td>
-										<td>Magnam, ea!</td>
-									</tr>
-									<tr>
-										<td>Lorem ipsum.</td>
-										<td>Ea, incidunt.</td>
-										<td>Ea, incidunt.</td>
-									</tr>
-									<tr>
-										<td>Lorem ipsum.</td>
-										<td>Ea, incidunt.</td>
-										<td>Lorem ipsum.</td>
-									</tr>
-								</tr>
-							</table>
-						</div>
+									<a href="#main-column"><h2>Hourly Graph</h2></a>
+	<!-- <div class="dropdown">
+							<span class="icon fa-stack fa-lg menu-btn metric-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
+													<i class="fa fa-square-o fa-stack-2x"></i>
+													<i class="fa fa-bars fa-stack-1x"></i>
+							</span>
+							<ul class="dropdown-menu  menu " id="h_graph-menu">
+													<li>Hits</li>
+													<li>Conversions</li>
+													<li>Payout</li>
+													<li>EPC</li>
+							</ul>
+						</div> -->
+					</header>
+				</div>
+				<div class="bottom-box" id="hourly-graph">
+					<div id="h_chart">
 					</div>
 				</div>
 			</div>
-		</html>
+			<div class="graph-box panel">
+				<div class="top-box">
+					<header>
+						<a href="#main-column"><h2>Period Graph</h2></a>
+						<div class="dropdown">
+							<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
+								<i class="fa fa-square-o fa-stack-2x"></i>
+								<i class="fa fa-bars fa-stack-1x"></i>
+							</span>
+							<ul class="dropdown-menu  menu" id="p_graph-menu">
+								<li>This Period</li>
+								<li>Last Period</li>
+								<li>This Month</li>
+								<li>Last Month</li>
+								<li>Past 30 Days</li>
+								<li>Past 60 Days</li>
+								<li>Past 90 Days</li>
+								<li>This Year</li>
+								<li>All Time</li>
+							</ul>
+						</div>
+					</header>
+				</div>
+				<div class=" bottom-box" id="period-graph">
+					<div id="p_chart"></div>
+				</div>
+			</div>
+		</div>
+		<!--Info Boxes-->
+		<div class="row flex-container" id="three-column">
+			<div class="three-box panel" id="news">
+				<div class="top-box">
+					<header>
+						<a href="#news">
+							<h2>News</h2>
+						</a>
+					</header>
+				</div>
+				<div class="bottom-box">
+					<ul id="news">
+						<li class="news-item">Lorem ipsum dolor sit.</li>
+						<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
+						<li class="news-item">Voluptatum veritatis iste ab.</li>
+						<li class="news-item">Laudantium et veniam asperiores?</li>
+						<li class="news-item">Lorem ipsum dolor sit.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="three-box panel" id="paysum">
+				<div class="top-box">
+					<header>
+						<a href="#paysum">
+							<h2>Payment Summary</h2>
+						</a>
+					</header>
+				</div>
+				<div class="bottom-box">
+					<ol id="paysum-list">
+						<li>Lorem ipsum dolor sit.</li>
+						<li>Aliquam dolorem consequuntur hic.</li>
+						<li>Eius voluptate, hic dicta.</li>
+						<li>Ea, consectetur nulla sint!</li>
+						<li>Iste officiis commodi cupiditate!</li>
+						<li>Aliquid eum cum exercitationem.</li>
+					</ol>
+				</div>
+			</div>
+			<div class="three-box panel" id="contact">
+				<div class="top-box">
+					<header>
+						<a href="#contact">
+							<h2>Agent Contact</h2>
+						</a>
+					</header>
+				</div>
+				<div class="bottom-box">
+					<table>
+						<tr>
+							<td>Lorem ipsum.</td>
+							<td>Numquam, blanditiis.</td>
+							<td>Magnam, ea!</td>
+						</tr>
+						<tr>
+							<td>Lorem ipsum.</td>
+							<td>Ea, incidunt.</td>
+							<td>Ea, incidunt.</td>
+						</tr>
+						<tr>
+							<td>Lorem ipsum.</td>
+							<td>Ea, incidunt.</td>
+							<td>Lorem ipsum.</td>
+						</tr>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

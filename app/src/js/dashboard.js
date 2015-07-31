@@ -57,9 +57,6 @@ for (i in $swap) {
 function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
-	var options = {
-		duration: 200
-	};
 	switch (flag) {
 		case 0:
 			$width = 0;
@@ -69,35 +66,18 @@ function shift(n, flag, k) {
 			break;
 	}
 
-	$swap[n].animate({
-		width: $width
-	});
+	if (n != 3) {
+		$swap[n].animate({
+			width: $width
+		});
+	}
+
 	switch (n) {
 		case 0:
 			var otherPrefix = $span[n].eq((k + 1) % 2);
 			// if selected prefix is not displayed, swap it in
 			otherPrefix.stop().fadeOut('options')
 			currentPrefix.delay(400).fadeIn('options');
-
-			/*// if selected prefix is 'Top'
-				if (k == 0) {
-					// if there is no set metric prefix, set 'Hits' as default
-
-					console.log($metric.width());
-					$metric.animate({
-						width: $metric.width()
-					});
-					if ($metric.css('display') == 'none') {
-						$metric.delay(500).fadeIn('options');
-					}
-				}
-				if (k == 1) {
-					console.log($metric.width());
-					$metric.animate({
-						width: 0
-					});
-						$metric.fadeOut('options');
-				}*/
 			break;
 		case 1:
 			var otherPrefix;
@@ -106,16 +86,14 @@ function shift(n, flag, k) {
 					otherPrefix = $span[n].eq(i);
 				}
 				if (typeof otherPrefix !== "undefined") {
-					console.log('fuck me');
-					otherPrefix.stop().fadeOut('options')
+					otherPrefix.stop().fadeOut('fast')
 				}
-				currentPrefix.delay(400).fadeIn('options');
+				currentPrefix.delay(400).fadeIn('fast');
 			}
 			break;
 		default:
-			(flag == 1) ? $span[n].delay(400).fadeIn(options) : $span[n].stop().fadeOut(options);
+			(flag == 1) ? $span[n].delay(400).fadeIn('fast') : $span[n].stop().fadeOut('fast');
 			break;
-
 	}
 }
 
@@ -150,6 +128,7 @@ $('.offer-type').click(function switch_offers() {
 				case 'n':
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
+					$('#swap3').css('vertical-align', '88%');
 					shift(2, 1, 0);
 					toggleTopMetric('by Hits');
 					break;
@@ -191,7 +170,7 @@ $('#metric-btn > ul > li').click(function() {
 		case 'by Hits':
 			tag = 'impression';
 			break;
-		case 'by Conversions':
+		case 'by Convs':
 			tag = 'conversion';
 			break;
 		case 'by Payout':
@@ -201,13 +180,11 @@ $('#metric-btn > ul > li').click(function() {
 			tag = 'epc';
 			break;
 	}
-	console.log(tag);
 	var queryVars = {
 		'function': currentFocus,
 		'return_type': 'json',
 		'type': tag
 	};
-	console.log(queryVars);
 	call_data(queryVars, url);
 });
 
@@ -232,7 +209,6 @@ function toggleTopMetric(type) {
 		'return_type': 'json',
 		'type': tag
 	};
-	console.log(queryVars);
 	call_data(queryVars, url);
 }
 
@@ -284,10 +260,40 @@ function display_offers(offers, type, scope) {
 			text: offers[i]['name']
 		}));
 	}
+	console.log($(target_list).width());
+	console.log($(target_list).height());
 	$('#offers-area').animate({
-		height: 114
+		height: 114,
+		width: $(target_list).width()
 	});
-	$(list_class).not(target_list).fadeOut();
-	$(target_list).delay(400).fadeIn();
+	$(list_class).not(target_list).fadeOut('fast');
+	$(target_list).delay(400).fadeIn('fast');
 }
+
+$('.period-menu li').each(function getPeriod(index) {
+	$(this).click(function() {
+		console.log('?????????????????????');
+		url = 'http://jamesdev.offerit.com/internal_data.php';
+		queryVars = {
+			'function': 'offerit_display_stats',
+			'period_index': index,
+			'period': period_map[index],
+			'dashboard_multi': undefined,
+			'dashboard_summary': undefined
+		}
+
+		console.log($(this).parent().attr('id'));	
+		switch ($(this).parent().attr('id')) {
+			case 'hs-menu':
+				queryVars['dashboard_summary'] = 1;
+				break;
+			case 'p_graph-menu':
+				queryVars['dashboard_multi'] = 1;
+				break;
+		}
+		console.log(queryVars);
+		call_data(queryVars, url);
+	});
+});
+
 });
