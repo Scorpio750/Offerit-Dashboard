@@ -380,7 +380,12 @@ img {
 
 // offer-bottom
 .offer-list {
-   position: absolute; 
+    padding-left: 0;
+}
+
+#new-offer-list {
+    padding-left: 3em;
+    font-size: 1.2em;
 }
 
 

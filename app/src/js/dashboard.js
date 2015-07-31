@@ -224,9 +224,10 @@ function display_offers(offers, type, scope) {
 	console.log('--------------------');
 	console.log(type);
 	var $list = $('#offer-list');
-	var target_list,
+	var target_list, target_list_id,
 		list_class = '.' + scope + '-list',
-		value;
+		value,
+		item_text;
 
 	switch (type) {
 		case 'impression':
@@ -253,47 +254,55 @@ function display_offers(offers, type, scope) {
 		case undefined:
 			alert('Error: cannot build list; type undefined.');
 	}
-	target_list = '#' + scope + target_list;
-	$(target_list).empty();
+	target_list_id = '#' + scope + target_list;
+	$(target_list_id).empty();
 	for (var i in offers) {
-		$(target_list).append($('<li />', {
-			text: offers[i]['name']
-		}));
+		if (type != 'new') {
+			$(target_list_id).append($('<li />', {
+				text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name'] + ' (' + target_list + ' : ' + offers[i][value] + ')'
+			}));
+		} else {
+			$(target_list_id).append($('<li />', {
+				text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name']
+			}));
+		}
 	}
-	console.log($(target_list).width());
-	console.log($(target_list).height());
+	console.log($(target_list_id).width());
+	console.log($(target_list_id).height());
 	$('#offers-area').animate({
-		height: 114,
-		width: $(target_list).width()
+		height: 128,
+		// width: $(target_list).width()
 	});
-	$(list_class).not(target_list).fadeOut('fast');
-	$(target_list).delay(400).fadeIn('fast');
+	$(list_class).not(target_list_id).fadeOut('fast');
+	$(target_list_id).delay(400).fadeIn('fast');
 }
 
-$('.period-menu li').each(function getPeriod(index) {
-	$(this).click(function() {
-		console.log('?????????????????????');
-		url = 'http://jamesdev.offerit.com/internal_data.php';
-		queryVars = {
-			'function': 'offerit_display_stats',
-			'period_index': index,
-			'period': period_map[index],
-			'dashboard_multi': undefined,
-			'dashboard_summary': undefined
-		}
+$()
 
-		console.log($(this).parent().attr('id'));	
-		switch ($(this).parent().attr('id')) {
-			case 'hs-menu':
-				queryVars['dashboard_summary'] = 1;
-				break;
-			case 'p_graph-menu':
-				queryVars['dashboard_multi'] = 1;
-				break;
-		}
-		console.log(queryVars);
-		call_data(queryVars, url);
-	});
+$('.period-menu li').click(function getPeriod() {
+url = 'http://jamesdev.offerit.com/internal_data.php';
+var index = $(this).index();
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': undefined,
+	'period': period_map[index],
+	'dashboard_multi': undefined,
+	'dashboard_summary': undefined
+}
+
+console.log($(this).parent().attr('id'));
+switch ($(this).parent().attr('id')) {
+	case 'hs-menu':
+		queryVars['dashboard_summary'] = 1;
+		break;
+	case 'p_graph-menu':
+		queryVars['dashboard_multi'] = 1;
+		break;
+}
+queryVars['period_index'] = index;
+console.log(index);
+console.log(queryVars);
+call_data(queryVars, url);
 });
 
 });
