@@ -55,6 +55,10 @@ gulp.task('styles', function() {
 		sass(config.sassPath)
 	)
 	.pipe(concat('style.css'))
+	.pipe(autoprefixer({
+		browsers: ['last 2 version'],
+		cascade: false
+		}))
 	.pipe(minify_css())
 	.pipe(gulp.dest(config.css));
 });

@@ -1,5 +1,5 @@
 // add nicescroll to all bottom-boxes
-$('#offer-box > .bottom-box').niceScroll({
+/*$('#offer-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
 	cursorwidth: '10px',
 	cursorcolor: '#555',
@@ -10,7 +10,7 @@ $('#offer-box > .bottom-box').niceScroll({
 		left: 0,
 		bottom: 0
 	}
-});
+});*/
 $('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
 	cursorwidth: '10px',
@@ -165,7 +165,6 @@ $('.menu-btn').click(function() {
 $('#metric-btn > ul > li').click(function() {
 	url = 'http://jamesdev.offerit.com/ajax_data.php';
 	var tag;
-	console.log($(this).text());
 	switch ($(this).text()) {
 		case 'by Hits':
 			tag = 'impression';
@@ -221,12 +220,9 @@ function toggleNewMetric() {
 }
 
 function display_offers(offers, type, scope) {
-	console.log('--------------------');
-	console.log(type);
-	var target_list, target_list_id,
-		list_class = '.' + scope + '-list',
-		value,
-		item_text;
+	// console.log('--------------------');
+	// console.log(type);
+	var value;
 
 	switch (type) {
 		case 'impression':
@@ -247,35 +243,43 @@ function display_offers(offers, type, scope) {
 			break;
 		case 'new':
 			// new offers list
-			target_list = 'new-offer-list';
+			target_list = '';
 			value = 'visitor';
 			break;
 		case undefined:
 			alert('Error: cannot build list; type undefined.');
 	}
-	target_list_id = '#' + scope + target_list;
-	$('#offers-table').find('th').eq(1).text(target_list);	
-	$(target_list_id).empty();
-	for (var i in offers) {
-		// if (type != 'new') {
-		// 	$(target_list_id).append($('<li />', {
-		// 		text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name'] + ' (' + target_list + ' : ' + offers[i][value] + ')'
-		// 	}));
-		// } else {
-		// 	$(target_list_id).append($('<li />', {
-		// 		text: /*'(offerid:' + offers[i]['offerid'] + ') ' + */ offers[i]['name']
-		// 	}));
-		// }
 
+	var value_category = $('#offers-table').find('th').eq(2);
+	if (value_category.text() != target_list) {
+		var timeout = window.setTimeout(function() {
+			$('#offers-table').fadeOut('fast');
+			$('#offers-table tbody > tr').remove();
+			value_category.text(target_list);
+			for (var i in offers) {
+				$('#offers-table > tbody:last-child').append($('<tr />')
+					.append($('<td />')
+						.text(offers[i].offerid)
+					)
+					.append($('<td />')
+						.text(offers[i].name)
+					)
+					.append($('<td />')
+						.text(offers[i][value])
+					)
+				);
+			}
+		}, 800);
 	}
-	console.log($(target_list_id).width());
-	console.log($(target_list_id).height());
-	$('#offers-area').animate({
-		height: 128,
-		// width: $(target_list).width()
-	});
-	$(list_class).not(target_list_id).fadeOut('fast');
-	$(target_list_id).delay(400).fadeIn('fast');
+	console.log($('#offers-table').width());
+	console.log($('#offers-table').height());
+	window.setTimeout(function() {  
+		$('#offers-area').animate({
+			// height: $('#offers-table').height(),
+			width: $('#offers-table').width()
+		});
+		$('#offers-table').fadeIn('fast');
+	}, 799);
 }
 
 // adjusts data displayed to match selected period
@@ -290,7 +294,6 @@ queryVars = {
 	'dashboard_summary': undefined
 }
 
-console.log($(this).parent().attr('id'));
 switch ($(this).parent().attr('id')) {
 	case 'hs-menu':
 		queryVars['dashboard_summary'] = 1;
@@ -300,8 +303,6 @@ switch ($(this).parent().attr('id')) {
 		break;
 }
 queryVars['period_index'] = index;
-console.log(index);
-console.log(queryVars);
 call_data(queryVars, url);
 });
 
