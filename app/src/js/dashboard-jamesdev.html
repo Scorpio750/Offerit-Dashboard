@@ -211,7 +211,6 @@
 			<div class="bottom-box">
 				<ul id="news">
 					{display_news data_only=1 count=5 order="publish desc" section="Announcements"}
-					{debug}
 					{if $news}
 					{foreach from=$news item='article'}
 					<li class="news-item"><a href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
@@ -240,7 +239,7 @@
 					{if $myPaymentSummary.paid}
 					<li>{#PaymentsSent#}: <a href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
 					{/if}
-				</ol>
+				</ul>
 			</div>
 		</div>
 		<div class="three-box panel" id="contact">
@@ -272,6 +271,6 @@
 			</table>
 		</div>
 	</div>
-</div>
-</div>
+	</div>
+	</body>
 </html>

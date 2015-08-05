@@ -26,9 +26,10 @@ $(document).ready(function() {
 			'Period Data': ['raw_hits', 'conv_count', 'total_payout', 'EPC']
 		};
 		var plots = {
-			'#h_chart': undefined,
-			'#p_chart': undefined
-		}, series_data;
+				'#h_chart': undefined,
+				'#p_chart': undefined
+			},
+			series_data;
 
 
 		// maps menu period indices to database period indices
@@ -71,19 +72,32 @@ $(document).ready(function() {
 						for (var i in series_data['Period Data']) {
 							label_series(series_data['Period Data'][i]);
 						}
-						var timespan;
+						var timespan, 
+							state_change = false;
 						switch (queryVars['function']) {
 							// Offers panel data
 							case 'ajax_get_affiliate_top_offers':
-								display_offers(data, queryVars['type'], 'user');
+								console.log($('#swap3 > span').css('display'));
+								console.log($('#swap1').find('span').eq(1).css('display'));	
+								// check to see if either the words 'New' or 'Network' are already displayed
+								if ($('#swap3 > span').css('display') != 'none' || $('#swap1').find('span').eq(1).css('display') != 'none') {
+									console.log('changing state to user');
+									state_change = true;
+								}
+								display_offers(data, queryVars['type'], 'user', state_change);
 								break;
 
 							case 'ajax_get_network_top_offers':
-								display_offers(data, queryVars['type'], 'network');
+								console.log($('#swap3 > span').css('display'));
+								if ($('#swap3 > span').css('display') == 'none') {
+									console.log('changing state to network');
+									state_change = true;
+								}
+								display_offers(data, queryVars['type'], 'network', state_change);
 								break;
 
 							case 'ajax_get_new_offers':
-								display_offers(data, 'new', '');
+								display_offers(data, 'new', '', true);
 								break;
 
 							case 'offerit_display_stats':

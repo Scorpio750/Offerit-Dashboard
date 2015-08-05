@@ -1,16 +1,3 @@
-// add nicescroll to all bottom-boxes
-/*$('#offer-box > .bottom-box').niceScroll({
-	cursoropacitymax: .5,
-	cursorwidth: '10px',
-	cursorcolor: '#555',
-	cursorborder: '0px',
-	railpadding: {
-		top: 0,
-		right: 0,
-		left: 0,
-		bottom: 0
-	}
-});*/
 $('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
 	cursorwidth: '10px',
@@ -51,9 +38,10 @@ for (i in $swap) {
 
 /*	shifts header base 
  *	@params:
- *	n - index in span array
- *	flag - if 0, fades in, else fades out
- *	k - span array subindex */
+ *		n 		- index in span array
+ *		flag 	- if 0, fades in, else fades out
+ *		k 		- span array subindex
+ */
 function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
@@ -122,7 +110,6 @@ $('.offer-type').click(function switch_offers() {
 				case 'u':
 					list = $('#top-offer-list-user')
 					currentFocus = 'ajax_get_affiliate_top_offers';
-					toggleTopMetric('by Hits');
 					shift(2, 0, 0);
 					break;
 				case 'n':
@@ -130,9 +117,9 @@ $('.offer-type').click(function switch_offers() {
 					currentFocus = 'ajax_get_network_top_offers';
 					$('#swap3').css('vertical-align', '87.5%');
 					shift(2, 1, 0);
-					toggleTopMetric('by Hits');
 					break;
 			}
+			toggleTopMetric('by Hits');
 			break;
 		case 'n':
 			list = $('#new-offer-list')
@@ -219,10 +206,25 @@ function toggleNewMetric() {
 	call_data(queryVars, url);
 }
 
-function display_offers(offers, type, scope) {
-	// console.log('--------------------');
-	// console.log(type);
+/* renders the offers by metric
+ * @params:
+ * 		offers 			- data being displayed
+ *		type 			- metric to display
+ *		scope			- scope of search (user or network)
+ *		state_change	- boolean indicating change of scope
+ */
+function display_offers(offers, type, scope, state_change) {
+	console.log('--------------------');
+	console.log(state_change);
 	var value;
+	var timer;
+
+	if (state_change == true) {
+		timer = 400;
+	} else {
+		timer = 200;
+	}
+	console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':
@@ -251,36 +253,44 @@ function display_offers(offers, type, scope) {
 	}
 
 	var value_category = $('#offers-table').find('th').eq(2);
-	if (value_category.text() != target_list) {
-		var timeout = window.setTimeout(function() {
+
+	// If the category value is different or scope has changed, reload data
+	if (value_category.text() != target_list || state_change) {
+
+		window.setTimeout(function() {
 			$('#offers-table').fadeOut('fast');
-			$('#offers-table tbody > tr').remove();
-			value_category.text(target_list);
-			for (var i in offers) {
-				$('#offers-table > tbody:last-child').append($('<tr />')
-					.append($('<td />')
-						.text(offers[i].offerid)
-					)
-					.append($('<td />')
-						.text(offers[i].name)
-					)
-					.append($('<td />')
-						.text(offers[i][value])
-					)
-				);
-			}
-		}, 800);
+			$('#offers-area').animate({
+				height: $('#offers-table').height()
+			});
+			window.setTimeout(function() {
+				$('#offers-table tbody > tr').remove();
+				value_category.text(target_list);
+				for (var i in offers) {
+					$('#offers-table > tbody:last-child').append($('<tr />')
+						.append($('<td />')
+							.text(offers[i].offerid)
+						)
+						.append($('<td />')
+							.text(offers[i].name)
+						)
+						.append($('<td />')
+							.text(offers[i][value])
+						)
+					);
+				}
+				$('#offers-table').fadeIn('fast');
+				$('#offers-area').animate({
+					height: $('#offers-table').height(),
+					width: $('#offers-table').width()
+				});
+			}, 200);
+		}, timer);
 	}
 	console.log($('#offers-table').width());
 	console.log($('#offers-table').height());
-	window.setTimeout(function() {  
-		$('#offers-area').animate({
-			// height: $('#offers-table').height(),
-			width: $('#offers-table').width()
-		});
-		$('#offers-table').fadeIn('fast');
-	}, 799);
 }
+
+
 
 // adjusts data displayed to match selected period
 $('.period-menu li').click(function getPeriod() {
