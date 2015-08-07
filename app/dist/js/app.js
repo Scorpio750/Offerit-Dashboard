@@ -7859,11 +7859,11 @@ function shift(n, flag, k) {
 			break;
 	}
 
-	if (n != 3) {
+	// if (n != 3) {
 		$swap[n].animate({
 			width: $width
 		});
-	}
+	// }
 
 	switch (n) {
 		case 0:
@@ -8025,9 +8025,9 @@ function display_offers(offers, type, scope, state_change) {
 	var timer;
 
 	if (state_change == true) {
-		timer = 400;
+		timer = 500;
 	} else {
-		timer = 200;
+		timer = 0;
 	}
 	console.log('timer = ' + timer);
 
@@ -8062,11 +8062,16 @@ function display_offers(offers, type, scope, state_change) {
 	// If the category value is different or scope has changed, reload data
 	if (value_category.text() != target_list || state_change) {
 
+		// sleep if there is a scope change until header finishes animating
 		window.setTimeout(function() {
 			$('#offers-table').fadeOut('fast');
+
+			// prevent the container div from collapsing when table fades out
 			$('#offers-area').animate({
 				height: $('#offers-table').height()
 			});
+			
+			// sleep until table finishes fading out
 			window.setTimeout(function() {
 				$('#offers-table tbody > tr').remove();
 				value_category.text(target_list);
