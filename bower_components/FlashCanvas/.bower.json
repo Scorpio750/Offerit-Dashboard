@@ -1,0 +1,14 @@
+{
+  "name": "FlashCanvas",
+  "homepage": "https://github.com/everlaat/flashcanvas",
+  "_release": "38405f336d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "38405f336d9b2d8a8f233407eec86243bf26ce58"
+  },
+  "_source": "git://github.com/everlaat/flashcanvas.git",
+  "_target": "*",
+  "_originalSource": "FlashCanvas",
+  "_direct": true
+}
