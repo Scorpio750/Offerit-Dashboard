@@ -7926,7 +7926,7 @@ $('.offer-type').click(function switch_offers() {
 				case 'n':
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
-					$('#swap3').css('vertical-align', '87.5%');
+					$('#swap3').css('vertical-align', '90%');
 					shift(2, 1, 0);
 					break;
 			}
