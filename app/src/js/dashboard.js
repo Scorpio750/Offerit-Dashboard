@@ -45,6 +45,10 @@ for (i in $swap) {
 function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
+
+	console.log(currentPrefix);
+	console.log('width is ' + currentPrefix.width() + 8);
+
 	switch (flag) {
 		case 0:
 			$width = 0;
@@ -54,11 +58,15 @@ function shift(n, flag, k) {
 			break;
 	}
 
-	// if (n != 3) {
-		$swap[n].animate({
-			width: $width
-		});
-	// }
+	// sometimes the metric button wrapper size doesn't scale in time
+	if (n == 3) {
+		if ($width < 34 && $width > 0) {
+			$width = $('#metric-btn').width() + 8;
+		}
+	}
+	$swap[n].animate({
+		width: $width
+	});
 
 	switch (n) {
 		case 0:
@@ -220,11 +228,11 @@ function display_offers(offers, type, scope, state_change) {
 	var timer;
 
 	if (state_change == true) {
-		timer = 500;
+		timer = 400;
 	} else {
 		timer = 0;
 	}
-	console.log('timer = ' + timer);
+	// console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':
@@ -265,7 +273,7 @@ function display_offers(offers, type, scope, state_change) {
 			$('#offers-area').animate({
 				height: $('#offers-table').height()
 			});
-			
+
 			// sleep until table finishes fading out
 			window.setTimeout(function() {
 				$('#offers-table tbody > tr').remove();
@@ -291,8 +299,8 @@ function display_offers(offers, type, scope, state_change) {
 			}, 200);
 		}, timer);
 	}
-	console.log($('#offers-table').width());
-	console.log($('#offers-table').height());
+	// console.log($('#offers-table').width());
+	// console.log($('#offers-table').height());
 }
 
 

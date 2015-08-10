@@ -104,7 +104,7 @@ img {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     align-content: space-between;
 }
 
@@ -218,10 +218,11 @@ img {
 
 /* MENU SELECTORS */
 .dropdown {
-    position: absolute;
+    float: right;
     display: inline-block;
     top: 12px;
-    right: 12px;
+    right: 10px;
+    margin-left: 1em;
     .dropdown-menu-right {
         top: 3em;
     }
@@ -255,7 +256,6 @@ img {
             background-color: #bcbcbc;
             color: white;
             cursor: pointer;
-            font-size: 15px;
             border-left: .75em solid #aaa;
             padding-left: .75em;
             font-weight: 900;
@@ -312,7 +312,7 @@ img {
 
 #offer-box {
     flex-grow: 1;
-    flex-basis: 25%;
+    moz-flex-basis: 25%;
     margin-right: 1.5em;
     .bottom-box {
         min-height: 8em;
@@ -332,21 +332,23 @@ img {
 // offer-top
 .swap-wrapper {
     display: inline-block;
+    padding-left: 4em;
     .swap {
         vertical-align: top;
         span {
             position: absolute;
         }
     }
-    #metric-btn-wrapper {
+}
+
+#metric-btn-wrapper {
+    position: relative;
+    top: 1.2em;
+    right: -0.5em;
+    span {
         position: relative;
-        top: .5em;
-        right: -1em;
-        width: 100%;
-        height: 100%;
-        span {
-            position: relative;
-        }
+        top: 0px;
+        right: 0px;
     }
 }
 
@@ -356,6 +358,7 @@ img {
 
 #metric-btn {
     z-index: 999;
+    margin: auto;
     button {
         background-color: $prim-green;
         // width: 34px;
@@ -415,7 +418,7 @@ img {
 // hourly stats box
 #hs-box {
     flex-grow: 3;
-    flex-basis: 30%;
+    moz-flex-basis: 30%;
     margin-left: 1em;
     z-index: 200;
     .top-box {

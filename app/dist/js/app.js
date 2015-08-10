@@ -7461,13 +7461,11 @@ $(document).ready(function() {
 						for (var i in series_data['Period Data']) {
 							label_series(series_data['Period Data'][i]);
 						}
-						var timespan, 
+						var timespan,
 							state_change = false;
 						switch (queryVars['function']) {
 							// Offers panel data
 							case 'ajax_get_affiliate_top_offers':
-								console.log($('#swap3 > span').css('display'));
-								console.log($('#swap1').find('span').eq(1).css('display'));	
 								// check to see if either the words 'New' or 'Network' are already displayed
 								if ($('#swap3 > span').css('display') != 'none' || $('#swap1').find('span').eq(1).css('display') != 'none') {
 									console.log('changing state to user');
@@ -7477,7 +7475,6 @@ $(document).ready(function() {
 								break;
 
 							case 'ajax_get_network_top_offers':
-								console.log($('#swap3 > span').css('display'));
 								if ($('#swap3 > span').css('display') == 'none') {
 									console.log('changing state to network');
 									state_change = true;
@@ -7486,7 +7483,8 @@ $(document).ready(function() {
 								break;
 
 							case 'ajax_get_new_offers':
-								display_offers(data, 'new', '', true);
+								if ($('#swap1 > span').eq(1).css('display') == 'none') { state_change == true; }
+								display_offers(data, 'new', '', state_change);
 								break;
 
 							case 'offerit_display_stats':
@@ -7850,6 +7848,10 @@ for (i in $swap) {
 function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
+
+	console.log(currentPrefix);
+	console.log('width is ' + currentPrefix.width() + 8);
+
 	switch (flag) {
 		case 0:
 			$width = 0;
@@ -7859,11 +7861,15 @@ function shift(n, flag, k) {
 			break;
 	}
 
-	// if (n != 3) {
-		$swap[n].animate({
-			width: $width
-		});
-	// }
+	// sometimes the metric button wrapper size doesn't scale in time
+	if (n == 3) {
+		if ($width < 34 && $width > 0) {
+			$width = $('#metric-btn').width() + 8;
+		}
+	}
+	$swap[n].animate({
+		width: $width
+	});
 
 	switch (n) {
 		case 0:
@@ -8025,11 +8031,11 @@ function display_offers(offers, type, scope, state_change) {
 	var timer;
 
 	if (state_change == true) {
-		timer = 500;
+		timer = 400;
 	} else {
 		timer = 0;
 	}
-	console.log('timer = ' + timer);
+	// console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':
@@ -8070,7 +8076,7 @@ function display_offers(offers, type, scope, state_change) {
 			$('#offers-area').animate({
 				height: $('#offers-table').height()
 			});
-			
+
 			// sleep until table finishes fading out
 			window.setTimeout(function() {
 				$('#offers-table tbody > tr').remove();
@@ -8096,8 +8102,8 @@ function display_offers(offers, type, scope, state_change) {
 			}, 200);
 		}, timer);
 	}
-	console.log($('#offers-table').width());
-	console.log($('#offers-table').height());
+	// console.log($('#offers-table').width());
+	// console.log($('#offers-table').height());
 }
 
 
