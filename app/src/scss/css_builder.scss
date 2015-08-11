@@ -163,8 +163,7 @@ img {
 }
 
 .stats-bar {
-    flex-grow: 1;
-    flex-basis: 1em;
+    flex: 1 0 1em;
     /* background-color: $off-white; */
 }
 
@@ -311,8 +310,7 @@ img {
 }
 
 #offer-box {
-    flex-grow: 1;
-    moz-flex-basis: 25%;
+    flex: 1 0 auto;
     margin-right: 1.5em;
     .bottom-box {
         min-height: 8em;
@@ -417,7 +415,7 @@ img {
 
 // hourly stats box
 #hs-box {
-    flex-grow: 3;
+    flex: 3 0 auto;
     moz-flex-basis: 30%;
     margin-left: 1em;
     z-index: 200;
@@ -457,8 +455,7 @@ img {
         padding: 1.25em;
         // border: 15px solid slategray;
         min-height: 18em;
-        flex-grow: 1;
-        flex-basis: 1em;
+        flex: 1 0 1em;
         #p_chart, #h_chart {
             width: 35.75em;
             height: 15.5em;
