@@ -8110,26 +8110,42 @@ function display_offers(offers, type, scope, state_change) {
 
 // adjusts data displayed to match selected period
 $('.period-menu li').click(function getPeriod() {
-url = 'http://jamesdev.offerit.com/internal_data.php';
-var index = $(this).index();
-queryVars = {
-	'function': 'offerit_display_stats',
-	'period_index': undefined,
-	'period': period_map[index],
-	'dashboard_multi': undefined,
-	'dashboard_summary': undefined
-}
+	url = 'http://jamesdev.offerit.com/internal_data.php';
+	var index = $(this).index();
+	queryVars = {
+		'function': 'offerit_display_stats',
+		'period_index': undefined,
+		'period': period_map[index],
+		'dashboard_multi': undefined,
+		'dashboard_summary': undefined
+	}
 
-switch ($(this).parent().attr('id')) {
-	case 'hs-menu':
-		queryVars['dashboard_summary'] = 1;
-		break;
-	case 'p_graph-menu':
-		queryVars['dashboard_multi'] = 1;
-		break;
-}
-queryVars['period_index'] = index;
-call_data(queryVars, url);
+	switch ($(this).parent().attr('id')) {
+		case 'hs-menu':
+			queryVars['dashboard_summary'] = 1;
+			break;
+		case 'p_graph-menu':
+			queryVars['dashboard_multi'] = 1;
+			break;
+	}
+	queryVars['period_index'] = index;
+	call_data(queryVars, url);
+});
+
+// refreshes hourly graph display
+$('#hourly-refresh').click(function() {
+	var spinner = $('.fa-refresh');
+	spinner.addClass('fa-spin');
+	window.setTimeout(function() {
+		spinner.removeClass('fa-spin');
+	}, 2000);
+	period = 8;
+		queryVars = {
+			'function': 'offerit_display_hourly_hits',
+			'period': period,
+			'return_type': 'json',
+		};
+		call_data(queryVars, url);
 });
 
 });

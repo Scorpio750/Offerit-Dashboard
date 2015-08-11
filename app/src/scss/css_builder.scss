@@ -150,6 +150,7 @@ img {
         h2 {
             margin-top: none;
             display: inline-block;
+            transition: all .5s;
         }
     }
 }
@@ -203,6 +204,7 @@ img {
     }
 }
 
+/* ICON SELECTORS */
 .icon {
     padding-top: 0;
     opacity: .7;
@@ -215,16 +217,22 @@ img {
     }
 }
 
+.header-icon {
+    margin-left: 2em;
+}
+
 /* MENU SELECTORS */
-.dropdown {
+
+.button-right {
     float: right;
     display: inline-block;
     top: 12px;
     right: 10px;
     margin-left: 1em;
-    .dropdown-menu-right {
-        top: 3em;
-    }
+}
+
+.dropdown-menu-right {
+    top: 3em;
 }
 
 .menu {
@@ -314,8 +322,6 @@ img {
     margin-right: 1.5em;
     .bottom-box {
         min-height: 8em;
-        display: flex;
-        justify-content: stretch;
     }
     &:hover {
         .top-box {
@@ -330,7 +336,6 @@ img {
 // offer-top
 .swap-wrapper {
     display: inline-block;
-    padding-left: 4em;
     .swap {
         vertical-align: top;
         span {
@@ -447,7 +452,6 @@ img {
         background-color: #aaa;
         h2 {
             color: #ddd;
-            transition: all .5s;
         }
     }
     .bottom-box {
@@ -474,12 +478,7 @@ img {
     }
 }
 
-#v_divider {
-    width: 1px;
-    background-color: #ccc;
-    transition: all .15s ease-in-out;
-}
-
+// Info Panel Selectors
 #three-column {
     align-items: stretch;
     align-content: stretch;

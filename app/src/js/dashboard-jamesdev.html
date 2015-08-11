@@ -4,30 +4,28 @@
 		<div class="top-box">
 			<header>
 				<div class="swap-wrapper">
-					<div class="flex-container">
-						<a href="#offer-box">
-							<h2>
-							<span class="swap" id="swap1"></span>
-							<span>Offers</span>
-							<span class="swap" id="swap3"></span>
-							</h2>
-						</a>
-						<span class="swap" id="metric-btn-wrapper">
-							<span class="dropdown swap" id="metric-btn">
-								<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu menu">
-									<li class="metric-type" id="0h">by Hits</li>
-									<li class="metric-type" id="1c">by Convs</li>
-									<li class="metric-type" id="2p">by Payout</li>
-									<li class="metric-type" id="3e">by EPC</li>
-								</ul>
-							</span>
+					<a href="#offer-box">
+						<h2 class="header-icon">
+						<span class="swap" id="swap1"></span>
+						<span>Offers</span>
+						<span class="swap" id="swap3"></span>
+						</h2>
+					</a>
+					<span class="swap" id="metric-btn-wrapper">
+						<span class="dropdown button-right swap" id="metric-btn">
+							<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu menu">
+								<li class="metric-type" id="0h">by Hits</li>
+								<li class="metric-type" id="1c">by Convs</li>
+								<li class="metric-type" id="2p">by Payout</li>
+								<li class="metric-type" id="3e">by EPC</li>
+							</ul>
 						</span>
-					</div>
+					</span>
 				</div>
-				<div class="dropdown">
+				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
 						<i class="fa fa-square-o fa-stack-2x"></i>
 						<i class="fa fa-bars fa-stack-1x"></i>
@@ -41,10 +39,6 @@
 						</ul>
 						<li class="dropdown-item offer-type" id="new-offers">New Offers
 						</li>
-						<!-- <ul class="subnav ">
-														<li class="offer-type" id="nu">By User</li>
-														<li class="offer-type" id="nn">By Network</li>
-						</ul> -->
 					</ul>
 				</div>
 			</header>
@@ -69,9 +63,9 @@
 		<div class="top-box" id="list-box">
 			<header>
 				<a href="#hs-box">
-					<h2>Today's Stats</h2>
+					<h2 class="header-icon">Today's Stats</h2>
 				</a>
-				<div class="dropdown">
+				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
 						<i class="fa fa-square-o fa-stack-2x"></i>
 						<i class="fa fa-bars fa-stack-1x"></i>
@@ -137,19 +131,16 @@
 	<div class="graph-box panel">
 		<div class="top-box">
 			<header>
-				<a href="#main-column"><h2>Hourly Graph</h2></a>
-				<!-- <div class="dropdown">
-											<span class="icon fa-stack fa-lg menu-btn metric-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
-																		<i class="fa fa-square-o fa-stack-2x"></i>
-																		<i class="fa fa-bars fa-stack-1x"></i>
-											</span>
-											<ul class="dropdown-menu  menu " id="h_graph-menu">
-																		<li>Hits</li>
-																		<li>Conversions</li>
-																		<li>Payout</li>
-																		<li>EPC</li>
-											</ul>
-				</div> -->
+				<a href="#main-column">
+					<h2 class="header-icon">Hourly Graph</h2>
+				</a>
+				<div class="dropdown button-right">
+					<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
+						<i class="fa fa-square-o fa-stack-2x"></i>
+						<i class="fa fa-refresh fa-stack-1x"></i>
+					</span>
+				</div>
+				
 			</header>
 		</div>
 		<div class="bottom-box" id="hourly-graph">
@@ -160,8 +151,10 @@
 	<div class="graph-box panel">
 		<div class="top-box">
 			<header>
-				<a href="#main-column"><h2>Period Graph</h2></a>
-				<div class="dropdown">
+				<a href="#main-column">
+					<h2 class="header-icon">Period Graph</h2>
+				</a>
+				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
 						<i class="fa fa-square-o fa-stack-2x"></i>
 						<i class="fa fa-bars fa-stack-1x"></i>
