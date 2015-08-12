@@ -5,7 +5,7 @@
 			<header>
 				<div class="swap-wrapper">
 					<a href="#offer-box">
-						<h2 class="header-icon">
+						<h2 class="with-icon">
 						<span class="swap" id="swap1"></span>
 						<span>Offers</span>
 						<span class="swap" id="swap3"></span>
@@ -63,7 +63,7 @@
 		<div class="top-box" id="list-box">
 			<header>
 				<a href="#hs-box">
-					<h2 class="header-icon">Today's Stats</h2>
+					<h2 class="with-icon">Today's Stats</h2>
 				</a>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
@@ -132,7 +132,7 @@
 		<div class="top-box">
 			<header>
 				<a href="#main-column">
-					<h2 class="header-icon">Hourly Graph</h2>
+					<h2 class="with-icon">Hourly Graph</h2>
 				</a>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
@@ -152,7 +152,7 @@
 		<div class="top-box">
 			<header>
 				<a href="#main-column">
-					<h2 class="header-icon">Period Graph</h2>
+					<h2 class="with-icon">Period Graph</h2>
 				</a>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
@@ -174,7 +174,12 @@
 			</header>
 		</div>
 		<div class=" bottom-box" id="period-graph">
-			<div id="p_chart"></div>
+			<div id="p_chart-holder">
+				<h3 id="p_chart-title">
+				This Period
+				</h3>
+				<div id="p_chart"></div>
+			</div>
 		</div>
 	</div>
 </div>

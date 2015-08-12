@@ -569,7 +569,7 @@ img {
     opacity: 1;
     color: #E6E6E6; }
 
-.header-icon {
+.with-icon {
   margin-left: 2em; }
 
 /* MENU SELECTORS */
@@ -752,6 +752,12 @@ img {
     color: #E6E6E6; }
 .graph-box:hover .bottom-box {
   background-color: #c6c6c6; }
+
+#p_chart-title {
+  position: absolute;
+  display: inline;
+  z-index: 100;
+  color: #777; }
 
 #three-column {
   -webkit-align-items: stretch;

@@ -217,7 +217,7 @@ img {
     }
 }
 
-.header-icon {
+.with-icon {
     margin-left: 2em;
 }
 
@@ -476,6 +476,13 @@ img {
             background-color: #c6c6c6;
         }
     }
+}
+
+#p_chart-title {
+    position: absolute;
+    display: inline;
+    z-index: 100;
+    color: #777;
 }
 
 // Info Panel Selectors

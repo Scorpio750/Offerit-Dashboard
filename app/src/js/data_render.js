@@ -49,8 +49,11 @@ $(document).ready(function() {
 
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
-			$.getJSON(url,
-				queryVars, function store_data(data) {
+			$.ajax({
+				dataType: 'json',
+				url: url,
+				data: queryVars,
+				success: function store_data(data) {
 					if (data) {
 						console.log(data);
 						series_data = {
@@ -94,7 +97,9 @@ $(document).ready(function() {
 								break;
 
 							case 'ajax_get_new_offers':
-								if ($('#swap1 > span').eq(1).css('display') == 'none') { state_change == true; }
+								if ($('#swap1 > span').eq(1).css('display') == 'none') {
+									state_change == true;
+								}
 								display_offers(data, 'new', '', state_change);
 								break;
 
@@ -130,8 +135,11 @@ $(document).ready(function() {
 								break;
 						}
 					}
-				});
+				}
+			});
 		}
+
+
 
 		function build_hourly_series(hits_data, timespan, queryVars, url) {
 			// build series for Hits	
@@ -393,16 +401,39 @@ $(document).ready(function() {
 						break;
 					case 'EPC':
 						extracted_data = data['total_payout'] / data['raw_hits'];
-						extracted_data = add_decimals(extracted_data);
+						console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
+						if (extracted_data != NaN) {
+							alert('Error: could not retrieve ' + n);
+							extracted_data = add_decimals(extracted_data);
+						} else {
+							extracted_data = 0;
+						}
 						extracted_data = '$' + extracted_data;
 						break;
 				}
-				target_data.animate()
-				target_data.text(extracted_data);
+
+				target_data.fadeOut('fast');
+				target_data.animate({
+					height: target_data.height()
+				})
+				// sleep until data finishes fading out
+				window.setTimeout(function() {
+					target_data.text(extracted_data);
+					target_data.fadeIn('fast');
+					target_data.animate({
+						width: target_data.width(),
+						height: target_data.height()
+					})
+				}, 200);
+
 			});
 		}
 
 		function add_decimals(n) {
+			if (typeof n === 'undefined' || n == NaN) {
+				n = 0;
+				console.log('n = ' + n);
+			}
 			if (!isInt(n)) {
 				n = n.toFixed(2);
 			}
