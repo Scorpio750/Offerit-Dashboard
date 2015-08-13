@@ -4,17 +4,17 @@
 		<div class="top-box">
 			<header>
 				<div class="swap-wrapper">
-					<a href="#offer-box">
-						<h2 class="with-icon">
-						<span class="swap" id="swap1"></span>
-						<span>Offers</span>
-						<span class="swap" id="swap3"></span>
+					<a class="with-icon" href="#offer-box">
+						<h2>
+							<span class="swap" id="swap1"></span>
+							Offers</span>
+							<span class="swap" id="swap2"></span>
 						</h2>
 					</a>
 					<span class="swap" id="metric-btn-wrapper">
 						<span class="dropdown button-right swap" id="metric-btn">
 							<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span class="caret"></span>
+								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu menu">
 								<li class="metric-type" id="0h">by Hits</li>
@@ -62,8 +62,8 @@
 	<div class="two-box panel" id="hs-box">
 		<div class="top-box" id="list-box">
 			<header>
-				<a href="#hs-box">
-					<h2 class="with-icon">Today's Stats</h2>
+				<a class="with-icon" href="#hs-box">
+					<h2>Today's Stats</h2>
 				</a>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
@@ -131,8 +131,8 @@
 	<div class="graph-box panel">
 		<div class="top-box">
 			<header>
-				<a href="#main-column">
-					<h2 class="with-icon">Hourly Graph</h2>
+				<a class="with-icon" href="#main-column">
+					<h2>Hourly Graph</h2>
 				</a>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
@@ -140,7 +140,6 @@
 						<i class="fa fa-refresh fa-stack-1x"></i>
 					</span>
 				</div>
-				
 			</header>
 		</div>
 		<div class="bottom-box" id="hourly-graph">
@@ -151,9 +150,14 @@
 	<div class="graph-box panel">
 		<div class="top-box">
 			<header>
-				<a href="#main-column">
-					<h2 class="with-icon">Period Graph</h2>
-				</a>
+				<span class="swap-wrapper">
+					<a class="with-icon" href="#main-column">
+						<h2>
+							Period Graph
+							<span class="swap" id="swap4"></span>
+						</h2>
+					</a>
+				</span>
 				<div class="dropdown button-right">
 					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
 						<i class="fa fa-square-o fa-stack-2x"></i>
@@ -176,7 +180,7 @@
 		<div class=" bottom-box" id="period-graph">
 			<div id="p_chart-holder">
 				<h3 id="p_chart-title">
-				This Period
+					This Period
 				</h3>
 				<div id="p_chart"></div>
 			</div>
@@ -188,7 +192,7 @@
 	<div class="three-box panel" id="news">
 		<div class="top-box">
 			<header>
-				<a href="#news">
+				<a  href="#news">
 					<h2>{$config.NICE_NAME} {#News#}</h2>
 				</a>
 			</header>
@@ -198,7 +202,7 @@
 				{display_news data_only=1 count=5 order="publish desc" section="Announcements"}
 				{if $news}
 				{foreach from=$news item='article'}
-				<li class="news-item"><a href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
+				<li class="news-item"><a  href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
 				{/foreach}
 				{/if}
 			</ul>
@@ -207,7 +211,7 @@
 	<div class="three-box panel" id="paysum">
 		<div class="top-box">
 			<header>
-				<a href="#paysum">
+				<a  href="#paysum">
 					<h2>{#PaymentSummary#}</h2>
 				</a>
 			</header>
@@ -216,13 +220,13 @@
 			<ul id="paysum-list">
 				{offerit_display_payment_summary data_only=1}
 				{if $myPaymentSummary}
-				<li>{#OutstandingBalance#}: <a href="/internal.php?page=payments">{$myPaymentSummary.earned-$myPaymentSummary.stored|currency_format:2}</a></li>
+				<li>{#OutstandingBalance#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.earned-$myPaymentSummary.stored|currency_format:2}</a></li>
 				{/if}
 				{if $myPaymentSummary.stored-$myPaymentSummary.paid}
-				<li>{#PendingPayments#}: <a href="/internal.php?page=payments">{$myPaymentSummary.stored-$myPaymentSummary.paid|currency_format:2}</a></li>
+				<li>{#PendingPayments#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.stored-$myPaymentSummary.paid|currency_format:2}</a></li>
 				{/if}
 				{if $myPaymentSummary.paid}
-				<li>{#PaymentsSent#}: <a href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
+				<li>{#PaymentsSent#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
 				{/if}
 			</ul>
 		</div>
@@ -230,7 +234,7 @@
 	<div class="three-box panel" id="contact">
 		<div class="top-box">
 			<header>
-				<a href="#contact">
+				<a  href="#contact">
 					<h2>Agent Contact</h2>
 				</a>
 			</header>

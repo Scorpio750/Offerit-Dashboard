@@ -11,10 +11,66 @@ $('.three-box > .bottom-box').niceScroll({
 	}
 });
 
-// Offer Panel functions
-var txt = ['Top ', 'New ', ' by Hits', ' by Convs', ' by Payout', ' by EPC', ' (Network)'],
+
+/////////////////////////
+//                     //
+//   DEFAULT DISPLAY   //
+//                     //
+/////////////////////////
+
+var queryVars, period = 0,
+	url = 'http://jamesdev.offerit.com/internal_data.php';
+
+
+//Offer Data
+queryVars = {
+	'function': 'ajax_get_affiliate_top_offers',
+	'return_type': 'json',
+	'type': 'impression'
+};
+call_data(queryVars, url);
+
+// Initially, display only hourly data 
+// and data from this pay period
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
+
+// Graph Data
+// Period data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': undefined,
+	'dashboard_multi': 1,
+};
+call_data(queryVars, url);
+
+// Hourly data
+period = 8;
+queryVars = {
+	'function': 'offerit_display_hourly_hits',
+	'period': period,
+	'return_type': 'json',
+};
+call_data(queryVars, url);
+
+/////////////////////////////////
+//                             //
+//    OFFER PANEL FUNCTIONS    //
+//                             //
+/////////////////////////////////
+
+var txt = ['Top ', 'New ', ' (Network)'],
 	n = txt.length + 1;
-$swap = [$('#swap1'), $('#swap2'), $('#swap3'), $('#metric-btn-wrapper')],
+$swap = [$('#swap1'), $('#swap2'), $('#metric-btn-wrapper'), $('#swap4')],
 $span = [];
 
 // create spans inside span
@@ -23,14 +79,21 @@ for (var i = 0; i < 2; i++) {
 		text: txt[i]
 	}));
 }
-for (i = 2; i < 7; i++) {
-	var k;
-
-	(i < 6) ? k = 1 : k = 2;
-	$swap[k].append($('<span />', {
-		text: txt[i]
+$swap[1].append($('<span />', {
+	text: txt[i]
+}));
+for (i = 0; i < 9; i++) {
+	txt = $('#p_graph-menu li').eq(i).text();
+	$swap[3].append($('<span />', {
+		text: ' (' + txt + ')'
 	}));
 }
+for (i = 1; i < 3; i += 2) {
+	$swap[i].css({
+		'font-size': '0.8em'
+	});
+}
+
 // hide and collect spans
 for (i in $swap) {
 	$span[i] = $('span', $swap[i]).hide();
@@ -59,7 +122,7 @@ function shift(n, flag, k) {
 	}
 
 	// sometimes the metric button wrapper size doesn't scale in time
-	if (n == 3) {
+	if (n == 2) {
 		if ($width < 34 && $width > 0) {
 			$width = $('#metric-btn').width() + 8;
 		}
@@ -75,18 +138,6 @@ function shift(n, flag, k) {
 			otherPrefix.stop().fadeOut('options')
 			currentPrefix.delay(400).fadeIn('options');
 			break;
-		case 1:
-			var otherPrefix;
-			for (var i = 0; i < 4; i++) {
-				if ($span[n].eq(i).css('display') == 'inline') {
-					otherPrefix = $span[n].eq(i);
-				}
-				if (typeof otherPrefix !== "undefined") {
-					otherPrefix.stop().fadeOut('fast')
-				}
-				currentPrefix.delay(400).fadeIn('fast');
-			}
-			break;
 		default:
 			(flag == 1) ? $span[n].delay(400).fadeIn('fast') : $span[n].stop().fadeOut('fast');
 			break;
@@ -95,7 +146,7 @@ function shift(n, flag, k) {
 
 // load top user offers by default
 shift(0, 1, 0);
-shift(3, 1, 0);
+shift(2, 1, 0);
 var currentFocus = 'ajax_get_affiliate_top_offers';
 toggleTopMetric('by Hits');
 
@@ -113,18 +164,18 @@ $('.offer-type').click(function switch_offers() {
 	switch (id[0]) {
 		case 't':
 			shift(0, 1, 0);
-			shift(3, 1, 0);
+			shift(2, 1, 0);
 			switch (id[1]) {
 				case 'u':
 					list = $('#top-offer-list-user')
 					currentFocus = 'ajax_get_affiliate_top_offers';
-					shift(2, 0, 0);
+					shift(1, 0, 0);
 					break;
 				case 'n':
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
-					$('#swap3').css('vertical-align', '90%');
-					shift(2, 1, 0);
+					$swap[1].css('vertical-align', '90%');
+					shift(1, 1, 0);
 					break;
 			}
 			toggleTopMetric('by Hits');
@@ -133,14 +184,88 @@ $('.offer-type').click(function switch_offers() {
 			list = $('#new-offer-list')
 			currentFocus = 'ajax_get_new_offers';
 			shift(0, 1, 1);
-			shift(3, 0, 0);
 			shift(2, 0, 0);
+			shift(1, 0, 0);
 			toggleNewMetric();
 			break;
 	}
 	$('.offer-list').not(list).fadeOut();
 	$(list).delay(400).fadeIn();
 });
+
+/////////////////////////////////////
+//                                 //
+//  STATS BOX RENDERING FUNCTIONS  //
+//                                 //
+/////////////////////////////////////
+
+function fill_stats(data) {
+	var container = $('.stats-container');
+	var boxes = container.find('.stats-box');
+	var target_text, target_data, extracted_data;
+	$.each(boxes, function insert_data() {
+		target_text = $(this).find('.right-stats-box>h3:nth-child(1)');
+		target_data = $(this).find('.right-stats-box>h3:nth-child(2)');
+		target_data.fadeOut('fast');
+		container.animate({
+			height: container.height()
+		})
+		switch (target_text.text()) {
+			case 'Hits':
+				extracted_data = data['raw_hits'];
+				break;
+			case 'Convs':
+				extracted_data = data['conv_count'];
+				break;
+			case 'Payout':
+				extracted_data = data['total_payout'];
+				extracted_data = add_decimals(extracted_data);
+				extracted_data = '$' + extracted_data;
+				break;
+			case 'EPC':
+				extracted_data = data['total_payout'] / data['raw_hits'];
+				console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
+				if (isNaN(extracted_data) /* || typeof extracted_data === 'undefined'*/ ) {
+					alert('Error: could not retrieve ' + extracted_data);
+					extracted_data = 0;
+				} else {
+					extracted_data = add_decimals(extracted_data);
+				}
+				extracted_data = '$' + extracted_data;
+				break;
+		}
+		if (extracted_data !== target_data.text()) {
+			target_data.text(extracted_data);
+			target_data.fadeIn('fast');
+		}
+
+
+		// sleep until data finishes fading out
+		/*window.setTimeout(function() {
+				container.animate({
+					width: container.width(),
+					height: container.height()
+				})
+			}, 200);*/
+	});
+}
+
+function add_decimals(n) {
+	if (!isInt(n)) {
+		n = n.toFixed(2);
+	}
+	return n;
+}
+
+function isInt(n) {
+	return n % 1 === 0;
+}
+
+/////////////////////////////////////
+//                                 //
+//     GENERIC MENU FUNCTIONS      //
+//                                 //
+/////////////////////////////////////
 
 $('.menu-btn').click(function() {
 	var notThisOne = $(this).next('.menu');
@@ -331,18 +456,18 @@ $('.period-menu li').click(function getPeriod() {
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
-	var spinner = $('.fa-refresh');
-	spinner.addClass('fa-spin');
-	window.setTimeout(function() {
-		spinner.removeClass('fa-spin');
-	}, 2000);
-	period = 8;
-		queryVars = {
-			'function': 'offerit_display_hourly_hits',
-			'period': period,
-			'return_type': 'json',
-		};
-		call_data(queryVars, url);
+var spinner = $('.fa-refresh');
+spinner.addClass('fa-spin');
+window.setTimeout(function() {
+	spinner.removeClass('fa-spin');
+}, 2000);
+period = 8;
+queryVars = {
+	'function': 'offerit_display_hourly_hits',
+	'period': period,
+	'return_type': 'json',
+};
+call_data(queryVars, url);
 });
 
 });

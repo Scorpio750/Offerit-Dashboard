@@ -218,7 +218,16 @@ img {
 }
 
 .with-icon {
-    margin-left: 2em;
+    margin-left: 4em;
+}
+
+.btn.active:focus {
+    &:active {
+        outline: none;
+    }
+    &:focus {
+        outline: none;
+    }
 }
 
 /* MENU SELECTORS */
@@ -319,7 +328,7 @@ img {
 
 #offer-box {
     flex: 1 0 auto;
-    margin-right: 1.5em;
+    margin-right: 1em;
     .bottom-box {
         min-height: 8em;
     }
@@ -353,10 +362,6 @@ img {
         top: 0px;
         right: 0px;
     }
-}
-
-#swap3 {
-    font-size: .8em;
 }
 
 #metric-btn {
@@ -418,7 +423,7 @@ img {
     }
 }
 
-// hourly stats box
+// Hourly Stats box
 #hs-box {
     flex: 3 0 auto;
     moz-flex-basis: 30%;

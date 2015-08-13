@@ -402,27 +402,27 @@ $(document).ready(function() {
 					case 'EPC':
 						extracted_data = data['total_payout'] / data['raw_hits'];
 						console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
-						if (extracted_data != NaN) {
-							alert('Error: could not retrieve ' + n);
-							extracted_data = add_decimals(extracted_data);
-						} else {
+						if (isNaN(extracted_data)) {
+							alert('Error: could not retrieve ' + extracted_data);
 							extracted_data = 0;
+						} else {
+							extracted_data = add_decimals(extracted_data);
 						}
 						extracted_data = '$' + extracted_data;
 						break;
 				}
 
 				target_data.fadeOut('fast');
-				target_data.animate({
-					height: target_data.height()
+				container.animate({
+					height: container.height()
 				})
 				// sleep until data finishes fading out
 				window.setTimeout(function() {
 					target_data.text(extracted_data);
 					target_data.fadeIn('fast');
-					target_data.animate({
-						width: target_data.width(),
-						height: target_data.height()
+					container.animate({
+						width: container.width(),
+						height: container.height()
 					})
 				}, 200);
 

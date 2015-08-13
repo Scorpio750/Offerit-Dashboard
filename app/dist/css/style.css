@@ -571,7 +571,12 @@ img {
     color: #E6E6E6; }
 
 .with-icon {
-  margin-left: 2em; }
+  margin-left: 4em; }
+
+.btn.active:focus:active {
+  outline: none; }
+.btn.active:focus:focus {
+  outline: none; }
 
 /* MENU SELECTORS */
 .button-right {
@@ -650,7 +655,7 @@ img {
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
-  margin-right: 1.5em; }
+  margin-right: 1em; }
   #offer-box .bottom-box {
     min-height: 8em; }
   #offer-box:hover .top-box {
@@ -673,9 +678,6 @@ img {
     position: relative;
     top: 0px;
     right: 0px; }
-
-#swap3 {
-  font-size: .8em; }
 
 #metric-btn {
   z-index: 999;
