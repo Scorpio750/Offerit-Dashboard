@@ -573,9 +573,7 @@ img {
 .with-icon {
   margin-left: 4em; }
 
-.btn.active:focus:active {
-  outline: none; }
-.btn.active:focus:focus {
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {
   outline: none; }
 
 /* MENU SELECTORS */

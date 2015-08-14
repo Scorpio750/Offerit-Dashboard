@@ -100,6 +100,7 @@ img {
 //   GENERIC SELECTORS   //
 //                       //
 ///////////////////////////
+
 .flex-container {
     display: flex;
     flex-flow: row wrap;
@@ -221,13 +222,8 @@ img {
     margin-left: 4em;
 }
 
-.btn.active:focus {
-    &:active {
-        outline: none;
-    }
-    &:focus {
-        outline: none;
-    }
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {
+    outline: none;
 }
 
 /* MENU SELECTORS */
@@ -314,6 +310,7 @@ img {
 //   PANEL SELECTORS   //
 //                     //
 /////////////////////////
+
 #main {
     margin: 0 auto;
     width: 77.5em;

@@ -1,3 +1,4 @@
+// added custom scrollbars
 $('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
 	cursorwidth: '10px',
@@ -22,7 +23,7 @@ var queryVars, period = 0,
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
 
-//Offer Data
+// Offer Data
 queryVars = {
 	'function': 'ajax_get_affiliate_top_offers',
 	'return_type': 'json',
@@ -88,7 +89,7 @@ for (i = 0; i < 9; i++) {
 		text: ' (' + txt + ')'
 	}));
 }
-for (i = 1; i < 3; i += 2) {
+for (i = 1; i <= 3; i += 2) {
 	$swap[i].css({
 		'font-size': '0.8em'
 	});
@@ -135,8 +136,12 @@ function shift(n, flag, k) {
 		case 0:
 			var otherPrefix = $span[n].eq((k + 1) % 2);
 			// if selected prefix is not displayed, swap it in
-			otherPrefix.stop().fadeOut('options')
-			currentPrefix.delay(400).fadeIn('options');
+			otherPrefix.stop().fadeOut('fast')
+			currentPrefix.delay(400).fadeIn('fast');
+			break;
+		case 3:
+			$span[n].not(currentPrefix).fadeOut('fast');
+			currentPrefix.delay(400).fadeIn('fast');
 			break;
 		default:
 			(flag == 1) ? $span[n].delay(400).fadeIn('fast') : $span[n].stop().fadeOut('fast');
@@ -174,6 +179,7 @@ $('.offer-type').click(function switch_offers() {
 				case 'n':
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
+					// must apply v-align here because initial application results in misaligned header
 					$swap[1].css('vertical-align', '90%');
 					shift(1, 1, 0);
 					break;
@@ -193,11 +199,11 @@ $('.offer-type').click(function switch_offers() {
 	$(list).delay(400).fadeIn();
 });
 
-/////////////////////////////////////
-//                                 //
-//  STATS BOX RENDERING FUNCTIONS  //
-//                                 //
-/////////////////////////////////////
+///////////////////////////////////////
+//                                   //
+//   STATS BOX RENDERING FUNCTIONS   //
+//                                   //
+///////////////////////////////////////
 
 function fill_stats(data) {
 	var container = $('.stats-container');
@@ -441,7 +447,9 @@ $('.period-menu li').click(function getPeriod() {
 		'dashboard_multi': undefined,
 		'dashboard_summary': undefined
 	}
-
+	// add period descriptor to the header
+	$swap[3].css('vertical-align', '90%');
+	shift(3, 1, index);
 	switch ($(this).parent().attr('id')) {
 		case 'hs-menu':
 			queryVars['dashboard_summary'] = 1;
