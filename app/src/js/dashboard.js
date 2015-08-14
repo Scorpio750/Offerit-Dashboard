@@ -212,10 +212,7 @@ function fill_stats(data) {
 	$.each(boxes, function insert_data() {
 		target_text = $(this).find('.right-stats-box>h3:nth-child(1)');
 		target_data = $(this).find('.right-stats-box>h3:nth-child(2)');
-		target_data.fadeOut('fast');
-		container.animate({
-			height: container.height()
-		})
+
 		switch (target_text.text()) {
 			case 'Hits':
 				extracted_data = data['raw_hits'];
@@ -231,33 +228,32 @@ function fill_stats(data) {
 			case 'EPC':
 				extracted_data = data['total_payout'] / data['raw_hits'];
 				console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
-				if (isNaN(extracted_data) /* || typeof extracted_data === 'undefined'*/ ) {
-					alert('Error: could not retrieve ' + extracted_data);
-					extracted_data = 0;
-				} else {
-					extracted_data = add_decimals(extracted_data);
-				}
+				extracted_data = add_decimals(extracted_data);
 				extracted_data = '$' + extracted_data;
 				break;
 		}
-		if (extracted_data !== target_data.text()) {
+		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
+		if (extracted_data != target_data.text()) {
+			target_data.fadeOut('fast');
+			/*container.animate({
+				height: container.height()
+			})*/
+			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
+			console.log('post-sleep ' + target_text.text());
 			target_data.fadeIn('fast');
-		}
-
-
-		// sleep until data finishes fading out
-		/*window.setTimeout(function() {
-				container.animate({
-					width: container.width(),
-					height: container.height()
-				})
-			}, 200);*/
+			/*container.animate({
+				width: container.width(),
+				height: container.height()
+			})
+*/		}
 	});
 }
 
 function add_decimals(n) {
-	if (!isInt(n)) {
+	if (typeof n === 'undefined' || isNaN(n)) {
+		n = 0;
+	} else if (!isInt(n)) {
 		n = n.toFixed(2);
 	}
 	return n;
@@ -267,11 +263,11 @@ function isInt(n) {
 	return n % 1 === 0;
 }
 
-/////////////////////////////////////
-//                                 //
-//     GENERIC MENU FUNCTIONS      //
-//                                 //
-/////////////////////////////////////
+///////////////////////////////////
+//                               //
+//    GENERIC MENU FUNCTIONS     //
+//                               //
+///////////////////////////////////
 
 $('.menu-btn').click(function() {
 	var notThisOne = $(this).next('.menu');
@@ -447,15 +443,16 @@ $('.period-menu li').click(function getPeriod() {
 		'dashboard_multi': undefined,
 		'dashboard_summary': undefined
 	}
-	// add period descriptor to the header
-	$swap[3].css('vertical-align', '90%');
-	shift(3, 1, index);
+
 	switch ($(this).parent().attr('id')) {
 		case 'hs-menu':
 			queryVars['dashboard_summary'] = 1;
 			break;
 		case 'p_graph-menu':
 			queryVars['dashboard_multi'] = 1;
+			// add period descriptor to the header
+			$swap[3].css('vertical-align', '90%');
+			shift(3, 1, index);
 			break;
 	}
 	queryVars['period_index'] = index;
