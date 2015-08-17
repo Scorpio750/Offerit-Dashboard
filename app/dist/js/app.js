@@ -7470,9 +7470,8 @@ $(document).ready(function() {
 							// Offers panel data
 							case 'ajax_get_affiliate_top_offers':
 								// check to see if either the words 'New' or 'Network' are already displayed
-								console.log($('#swap2 > span').css('display'));
-								console.log($('#swap2').find('span').eq(0).css('display'));
-								if ($('#swap2 > span').css('display') == 'block'/* || $('#swap1').find('span').eq(0).css('display') != 'none'*/) {
+								console.log($('#swap2 > span').text() + ': ' + $('#swap2 > span').css('display'));
+								if ($('#swap2 > span').css('display') != 'none'/* || $('#swap1').find('span').eq(0).css('display') != 'none'*/) {
 									console.log('changing state to user');
 									state_change = true;
 								}
@@ -7628,6 +7627,10 @@ $(document).ready(function() {
 					clickable: false,
 					autoHighlight: true,
 					markings: weekendAreas
+				},
+				legend: {
+					position: "se",
+					backgroundOpacity: 0.5
 				}
 			}
 
