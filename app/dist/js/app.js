@@ -7791,7 +7791,7 @@ call_data(queryVars, url);
 
 var txt = ['Top ', 'New ', ' (Network)'],
 	n = txt.length + 1;
-$swap = [$('#swap1'), $('#swap2'), $('#metric-btn-wrapper'), $('#swap4')],
+$swap = [$('#swap1'), $('#swap2'), $('#metric-btn-wrapper'), $('#swap3'), $('#swap4')],
 $span = [];
 
 // create spans inside span
@@ -7803,13 +7803,18 @@ for (var i = 0; i < 2; i++) {
 $swap[1].append($('<span />', {
 	text: txt[i]
 }));
-for (i = 0; i < 9; i++) {
-	txt = $('#p_graph-menu li').eq(i).text();
-	$swap[3].append($('<span />', {
-		text: ' (' + txt + ')'
-	}));
+for (i = 3; i < 5; i++) {
+	for (var j = 0; j < 9; j++) {
+		txt = $('#p_graph-menu li').eq(j).text();
+		$swap[i].append($('<span />', {
+			text: ' (' + txt + ')'
+		}));
+	}
 }
-for (i = 1; i <= 3; i += 2) {
+for (i = 1; i <= 4; i++) {
+	if (i == 2) {
+		continue;
+	}
 	$swap[i].css({
 		'font-size': '0.8em'
 	});
@@ -7857,16 +7862,18 @@ function shift(n, flag, k) {
 			var otherPrefix = $span[n].eq((k + 1) % 2);
 			// if selected prefix is not displayed, swap it in
 			otherPrefix.stop().fadeOut('fast')
-			currentPrefix.delay(400).fadeIn('fast');
 			break;
 		case 3:
 			$span[n].not(currentPrefix).fadeOut('fast');
-			currentPrefix.delay(400).fadeIn('fast');
+			break;
+		case 4:
+			$span[n].not(currentPrefix).fadeOut('fast');
 			break;
 		default:
 			(flag == 1) ? $span[n].delay(400).fadeIn('fast') : $span[n].stop().fadeOut('fast');
-			break;
+			return;
 	}
+	currentPrefix.delay(400).fadeIn('fast');
 }
 
 // load top user offers by default
@@ -7926,6 +7933,10 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data) {
+	if (data.length === 0) {
+		alert('No data found upon retrieval.');
+		return;
+	}
 	var container = $('.stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
@@ -7960,13 +7971,15 @@ function fill_stats(data) {
 			})*/
 			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
-			console.log('post-sleep ' + target_text.text());
 			target_data.fadeIn('fast');
-			/*container.animate({
-				width: container.width(),
-				height: container.height()
-			})
-*/		}
+			/*window.setTimeout(function() {
+				container.animate({
+					width: container.width(),
+					height: container.height()
+				})
+			}, 200);*/
+			console.log('post-sleep ' + target_text.text());
+		}
 	});
 }
 
@@ -8156,6 +8169,7 @@ function display_offers(offers, type, scope, state_change) {
 $('.period-menu li').click(function getPeriod() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 	var index = $(this).index();
+	var swapid;
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': undefined,
@@ -8167,14 +8181,17 @@ $('.period-menu li').click(function getPeriod() {
 	switch ($(this).parent().attr('id')) {
 		case 'hs-menu':
 			queryVars['dashboard_summary'] = 1;
+			swapid = 3;
 			break;
 		case 'p_graph-menu':
 			queryVars['dashboard_multi'] = 1;
 			// add period descriptor to the header
-			$swap[3].css('vertical-align', '90%');
-			shift(3, 1, index);
+			swapid = 4;
 			break;
 	}
+	// add descriptor to appropriate header
+	$swap[swapid].css('vertical-align', '90%');
+	shift(swapid, 1, index);
 	queryVars['period_index'] = index;
 	call_data(queryVars, url);
 });

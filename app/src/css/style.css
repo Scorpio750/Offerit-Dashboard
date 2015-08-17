@@ -464,9 +464,9 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -524,30 +524,18 @@ img {
   flex: 1 0 1em;
   /* background-color: $off-white; */ }
 
-.stats-container {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+.stats-container .flex-container {
   -webkit-justify-content: space-around;
   -ms-flex-pack: distribute;
   justify-content: space-around; }
 
 .stats-box {
-  text-align: center;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
   opacity: 0.6;
   padding: .5em 1em;
-  border-radius: 1em;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   transition: all .2s ease-in-out; }
-  .stats-box .left-stats-box {
-    padding-top: 1.2em;
-    padding-right: 1.2em; }
   .stats-box .right-stats-box {
     padding: auto; }
     .stats-box .right-stats-box h3 {
@@ -649,9 +637,9 @@ img {
   z-index: 100; }
 
 #offer-box {
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
+  -webkit-flex: 1 2 auto;
+  -ms-flex: 1 2 auto;
+  flex: 1 2 auto;
   margin-right: 1em; }
   #offer-box .bottom-box {
     min-height: 8em; }
@@ -713,9 +701,9 @@ img {
     text-align: left; }
 
 #hs-box {
-  -webkit-flex: 3 0 auto;
-  -ms-flex: 3 0 auto;
-  flex: 3 0 auto;
+  -webkit-flex: 4 1 auto;
+  -ms-flex: 4 1 auto;
+  flex: 4 1 auto;
   moz-flex-basis: 30%;
   margin-left: 1em;
   z-index: 200; }
