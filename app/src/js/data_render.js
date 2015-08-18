@@ -65,7 +65,7 @@ $(document).ready(function() {
 					loader = $('#period-graph').find('.loader');
 				}
 				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
-					loader = $('#hs-box').find('.loader');
+					loader = $('#stats-panel').find('.loader');
 				}
 			}
 			else if (function_type == 'offerit_display_hourly_hits') {
@@ -77,10 +77,10 @@ $(document).ready(function() {
 				url: url,
 				data: queryVars,
 				beforeSend: function loading() {
-					$(loader).addClass('flex-load');
+					$(loader).fadeIn('fast');
 				},
 				complete: function unloading() {
-					$(loader).removeClass('flex-load');
+					$(loader).fadeOut('fast');
 				},
 				success: function store_data(data) {
 					if (data) {

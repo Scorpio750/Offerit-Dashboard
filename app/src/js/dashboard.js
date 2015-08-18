@@ -187,7 +187,7 @@ $('.offer-type').click(function switch_offers() {
 					list = $('#top-offer-list-network')
 					currentFocus = 'ajax_get_network_top_offers';
 					// must apply v-align here because initial application results in misaligned header
-					$swap[1].css('vertical-align', '90%');
+					$swap[1].css('vertical-align', '92%');
 					shift(1, 1, 0);
 					break;
 			}
@@ -245,13 +245,13 @@ function fill_stats(data) {
 		}
 		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
-			target_data.fadeOut('fast');
+			// target_data.fadeOut('fast');
 			/*container.animate({
 				height: container.height()
 			})*/
 			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
-			target_data.fadeIn('fast');
+			// target_data.fadeIn('fast');
 			/*window.setTimeout(function() {
 				container.animate({
 					width: container.width(),
@@ -470,7 +470,7 @@ $('.period-menu li').click(function getPeriod() {
 			break;
 	}
 	// add descriptor to appropriate header
-	$swap[swapid].css('vertical-align', '90%');
+	$swap[swapid].css('vertical-align', '92%');
 	shift(swapid, 1, index);
 	queryVars['period_index'] = index;
 	call_data(queryVars, url);
@@ -478,11 +478,11 @@ $('.period-menu li').click(function getPeriod() {
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
-var spinner = $('.fa-refresh');
-spinner.addClass('fa-spin');
+/*var spinner = $('.fa-refresh');
+spinner.addClass('fa-pulse');
 window.setTimeout(function() {
-	spinner.removeClass('fa-spin');
-}, 2000);
+	spinner.removeClass('fa-pulse');
+}, 200);*/
 period = 8;
 queryVars = {
 	'function': 'offerit_display_hourly_hits',

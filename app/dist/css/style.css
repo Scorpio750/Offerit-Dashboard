@@ -573,7 +573,7 @@ img {
   z-index: 2;
   top: 0;
   left: 0;
-  background-color: #666;
+  background-color: #555;
   opacity: 0.5;
   border-radius: 0 0 6px 6px; }
 
@@ -725,20 +725,20 @@ img {
   #offers-table td {
     text-align: left; }
 
-#hs-box {
+#stats-panel {
   -webkit-flex: 4 1 auto;
   -ms-flex: 4 1 auto;
   flex: 4 1 auto;
   moz-flex-basis: 30%;
   margin-left: 1em;
   z-index: 200; }
-  #hs-box .top-box {
+  #stats-panel .top-box {
     background-color: #7ac5cd; }
-  #hs-box .bottom-box {
+  #stats-panel .bottom-box {
     background-color: #619da4; }
-  #hs-box:hover .top-box {
+  #stats-panel:hover .top-box {
     background-color: #7ABdC4; }
-  #hs-box:hover .bottom-box {
+  #stats-panel:hover .bottom-box {
     background-color: #558E96; }
 
 #main-column {

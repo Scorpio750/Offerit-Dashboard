@@ -230,7 +230,7 @@ img {
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: #666;
+    background-color: #555;
     opacity: 0.5;
     border-radius: 0 0 6px 6px;
 }
@@ -436,7 +436,7 @@ img {
 }
 
 // Hourly Stats box
-#hs-box {
+#stats-panel {
     flex: 4 1 auto;
     moz-flex-basis: 30%;
     margin-left: 1em;
