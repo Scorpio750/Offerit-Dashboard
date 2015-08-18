@@ -214,7 +214,7 @@ $('.offer-type').click(function switch_offers() {
 
 function fill_stats(data) {
 	if (data.length === 0) {
-		alert('No data found upon retrieval.');
+		console.log('No data found upon retrieval.');
 		return;
 	}
 	var container = $('.stats-container');

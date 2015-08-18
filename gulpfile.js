@@ -107,7 +107,7 @@ gulp.task('scripts', function() {
 		.pipe(gulp.dest('app/dist/js'));
 });
 
-gulp.task('serve', ['literallyCSS', 'scripts', 'icons'], function() {
+gulp.task('serve', ['literallyCSS', 'scripts', 'modernizr', 'icons'], function() {
 	browserSync.init({
 		server: {
 			baseDir: 'app',

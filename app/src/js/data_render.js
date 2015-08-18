@@ -49,10 +49,39 @@ $(document).ready(function() {
 
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
+			var function_type = queryVars['function'];
+			var loader;
+
+			// determine which function is being called to place appropriate loader
+			// not very DRY, but I'm not sure how else to implement this considering
+			// we evaluate function type upon completion of ajax call as well
+			if (function_type == 'ajax_get_affiliate_top_offers' 
+				|| function_type == 'ajax_get_network_top_offers'
+				|| function_type == 'ajax_get_new_offers') {
+				loader = $('#offer-box').find('.loader');
+			}
+			else if (function_type == 'offerit_display_stats') {
+				if (typeof queryVars['dashboard_multi'] !== "undefined") {
+					loader = $('#period-graph').find('.loader');
+				}
+				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
+					loader = $('#hs-box').find('.loader');
+				}
+			}
+			else if (function_type == 'offerit_display_hourly_hits') {
+				loader = $('#hourly-graph').find('.loader');
+			}
+
 			$.ajax({
 				dataType: 'json',
 				url: url,
 				data: queryVars,
+				beforeSend: function loading() {
+					$(loader).addClass('flex-load');
+				},
+				complete: function unloading() {
+					$(loader).removeClass('flex-load');
+				},
 				success: function store_data(data) {
 					if (data) {
 						console.log(data);
@@ -77,7 +106,7 @@ $(document).ready(function() {
 						}
 						var timespan,
 							state_change = false;
-						switch (queryVars['function']) {
+						switch (function_type) {
 							// Offers panel data
 							case 'ajax_get_affiliate_top_offers':
 								// check to see if either the words 'New' or 'Network' are already displayed
