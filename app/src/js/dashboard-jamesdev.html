@@ -1,277 +1,279 @@
-<!--Reminder Boxes-->
-<div class="row flex-container" id="reminders">
-	<div class="two-box panel" id="offer-box">
-		<div class="top-box">
-			<header>
-				<div class="swap-wrapper">
-					<a class="with-icon" href="#offer-box">
-						<h2>
-							<span class="swap" id="swap1"></span>
-							Offers
-							<span class="swap" id="swap2"></span>
-						</h2>
-					</a>
-					<span class="swap" id="metric-btn-wrapper">
-						<span class="dropdown button-right swap" id="metric-btn">
-							<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu menu">
-								<li class="metric-type" id="0h">by Hits</li>
-								<li class="metric-type" id="1c">by Convs</li>
-								<li class="metric-type" id="2p">by Payout</li>
-								<li class="metric-type" id="3e">by EPC</li>
-							</ul>
+<div id="affiliate-dashboard">
+	<!--Reminder Boxes-->
+	<div class="row flex-container" id="reminders">
+		<div class="two-box panel" id="offer-box">
+			<div class="top-box">
+				<header>
+					<div class="swap-wrapper">
+						<a class="with-icon" href="#offer-box">
+							<h2>
+								<span class="swap" id="swap1"></span>
+								Offers
+								<span class="swap" id="swap2"></span>
+							</h2>
+						</a>
+						<span class="swap" id="metric-btn-wrapper">
+							<span class="dropdown button-right swap" id="metric-btn">
+								<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu menu">
+									<li class="metric-type" id="0h">by Hits</li>
+									<li class="metric-type" id="1c">by Convs</li>
+									<li class="metric-type" id="2p">by Payout</li>
+									<li class="metric-type" id="3e">by EPC</li>
+								</ul>
+							</span>
 						</span>
-					</span>
-				</div>
-				<div class="dropdown button-right">
-					<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
-						<i class="fa fa-square-o fa-stack-2x"></i>
-						<i class="fa fa-bars fa-stack-1x"></i>
-					</span>
-					<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
-						<li class="dropdown-item" id="top-offers">Top Offers
-						</li>
-						<ul class="subnav ">
-							<li class="offer-type" id="tu">By User</li>
-							<li class="offer-type" id="tn">By Network</li>
+					</div>
+					<div class="dropdown button-right">
+						<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
+							<i class="fa fa-square-o fa-stack-2x"></i>
+							<i class="fa fa-bars fa-stack-1x"></i>
+						</span>
+						<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
+							<li class="dropdown-item" id="top-offers">Top Offers
+							</li>
+							<ul class="subnav ">
+								<li class="offer-type" id="tu">By User</li>
+								<li class="offer-type" id="tn">By Network</li>
+							</ul>
+							<li class="dropdown-item offer-type" id="new-offers">New Offers
+							</li>
 						</ul>
-						<li class="dropdown-item offer-type" id="new-offers">New Offers
-						</li>
-					</ul>
+					</div>
+				</header>
+			</div>
+			<div class="bottom-box">
+				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
+				<div id="offers-area">
+					<table id="offers-table">
+						<thead>
+							<tr class="">
+								<th>Offer ID</th>
+								<th>Name</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
 				</div>
-			</header>
-		</div>
-		<div class="bottom-box">
-			<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
-			<div id="offers-area">
-				<table id="offers-table">
-					<thead>
-						<tr class="">
-							<th>Offer ID</th>
-							<th>Name</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
 			</div>
 		</div>
-	</div>
-	<div class="two-box panel" id="stats-panel">
-		<div class="top-box" id="list-box">
-			<header>
-				<span class="swap-wrapper">
-					<a class="with-icon" href="#stats-panel">
-						<h2>
-							Period Statistics
-							<span class="swap" id="swap3"></span>
-						</h2>
-					</a>
-				</span>
-				<div class="dropdown button-right">
-					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
-						<i class="fa fa-square-o fa-stack-2x"></i>
-						<i class="fa fa-bars fa-stack-1x"></i>
+		<div class="two-box panel" id="stats-panel">
+			<div class="top-box" id="list-box">
+				<header>
+					<span class="swap-wrapper">
+						<a class="with-icon" href="#stats-panel">
+							<h2>
+								Period Statistics
+								<span class="swap" id="swap3"></span>
+							</h2>
+						</a>
 					</span>
-					<ul class="dropdown-menu period-menu menu" id="hs-menu">
-						<li class="period">This Period</li>
-						<li class="period">Last Period</li>
-						<li class="period">This Month</li>
-						<li class="period">Last Month</li>
-						<li class="period">Past 30 Days</li>
-						<li class="period">Past 60 Days</li>
-						<li class="period">Past 90 Days</li>
-						<li class="period">This Year</li>
-						<li class="period">All Time</li>
-					</ul>
-				</div>
-			</header>
-		</div>
-		<div class="bottom-box">
-			<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
-			<div class="stats-container flex-container">
-				<div class="stats-box flex-container"
-				>
-				<div class="left-stats-box">
-					<i class="fa fa-exclamation fa-3x"></i>
-				</div>
-				<div class="right-stats-box">
-					<h3>Hits</h3>
-					<h3>8</h3>
-				</div>
+					<div class="dropdown button-right">
+						<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
+							<i class="fa fa-square-o fa-stack-2x"></i>
+							<i class="fa fa-bars fa-stack-1x"></i>
+						</span>
+						<ul class="dropdown-menu period-menu menu" id="hs-menu">
+							<li class="period">This Period</li>
+							<li class="period">Last Period</li>
+							<li class="period">This Month</li>
+							<li class="period">Last Month</li>
+							<li class="period">Past 30 Days</li>
+							<li class="period">Past 60 Days</li>
+							<li class="period">Past 90 Days</li>
+							<li class="period">This Year</li>
+							<li class="period">All Time</li>
+						</ul>
+					</div>
+				</header>
 			</div>
-			<div class="stats-box flex-container">
-				<div class="left-stats-box">
-					<i class="fa fa-sign-out fa-3x"></i>
+			<div class="bottom-box">
+				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
+				<div class="stats-container flex-container">
+					<div class="stats-box flex-container"
+					>
+					<div class="left-stats-box">
+						<i class="fa fa-exclamation fa-3x"></i>
+					</div>
+					<div class="right-stats-box">
+						<h3>Hits</h3>
+						<h3>8</h3>
+					</div>
 				</div>
-				<div class="right-stats-box">
-					<h3>Convs</h3>
-					<h3>3</h3>
+				<div class="stats-box flex-container">
+					<div class="left-stats-box">
+						<i class="fa fa-sign-out fa-3x"></i>
+					</div>
+					<div class="right-stats-box">
+						<h3>Convs</h3>
+						<h3>3</h3>
+					</div>
 				</div>
-			</div>
-			<div class="stats-box flex-container">
-				<div class="left-stats-box">
-					<i class="fa fa-money fa-3x"></i>
+				<div class="stats-box flex-container">
+					<div class="left-stats-box">
+						<i class="fa fa-money fa-3x"></i>
+					</div>
+					<div class="right-stats-box">
+						<h3>Payout</h3>
+						<h3>$189</h3>
+					</div>
 				</div>
-				<div class="right-stats-box">
-					<h3>Payout</h3>
-					<h3>$189</h3>
+				<div class="stats-box flex-container">
+					<div class="left-stats-box">
+						<i class="fa fa-cart-arrow-down fa-3x"></i>
+					</div>
+					<div class="right-stats-box">
+						<h3>EPC</h3>
+						<h3>$.08</h3>
+					</div>
 				</div>
-			</div>
-			<div class="stats-box flex-container">
-				<div class="left-stats-box">
-					<i class="fa fa-cart-arrow-down fa-3x"></i>
-				</div>
-				<div class="right-stats-box">
-					<h3>EPC</h3>
-					<h3>$.08</h3>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
-<!--Graph Box-->
-<div class="row flex-container" id="main-column">
-	<div class="graph-box panel">
-		<div class="top-box">
-			<header>
-				<a class="with-icon" href="#main-column">
-					<h2>Hourly Graph</h2>
-				</a>
-				<div class="dropdown button-right">
-					<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
-						<i class="fa fa-square-o fa-stack-2x"></i>
-						<i class="fa fa-refresh fa-stack-1x"></i>
-					</span>
-				</div>
-			</header>
-		</div>
-		<div class="bottom-box" id="hourly-graph">
-			<div class="loader flex-load"><center>
-				<i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i>
-			</center></div>
-			<div id="h_chart">
 			</div>
 		</div>
 	</div>
-	<div class="graph-box panel">
-		<div class="top-box">
-			<header>
-				<span class="swap-wrapper">
+	</div>
+	<!--Graph Box-->
+	<div class="row flex-container" id="main-column">
+		<div class="graph-box panel">
+			<div class="top-box">
+				<header>
 					<a class="with-icon" href="#main-column">
-						<h2>
-							Period Graph
-							<span class="swap" id="swap4"></span>
-						</h2>
+						<h2>Hourly Graph</h2>
 					</a>
-				</span>
-				<div class="dropdown button-right">
-					<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
-						<i class="fa fa-square-o fa-stack-2x"></i>
-						<i class="fa fa-bars fa-stack-1x"></i>
-					</span>
-					<ul class="dropdown-menu period-menu menu" id="p_graph-menu">
-						<li class="period">This Period</li>
-						<li class="period">Last Period</li>
-						<li class="period">This Month</li>
-						<li class="period">Last Month</li>
-						<li class="period">Past 30 Days</li>
-						<li class="period">Past 60 Days</li>
-						<li class="period">Past 90 Days</li>
-						<li class="period">This Year</li>
-						<li class="period">All Time</li>
-					</ul>
+					<div class="dropdown button-right">
+						<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
+							<i class="fa fa-square-o fa-stack-2x"></i>
+							<i class="fa fa-refresh fa-stack-1x"></i>
+						</span>
+					</div>
+				</header>
+			</div>
+			<div class="bottom-box" id="hourly-graph">
+				<div class="loader flex-load"><center>
+					<i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i>
+				</center></div>
+				<div id="h_chart">
 				</div>
-			</header>
+			</div>
 		</div>
-		<div class=" bottom-box" id="period-graph">
-			<div id="p_chart-holder">
-			<!-- <h3 id="p_chart-title">
-				This Period
-			</h3> -->
-			<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
-			<div id="p_chart"></div>
-		</div>
-	</div>
-</div>
-</div>
-<!--Info Boxes-->
-<div class="row flex-container" id="three-column">
-	<div class="three-box panel" id="news">
-		<div class="top-box">
-			<header>
-				<a  href="#news">
-					<h2>{$config.NICE_NAME} {#News#}</h2>
-				</a>
-			</header>
-		</div>
-		<div class="bottom-box">
-			<ul id="news">
-				{display_news data_only=1 count=5 order="publish desc" section="Announcements"}
-				{if $news}
-				{foreach from=$news item='article'}
-				<li class="news-item"><a  href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
-				{/foreach}
-				{/if}
-			</ul>
-		</div>
-	</div>
-	<div class="three-box panel" id="paysum">
-		<div class="top-box">
-			<header>
-				<a  href="#paysum">
-					<h2>{#PaymentSummary#}</h2>
-				</a>
-			</header>
-		</div>
-		<div class="bottom-box">
-			<ul id="paysum-list">
-				{offerit_display_payment_summary data_only=1}
-				{if $myPaymentSummary}
-				<li>{#OutstandingBalance#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.earned-$myPaymentSummary.stored|currency_format:2}</a></li>
-				{/if}
-				{if $myPaymentSummary.stored-$myPaymentSummary.paid}
-				<li>{#PendingPayments#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.stored-$myPaymentSummary.paid|currency_format:2}</a></li>
-				{/if}
-				{if $myPaymentSummary.paid}
-				<li>{#PaymentsSent#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
-				{/if}
-			</ul>
+		<div class="graph-box panel">
+			<div class="top-box">
+				<header>
+					<span class="swap-wrapper">
+						<a class="with-icon" href="#main-column">
+							<h2>
+								Period Graph
+								<span class="swap" id="swap4"></span>
+							</h2>
+						</a>
+					</span>
+					<div class="dropdown button-right">
+						<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
+							<i class="fa fa-square-o fa-stack-2x"></i>
+							<i class="fa fa-bars fa-stack-1x"></i>
+						</span>
+						<ul class="dropdown-menu period-menu menu" id="p_graph-menu">
+							<li class="period">This Period</li>
+							<li class="period">Last Period</li>
+							<li class="period">This Month</li>
+							<li class="period">Last Month</li>
+							<li class="period">Past 30 Days</li>
+							<li class="period">Past 60 Days</li>
+							<li class="period">Past 90 Days</li>
+							<li class="period">This Year</li>
+							<li class="period">All Time</li>
+						</ul>
+					</div>
+				</header>
+			</div>
+			<div class=" bottom-box" id="period-graph">
+				<div id="p_chart-holder">
+				<!-- <h3 id="p_chart-title">
+					This Period
+				</h3> -->
+				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
+				<div id="p_chart"></div>
+			</div>
 		</div>
 	</div>
-	<div class="three-box panel" id="contact">
-		<div class="top-box">
-			<header>
-				<a  href="#contact">
-					<h2>Agent Contact</h2>
-				</a>
-			</header>
+	</div>
+	<!--Info Boxes-->
+	<div class="row flex-container" id="three-column">
+		<div class="three-box panel" id="news">
+			<div class="top-box">
+				<header>
+					<a  href="#news">
+						<h2>{$config.NICE_NAME} {#News#}</h2>
+					</a>
+				</header>
+			</div>
+			<div class="bottom-box">
+				<ul id="news">
+					{display_news data_only=1 count=5 order="publish desc" section="Announcements"}
+					{if $news}
+					{foreach from=$news item='article'}
+					<li class="news-item"><a  href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
+					{/foreach}
+					{/if}
+				</ul>
+			</div>
 		</div>
-		<div class="bottom-box">
-			<table>
-				<tr>
-					<td>Lorem ipsum.</td>
-					<td>Numquam, blanditiis.</td>
-					<td>Magnam, ea!</td>
+		<div class="three-box panel" id="paysum">
+			<div class="top-box">
+				<header>
+					<a  href="#paysum">
+						<h2>{#PaymentSummary#}</h2>
+					</a>
+				</header>
+			</div>
+			<div class="bottom-box">
+				<ul id="paysum-list">
+					{offerit_display_payment_summary data_only=1}
+					{if $myPaymentSummary}
+					<li>{#OutstandingBalance#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.earned-$myPaymentSummary.stored|currency_format:2}</a></li>
+					{/if}
+					{if $myPaymentSummary.stored-$myPaymentSummary.paid}
+					<li>{#PendingPayments#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.stored-$myPaymentSummary.paid|currency_format:2}</a></li>
+					{/if}
+					{if $myPaymentSummary.paid}
+					<li>{#PaymentsSent#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
+					{/if}
+				</ul>
+			</div>
+		</div>
+		<div class="three-box panel" id="contact">
+			<div class="top-box">
+				<header>
+					<a  href="#contact">
+						<h2>Agent Contact</h2>
+					</a>
+				</header>
+			</div>
+			<div class="bottom-box">
+				<table>
+					<tr>
+						<td>Lorem ipsum.</td>
+						<td>Numquam, blanditiis.</td>
+						<td>Magnam, ea!</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum.</td>
+						<td>Ea, incidunt.</td>
+						<td>Ea, incidunt.</td>
+					</tr>
+					<tr>
+						<td>Lorem ipsum.</td>
+						<td>Ea, incidunt.</td>
+						<td>Lorem ipsum.</td>
+					</tr>
 				</tr>
-				<tr>
-					<td>Lorem ipsum.</td>
-					<td>Ea, incidunt.</td>
-					<td>Ea, incidunt.</td>
-				</tr>
-				<tr>
-					<td>Lorem ipsum.</td>
-					<td>Ea, incidunt.</td>
-					<td>Lorem ipsum.</td>
-				</tr>
-			</tr>
-		</table>
+			</table>
+		</div>
 	</div>
+	</div>
+	</body>
+	</html>
 </div>
-</div>
-</body>
-</html>

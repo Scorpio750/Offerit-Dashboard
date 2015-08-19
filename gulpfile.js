@@ -7,7 +7,7 @@ var gulp 		= require('gulp'),
 	uglify		= require('gulp-uglify'),
 	notify 		= require('gulp-notify'),
 	bower		= require('gulp-bower'),
-	minify_css	= require('gulp-minify-css'),
+	minifyCSS	= require('gulp-minify-css'),
 	autoprefixer= require('gulp-autoprefixer'),
 	modernizr	= require('gulp-modernizr'),
 	merge		= require('merge2');
@@ -60,7 +60,7 @@ gulp.task('styles', function() {
 		browsers: ['last 2 versions'],
 		cascade: false
 		}))
-	//.pipe(minify_css())
+	.pipe(minifyCSS())
 	.pipe(gulp.dest(config.cssSrc));
 });
 
@@ -96,7 +96,6 @@ gulp.task('scripts', function() {
 			config.bowerDir + '/flot/jquery.flot.*.js',
 			config.bowerDir + '/nicescroll/jquery.nicescroll.min.js',	
 			config.jsPath + '/flotanimator/jquery.flot.animator.js',
-			// config.jsPath + '/modernizr.js',
 			config.jsPath + '/data_render.js',
 			config.jsPath + '/dashboard.js',
 			config.jsPath + '/literalclose'	
