@@ -7504,6 +7504,7 @@ $(document).ready(function() {
 									console.log('changing state to user');
 									state_change = true;
 								}
+								console.log(queryVars);
 								display_offers(data, queryVars['type'], 'user', state_change);
 								break;
 
@@ -7718,7 +7719,7 @@ $(document).ready(function() {
 			display: "none",
 			border: ".1em solid #fdd",
 			padding: ".5em",
-			backgroundColor: "slategray",
+			backgroundColor: "aliceblue",
 			opacity: 0.80
 		}).appendTo("body");
 
@@ -8081,6 +8082,7 @@ $('.menu-btn').click(function() {
 
 // hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
+	console.log($(this).text());
 	toggleTopMetric($(this).text());
 });
 
@@ -8126,6 +8128,7 @@ function toggleNewMetric() {
 function display_offers(offers, type, scope, state_change) {
 	console.log('--------------------');
 	console.log(state_change);
+	console.log(type);
 	var value;
 	var timer;
 

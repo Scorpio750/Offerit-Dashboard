@@ -329,6 +329,7 @@ $('.menu-btn').click(function() {
 
 // hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
+	console.log($(this).text());
 	toggleTopMetric($(this).text());
 });
 
@@ -374,6 +375,7 @@ function toggleNewMetric() {
 function display_offers(offers, type, scope, state_change) {
 	console.log('--------------------');
 	console.log(state_change);
+	console.log(type);
 	var value;
 	var timer;
 
