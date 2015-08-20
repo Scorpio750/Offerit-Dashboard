@@ -305,17 +305,26 @@ $sec-red-hover: #A04343;
     .rotated {
         transform: rotateY(180deg);
     }
+    /* ERROR SELECTORS */
+    .error-box {
+        display: none;
+        margin: auto;
+    }
+    .error-button {
+        border-radius: 8px;
+        font-weight: bold;
+        &:hover, &:active, &:focus {
+            span {
+                color: white;
+            }
+        }
+    }
     /////////////////////////
     //                     //
     //   PANEL SELECTORS   //
     //                     //
     /////////////////////////
-    /* #main {
-        margin: 0 auto;
-        width: 77.5em;
-        padding: 12em 0 2em;
-        text-align: center;
-    } */
+    
     #reminders {
         margin-bottom: 3em;
         z-index: 100;
@@ -326,6 +335,7 @@ $sec-red-hover: #A04343;
         .bottom-box {
             min-height: 8em;
             // padding: 1em 0;
+       
         }
         &:hover {
             .top-box {
@@ -426,6 +436,10 @@ $sec-red-hover: #A04343;
             text-align: left;
         }
     }
+    #error-offers-button {
+        background-color: $prim-green-hover;
+    }
+
     // Hourly Stats box
     #stats-panel {
         flex: 4 1 auto;
@@ -448,19 +462,10 @@ $sec-red-hover: #A04343;
         }
     }
     #error-stats {
-        display: none;
         padding-bottom: 1em;
-        margin: auto;
     }
     #error-stats-button {
-        border-radius: 8px;
         background-color: $prim-cadet-hover;
-        font-weight: bold;
-        &:hover, &:active, &:focus {
-            span {
-                color: white;
-            }
-        }
     }
     // Graph Panel Selectors
     #main-column {

@@ -154,7 +154,7 @@ $(document).ready(function() {
 
 								// stats-box data
 								else if (typeof queryVars['dashboard_summary'] !== "undefined") {
-									fill_stats(data.total);
+									fill_stats(data.total, queryVars['period_index']);
 									return;
 								}
 								break;

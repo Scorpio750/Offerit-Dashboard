@@ -7543,7 +7543,7 @@ $(document).ready(function() {
 
 								// stats-box data
 								else if (typeof queryVars['dashboard_summary'] !== "undefined") {
-									fill_stats(data.total);
+									fill_stats(data.total, queryVars['period_index']);
 									return;
 								}
 								break;
@@ -7774,8 +7774,7 @@ $('.three-box > .bottom-box').niceScroll({
 var queryVars, period = 0,
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
-var queryVars_err, url_err;
-
+var period_err;
 
 // Offer Data
 queryVars = {
@@ -7787,6 +7786,16 @@ call_data(queryVars, url);
 
 // Initially, display only hourly data 
 // and data from this pay period
+
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
 
 // Graph Data
 // Period data
@@ -7808,15 +7817,6 @@ queryVars = {
 };
 call_data(queryVars, url);
 
-// Stats Data
-queryVars = {
-	'function': 'offerit_display_stats',
-	'period_index': period,
-	'period': period_map[period],
-	'dashboard_summary': 1,
-	'dashboard_multi': undefined
-};
-call_data(queryVars, url);
 
 
 /////////////////////////////////
@@ -7968,13 +7968,15 @@ $('.offer-type').click(function switch_offers() {
 //                                   //
 ///////////////////////////////////////
 
-function fill_stats(data) {
+function fill_stats(data, period_stamp) {
 	var container = $('.stats-container');
 	var errorStats = $('#error-stats');
 	if (data.length === 0) {
-		console.log('No data found upon retrieval.');
 		container.hide();
 		errorStats.show();
+
+		// cache period for future reload
+		period_err = period_stamp;
 		/*errorStats.animate({
 			height: errorStats.css('height'),
 			width: errorStats.css('width')
@@ -8045,11 +8047,16 @@ function isInt(n) {
 
 // Reload stats boxes
 $('#error-stats-button').click(function reload_data() {
-	console.log('``````````````````````````````````````');
-	console.log(queryVars_err);
-	console.log(url_err);
+	queryVars = {
+		'function': 'offerit_display_stats',
+		'period_index': period_err,
+		'period': period_map[period_err],
+		'dashboard_summary': 1,
+		'dashboard_multi': undefined
+	};
+	url = 'http://jamesdev.offerit.com/internal_data.php';
 
-	call_data(queryVars_err, url_err);
+	call_data(queryVars, url);
 })
 
 ///////////////////////////////////
@@ -8074,28 +8081,7 @@ $('.menu-btn').click(function() {
 
 // hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
-	url = 'http://jamesdev.offerit.com/ajax_data.php';
-	var tag;
-	switch ($(this).text()) {
-		case 'by Hits':
-			tag = 'impression';
-			break;
-		case 'by Convs':
-			tag = 'conversion';
-			break;
-		case 'by Payout':
-			tag = 'commission';
-			break;
-		case 'by EPC':
-			tag = 'epc';
-			break;
-	}
-	queryVars = {
-		'function': currentFocus,
-		'return_type': 'json',
-		'type': tag
-	};
-	call_data(queryVars, url);
+	toggleTopMetric($(this).text());
 });
 
 function toggleTopMetric(type) {
@@ -8228,7 +8214,7 @@ $('.period-menu li').click(function getPeriod() {
 	var swapid;
 	queryVars = {
 		'function': 'offerit_display_stats',
-		'period_index': undefined,
+		'period_index': index,
 		'period': period_map[index],
 		'dashboard_multi': undefined,
 		'dashboard_summary': undefined
@@ -8248,20 +8234,19 @@ $('.period-menu li').click(function getPeriod() {
 	// add descriptor to appropriate header
 	$swap[swapid].css('vertical-align', '92%');
 	shift(swapid, 1, index);
-	queryVars['period_index'] = index;
 	call_data(queryVars, url);
 });
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
 
-period = 8;
-queryVars = {
-	'function': 'offerit_display_hourly_hits',
-	'period': period,
-	'return_type': 'json',
-};
-call_data(queryVars, url);
+	period = 8;
+	queryVars = {
+		'function': 'offerit_display_hourly_hits',
+		'period': period,
+		'return_type': 'json',
+	};
+	call_data(queryVars, url);
 });
 
 });
