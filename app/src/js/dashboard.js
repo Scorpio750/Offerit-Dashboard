@@ -22,6 +22,8 @@ $('.three-box > .bottom-box').niceScroll({
 var queryVars, period = 0,
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
+var queryVars_err, url_err;
+
 
 // Offer Data
 queryVars = {
@@ -33,15 +35,6 @@ call_data(queryVars, url);
 
 // Initially, display only hourly data 
 // and data from this pay period
-// Stats Data
-queryVars = {
-	'function': 'offerit_display_stats',
-	'period_index': period,
-	'period': period_map[period],
-	'dashboard_summary': 1,
-	'dashboard_multi': undefined
-};
-call_data(queryVars, url);
 
 // Graph Data
 // Period data
@@ -62,6 +55,17 @@ queryVars = {
 	'return_type': 'json',
 };
 call_data(queryVars, url);
+
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
+
 
 /////////////////////////////////
 //                             //
@@ -213,11 +217,19 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data) {
+	var container = $('.stats-container');
+	var errorStats = $('#error-stats');
 	if (data.length === 0) {
 		console.log('No data found upon retrieval.');
+		container.hide();
+		errorStats.show();
+		/*errorStats.animate({
+			height: errorStats.css('height'),
+			width: errorStats.css('width')
+		});*/
 		return;
 	}
-	var container = $('.stats-container');
+
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -246,9 +258,6 @@ function fill_stats(data) {
 		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
 			// target_data.fadeOut('fast');
-			/*container.animate({
-				height: container.height()
-			})*/
 			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
 			// target_data.fadeIn('fast');
@@ -261,6 +270,12 @@ function fill_stats(data) {
 			console.log('post-sleep ' + target_text.text());
 		}
 	});
+	errorStats.hide();
+	container.show();
+	/*container.animate({
+		height: container.height(),
+		width: container.width()
+	});*/
 }
 
 function add_decimals(n) {
@@ -275,6 +290,15 @@ function add_decimals(n) {
 function isInt(n) {
 	return n % 1 === 0;
 }
+
+// Reload stats boxes
+$('#error-stats-button').click(function reload_data() {
+	console.log('``````````````````````````````````````');
+	console.log(queryVars_err);
+	console.log(url_err);
+
+	call_data(queryVars_err, url_err);
+})
 
 ///////////////////////////////////
 //                               //
@@ -314,7 +338,7 @@ $('#metric-btn > ul > li').click(function() {
 			tag = 'epc';
 			break;
 	}
-	var queryVars = {
+	queryVars = {
 		'function': currentFocus,
 		'return_type': 'json',
 		'type': tag
@@ -338,7 +362,7 @@ function toggleTopMetric(type) {
 			tag = 'epc';
 			break;
 	}
-	var queryVars = {
+	queryVars = {
 		'function': currentFocus,
 		'return_type': 'json',
 		'type': tag
@@ -478,11 +502,7 @@ $('.period-menu li').click(function getPeriod() {
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
-/*var spinner = $('.fa-refresh');
-spinner.addClass('fa-pulse');
-window.setTimeout(function() {
-	spinner.removeClass('fa-pulse');
-}, 200);*/
+
 period = 8;
 queryVars = {
 	'function': 'offerit_display_hourly_hits',
