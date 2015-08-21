@@ -217,21 +217,6 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data, period_stamp) {
-	var container = $('.stats-container');
-	var errorStats = $('#error-stats');
-	if (data.length === 0) {
-		container.hide();
-		errorStats.show();
-
-		// cache period for future reload
-		period_err = period_stamp;
-		/*errorStats.animate({
-			height: errorStats.css('height'),
-			width: errorStats.css('width')
-		});*/
-		return;
-	}
-
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -272,8 +257,6 @@ function fill_stats(data, period_stamp) {
 			console.log('post-sleep ' + target_text.text());
 		}
 	});
-	errorStats.hide();
-	container.show();
 	/*container.animate({
 		height: container.height(),
 		width: container.width()
@@ -342,6 +325,7 @@ function toggleTopMetric(type) {
 			break;
 		case 'by Conversions':
 			tag = 'conversion';
+			break;
 		case 'by Payout':
 			tag = 'commission';
 			break;

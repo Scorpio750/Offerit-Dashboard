@@ -7439,26 +7439,32 @@ $(document).ready(function() {
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
 			var function_type = queryVars['function'];
-			var loader;
+			var loader, error_panel;
 
-			// determine which function is being called to place appropriate loader
-			// not very DRY, but I'm not sure how else to implement this considering
-			// we evaluate function type upon completion of ajax call as well
+			// determine which function is being called to retrieve appropriate subpanels
 			if (function_type == 'ajax_get_affiliate_top_offers' 
 				|| function_type == 'ajax_get_network_top_offers'
 				|| function_type == 'ajax_get_new_offers') {
 				loader = $('#offer-box').find('.loader');
+				error_panel = $('#error-offers');
+				success_panel = $('#offers-area');
 			}
 			else if (function_type == 'offerit_display_stats') {
 				if (typeof queryVars['dashboard_multi'] !== "undefined") {
 					loader = $('#period-graph').find('.loader');
+					error_panel = $('#error-period-graph');
+					success_panel = $('#p_chart');
 				}
 				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
 					loader = $('#stats-panel').find('.loader');
+					error_panel = $('#error-stats');
+					success_panel = $('#stats-container')
 				}
 			}
 			else if (function_type == 'offerit_display_hourly_hits') {
 				loader = $('#hourly-graph').find('.loader');
+				error_panel = $('#error-hourly-graph');
+				success_panel = $('#h_chart');
 			}
 
 			$.ajax({
@@ -7472,8 +7478,15 @@ $(document).ready(function() {
 					$(loader).fadeOut('fast');
 				},
 				success: function store_data(data) {
-					if (data) {
+					if (data && data.length > 0) {
+						console.log('QUERYVARS:');
+						console.log(queryVars);
+						console.log('DATA:');
 						console.log(data);
+
+						error_panel.addClass('hidden');
+						success_panel.removeClass('hidden');
+
 						series_data = {
 							'Hourly Data': [],
 							'Period Data': [
@@ -7504,7 +7517,6 @@ $(document).ready(function() {
 									console.log('changing state to user');
 									state_change = true;
 								}
-								console.log(queryVars);
 								display_offers(data, queryVars['type'], 'user', state_change);
 								break;
 
@@ -7556,12 +7568,18 @@ $(document).ready(function() {
 								build_hourly_series(data, timespan, queryVars, url);
 								break;
 						}
+						return;
 					}
+					// data is null or empty, call error handler
+					error_handler(success_panel, error_panel);
 				}
 			});
 		}
 
-
+		function error_handler(success_panel, error_panel) {
+			success_panel.addClass('hidden');
+			error_panel.removeClass('hidden');
+		}
 
 		function build_hourly_series(hits_data, timespan, queryVars, url) {
 			// build series for Hits	
@@ -7586,7 +7604,6 @@ $(document).ready(function() {
 				}
 			});
 		}
-
 
 		// creates the axes from the ajax data and stores them in the appropriate series object
 		function create_axes(ajax_data, series, identifier) {
@@ -7970,21 +7987,6 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data, period_stamp) {
-	var container = $('.stats-container');
-	var errorStats = $('#error-stats');
-	if (data.length === 0) {
-		container.hide();
-		errorStats.show();
-
-		// cache period for future reload
-		period_err = period_stamp;
-		/*errorStats.animate({
-			height: errorStats.css('height'),
-			width: errorStats.css('width')
-		});*/
-		return;
-	}
-
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -8025,8 +8027,6 @@ function fill_stats(data, period_stamp) {
 			console.log('post-sleep ' + target_text.text());
 		}
 	});
-	errorStats.hide();
-	container.show();
 	/*container.animate({
 		height: container.height(),
 		width: container.width()
@@ -8095,6 +8095,7 @@ function toggleTopMetric(type) {
 			break;
 		case 'by Conversions':
 			tag = 'conversion';
+			break;
 		case 'by Payout':
 			tag = 'commission';
 			break;
