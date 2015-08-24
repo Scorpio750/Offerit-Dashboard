@@ -34,7 +34,7 @@
 						<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
 							<li class="dropdown-item" id="top-offers">Top Offers
 							</li>
-							<ul class="subnav ">
+							<ul class="subnav">
 								<li class="offer-type" id="tu">By User</li>
 								<li class="offer-type" id="tn">By Network</li>
 							</ul>
@@ -46,19 +46,31 @@
 			</div>
 			<div class="bottom-box">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
 				<div class="error-box" id="error-offers">
 					<h3>
 						Sorry, an error has occurred.
 					</h3>
+=======
+				<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
+				<div class="error-box hidden flex-state" id="error-offers">
+					<h4 class="error-message">
+						Sorry, an error has occurred.
+					</h4>
+>>>>>>> dcd2bdd03dc3600c77b8ad09f34594418668e15b
 					<button class="btn error-button" id="error-offers-button">
 						<span>Retry</span>
 					</button>
 				</div>
+<<<<<<< HEAD
 =======
 				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
 >>>>>>> parent of 9bc511a... added error handling for stats-box
 				<div id="offers-area">
+=======
+				<div class="success-box" id="offers-area">
+>>>>>>> dcd2bdd03dc3600c77b8ad09f34594418668e15b
 					<table id="offers-table">
 						<thead>
 							<tr class="">
@@ -104,19 +116,29 @@
 				</header>
 			</div>
 			<div class="bottom-box">
+<<<<<<< HEAD
 				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
 <<<<<<< HEAD
 				<div class="error-box" id="error-stats">
 					<h3>
+=======
+				<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
+				<div class="error-box hidden flex-state" id="error-stats">
+					<h3 class="error-message">
+>>>>>>> dcd2bdd03dc3600c77b8ad09f34594418668e15b
 						Sorry, an error has occurred.
 					</h3>
 					<button class="btn error-button" id="error-stats-button">
 						<span>Retry</span>
 					</button>
 				</div>
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 9bc511a... added error handling for stats-box
 				<div class="stats-container flex-container">
+=======
+				<div class="flex-container success-box" id="stats-container">
+>>>>>>> dcd2bdd03dc3600c77b8ad09f34594418668e15b
 					<div class="stats-box flex-container"
 					>
 					<div class="left-stats-box">
@@ -175,13 +197,22 @@
 				</header>
 			</div>
 			<div class="bottom-box" id="hourly-graph">
-				<div class="loader flex-load"><center>
+				<div class="loader flex-state"><center>
 					<i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i>
 				</center></div>
-				<div id="h_chart">
+				<div class="error-box hidden flex-state" id="error-hourly-graph">
+					<h3 class="error-message">
+						Sorry, an error has occurred.
+					</h3>
+					<button class="btn error-button" id="error-hourly-graph-button">
+						<span>Retry</span>
+					</button>
+				</div>
+				<div class="success-box" id="h_chart">
 				</div>
 			</div>
 		</div>
+
 		<div class="graph-box panel">
 			<div class="top-box">
 				<header>
@@ -217,8 +248,16 @@
 				<!-- <h3 id="p_chart-title">
 					This Period
 				</h3> -->
-				<div class="loader flex-load"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
-				<div id="p_chart"></div>
+				<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
+				<div class="error-box hidden flex-state" id="error-period-graph">
+					<h3 class="error-message">
+						Sorry, an error has occurred.
+					</h3>
+					<button class="btn error-button" id="error-period-graph-button">
+						<span>Retry</span>
+					</button>
+				</div>
+				<div class="success-box" id="p_chart"></div>
 			</div>
 		</div>
 	</div>

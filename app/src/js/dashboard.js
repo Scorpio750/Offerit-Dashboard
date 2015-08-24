@@ -52,6 +52,16 @@ queryVars = {
 };
 call_data(queryVars, url);
 
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
+
 // Graph Data
 // Period data
 queryVars = {
@@ -321,28 +331,8 @@ $('.menu-btn').click(function() {
 
 // hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
-	url = 'http://jamesdev.offerit.com/ajax_data.php';
-	var tag;
-	switch ($(this).text()) {
-		case 'by Hits':
-			tag = 'impression';
-			break;
-		case 'by Convs':
-			tag = 'conversion';
-			break;
-		case 'by Payout':
-			tag = 'commission';
-			break;
-		case 'by EPC':
-			tag = 'epc';
-			break;
-	}
-	var queryVars = {
-		'function': currentFocus,
-		'return_type': 'json',
-		'type': tag
-	};
-	call_data(queryVars, url);
+	console.log($(this).text());
+	toggleTopMetric($(this).text());
 });
 
 function toggleTopMetric(type) {
@@ -354,6 +344,7 @@ function toggleTopMetric(type) {
 			break;
 		case 'by Conversions':
 			tag = 'conversion';
+			break;
 		case 'by Payout':
 			tag = 'commission';
 			break;
