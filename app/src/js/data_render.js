@@ -115,6 +115,7 @@ $(document).ready(function() {
 									console.log('changing state to user');
 									state_change = true;
 								}
+								console.log(queryVars);
 								display_offers(data, queryVars['type'], 'user', state_change);
 								break;
 
@@ -154,7 +155,7 @@ $(document).ready(function() {
 
 								// stats-box data
 								else if (typeof queryVars['dashboard_summary'] !== "undefined") {
-									fill_stats(data.total);
+									fill_stats(data.total, queryVars['period_index']);
 									return;
 								}
 								break;
@@ -329,7 +330,7 @@ $(document).ready(function() {
 			display: "none",
 			border: ".1em solid #fdd",
 			padding: ".5em",
-			backgroundColor: "slategray",
+			backgroundColor: "aliceblue",
 			opacity: 0.80
 		}).appendTo("body");
 

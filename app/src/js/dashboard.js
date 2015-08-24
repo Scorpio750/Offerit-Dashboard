@@ -22,9 +22,6 @@ $('.three-box > .bottom-box').niceScroll({
 var queryVars, period = 0,
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
-var queryVars_err, url_err;
-
-
 // Offer Data
 queryVars = {
 	'function': 'ajax_get_affiliate_top_offers',
@@ -35,6 +32,25 @@ call_data(queryVars, url);
 
 // Initially, display only hourly data 
 // and data from this pay period
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
+
+// Stats Data
+queryVars = {
+	'function': 'offerit_display_stats',
+	'period_index': period,
+	'period': period_map[period],
+	'dashboard_summary': 1,
+	'dashboard_multi': undefined
+};
+call_data(queryVars, url);
 
 // Graph Data
 // Period data
@@ -55,17 +71,6 @@ queryVars = {
 	'return_type': 'json',
 };
 call_data(queryVars, url);
-
-// Stats Data
-queryVars = {
-	'function': 'offerit_display_stats',
-	'period_index': period,
-	'period': period_map[period],
-	'dashboard_summary': 1,
-	'dashboard_multi': undefined
-};
-call_data(queryVars, url);
-
 
 /////////////////////////////////
 //                             //
@@ -217,19 +222,11 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data) {
-	var container = $('.stats-container');
-	var errorStats = $('#error-stats');
 	if (data.length === 0) {
 		console.log('No data found upon retrieval.');
-		container.hide();
-		errorStats.show();
-		/*errorStats.animate({
-			height: errorStats.css('height'),
-			width: errorStats.css('width')
-		});*/
 		return;
 	}
-
+	var container = $('.stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -258,6 +255,9 @@ function fill_stats(data) {
 		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
 			// target_data.fadeOut('fast');
+			/*container.animate({
+				height: container.height()
+			})*/
 			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
 			// target_data.fadeIn('fast');
@@ -270,12 +270,6 @@ function fill_stats(data) {
 			console.log('post-sleep ' + target_text.text());
 		}
 	});
-	errorStats.hide();
-	container.show();
-	/*container.animate({
-		height: container.height(),
-		width: container.width()
-	});*/
 }
 
 function add_decimals(n) {
@@ -293,11 +287,16 @@ function isInt(n) {
 
 // Reload stats boxes
 $('#error-stats-button').click(function reload_data() {
-	console.log('``````````````````````````````````````');
-	console.log(queryVars_err);
-	console.log(url_err);
+	queryVars = {
+		'function': 'offerit_display_stats',
+		'period_index': period_err,
+		'period': period_map[period_err],
+		'dashboard_summary': 1,
+		'dashboard_multi': undefined
+	};
+	url = 'http://jamesdev.offerit.com/internal_data.php';
 
-	call_data(queryVars_err, url_err);
+	call_data(queryVars, url);
 })
 
 ///////////////////////////////////
@@ -338,7 +337,7 @@ $('#metric-btn > ul > li').click(function() {
 			tag = 'epc';
 			break;
 	}
-	queryVars = {
+	var queryVars = {
 		'function': currentFocus,
 		'return_type': 'json',
 		'type': tag
@@ -362,7 +361,7 @@ function toggleTopMetric(type) {
 			tag = 'epc';
 			break;
 	}
-	queryVars = {
+	var queryVars = {
 		'function': currentFocus,
 		'return_type': 'json',
 		'type': tag
@@ -388,6 +387,7 @@ function toggleNewMetric() {
 function display_offers(offers, type, scope, state_change) {
 	console.log('--------------------');
 	console.log(state_change);
+	console.log(type);
 	var value;
 	var timer;
 
@@ -476,7 +476,7 @@ $('.period-menu li').click(function getPeriod() {
 	var swapid;
 	queryVars = {
 		'function': 'offerit_display_stats',
-		'period_index': undefined,
+		'period_index': index,
 		'period': period_map[index],
 		'dashboard_multi': undefined,
 		'dashboard_summary': undefined
@@ -496,20 +496,18 @@ $('.period-menu li').click(function getPeriod() {
 	// add descriptor to appropriate header
 	$swap[swapid].css('vertical-align', '92%');
 	shift(swapid, 1, index);
-	queryVars['period_index'] = index;
 	call_data(queryVars, url);
 });
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
-
-period = 8;
-queryVars = {
-	'function': 'offerit_display_hourly_hits',
-	'period': period,
-	'return_type': 'json',
-};
-call_data(queryVars, url);
+	period = 8;
+	queryVars = {
+		'function': 'offerit_display_hourly_hits',
+		'period': period,
+		'return_type': 'json',
+	};
+	call_data(queryVars, url);
 });
 
 });
