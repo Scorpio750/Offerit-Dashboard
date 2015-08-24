@@ -1,56 +1,192 @@
+{literal}
+// Flot rendering functions
 $(document).ready(function() {
+	var queryVars, period;
+	/* creating data array to hold series information
+	 * 1st element is hourly graph data
+	 * 2nd element is period graph data
+	 * Period graph elements are indexed in the following manner:
+	 * [0] This Period
+	 * [1] Last Period
+	 * [2] This Month
+	 * [3] Last Month
+	 * [4] Past 30 Days
+	 * [5] Past 60 Days
+	 * [6] Past 90 Days
+	 * [7] This Year
+	 * [8] All Time
+	 */
+	var series_data = {
+		'Hourly Data': [],
+		'Period Data': [
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			[''],
+			['']
+		]
+	};
 
-	function call_data(queryVars, retrieved_data) {
-		$.getJSON('http://demo.offerit.com/internal_data.php', queryVars, function(data) {
-			if (data) {
-				if (queryVars['function'] == 'offerit_display_stats') {
-					retrieved_data = data.total;
-				}
-				else {
-					retrieved_data = data;
-				}
-			}
-		});
-		console.log(retrieved_data);
-		return retrieved_data;
+	label_series(series_data['Hourly Data']);
+	for (var i in series_data['Period Data']) {
+		label_series(series_data['Period Data'][i]);
 	}
 
-	function plot_graph(plot_name, data, options) {
-		return ($.plot(plot_name, data, options));
+	// maps menu period indices to database period indices
+	var period_map = [0, 1, 5, 11, 13, 12, 13, 6, 7];
+
+	// constructs each series element
+	function label_series(series) {
+		var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
+		for (var i in names) {
+			series[i] = {
+				label: names[i],
+				data: []
+			};
+		}
+		return series;
 	}
 
 	// AJAX calls for plot data
-	var queryVars, period;
+	function call_data(queryVars) {
+		$.getJSON('http://jamesdev.offerit.com/internal_data.php',
+			queryVars, function store_data(data) {
+				if (data) {
+					var retrieved_data, target_series, plot_name;
+					if (queryVars['function'] == 'offerit_display_stats') {
+						retrieved_data = data.total;
+						target_series = series_data['Period Data'][0];
+						plot_name = '#p_chart';
+
+					} else {
+						retrieved_data = data;
+						series_data['Hourly Data'];
+						plot_name = '#h_chart';
+					}
+					target_series = create_axes(retrieved_data, target_series);
+					plot_graph(plot_name, target_series);
+				}
+			});
+	}
+
+	// creates the axes from the ajax data and stores them in the appropriate series object
+	function create_axes(ajax_data, series) {
+		var axes = []
+		for (var date in ajax_data) {
+			// multiply
+			axes.push([date * 1000, ajax_data[date]]);
+		}
+		// zip x-axis and y-axis values together
+		// zip(axes);
+		console.log("Axes: " + axes);
+		series = axes;
+		return series;
+	}
+
+	function plot_graph(plot_name, data) {
+		var series_options = {
+			series: {
+				stack: true,
+				group: true,
+				groupInterval: 1,
+				lines: {
+					show: true,
+					fill: false
+				},
+				points: {
+					show: false
+				},
+			},
+			xaxis: {
+				mode: "time",
+				timezone: "browser",
+				tickLength: 5
+			},
+			selection: {
+				mode: "x"
+			},
+			grid: {
+				color: "slategray",
+				borderWidth: 0,
+				backgroundColor: "#E6E6E6",
+				hoverable: true,
+				clickable: false,
+				autoHighlight: true
+			}
+		}
+		return ($.plot(plot_name, data, series_options));
+	}
+
+	// helper for returning the weekends in a period
+	function weekendAreas(axes) {
+
+		var markings = [],
+			d = new Date(axes.xaxis.min);
+
+		// go to the first Saturday
+
+		d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
+		d.setUTCSeconds(0);
+		d.setUTCMinutes(0);
+		d.setUTCHours(0);
+
+		var i = d.getTime();
+
+		// when we don't set yaxis, the rectangle automatically
+		// extends to infinity upwards and downwards
+
+		do {
+			markings.push({
+				xaxis: {
+					from: i,
+					to: i + 2 * 24 * 60 * 60 * 1000
+				}
+			});
+			i += 7 * 24 * 60 * 60 * 1000;
+		} while (i < axes.xaxis.max);
+
+		return markings;
+	}
+
+	///////////////////////////
+	//                       //
+	// Default display data  //
+	//                       //
+	///////////////////////////
+
+	// Initially, display only hourly data 
+	// and data from this pay period
 
 	// Period data
+
 	period = 1;
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period': period,
 		'dashboard_summary': 1
 	};
-	var summary_data = call_data(queryVars, summary_data);
+	var summary_data = call_data(queryVars);
 
 	// Hourly data
+	period = 8;
 	queryVars = {
 		'function': 'offerit_display_hourly_hits',
 		'period': period,
 		'return_type': 'json',
 		'time_format': 'hour'
 	};
-	var hourly_hits = call_data(queryVars, hourly_hits);
+	var hourly_hits = call_data(queryVars);
+	queryVars['function'] = 'offerit_display_hourly_sales';
+	var hourly_sales = call_data(queryVars);
 
-	queryVars = {
-		'function': 'offerit_display_hourly_sales',
-		'period': period,
-		'return_type': 'json',
-		'time_format': 'hour'
-	};
-	var hourly_sales = call_data(queryVars, hourly_sales);
 
-	// h_plot
-
-	// p_plot
+	// Object.keys(series_data['p_series']).forEach(function(key, index) {
+	// 	label_series(series_data['p_series'], names);
+	// }, series_data['p_series']);
 
 	function flot_test() {
 		// flot chart code
@@ -348,3 +484,4 @@ $(document).ready(function() {
 		});
 	}
 });
+{/literal}

@@ -8,7 +8,7 @@
   "main": [
     "app/dist/dashboard-flat.html",
     "app/dist/css/css_builder.css",
-	"app/dist/js/app.js"
+    "app/dist/js/app.js"
   ],
   "moduleType": [
     "node"
@@ -22,10 +22,14 @@
     "tests"
   ],
   "dependencies": {
-	"jquery": "~2.1.4",
-	"flot": "~0.8.3",
+    "jquery": "~2.1.4",
+    "flot": "~0.8.3",
     "flot.curvedlines": "~1.1.1",
     "bootstrap-sass": "~3.3.5",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "normalize.css": "~3.0.3",
+    "nicescroll": "~3.6.0",
+    "modernizr": "~2.8.3",
+    "FlashCanvas": "*"
   }
 }

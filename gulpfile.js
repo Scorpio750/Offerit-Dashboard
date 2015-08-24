@@ -6,12 +6,19 @@ var gulp 		= require('gulp'),
 	debug 		= require('gulp-debug'),
 	uglify		= require('gulp-uglify'),
 	notify 		= require('gulp-notify'),
-	bower		= require('gulp-bower');
-	autoprefixer= require('gulp-autoprefixer');
+	bower		= require('gulp-bower'),
+	minifyCSS	= require('gulp-minify-css'),
+	autoprefixer= require('gulp-autoprefixer'),
+	modernizr	= require('gulp-modernizr'),
+	merge		= require('merge2');
 
 var config = {
-	sassPath: './app/src/scss',
-	bowerDir: 'bower_components'
+	sassPath: 'app/src/scss/css_builder.scss',
+	normalize: 'bower_components/normalize.css/normalize.css',
+	bowerDir: 'bower_components',
+	cssSrc: 'app/src/css',
+	cssDist: 'app/dist/css',
+	jsPath: 'app/src/js'
 }
 
 // runs bower install
@@ -28,7 +35,7 @@ gulp.task('icons', function() {
 
 // sets up sass, links bootstrap and fontawesome into path for access
 gulp.task('sass', function() {
-	return sass(config.sassPath + '/css_builder.scss', {
+	return sass(config.sassPath, {
 			loadPath: [
 				config.sassPath,
 				config.bowerDir + '/bootstrap-sass/assets/stylesheets',
@@ -38,26 +45,68 @@ gulp.task('sass', function() {
 			.on('error', notify.onError(function (error) {
 				return 'Error: ' + error.message;
 				}))
-		.pipe(gulp.dest('app/dist/css'))
+		.pipe(gulp.dest(config.cssSrc))
 		.pipe(reload({ stream:true }));
 });
+
+// merge css streams
+gulp.task('styles', function() {
+	return merge(
+		gulp.src(config.normalize),
+		sass(config.sassPath)
+	)
+	.pipe(concat('style.css'))
+	.pipe(autoprefixer({
+		browsers: ['last 2 versions'],
+		cascade: false
+		}))
+	.pipe(minifyCSS())
+	.pipe(gulp.dest(config.cssSrc));
+});
+
+// wrap css in literal tags for smarty parsing
+gulp.task('literallyCSS', ['styles'], function() {
+	return gulp.src([
+			config.jsPath + '/literalopen',
+			config.cssSrc + '/style.css',
+			config.jsPath + '/literalclose'	
+			])
+		.pipe(concat('style.css'))
+		.pipe(gulp.dest(config.cssDist));	
+});
+
+// run all src js through modernizr
+gulp.task('modernizr', ['styles'], function() {
+	return gulp.src([
+			config.cssSrc + '/*.css',
+			config.jsPath + '/**/*.js',
+			config.bowerDir + '/**/.*.js'
+			])	
+		.pipe(modernizr())
+		.pipe(gulp.dest(config.jsPath));
+});
+
 
 // concatenates all js scripts into one file
 gulp.task('scripts', function() {
 	return gulp.src([
+			config.jsPath + '/literalopen',
 			config.bowerDir + '/jquery/dist/jquery.min.js',
 			config.bowerDir + '/flot/jquery.flot.js',
 			config.bowerDir + '/flot/jquery.flot.*.js',
-			config.bowerDir + '/flot.curvedlines/curvedLines.js',
-			'app/src/js/flotanimator/jquery.flot.animator.js',
-			'app/src/js/flot.js',
-			'app/src/js/dashboard.js'])
+			config.bowerDir + '/nicescroll/jquery.nicescroll.min.js',	
+			config.jsPath + '/flotanimator/jquery.flot.animator.js',
+			config.jsPath + '/data_render.js',
+			config.jsPath + '/dashboard.js',
+			config.jsPath + '/literalclose'	
+			])
 		.pipe(debug({title : 'js-scripts'}))
 		.pipe(concat('app.js'))
+		//.pipe(uglify())
 		.pipe(gulp.dest('app/dist/js'));
 });
 
-gulp.task('serve', ['sass', 'scripts', 'icons'], function() {
+gulp.task('serve', ['literallyCSS', 'scripts', 'modernizr', 'icons'], function() {
 	browserSync.init({
 		server: {
 			baseDir: 'app',
@@ -66,8 +115,8 @@ gulp.task('serve', ['sass', 'scripts', 'icons'], function() {
 		ghostMode: { scroll: false }
 	});
 
-	gulp.watch(config.sassPath + '/*.scss', ['sass']);
-	gulp.watch('app/src/js/**/*.js', ['scripts']);
+	gulp.watch(config.sassPath, ['literallyCSS']);
+	gulp.watch(config.jsPath + '/**/*.js', ['scripts']);
 	gulp.watch(['dist/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
 });
 
