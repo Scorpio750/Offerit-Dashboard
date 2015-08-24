@@ -172,13 +172,16 @@ $sec-red-hover: #A04343;
         flex: 1 0 1em;
         /* background-color: $off-white; */
     }
-    .stats-container .flex-container {
-        justify-content: space-around;
-    }
+
     .stats-box {
         opacity: 0.6;
         padding: .5em 1em;
         flex: auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+
         .left-stats-box {}
         .right-stats-box {
             h3 {
@@ -406,11 +409,14 @@ $sec-red-hover: #A04343;
         // width: 100%;
         // height: 100%;
         display: none;
-        th ~ td {
-            border: 1px dashed rgba(205, 205, 205, 0.5);
+        th ~ th {
+            border-left: 1px dashed rgba(205, 205, 205, 0.5);
         }
         td ~ td {
-            border: 1px dashed rgba(205, 205, 205, 0.5);
+            border-left: 1px dashed rgba(205, 205, 205, 0.5);
+        }
+        tr ~ tr {
+            border-top: 1px dashed rgba(205, 205, 205, 0.5);
         }
         th, td {
             padding: 0.3em 0.5em;
@@ -424,6 +430,7 @@ $sec-red-hover: #A04343;
         }
         th {
             font-size: 17px;
+            border-bottom: 1px dashed rgba(205, 205, 205, 0.5);
         }
         td {
             text-align: left;

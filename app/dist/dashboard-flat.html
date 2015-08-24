@@ -1,280 +1,330 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0049)http://staging.offerit.com/internal.php?skin=1006 -->
 <html  xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head><meta name="viewport" http-equiv="Content-Type" content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=8">
-	<title>OFFERIT</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="js/app.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
-	<!--Load the AJAX API-->
-</head>
-<body>
-	<div id="wrapper">
-		<div class="container" id="main">
-			<!--Reminder Boxes-->
-			<div class="row flex-container" id="reminders">
-				<div class="two-box panel" id="offer-box">
-					<div class="top-box">
-						<header>
-							<div class="swap-wrapper">
-								<a href="#offer-box">
-									<h2>
+	<head><meta name="viewport" http-equiv="Content-Type" content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<title>OFFERIT</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/app.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css?1.1.3.65" /><![endif]-->
+		<!--Load the AJAX API-->
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="affiliate-dashboard">
+				<!--Reminder Boxes-->
+				<div class="row flex-container" id="reminders">
+					<div class="two-box panel" id="offer-box">
+						<div class="top-box">
+							<header>
+								<div class="swap-wrapper">
+									<a class="with-icon" href="#offer-box">
+										<h2>
 										<span class="swap" id="swap1"></span>
-										<span>Offers</span>
-										<span class="swap" id="swap3"></span>
-									</h2>
-								</a>
-								<span class="swap" id="metric-btn-wrapper">
-									<span class="dropdown swap" id="metric-btn">
-										<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Offers
+										<span class="swap" id="swap2"></span>
+										</h2>
+									</a>
+									<span class="swap" id="metric-btn-wrapper">
+										<span class="dropdown button-right swap" id="metric-btn">
+											<button type="button" class="btn dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu menu">
-											<li class="metric-type" id="0h">by Hits</li>
-											<li class="metric-type" id="1c">by Convs</li>
-											<li class="metric-type" id="2p">by Payout</li>
-											<li class="metric-type" id="3e">by EPC</li>
-										</ul>
+											</button>
+											<ul class="dropdown-menu menu">
+												<li class="metric-type" id="0h">by Hits</li>
+												<li class="metric-type" id="1c">by Conversions</li>
+												<li class="metric-type" id="2p">by Payout</li>
+												<li class="metric-type" id="3e">by EPC</li>
+											</ul>
+										</span>
 									</span>
-								</span>
-							</div>
-							<div class="dropdown">
-								<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
-									<i class="fa fa-square-o fa-stack-2x"></i>
-									<i class="fa fa-bars fa-stack-1x"></i>
-								</span>
-								<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
-									<li class="dropdown-item" id="top-offers">Top Offers
-									</li>
-									<ul class="subnav ">
-										<li class="offer-type" id="tu">By User</li>
-										<li class="offer-type" id="tn">By Network</li>
-									</ul>
-									<li class="dropdown-item offer-type" id="new-offers">New Offers
-									</li>
-						<!-- <ul class="subnav ">
-												<li class="offer-type" id="nu">By User</li>
-												<li class="offer-type" id="nn">By Network</li>
-											</ul> -->
-										</ul>
-									</div>
-
-								</header>
-							</div>
-							<div class="bottom-box">
-								<!-- <span class="swap" id="swap2"></span> -->
-								<div id="offers-area">
-									<ol class="offer-list" id="top-offer-list-user">
-										<ol class="user-list" id="userHits"></ol>
-										<ol class="user-list" id="userConvs"></ol>
-										<ol class="user-list" id="userPayouts"></ol>
-										<ol class="user-list" id="userEpc"></ol>
-									</ol>
-									<ol class="offer-list" id="top-offer-list-network">
-										<ol class="network-list" id="networkHits"></ol>
-										<ol class="network-list" id="networkConvs"></ol>
-										<ol class="network-list" id="networkPayouts"></ol>
-										<ol class="network-list" id="networkEpc"></ol>
-									</ol>
-									<ol class="offer-list" id="new-offer-list"></ol>
 								</div>
-
+								<div class="dropdown button-right">
+									<span class="icon fa-stack fa-lg dropdown-toggle menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="offer-toggle-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-bars fa-stack-1x"></i>
+									</span>
+									<ul class="dropdown-menu  menu" aria-labelledby="offer-toggle-btn" id="offer-menu">
+										<li class="dropdown-item" id="top-offers">Top Offers
+										</li>
+										<ul class="subnav">
+											<li class="offer-type" id="tu">By User</li>
+											<li class="offer-type" id="tn">By Network</li>
+										</ul>
+										<li class="dropdown-item offer-type" id="new-offers">New Offers
+										</li>
+									</ul>
+								</div>
+							</header>
+						</div>
+						<div class="bottom-box">
+							<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
+							<div class="error-box hidden flex-state" id="error-offers">
+								<h4 class="error-message">
+								Sorry, an error has occurred.
+								</h4>
+								<button class="btn error-button" id="error-offers-button">
+								<span>Retry</span>
+								</button>
+							</div>
+							<div id="offers-area">
+								<div class="success-box" id="offers-area">
+									<table id="offers-table">
+										<thead>
+											<tr class="">
+												<th>Offer ID</th>
+												<th>Name</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
-						<div class="two-box panel" id="hs-box">
-							<div class="top-box" id="list-box">
-								<header>
-									<a href="#hs-box">
-										<h2>Today's Stats</h2>
+					</div>
+					<div class="two-box panel" id="stats-panel">
+						<div class="top-box" id="list-box">
+							<header>
+								<span class="swap-wrapper">
+									<a class="with-icon" href="#stats-panel">
+										<h2>
+										Period Statistics
+										<span class="swap" id="swap3"></span>
+										</h2>
 									</a>
-									<div class="dropdown">
-										<span class="icon fa-stack fa-lg menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
-											<i class="fa fa-square-o fa-stack-2x"></i>
-											<i class="fa fa-bars fa-stack-1x"></i>
-										</span>
-										<ul class="dropdown-menu  menu" id="hs-menu">
-											<li>This Period</li>
-											<li>Last Period</li>
-											<li>This Month</li>
-											<li>Last Month</li>
-											<li>Past 30 Days</li>
-											<li>Past 60 Days</li>
-											<li>Past 90 Days</li>
-											<li>This Year</li>
-											<li>All Time</li>
-										</ul>
-									</div>
-								</header>
+								</span>
+								<div class="dropdown button-right">
+									<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hs-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-bars fa-stack-1x"></i>
+									</span>
+									<ul class="dropdown-menu period-menu menu" id="hs-menu">
+										<li class="period">This Period</li>
+										<li class="period">Last Period</li>
+										<li class="period">This Month</li>
+										<li class="period">Last Month</li>
+										<li class="period">Past 30 Days</li>
+										<li class="period">Past 60 Days</li>
+										<li class="period">Past 90 Days</li>
+										<li class="period">This Year</li>
+										<li class="period">All Time</li>
+									</ul>
+								</div>
+							</header>
+						</div>
+						<div class="bottom-box">
+							<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-4x"></i></div>
+							<div class="error-box hidden flex-state" id="error-stats">
+								<h3 class="error-message">
+								Sorry, an error has occurred.
+								</h3>
+								<button class="btn error-button" id="error-stats-button">
+								<span>Retry</span>
+								</button>
 							</div>
-							<div class="bottom-box">
-								<div class="stats-container">
-									<div class="stats-box">
+							<div class="stats-container flex-container">
+								<div class="flex-container success-box" id="stats-container">
+									<div class="stats-box flex-container"
+										>
 										<div class="left-stats-box">
 											<i class="fa fa-exclamation fa-3x"></i>
 										</div>
 										<div class="right-stats-box">
 											<h3>Hits</h3>
-											<h3>8</h3>
+											<h3>N/A</h3>
 										</div>
 									</div>
-									<div class="stats-box">
+									<div class="stats-box flex-container">
 										<div class="left-stats-box">
 											<i class="fa fa-sign-out fa-3x"></i>
 										</div>
 										<div class="right-stats-box">
 											<h3>Convs</h3>
-											<h3>3</h3>
+											<h3>N/A</h3>
 										</div>
 									</div>
-									<div class="stats-box">
+									<div class="stats-box flex-container">
 										<div class="left-stats-box">
 											<i class="fa fa-money fa-3x"></i>
 										</div>
 										<div class="right-stats-box">
 											<h3>Payout</h3>
-											<h3>$189</h3>
+											<h3>N/A</h3>
 										</div>
 									</div>
-									<div class="stats-box">
+									<div class="stats-box flex-container">
 										<div class="left-stats-box">
 											<i class="fa fa-cart-arrow-down fa-3x"></i>
 										</div>
 										<div class="right-stats-box">
 											<h3>EPC</h3>
-											<h3>$.08</h3>
+											<h3>N/A</h3>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!--Graph Box-->
-					<div class="row flex-container" id="main-column">
-						<div class="graph-box panel">
-							<div class="top-box">
-								<header>
-									<a href="#main-column"><h2>Hourly Graph</h2></a>
-	<!-- <div class="dropdown">
-							<span class="icon fa-stack fa-lg menu-btn metric-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="h_chart-btn">
-													<i class="fa fa-square-o fa-stack-2x"></i>
-													<i class="fa fa-bars fa-stack-1x"></i>
-							</span>
-							<ul class="dropdown-menu  menu " id="h_graph-menu">
-													<li>Hits</li>
-													<li>Conversions</li>
-													<li>Payout</li>
-													<li>EPC</li>
-							</ul>
-						</div> -->
-					</header>
 				</div>
-				<div class="bottom-box" id="hourly-graph">
-					<div id="h_chart">
+				<!--Graph Box-->
+				<div class="row flex-container" id="main-column">
+					<div class="graph-box panel">
+						<div class="top-box">
+							<header>
+								<a class="with-icon" href="#main-column">
+									<h2>Hourly Graph</h2>
+								</a>
+								<div class="dropdown button-right">
+									<span class="icon fa-stack fa-lg menu-btn" id="hourly-refresh">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-refresh fa-stack-1x"></i>
+									</span>
+								</div>
+							</header>
+						</div>
+						<div class="bottom-box" id="hourly-graph">
+							<div class="loader flex-state"><center>
+								<i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i>
+							</center></div>
+							<div class="error-box hidden flex-state" id="error-hourly-graph">
+								<h3 class="error-message">
+								Sorry, an error has occurred.
+								</h3>
+								<button class="btn error-button" id="error-hourly-graph-button">
+								<span>Retry</span>
+								</button>
+							</div>
+							<div class="success-box" id="h_chart"></div>
+						</div>
+					</div>
+					<div class="graph-box panel">
+						<div class="top-box">
+							<header>
+								<span class="swap-wrapper">
+									<a class="with-icon" href="#main-column">
+										<h2>
+										Period Graph
+										<span class="swap" id="swap4"></span>
+										</h2>
+									</a>
+								</span>
+								<div class="dropdown button-right">
+									<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-bars fa-stack-1x"></i>
+									</span>
+									<ul class="dropdown-menu period-menu menu" id="p_graph-menu">
+										<li class="period">This Period</li>
+										<li class="period">Last Period</li>
+										<li class="period">This Month</li>
+										<li class="period">Last Month</li>
+										<li class="period">Past 30 Days</li>
+										<li class="period">Past 60 Days</li>
+										<li class="period">Past 90 Days</li>
+										<li class="period">This Year</li>
+										<li class="period">All Time</li>
+									</ul>
+								</div>
+							</header>
+						</div>
+						<div class=" bottom-box" id="period-graph">
+							<div id="p_chart-holder">
+								<!-- <h3 id="p_chart-title">
+									This Period
+								</h3> -->
+								<div class="loader flex-state"><i class="fa fa-circle-o-notch loading-img fa-pulse fa-5x"></i></div>
+								<div class="error-box hidden flex-state" id="error-period-graph">
+									<h3 class="error-message">
+									Sorry, an error has occurred.
+									</h3>
+									<button class="btn error-button" id="error-period-graph-button">
+									<span>Retry</span>
+									</button>
+								</div>
+								<div class="success-box" id="p_chart"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Info Boxes-->
+				<div class="row flex-container" id="three-column">
+					<div class="three-box panel" id="news">
+						<div class="top-box">
+							<header>
+								<a  href="#news">
+									<h2>{$config.NICE_NAME} {#News#}</h2>
+								</a>
+							</header>
+						</div>
+						<div class="bottom-box">
+							<ul id="news">
+								{display_news data_only=1 count=5 order="publish desc" section="Announcements"}
+								{if $news}
+								{foreach from=$news item='article'}
+								<li class="news-item"><a  href="/internal.php?page=news&newsid={$article.newsid}" target="_blank">{$article.headline}</a></li>
+								{/foreach}
+								{/if}
+							</ul>
+						</div>
+					</div>
+					<div class="three-box panel" id="paysum">
+						<div class="top-box">
+							<header>
+								<a  href="#paysum">
+									<h2>{#PaymentSummary#}</h2>
+								</a>
+							</header>
+						</div>
+						<div class="bottom-box">
+							<ul id="paysum-list">
+								{offerit_display_payment_summary data_only=1}
+								{if $myPaymentSummary}
+								<li>{#OutstandingBalance#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.earned-$myPaymentSummary.stored|currency_format:2}</a></li>
+								{/if}
+								{if $myPaymentSummary.stored-$myPaymentSummary.paid}
+								<li>{#PendingPayments#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.stored-$myPaymentSummary.paid|currency_format:2}</a></li>
+								{/if}
+								{if $myPaymentSummary.paid}
+								<li>{#PaymentsSent#}: <a  href="/internal.php?page=payments">{$myPaymentSummary.paid|currency_format:2}</a></li>
+								{/if}
+							</ul>
+						</div>
+					</div>
+					<div class="three-box panel" id="contact">
+						<div class="top-box">
+							<header>
+								<a  href="#contact">
+									<h2>Agent Contact</h2>
+								</a>
+							</header>
+						</div>
+						<div class="bottom-box">
+							<table>
+								<tr>
+									<td>Lorem ipsum.</td>
+									<td>Numquam, blanditiis.</td>
+									<td>Magnam, ea!</td>
+								</tr>
+								<tr>
+									<td>Lorem ipsum.</td>
+									<td>Ea, incidunt.</td>
+									<td>Ea, incidunt.</td>
+								</tr>
+								<tr>
+									<td>Lorem ipsum.</td>
+									<td>Ea, incidunt.</td>
+									<td>Lorem ipsum.</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="graph-box panel">
-				<div class="top-box">
-					<header>
-						<a href="#main-column"><h2>Period Graph</h2></a>
-						<div class="dropdown">
-							<span class="icon fa-stack fa-lg menu-btn period-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="p_chart-btn">
-								<i class="fa fa-square-o fa-stack-2x"></i>
-								<i class="fa fa-bars fa-stack-1x"></i>
-							</span>
-							<ul class="dropdown-menu  menu" id="p_graph-menu">
-								<li>This Period</li>
-								<li>Last Period</li>
-								<li>This Month</li>
-								<li>Last Month</li>
-								<li>Past 30 Days</li>
-								<li>Past 60 Days</li>
-								<li>Past 90 Days</li>
-								<li>This Year</li>
-								<li>All Time</li>
-							</ul>
-						</div>
-					</header>
-				</div>
-				<div class=" bottom-box" id="period-graph">
-					<div id="p_chart"></div>
-				</div>
-			</div>
 		</div>
-		<!--Info Boxes-->
-		<div class="row flex-container" id="three-column">
-			<div class="three-box panel" id="news">
-				<div class="top-box">
-					<header>
-						<a href="#news">
-							<h2>News</h2>
-						</a>
-					</header>
-				</div>
-				<div class="bottom-box">
-					<ul id="news">
-						<li class="news-item">Lorem ipsum dolor sit.</li>
-						<li class="news-item">Perspiciatis magni deserunt exercitationem.</li>
-						<li class="news-item">Voluptatum veritatis iste ab.</li>
-						<li class="news-item">Laudantium et veniam asperiores?</li>
-						<li class="news-item">Lorem ipsum dolor sit.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="three-box panel" id="paysum">
-				<div class="top-box">
-					<header>
-						<a href="#paysum">
-							<h2>Payment Summary</h2>
-						</a>
-					</header>
-				</div>
-				<div class="bottom-box">
-					<ol id="paysum-list">
-						<li>Lorem ipsum dolor sit.</li>
-						<li>Aliquam dolorem consequuntur hic.</li>
-						<li>Eius voluptate, hic dicta.</li>
-						<li>Ea, consectetur nulla sint!</li>
-						<li>Iste officiis commodi cupiditate!</li>
-						<li>Aliquid eum cum exercitationem.</li>
-					</ol>
-				</div>
-			</div>
-			<div class="three-box panel" id="contact">
-				<div class="top-box">
-					<header>
-						<a href="#contact">
-							<h2>Agent Contact</h2>
-						</a>
-					</header>
-				</div>
-				<div class="bottom-box">
-					<table>
-						<tr>
-							<td>Lorem ipsum.</td>
-							<td>Numquam, blanditiis.</td>
-							<td>Magnam, ea!</td>
-						</tr>
-						<tr>
-							<td>Lorem ipsum.</td>
-							<td>Ea, incidunt.</td>
-							<td>Ea, incidunt.</td>
-						</tr>
-						<tr>
-							<td>Lorem ipsum.</td>
-							<td>Ea, incidunt.</td>
-							<td>Lorem ipsum.</td>
-						</tr>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
-</body>
+	</body>
 </html>

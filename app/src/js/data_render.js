@@ -57,25 +57,25 @@ $(document).ready(function() {
 				|| function_type == 'ajax_get_network_top_offers'
 				|| function_type == 'ajax_get_new_offers') {
 				loader = $('#offer-box').find('.loader');
-				error_panel = $('#error-offers');
-				success_panel = $('#offers-area');
+				// error_panel = $('#error-offers');
+				// success_panel = $('#offers-area');
 			}
 			else if (function_type == 'offerit_display_stats') {
 				if (typeof queryVars['dashboard_multi'] !== "undefined") {
 					loader = $('#period-graph').find('.loader');
-					error_panel = $('#error-period-graph');
-					success_panel = $('#p_chart');
+					// error_panel = $('#error-period-graph');
+					// success_panel = $('#p_chart');
 				}
 				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
 					loader = $('#stats-panel').find('.loader');
-					error_panel = $('#error-stats');
-					success_panel = $('#stats-container')
+					// error_panel = $('#error-stats');
+					// success_panel = $('#stats-container')
 				}
 			}
 			else if (function_type == 'offerit_display_hourly_hits') {
 				loader = $('#hourly-graph').find('.loader');
-				error_panel = $('#error-hourly-graph');
-				success_panel = $('#h_chart');
+				// error_panel = $('#error-hourly-graph');
+				// success_panel = $('#h_chart');
 			}
 
 			$.ajax({
@@ -95,8 +95,8 @@ $(document).ready(function() {
 						console.log('DATA:');
 						console.log(data);
 
-						error_panel.addClass('hidden');
-						success_panel.removeClass('hidden');
+						/*error_panel.addClass('hidden');
+						success_panel.removeClass('hidden');*/
 
 						series_data = {
 							'Hourly Data': [],
@@ -183,7 +183,7 @@ $(document).ready(function() {
 						return;
 					}
 					// data is null or empty, call error handler
-					error_handler(success_panel, error_panel);
+					// error_handler(success_panel, error_panel);
 				}
 			});
 		}
