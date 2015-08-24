@@ -232,11 +232,13 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data) {
+	console.log('filling stats...');
+
 	if (data.length === 0) {
-		console.log('No data found upon retrieval.');
+		alert('No data found upon retrieval.');
 		return;
 	}
-	var container = $('.stats-container');
+	var container = $('#stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -326,12 +328,7 @@ $('.menu-btn').click(function() {
 	notThisOne.slideToggle();
 });
 
-// toggle graphs
-// $('#metric-btn > ul > li').click(toggleTopMetric($(this).text()));
-
-// hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
-	console.log($(this).text());
 	toggleTopMetric($(this).text());
 });
 
@@ -387,7 +384,6 @@ function display_offers(offers, type, scope, state_change) {
 	} else {
 		timer = 0;
 	}
-	// console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':

@@ -7447,24 +7447,24 @@ $(document).ready(function() {
 				|| function_type == 'ajax_get_new_offers') {
 				loader = $('#offer-box').find('.loader');
 				// error_panel = $('#error-offers');
-				// success_panel = $('#offers-area');
+				success_panel = $('#offers-area');
 			}
 			else if (function_type == 'offerit_display_stats') {
 				if (typeof queryVars['dashboard_multi'] !== "undefined") {
 					loader = $('#period-graph').find('.loader');
 					// error_panel = $('#error-period-graph');
-					// success_panel = $('#p_chart');
+					success_panel = $('#p_chart');
 				}
 				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
 					loader = $('#stats-panel').find('.loader');
 					// error_panel = $('#error-stats');
-					// success_panel = $('#stats-container')
+					success_panel = $('#stats-container')
 				}
 			}
 			else if (function_type == 'offerit_display_hourly_hits') {
 				loader = $('#hourly-graph').find('.loader');
 				// error_panel = $('#error-hourly-graph');
-				// success_panel = $('#h_chart');
+				success_panel = $('#h_chart');
 			}
 
 			$.ajax({
@@ -7478,14 +7478,17 @@ $(document).ready(function() {
 					$(loader).fadeOut('fast');
 				},
 				success: function store_data(data) {
-					if (data && data.length > 0) {
+					if (data/* && data.length > 0*/) {
+						console.log('============================================');
 						console.log('QUERYVARS:');
 						console.log(queryVars);
 						console.log('DATA:');
+						console.log(data.length);
+						console.log(typeof data);
 						console.log(data);
 
-						/*error_panel.addClass('hidden');
-						success_panel.removeClass('hidden');*/
+						// error_panel.addClass('hidden');
+						success_panel.removeClass('hidden');
 
 						series_data = {
 							'Hourly Data': [],
@@ -8003,11 +8006,13 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data) {
+	console.log('filling stats...');
+
 	if (data.length === 0) {
-		console.log('No data found upon retrieval.');
+		alert('No data found upon retrieval.');
 		return;
 	}
-	var container = $('.stats-container');
+	var container = $('#stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -8097,12 +8102,7 @@ $('.menu-btn').click(function() {
 	notThisOne.slideToggle();
 });
 
-// toggle graphs
-// $('#metric-btn > ul > li').click(toggleTopMetric($(this).text()));
-
-// hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
-	console.log($(this).text());
 	toggleTopMetric($(this).text());
 });
 
@@ -8158,7 +8158,6 @@ function display_offers(offers, type, scope, state_change) {
 	} else {
 		timer = 0;
 	}
-	// console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':
