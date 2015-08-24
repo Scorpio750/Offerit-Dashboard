@@ -89,7 +89,8 @@ $(document).ready(function() {
 					$(loader).fadeOut('fast');
 				},
 				success: function store_data(data) {
-					if (data && data.length > 0) {
+					if (data || data.length > 0) {
+						console.log('=======================');
 						console.log('QUERYVARS:');
 						console.log(queryVars);
 						console.log('DATA:');
@@ -188,6 +189,7 @@ $(document).ready(function() {
 		}
 
 		function error_handler(success_panel, error_panel) {
+			console.log('Error Panel: ' + error_panel + '\nSuccess Panel' + success_panel);
 			success_panel.addClass('hidden');
 			error_panel.removeClass('hidden');
 		}

@@ -7478,7 +7478,8 @@ $(document).ready(function() {
 					$(loader).fadeOut('fast');
 				},
 				success: function store_data(data) {
-					if (data && data.length > 0) {
+					if (data || data.length > 0) {
+						console.log('=======================');
 						console.log('QUERYVARS:');
 						console.log(queryVars);
 						console.log('DATA:');
@@ -7577,6 +7578,7 @@ $(document).ready(function() {
 		}
 
 		function error_handler(success_panel, error_panel) {
+			console.log('Error Panel: ' + error_panel + '\nSuccess Panel' + success_panel);
 			success_panel.addClass('hidden');
 			error_panel.removeClass('hidden');
 		}
@@ -7987,6 +7989,7 @@ $('.offer-type').click(function switch_offers() {
 ///////////////////////////////////////
 
 function fill_stats(data, period_stamp) {
+	var container = $('#stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
 	$.each(boxes, function insert_data() {
@@ -8015,7 +8018,7 @@ function fill_stats(data, period_stamp) {
 		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
 			// target_data.fadeOut('fast');
-			console.log('pre-sleep ' + target_text.text());
+			// console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
 			// target_data.fadeIn('fast');
 			/*window.setTimeout(function() {
@@ -8024,7 +8027,7 @@ function fill_stats(data, period_stamp) {
 					height: container.height()
 				})
 			}, 200);*/
-			console.log('post-sleep ' + target_text.text());
+			// console.log('post-sleep ' + target_text.text());
 		}
 	});
 	/*container.animate({
@@ -8035,7 +8038,7 @@ function fill_stats(data, period_stamp) {
 
 function add_decimals(n) {
 	if (typeof n === 'undefined' || isNaN(n)) {
-		n = 0;
+		n = 'N/A';
 	} else if (!isInt(n)) {
 		n = n.toFixed(2);
 	}
