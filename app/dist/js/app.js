@@ -7526,10 +7526,15 @@ $(document).ready(function() {
 									timespan = 'Period Data';
 									// loop through and fill each metric subindex
 									for (var subindex in metrices[timespan]) {
+										var identifier = metrices[timespan][subindex];	
+										console.log(identifier);
+										if (identifier == 'conv_count' || identifier == 'EPC') {
+											continue;
+										}
 										series_data[timespan][period][subindex] = create_axes(
 											data['stats']['date'],
 											series_data[timespan][period][subindex],
-											metrices[timespan][subindex]
+											identifier	
 										);
 									}
 									plot_name = "#p_chart";
@@ -7657,9 +7662,9 @@ $(document).ready(function() {
 					},
 					legend: {
 						position: "se",
-						backgroundOpacity: 0.5,
+						backgroundOpacity: 0.7,
 						labelFormatter: function format_label(label, series) {
-							return '<a href="#" onClick="togglePlot(' + series.idx + '); return false;">' + label + '</a>';
+							return '<a style="color: #555; font-weight: light;" href="" onClick="togglePlot(' + plot_name + '); return false;">' + label + '</a>';
 						}
 					}
 				}
@@ -7739,11 +7744,12 @@ $(document).ready(function() {
 			}
 		}
 
-		togglePlot = function(seriesIdx) {
-			var someData = somePlot.getData();
-			someData[seriesIdx].lines.show = !someData[seriesIdx].lines.show;
-			somePlot.setData(someData);
-			somePlot.draw();
+		togglePlot = function(plot_name) {
+			var someData = plots[plot_name].getData();
+			console.log(someData);
+			/*someData.lines.show = !someData.lines.show;
+			plots[plot_name].setData(someData);
+			plots[plot_name].draw();*/
 		}
 // added custom scrollbars
 $('.three-box > .bottom-box').niceScroll({

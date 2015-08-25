@@ -179,6 +179,9 @@ $sec-red-hover: #A04343;
         opacity: 0.6;
         padding: .5em 1em;
         flex: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         .left-stats-box {}
         .right-stats-box {
             h3 {
@@ -501,6 +504,9 @@ $sec-red-hover: #A04343;
                 background-color: #c6c6c6;
             }
         }
+    }
+    .legendLabel a {
+        color: gray;
     }
     #p_chart-title {
         position: absolute;
