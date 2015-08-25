@@ -7388,13 +7388,11 @@ $.extend({
 });
 
 $(document).ready(function() {
-
 		//////////////////////////////////
 		//                              //
 		//   FLOT RENDERING FUNCTIONS   //
 		//                              //
 		//////////////////////////////////
-
 		/* creating data array to hold series information
 		 * 1st element is hourly graph data
 		 * 2nd element is period graph data
@@ -7409,7 +7407,20 @@ $(document).ready(function() {
 		 * [7] This Year
 		 * [8] All Time
 		 */
-
+		series_data = {
+			'Hourly Data': [],
+			'Period Data': [
+				[''],
+				[''],
+				[''],
+				[''],
+				[''],
+				[''],
+				[''],
+				[''],
+				['']
+			]
+		};
 		var metrices = {
 			'Hourly Data': ['impression', 'conv_count', 'payout', 'EPC'],
 			'Period Data': ['raw_hits', 'conv_count', 'total_payout', 'EPC']
@@ -7419,11 +7430,8 @@ $(document).ready(function() {
 				'#p_chart': undefined
 			},
 			series_data;
-
-
 		// maps menu period indices to database period indices
 		var period_map = [0, 1, 5, 11, 13, 12, 13, 6, 7];
-
 		// constructs each series element
 		function label_series(series) {
 			var names = ['Hits', 'Conversions', 'Payout', 'EPC'];
@@ -7435,38 +7443,30 @@ $(document).ready(function() {
 			}
 			return series;
 		}
-
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
 			var function_type = queryVars['function'];
 			var loader, error_panel;
-
 			// determine which function is being called to retrieve appropriate subpanels
-			if (function_type == 'ajax_get_affiliate_top_offers' 
-				|| function_type == 'ajax_get_network_top_offers'
-				|| function_type == 'ajax_get_new_offers') {
+			if (function_type == 'ajax_get_affiliate_top_offers' || function_type == 'ajax_get_network_top_offers' || function_type == 'ajax_get_new_offers') {
 				loader = $('#offer-box').find('.loader');
 				error_panel = $('#error-offers');
 				success_panel = $('#offers-area');
-			}
-			else if (function_type == 'offerit_display_stats') {
+			} else if (function_type == 'offerit_display_stats') {
 				if (typeof queryVars['dashboard_multi'] !== "undefined") {
 					loader = $('#period-graph').find('.loader');
 					error_panel = $('#error-period-graph');
 					success_panel = $('#p_chart');
-				}
-				else if (typeof queryVars['dashboard_summary'] !== "undefined") {
+				} else if (typeof queryVars['dashboard_summary'] !== "undefined") {
 					loader = $('#stats-panel').find('.loader');
 					error_panel = $('#error-stats');
 					success_panel = $('#stats-container')
 				}
-			}
-			else if (function_type == 'offerit_display_hourly_hits') {
+			} else if (function_type == 'offerit_display_hourly_hits') {
 				loader = $('#hourly-graph').find('.loader');
 				error_panel = $('#error-hourly-graph');
 				success_panel = $('#h_chart');
 			}
-
 			$.ajax({
 				dataType: 'json',
 				url: url,
@@ -7484,24 +7484,9 @@ $(document).ready(function() {
 						console.log(queryVars);
 						console.log('DATA:');
 						console.log(data);
-
 						error_panel.addClass('hidden');
 						success_panel.removeClass('hidden');
 
-						series_data = {
-							'Hourly Data': [],
-							'Period Data': [
-								[''],
-								[''],
-								[''],
-								[''],
-								[''],
-								[''],
-								[''],
-								[''],
-								['']
-							]
-						};
 						// add subseries for each metric option
 						label_series(series_data['Hourly Data']);
 						for (var i in series_data['Period Data']) {
@@ -7514,54 +7499,49 @@ $(document).ready(function() {
 							case 'ajax_get_affiliate_top_offers':
 								// check to see if either the words 'New' or 'Network' are already displayed
 								console.log($('#swap2 > span').text() + ': ' + $('#swap2 > span').css('display'));
-								if ($('#swap2 > span').css('display') != 'none'/* || $('#swap1').find('span').eq(0).css('display') != 'none'*/) {
+								if ($('#swap2 > span').css('display') != 'none' /* || $('#swap1').find('span').eq(0).css('display') != 'none'*/ ) {
 									console.log('changing state to user');
 									state_change = true;
 								}
 								display_offers(data, queryVars['type'], 'user', state_change);
 								break;
-
 							case 'ajax_get_network_top_offers':
 								console.log($('#swap2 > span').css('display'));
 								console.log($('#swap2').find('span').eq(0).css('display'));
-								if ($('#swap2 > span').css('display') == 'none'/* || $('#swap1').find('span').eq(0).css('display') != 'none'*/) {
+								if ($('#swap2 > span').css('display') == 'none' /* || $('#swap1').find('span').eq(0).css('display') != 'none'*/ ) {
 									console.log('changing state to network');
 									state_change = true;
 								}
 								display_offers(data, queryVars['type'], 'network', state_change);
 								break;
-
 							case 'ajax_get_new_offers':
 								if ($('#swap1 > span').eq(1).css('display') == 'none') {
 									state_change == true;
 								}
 								display_offers(data, 'new', '', state_change);
 								break;
-
 							case 'offerit_display_stats':
 								// period graph data
 								if (typeof queryVars['dashboard_multi'] !== "undefined") {
 									timespan = 'Period Data';
-
 									// loop through and fill each metric subindex
 									for (var subindex in metrices[timespan]) {
 										series_data[timespan][period][subindex] = create_axes(
 											data['stats']['date'],
 											series_data[timespan][period][subindex],
-											metrices[timespan][subindex]);
+											metrices[timespan][subindex]
+										);
 									}
 									plot_name = "#p_chart";
 									plot_graph(plot_name, series_data[timespan][period]);
 									break;
 								}
-
 								// stats-box data
 								else if (typeof queryVars['dashboard_summary'] !== "undefined") {
 									fill_stats(data.total, queryVars['period_index']);
 									return;
 								}
 								break;
-
 								// If we request hits, we build the whole graph,
 								// calling hourly_sales internally
 							case 'offerit_display_hourly_hits':
@@ -7584,32 +7564,30 @@ $(document).ready(function() {
 		}
 
 		function build_hourly_series(hits_data, timespan, queryVars, url) {
-			// build series for Hits	
+			// build series for Hits
 			series_data[timespan][0] = create_axes(
 				hits_data,
 				series_data[timespan][0],
-				metrices[timespan][0]);
-
+				metrices[timespan][0]
+			);
 			queryVars.function = 'offerit_display_hourly_sales';
 			$.getJSON(url, queryVars, function store_hourly_data(data) {
 				if (data) {
-
 					// build conversions series
 					for (var i = 1; i < 4; i++) {
 						series_data[timespan][i] = create_axes(
 							data,
 							series_data[timespan][i],
-							metrices[timespan][i]);
+							metrices[timespan][i]
+						);
 					}
 					plot_name = '#h_chart';
 					plot_graph(plot_name, series_data[timespan]);
 				}
 			});
 		}
-
 		// creates the axes from the ajax data and stores them in the appropriate series object
 		function create_axes(ajax_data, series, identifier) {
-
 			// EPC has to be all *special*
 			// making me do a fucking edgecase and shit
 			// Fuck you, EPC... fuck you.
@@ -7642,70 +7620,65 @@ $(document).ready(function() {
 
 		function plot_graph(plot_name, data) {
 			var series_options = {
-				series: {
-					lines: {
-						show: true,
-						fill: true
+					series: {
+						lines: {
+							show: true,
+							fill: true
+						},
+						points: {
+							show: false
+						},
 					},
-					points: {
-						show: false
+					xaxis: {
+						mode: "time",
+						timezone: "browser",
+						tickLength: 5
 					},
-				},
-				xaxis: {
-					mode: "time",
-					timezone: "browser",
-					tickLength: 5
-				},
-				selection: {
-					mode: "x"
-				},
-				yaxes: [{
-					/* first y-axis */
-				}, {
-					/* second y-axis */
-					position: "right"
-				}],
-				yaxis: {
-					min: 0
-				},
-				grid: {
-					color: "slategray",
-					borderWidth: 0,
-					backgroundColor: "#E6E6E6",
-					hoverable: true,
-					clickable: false,
-					autoHighlight: true,
-					markings: weekendAreas
-				},
-				legend: {
-					position: "se",
-					backgroundOpacity: 0.5
+					selection: {
+						mode: "x"
+					},
+					yaxes: [{
+						/* first y-axis */
+					}, {
+						/* second y-axis */
+						position: "right"
+					}],
+					yaxis: {
+						min: 0
+					},
+					grid: {
+						color: "slategray",
+						borderWidth: 0,
+						backgroundColor: "#E6E6E6",
+						hoverable: true,
+						clickable: false,
+						autoHighlight: true,
+						markings: weekendAreas
+					},
+					legend: {
+						position: "se",
+						backgroundOpacity: 0.5,
+						labelFormatter: function format_label(label, series) {
+							return '<a href="#" onClick="togglePlot(' + series.idx + '); return false;">' + label + '</a>';
+						}
+					}
 				}
-			}
-
-			// first correct the timestamps - they are recorded as the daily
-			// midnights in UTC+0100, but Flot always displays dates in UTC
-			// so we have to add one hour to hit the midnights in the plot
-
+				// first correct the timestamps - they are recorded as the daily
+				// midnights in UTC+0100, but Flot always displays dates in UTC
+				// so we have to add one hour to hit the midnights in the plot
 			for (var i = 0; i < data.length; ++i) {
 				data[i][0] += 60 * 60 * 1000;
 			}
-
 			// helper for returning the weekends in a period
 			function weekendAreas(axes) {
-
 				var markings = [],
 					d = new Date(axes.xaxis.min);
-
 				// go to the first Saturday
-
 				d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
 				d.setUTCSeconds(0);
 				d.setUTCMinutes(0);
 				d.setUTCHours(0);
-
 				var i = d.getTime();
-
 				// when we don't set yaxis, the rectangle automatically
 				// extends to infinity upwards and downwards
 				do {
@@ -7720,7 +7693,6 @@ $(document).ready(function() {
 				} while (i < axes.xaxis.max);
 				return markings;
 			}
-
 			// clear data before replotting
 			data[2].yaxis = 2;
 			data[3].yaxis = 2;
@@ -7731,7 +7703,6 @@ $(document).ready(function() {
 			plots[plot_name].setupGrid();
 			plots[plot_name].draw();
 		}
-
 		// chart tooltip
 		$("<div id='tooltip' style='font-weight: bold'></div>").css({
 			position: "absolute",
@@ -7741,7 +7712,6 @@ $(document).ready(function() {
 			backgroundColor: "aliceblue",
 			opacity: 0.80
 		}).appendTo("body");
-
 		$("#h_chart").bind("plotclick", function(event, pos, item) {
 			console.log(item);
 			// axis coordinates for other axes, if present, are in pos.x2, pos.x3, ...
@@ -7751,7 +7721,6 @@ $(document).ready(function() {
 				alert("You clicked a point!");
 			}
 		});
-
 		$("#p_chart").bind("plothover", plot_hover);
 		$("#h_chart").bind("plothover", plot_hover);
 
@@ -7770,6 +7739,12 @@ $(document).ready(function() {
 			}
 		}
 
+		togglePlot = function(seriesIdx) {
+			var someData = somePlot.getData();
+			someData[seriesIdx].lines.show = !someData[seriesIdx].lines.show;
+			somePlot.setData(someData);
+			somePlot.draw();
+		}
 // added custom scrollbars
 $('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,
@@ -7940,7 +7915,7 @@ toggleTopMetric('by Hits');
 
 // triggers subnavs to open upon hovering over a menu item
 $('.dropdown-item').click(function slide() {
-	/* Finding the drop down list that corresponds to the current section: */
+	// Finding the drop down list that corresponds to the current section: 
 	var dropDown = $(this).next('.subnav');
 	$('.subnav').not(dropDown).slideUp();
 	dropDown.slideToggle();
@@ -7999,47 +7974,44 @@ function fill_stats(data, period_stamp) {
 		switch (target_text.text()) {
 			case 'Hits':
 				extracted_data = data['raw_hits'];
+				extracted_data = convert_undefined(extracted_data);
 				break;
 			case 'Convs':
 				extracted_data = data['conv_count'];
+				extracted_data = convert_undefined(extracted_data);
 				break;
 			case 'Payout':
 				extracted_data = data['total_payout'];
 				extracted_data = add_decimals(extracted_data);
-				extracted_data = '$' + extracted_data;
+				if (extracted_data != 'N/A') {
+					extracted_data = '$' + extracted_data;
+				}
 				break;
 			case 'EPC':
 				extracted_data = data['total_payout'] / data['raw_hits'];
-				console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
 				extracted_data = add_decimals(extracted_data);
-				extracted_data = '$' + extracted_data;
+				if (extracted_data != 'N/A') {
+					extracted_data = '$' + extracted_data;
+				}
 				break;
 		}
-		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
+		console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
-			// target_data.fadeOut('fast');
-			// console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
-			// target_data.fadeIn('fast');
-			/*window.setTimeout(function() {
-				container.animate({
-					width: container.width(),
-					height: container.height()
-				})
-			}, 200);*/
-			// console.log('post-sleep ' + target_text.text());
 		}
 	});
-	/*container.animate({
-		height: container.height(),
-		width: container.width()
-	});*/
+}
+
+function convert_undefined(n) {
+	if (typeof n === 'undefined' || isNaN(n)) {
+		n = 'N/A';
+	}
+	return n;
 }
 
 function add_decimals(n) {
-	if (typeof n === 'undefined' || isNaN(n)) {
-		n = 'N/A';
-	} else if (!isInt(n)) {
+	n = convert_undefined(n);
+	if (!isInt(n) && n != 'N/A') {
 		n = n.toFixed(2);
 	}
 	return n;
@@ -8061,7 +8033,7 @@ $('#error-stats-button').click(function reload_data() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
 	call_data(queryVars, url);
-})
+});
 
 ///////////////////////////////////
 //                               //
@@ -8080,10 +8052,6 @@ $('.menu-btn').click(function() {
 	notThisOne.slideToggle();
 });
 
-// toggle graphs
-// $('#metric-btn > ul > li').click(toggleTopMetric($(this).text()));
-
-// hacky as fuck, remove whenever possible
 $('#metric-btn > ul > li').click(function() {
 	console.log($(this).text());
 	toggleTopMetric($(this).text());
@@ -8141,7 +8109,6 @@ function display_offers(offers, type, scope, state_change) {
 	} else {
 		timer = 0;
 	}
-	// console.log('timer = ' + timer);
 
 	switch (type) {
 		case 'impression':
@@ -8160,8 +8127,8 @@ function display_offers(offers, type, scope, state_change) {
 			target_list = 'Epc';
 			value = 'amount';
 			break;
-		case 'new':
 			// new offers list
+		case 'new':
 			target_list = '';
 			value = 'visitor';
 			break;
@@ -8208,11 +8175,7 @@ function display_offers(offers, type, scope, state_change) {
 			}, 200);
 		}, timer);
 	}
-	// console.log($('#offers-table').width());
-	// console.log($('#offers-table').height());
 }
-
-
 
 // adjusts data displayed to match selected period
 $('.period-menu li').click(function getPeriod() {
@@ -8247,13 +8210,13 @@ $('.period-menu li').click(function getPeriod() {
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
 
-	period = 8;
-	queryVars = {
-		'function': 'offerit_display_hourly_hits',
-		'period': period,
-		'return_type': 'json',
-	};
-	call_data(queryVars, url);
+period = 8;
+queryVars = {
+	'function': 'offerit_display_hourly_hits',
+	'period': period,
+	'return_type': 'json',
+};
+call_data(queryVars, url);
 });
 
 });
