@@ -7526,15 +7526,14 @@ $(document).ready(function() {
 									timespan = 'Period Data';
 									// loop through and fill each metric subindex
 									for (var subindex in metrices[timespan]) {
-										var identifier = metrices[timespan][subindex];	
-										console.log(identifier);
+										var identifier = metrices[timespan][subindex];
 										if (identifier == 'conv_count' || identifier == 'EPC') {
-											continue;
+											// continue;
 										}
 										series_data[timespan][period][subindex] = create_axes(
 											data['stats']['date'],
 											series_data[timespan][period][subindex],
-											identifier	
+											identifier
 										);
 									}
 									plot_name = "#p_chart";
@@ -7624,7 +7623,48 @@ $(document).ready(function() {
 		}
 
 		function plot_graph(plot_name, data) {
-			var series_options = {
+			console.log('plotting data...');
+			console.log(data);
+			// first correct the timestamps - they are recorded as the daily
+			// midnights in UTC+0100, but Flot always displays dates in UTC
+			// so we have to add one hour to hit the midnights in the plot
+			for (var i = 0; i < data.length; ++i) {
+				data[i][0] += 60 * 60 * 1000;
+			}
+			// helper for returning the weekends in a period
+			function weekendAreas(axes) {
+				var markings = [],
+					d = new Date(axes.xaxis.min);
+				// go to the first Saturday
+				d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
+				d.setUTCSeconds(0);
+				d.setUTCMinutes(0);
+				d.setUTCHours(0);
+				var i = d.getTime();
+				// when we don't set yaxis, the rectangle automatically
+				// extends to infinity upwards and downwards
+				do {
+					markings.push({
+						xaxis: {
+							from: i,
+							to: i + 2 * 24 * 60 * 60 * 1000
+						},
+						color: '#DFDFDF'
+					});
+					i += 7 * 24 * 60 * 60 * 1000;
+				} while (i < axes.xaxis.max);
+				return markings;
+			}
+
+			// add index for each series
+			for (var i in data) {
+				data[i].idx = i;
+			}
+			// clear data before replotting
+			data[2].yaxis = 2;
+			data[3].yaxis = 2;
+			if (typeof plots[plot_name] === 'undefined') {
+				plots[plot_name] = $.plot(plot_name, data, {
 					series: {
 						lines: {
 							show: true,
@@ -7632,7 +7672,7 @@ $(document).ready(function() {
 						},
 						points: {
 							show: false
-						},
+						}
 					},
 					xaxis: {
 						mode: "time",
@@ -7664,45 +7704,10 @@ $(document).ready(function() {
 						position: "se",
 						backgroundOpacity: 0.7,
 						labelFormatter: function format_label(label, series) {
-							return '<a style="color: #555; font-weight: light;" href="" onClick="togglePlot(' + plot_name + '); return false;">' + label + '</a>';
+							return '<a style="color: #555; font-weight: light;" href="" class="legend" data-index="' + series.idx + '">' + label + '</a>';
 						}
 					}
-				}
-				// first correct the timestamps - they are recorded as the daily
-				// midnights in UTC+0100, but Flot always displays dates in UTC
-				// so we have to add one hour to hit the midnights in the plot
-			for (var i = 0; i < data.length; ++i) {
-				data[i][0] += 60 * 60 * 1000;
-			}
-			// helper for returning the weekends in a period
-			function weekendAreas(axes) {
-				var markings = [],
-					d = new Date(axes.xaxis.min);
-				// go to the first Saturday
-				d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
-				d.setUTCSeconds(0);
-				d.setUTCMinutes(0);
-				d.setUTCHours(0);
-				var i = d.getTime();
-				// when we don't set yaxis, the rectangle automatically
-				// extends to infinity upwards and downwards
-				do {
-					markings.push({
-						xaxis: {
-							from: i,
-							to: i + 2 * 24 * 60 * 60 * 1000
-						},
-						color: '#DFDFDF'
-					});
-					i += 7 * 24 * 60 * 60 * 1000;
-				} while (i < axes.xaxis.max);
-				return markings;
-			}
-			// clear data before replotting
-			data[2].yaxis = 2;
-			data[3].yaxis = 2;
-			if (typeof plots[plot_name] === 'undefined') {
-				plots[plot_name] = $.plot(plot_name, data, series_options);
+				});
 			}
 			plots[plot_name].setData(data);
 			plots[plot_name].setupGrid();
@@ -7744,13 +7749,49 @@ $(document).ready(function() {
 			}
 		}
 
-		togglePlot = function(plot_name) {
-			var someData = plots[plot_name].getData();
-			console.log(someData);
-			/*someData.lines.show = !someData.lines.show;
-			plots[plot_name].setData(someData);
-			plots[plot_name].draw();*/
+		highlightPlot = function(seriesIdx) {
+			var someData = plots['#p_chart'].getData();
+			console.log(seriesIdx);
+			$.each(someData, function(index, series) {
+				someData[index].lines.lineWidth = (index == seriesIdx ? 4 : 2);
+			});
+			plots['#p_chart'].setData(someData);
+			plots['#p_chart'].draw();
 		}
+
+		// series toggle functions
+		togglePlot = function(seriesIdx) {
+			console.log('toggling series...');
+			var plotTypes = ['lines', 'points', 'bars'];
+			var someData = plots['#p_chart'].getData();
+			console.log(someData);
+			var series = someData[seriesIdx];
+			$.each(plotTypes, function(index, plotType) {
+				if (series[plotType]) {
+					if (series[plotType].show) {
+						series[plotType].show = false;
+						series[plotType].hidden = true;
+					} else if (series[plotType].hidden) {
+						series[plotType].show = true;
+						series[plotType].hidden = false;
+					}
+				}
+			});
+			plots['#p_chart'].setData(someData);
+			plots['#p_chart'].draw();
+		}
+		$(document).on({
+			click: function() {
+				togglePlot($(this).data('index'));
+				return false;
+			},
+			mouseover: function() {
+				highlightPlot($(this).data('index'));
+			},
+			mouseout: function() {
+				highlightPlot(-1);
+			},
+		}, 'a.legend');
 // added custom scrollbars
 $('.three-box > .bottom-box').niceScroll({
 	cursoropacitymax: .5,

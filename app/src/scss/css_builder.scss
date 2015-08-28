@@ -194,11 +194,11 @@ $sec-red-hover: #A04343;
             opacity: 1;
             cursor: default;
         }
-        /* &:active {
+        &:active {
             // background-color: $prim-cadet-hover;
             // border: .5em inset $sec-cadet;
             color: #2a2a2a;
-        } */
+        }
     }
     /* ICON SELECTORS */
     .icon {
@@ -306,8 +306,7 @@ $sec-red-hover: #A04343;
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0.5;
     }
-    .error-box {
-    }
+    .error-box {}
     .error-message {
         width: 100%;
     }
@@ -505,8 +504,11 @@ $sec-red-hover: #A04343;
             }
         }
     }
-    .legendLabel a {
-        color: gray;
+    .legendLabel {
+        .legend {
+            color: #555;
+            font-weight: light;
+        }
     }
     #p_chart-title {
         position: absolute;
