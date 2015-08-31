@@ -362,7 +362,6 @@ $(document).ready(function() {
 
 		highlightPlot = function(seriesIdx) {
 			var someData = plots['#p_chart'].getData();
-			console.log(seriesIdx);
 			$.each(someData, function(index, series) {
 				someData[index].lines.lineWidth = (index == seriesIdx ? 4 : 2);
 			});
@@ -372,10 +371,8 @@ $(document).ready(function() {
 
 		// series toggle functions
 		togglePlot = function(seriesIdx) {
-			console.log('toggling series...');
 			var plotTypes = ['lines', 'points', 'bars'];
 			var someData = plots['#p_chart'].getData();
-			console.log(someData);
 			var series = someData[seriesIdx];
 			$.each(plotTypes, function(index, plotType) {
 				if (series[plotType]) {

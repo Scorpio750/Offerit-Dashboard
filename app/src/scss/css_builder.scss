@@ -25,7 +25,7 @@
 }
 
 
-$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
+$font-stack: Roboto, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -172,13 +172,17 @@ $sec-red-hover: #A04343;
         flex: 1 0 1em;
         /* background-color: $off-white; */
     }
-    .stats-container .flex-container {
+    #stats-container {
+        display: flex;
+        flex-flow: row wrap;
         justify-content: space-around;
+        align-items: space-around;
+        align-content: space-around;
     }
     .stats-box {
         opacity: 0.6;
         padding: .5em 1em;
-        flex: auto;
+        flex: 1 0 100px;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -290,7 +294,7 @@ $sec-red-hover: #A04343;
     /* LOAD AND ERROR STATE SELECTORS */
     .flex-state {
         display: flex;
-        flex-wrap: wrap;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: center;
         align-content: center;
@@ -306,7 +310,8 @@ $sec-red-hover: #A04343;
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0.5;
     }
-    .error-box {}
+    .error-box {
+    }
     .error-message {
         width: 100%;
     }
@@ -504,11 +509,14 @@ $sec-red-hover: #A04343;
             }
         }
     }
-    .legendLabel {
-        .legend {
-            color: #555;
-            font-weight: light;
-        }
+    .legendLabel a {
+        color: gray;
+    }
+    .legend {
+        color: #555; font-weight: light;
+    }
+    .selected {
+        opacity: 1;
     }
     #p_chart-title {
         position: absolute;
