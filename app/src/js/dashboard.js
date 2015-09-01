@@ -119,7 +119,7 @@ function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
 
-	console.log(currentPrefix);
+	// console.log(currentPrefix);
 	// console.log('width is ' + currentPrefix.width() + 8);
 
 	switch (flag) {

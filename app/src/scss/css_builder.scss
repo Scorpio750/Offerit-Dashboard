@@ -186,7 +186,9 @@ $sec-red-hover: #A04343;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        .left-stats-box {}
+        .left-stats-box, .right-stats-box {
+            flex: auto;
+        }
         .right-stats-box {
             h3 {
                 margin-top: .5em;
@@ -310,8 +312,7 @@ $sec-red-hover: #A04343;
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0.5;
     }
-    .error-box {
-    }
+    .error-box {}
     .error-message {
         width: 100%;
     }
@@ -509,14 +510,22 @@ $sec-red-hover: #A04343;
             }
         }
     }
-    .legendLabel a {
-        color: gray;
-    }
-    .legend {
-        color: #555; font-weight: light;
-    }
-    .selected {
-        opacity: 1;
+    .legendLabel {
+        .legendIndex {
+            opacity: .6;
+            color: #555;
+            font-weight: light;
+        }
+        .hover {
+            opacity: 1;
+        }
+        .selected {
+            opacity: 1;
+        }
+        .inactive {
+            opacity: .2;
+            cursor: default;
+        }
     }
     #p_chart-title {
         position: absolute;

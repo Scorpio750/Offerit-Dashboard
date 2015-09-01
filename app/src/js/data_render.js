@@ -37,10 +37,9 @@ $(document).ready(function() {
 			'Period Data': ['raw_hits', 'conv_count', 'total_payout', 'EPC']
 		};
 		var plots = {
-				'#h_chart': undefined,
-				'#p_chart': undefined
-			},
-			series_data;
+			'#h_chart': undefined,
+			'#p_chart': undefined
+		};
 		// maps menu period indices to database period indices
 		var period_map = [0, 1, 5, 11, 13, 12, 13, 6, 7];
 		// constructs each series element
@@ -54,6 +53,9 @@ $(document).ready(function() {
 			}
 			return series;
 		}
+		// counter for # of active series for period plot
+		var activeSeries = 0;
+
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
 			var function_type = queryVars['function'];
@@ -315,7 +317,7 @@ $(document).ready(function() {
 						position: "se",
 						backgroundOpacity: 0.7,
 						labelFormatter: function format_label(label, series) {
-							return '<a style="color: #555; font-weight: light;" href="" class="legend" data-index="' + series.idx + '">' + label + '</a>';
+							return '<a style="color: #555; font-weight: light;" href="" class="legendIndex" data-index="' + series.idx + '">' + label + '</a>';
 						}
 					}
 				});
@@ -324,6 +326,13 @@ $(document).ready(function() {
 			plots[plot_name].setupGrid();
 			plots[plot_name].draw();
 		}
+
+		///////////////////////////////////////
+		//                                   //
+		//      PLOT AUXILIARY FUNCTIONS     //
+		//                                   //
+		///////////////////////////////////////
+
 		// chart tooltip
 		$("<div id='tooltip' style='font-weight: bold'></div>").css({
 			position: "absolute",
@@ -360,43 +369,85 @@ $(document).ready(function() {
 			}
 		}
 
-		highlightPlot = function(seriesIdx) {
-			var someData = plots['#p_chart'].getData();
+		highlightPlot = function(plot_name, seriesIdx) {
+			var someData = plots[plot_name].getData();
 			$.each(someData, function(index, series) {
 				someData[index].lines.lineWidth = (index == seriesIdx ? 4 : 2);
 			});
-			plots['#p_chart'].setData(someData);
-			plots['#p_chart'].draw();
+			plots[plot_name].setData(someData);
+			plots[plot_name].draw();
 		}
 
 		// series toggle functions
-		togglePlot = function(seriesIdx) {
-			var plotTypes = ['lines', 'points', 'bars'];
-			var someData = plots['#p_chart'].getData();
-			var series = someData[seriesIdx];
+		togglePlot = function(plot_name, $label) {
+			console.log('toggling $label...');
+			console.log($label);
+			var seriesIdx = $label.data('index'),
+				labelText = $label.text(),
+				plotTypes = ['lines', 'points', 'bars'],
+				someData = plots[plot_name].getData(),
+				series = someData[seriesIdx],
+				isSelected;
+
 			$.each(plotTypes, function(index, plotType) {
 				if (series[plotType]) {
 					if (series[plotType].show) {
 						series[plotType].show = false;
 						series[plotType].hidden = true;
+						isSelected = false;
+						activeSeries--;
 					} else if (series[plotType].hidden) {
-						series[plotType].show = true;
-						series[plotType].hidden = false;
+						if (activeSeries < 2) {
+							series[plotType].show = true;
+							series[plotType].hidden = false;
+							isSelected = true;
+							activeSeries++;
+						}
 					}
 				}
 			});
-			plots['#p_chart'].setData(someData);
-			plots['#p_chart'].draw();
+
+			if (isSelected) {
+				$label.addClass('selected');
+			}
+			else { 
+				$label.removeClass('selected');
+			}
+			// redrawing the graph will render $label useless, so we save the state of the legend
+			// and replace the new legend with the old one after redraw
+			var $cachedLegend = $(plot_name).find('.legend').clone();
+			plots[plot_name].setData(someData);
+			plots[plot_name].setupGrid();
+			plots[plot_name].draw();
+
+			// nuke label
+			$(plot_name).find('.legend').remove();
+			console.log($cachedLegend);
+			$cachedLegend.appendTo(plot_name);
 		}
+
 		$(document).on({
 			click: function() {
-				togglePlot($(this).data('index'));
+				togglePlot('#p_chart', $(this));
 				return false;
 			},
 			mouseover: function() {
-				highlightPlot($(this).data('index'));
+				highlightPlot('#p_chart', $(this).data('index'));
 			},
 			mouseout: function() {
-				highlightPlot(-1);
+				highlightPlot('#p_chart', -1);
 			},
-		}, 'a.legend');
+		}, '#p_chart a.legendIndex');
+
+		$(document).on({
+			click: function() {
+				togglePlot('#h_chart', $(this));
+				return false;
+			},
+			mouseover: function() {
+				highlightPlot('#h_chart', $(this).data('index'));
+			},
+			mouseout: function() {
+				highlightPlot('#h_chart', -1);
+			},
+		}, '#h_chart a.legendIndex');
