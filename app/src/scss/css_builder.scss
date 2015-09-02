@@ -512,7 +512,7 @@ $sec-red-hover: #A04343;
     }
     .legendLabel {
         .legendIndex {
-            opacity: .6;
+            opacity: .7;
             color: #555;
             font-weight: light;
         }
@@ -523,7 +523,7 @@ $sec-red-hover: #A04343;
             opacity: 1;
         }
         .inactive {
-            opacity: .2;
+            opacity: .4 !important;
             cursor: default;
         }
     }

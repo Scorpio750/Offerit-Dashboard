@@ -54,7 +54,10 @@ $(document).ready(function() {
 			return series;
 		}
 		// counter for # of active series for period plot
-		var activeSeries = 0;
+		var activeSeries = {
+			'#h_chart': undefined,
+			'#p_chart': undefined
+		};
 
 		// AJAX calls for plot data
 		function call_data(queryVars, url) {
@@ -206,8 +209,6 @@ $(document).ready(function() {
 		// creates the axes from the ajax data and stores them in the appropriate series object
 		function create_axes(ajax_data, series, identifier) {
 			// EPC has to be all *special*
-			// making me do a fucking edgecase and shit
-			// Fuck you, EPC... fuck you.
 			if (identifier == 'EPC') {
 				var epc_val;
 				for (var i in ajax_data) {
@@ -325,13 +326,40 @@ $(document).ready(function() {
 			plots[plot_name].setData(data);
 			plots[plot_name].setupGrid();
 			plots[plot_name].draw();
+			default_series_setup(plot_name);
 		}
 
-		///////////////////////////////////////
-		//                                   //
-		//      PLOT AUXILIARY FUNCTIONS     //
-		//                                   //
-		///////////////////////////////////////
+		// default display is Hits and Payouts
+		function default_series_setup(plot_name) {
+			console.log('rendering default display...');
+			var $labels = $(plot_name + ' .legend').find('.legendIndex');
+			activeSeries[plot_name] = 2;
+			$labels.each(function render_default_display() {
+				console.log($(this));
+				console.log($(this).data('index'));
+				console.log($(this).data('index') % 2);
+				console.log('activeSeries: ' + activeSeries[plot_name]);
+				switch ($(this).data('index') % 2) {
+					case 0:
+						// make active
+						$(this).addClass('selected');
+						break;
+					case 1:
+						// make inactive
+						console.log('making ' + $(this).text() + ' inactive');
+						togglePlot(plot_name, $(this));
+						console.log($(this));
+						$(this).addClass('inactive');
+						break;
+				}
+			});
+		}
+
+		//////////////////////////////////////
+		//                                  //
+		//     PLOT AUXILIARY FUNCTIONS     //
+		//                                  //
+		//////////////////////////////////////
 
 		// chart tooltip
 		$("<div id='tooltip' style='font-weight: bold'></div>").css({
@@ -380,39 +408,51 @@ $(document).ready(function() {
 
 		// series toggle functions
 		togglePlot = function(plot_name, $label) {
-			console.log('toggling $label...');
+			console.log('toggling data...');
+			console.log(plot_name);
 			console.log($label);
-			var seriesIdx = $label.data('index'),
-				labelText = $label.text(),
-				plotTypes = ['lines', 'points', 'bars'],
+			var $labels = $(plot_name + ' .legend').find('.legendIndex'),
+				seriesIdx = $label.data('index'),
 				someData = plots[plot_name].getData(),
 				series = someData[seriesIdx],
-				isSelected;
+				plotTypes = ['lines', 'points', 'bars'];
 
 			$.each(plotTypes, function(index, plotType) {
 				if (series[plotType]) {
 					if (series[plotType].show) {
 						series[plotType].show = false;
 						series[plotType].hidden = true;
-						isSelected = false;
-						activeSeries--;
-					} else if (series[plotType].hidden) {
-						if (activeSeries < 2) {
-							series[plotType].show = true;
-							series[plotType].hidden = false;
-							isSelected = true;
-							activeSeries++;
+						if ($label.hasClass('selected')) {
+							$label.removeClass('selected');
 						}
+						activeSeries[plot_name]--;
+						// reactivate inactive plots
+						if (activeSeries[plot_name] < 2) {
+							$labels.each(function makeActive() {
+								if ($(this).hasClass('inactive')) {
+									$(this).removeClass('inactive');
+								}
+							});
+						}
+						return;
+					} else if (series[plotType].hidden) {
+						series[plotType].show = true;
+						series[plotType].hidden = false;
+						$label.addClass('selected');
+						activeSeries[plot_name]++;
+						// fade out inactive labels if there are two active series
+						if (activeSeries[plot_name] == 2) {
+							$labels.each(function makeInactive() {
+								if (!$(this).hasClass('selected')) {
+									$(this).addClass('inactive');
+								}
+							});
+						}
+						return;
 					}
 				}
 			});
 
-			if (isSelected) {
-				$label.addClass('selected');
-			}
-			else { 
-				$label.removeClass('selected');
-			}
 			// redrawing the graph will render $label useless, so we save the state of the legend
 			// and replace the new legend with the old one after redraw
 			var $cachedLegend = $(plot_name).find('.legend').clone();
