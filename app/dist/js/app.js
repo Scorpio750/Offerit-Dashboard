@@ -7444,8 +7444,8 @@ $(document).ready(function() {
 		}
 		// counter for # of active series for period plot
 		var activeSeries = {
-			'#h_chart': undefined,
-			'#p_chart': undefined
+			'#h_chart': 4,
+			'#p_chart': 4
 		};
 
 		// AJAX calls for plot data
@@ -7722,26 +7722,35 @@ $(document).ready(function() {
 		function default_series_setup(plot_name) {
 			console.log('rendering default display...');
 			var $labels = $(plot_name + ' .legend').find('.legendIndex');
-			activeSeries[plot_name] = 2;
-			$labels.each(function render_default_display() {
-				console.log($(this));
-				console.log($(this).data('index'));
-				console.log($(this).data('index') % 2);
-				console.log('activeSeries: ' + activeSeries[plot_name]);
-				switch ($(this).data('index') % 2) {
-					case 0:
-						// make active
-						$(this).addClass('selected');
-						break;
-					case 1:
-						// make inactive
-						console.log('making ' + $(this).text() + ' inactive');
-						togglePlot(plot_name, $(this));
-						console.log($(this));
-						$(this).addClass('inactive');
-						break;
-				}
-			});
+			activeSeries[plot_name] = 4;
+			// first iteration, clear all series
+			// second iteration, add back only Hits and Payouts
+			for (var i = 0; i < 2; i++) {
+				$labels.each(function render_default_display() {
+					console.log('-----------------');
+					var $label = $(this);
+					console.log($label);
+					console.log($label.data('index'));
+					console.log($label.data('index') % 2);
+					
+					switch (i) {
+						case 0:
+							togglePlot(plot_name, $label);
+							break;
+						case 1:
+							if ($label.data('index') % 2 == 0) {
+								console.log('adding ' + $label);
+								togglePlot(plot_name, $label);
+								// have to create new label because we redrew the graph
+								var $newlabel = $(plot_name + ' .legend').find('.legendIndex:contains(' + $label.text() + ')');
+								$newlabel.removeClass('inactive');
+								$newlabel.addClass('selected');
+							}
+							break;
+					}
+					console.log('activeSeries: ' + activeSeries[plot_name]);
+				});
+			}
 		}
 
 		//////////////////////////////////////
@@ -7798,8 +7807,6 @@ $(document).ready(function() {
 		// series toggle functions
 		togglePlot = function(plot_name, $label) {
 			console.log('toggling data...');
-			console.log(plot_name);
-			console.log($label);
 			var $labels = $(plot_name + ' .legend').find('.legendIndex'),
 				seriesIdx = $label.data('index'),
 				someData = plots[plot_name].getData(),
@@ -7823,11 +7830,12 @@ $(document).ready(function() {
 								}
 							});
 						}
-						return;
 					} else if (series[plotType].hidden) {
 						series[plotType].show = true;
 						series[plotType].hidden = false;
-						$label.addClass('selected');
+						if (!$label.hasClass('selected')) {
+							$label.addClass('selected');
+						}
 						activeSeries[plot_name]++;
 						// fade out inactive labels if there are two active series
 						if (activeSeries[plot_name] == 2) {
@@ -7837,7 +7845,6 @@ $(document).ready(function() {
 								}
 							});
 						}
-						return;
 					}
 				}
 			});
