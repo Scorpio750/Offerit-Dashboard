@@ -57,11 +57,11 @@ $(document).ready(function() {
 		// counter for # of active series for period plot
 		var activeSeries = {
 			'#h_chart': {
-				data: undefined,
+				series: [, ],
 				number: 4
 			},
 			'#p_chart': {
-				data: undefined,
+				series: [, ],
 				number: 4
 			}
 		};
@@ -70,6 +70,7 @@ $(document).ready(function() {
 		function call_data(queryVars, url) {
 			var function_type = queryVars['function'];
 			var loader, error_panel;
+
 			// determine which function is being called to retrieve appropriate subpanels
 			if (function_type == 'ajax_get_affiliate_top_offers' || function_type == 'ajax_get_network_top_offers' || function_type == 'ajax_get_new_offers') {
 				loader = $('#offer-box').find('.loader');
@@ -90,6 +91,8 @@ $(document).ready(function() {
 				error_panel = $('#error-hourly-graph');
 				success_panel = $('#h_chart');
 			}
+
+			// AJAX call
 			$.ajax({
 				dataType: 'json',
 				url: url,
@@ -424,19 +427,29 @@ $(document).ready(function() {
 				series = someData[seriesIdx],
 				plotTypes = ['lines', 'points', 'bars'];
 
+			console.log(someData);
+			console.log(series);
 			$.each(plotTypes, function(index, plotType) {
 				if (series[plotType]) {
 					if (series[plotType].show) {
+						console.log('deleting series...');
 						series[plotType].show = false;
 						series[plotType].hidden = true;
 						if ($label.hasClass('selected')) {
 							$label.removeClass('selected');
 						}
 						activeSeries[plot_name]['number']--;
+						for (var i in activeSeries[plot_name]['series']) {
+							if (activeSeries[plot_name]['series'][i].idx == series.idx) {
+								activeSeries[plot_name]['series'].splice(i, 1);
+							}
+						}
+						console.log(activeSeries);
 						reactivateLabels(plot_name, $labels);
 
 					} else if (series[plotType].hidden) {
 						// block reactivation if there are 2 series displayed
+						console.log('adding series...');
 						if (activeSeries[plot_name]['number'] < 2) {
 							series[plotType].show = true;
 							series[plotType].hidden = false;
@@ -444,6 +457,8 @@ $(document).ready(function() {
 								$label.addClass('selected');
 							}
 							activeSeries[plot_name]['number']++;
+							activeSeries[plot_name]['series'].push(series);
+							console.log(activeSeries);
 							deactivateLabels(plot_name, $labels);
 						}
 					}
@@ -463,7 +478,7 @@ $(document).ready(function() {
 		}
 
 		function deactivateLabels(plot_name, $labels) {
-		// fade out inactive labels if there are two active series
+			// fade out inactive labels if there are two active series
 			if (activeSeries[plot_name]['number'] >= 2) {
 				$labels.each(function makeInactive() {
 					if (!$(this).hasClass('selected')) {
@@ -474,16 +489,52 @@ $(document).ready(function() {
 		}
 
 		function redraw_graph(plot_name, someData) {
+			console.log('redrawing graph....');
 			// redrawing the graph will render $label useless, so we save the state of the legend
 			// and replace the new legend with the old one after redraw
 			var $cachedLegend = $(plot_name).find('.legend').clone();
 			plots[plot_name].setData(someData);
+
+			// find new scaled dimensions based on active series
+			console.log(plots[plot_name]);
+			var plotOptions = plots[plot_name].getOptions();
+			var k = 0,
+				maxValue = [, , , ],
+				yaxis;
+
+			for (var i in activeSeries[plot_name]['series']) {
+				maxValue[i] = getMaxValue(activeSeries[plot_name]['series'][i].data);
+			}
+
+			// smaller value has to be 
+			for (i in maxValue) {
+				if (i <= 2) {
+					yaxis = 0;
+				}
+				else {
+					yaxis = 1;
+				}
+				plotOptions['yaxes'][yaxis]['max'] = maxValue;
+			}
+
+			// draw stuff and shit
 			plots[plot_name].setupGrid();
 			plots[plot_name].draw();
 
 			// nuke label
 			$(plot_name).find('.legend').remove();
 			$cachedLegend.appendTo(plot_name);
+		}
+
+		// finds the max value for y-axes
+		function getMaxValue(data) {
+			var maxValue = 0;
+			for (i in data) {
+				if (data[i][1] > maxValue) {
+					maxValue = data[i][1] * 2;
+				}
+			}
+			return maxValue;
 		}
 
 		$(document).on({
