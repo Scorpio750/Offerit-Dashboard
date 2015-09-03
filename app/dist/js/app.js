@@ -7751,6 +7751,7 @@ $(document).ready(function() {
 					console.log('activeSeries: ' + activeSeries[plot_name]);
 				});
 			}
+			activeSeries[plot_name] = 2;
 		}
 
 		//////////////////////////////////////
@@ -7831,19 +7832,22 @@ $(document).ready(function() {
 							});
 						}
 					} else if (series[plotType].hidden) {
-						series[plotType].show = true;
-						series[plotType].hidden = false;
-						if (!$label.hasClass('selected')) {
-							$label.addClass('selected');
-						}
-						activeSeries[plot_name]++;
-						// fade out inactive labels if there are two active series
-						if (activeSeries[plot_name] == 2) {
-							$labels.each(function makeInactive() {
-								if (!$(this).hasClass('selected')) {
-									$(this).addClass('inactive');
-								}
-							});
+						// block reactivation if there are 2 series displayed
+						if (activeSeries[plot_name] < 2) {
+							series[plotType].show = true;
+							series[plotType].hidden = false;
+							if (!$label.hasClass('selected')) {
+								$label.addClass('selected');
+							}
+							activeSeries[plot_name]++;
+							// fade out inactive labels if there are two active series
+							if (activeSeries[plot_name] >= 2) {
+								$labels.each(function makeInactive() {
+									if (!$(this).hasClass('selected')) {
+										$(this).addClass('inactive');
+									}
+								});
+							}
 						}
 					}
 				}
