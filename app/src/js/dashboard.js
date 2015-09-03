@@ -435,6 +435,7 @@ $('.period-menu li').click(function getPeriod() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 	var index = $(this).index();
 	var swapid;
+	currentPeriod = index;
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': index,

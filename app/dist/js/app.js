@@ -7421,6 +7421,7 @@ $(document).ready(function() {
 				['']
 			]
 		};
+		var currentPeriod;
 		var metrices = {
 			'Hourly Data': ['impression', 'conv_count', 'payout', 'EPC'],
 			'Period Data': ['raw_hits', 'conv_count', 'total_payout', 'EPC']
@@ -7444,8 +7445,14 @@ $(document).ready(function() {
 		}
 		// counter for # of active series for period plot
 		var activeSeries = {
-			'#h_chart': 4,
-			'#p_chart': 4
+			'#h_chart': {
+				data: undefined,
+				number: 4
+			},
+			'#p_chart': {
+				data: undefined,
+				number: 4
+			}
 		};
 
 		// AJAX calls for plot data
@@ -7529,12 +7536,11 @@ $(document).ready(function() {
 								// period graph data
 								if (typeof queryVars['dashboard_multi'] !== "undefined") {
 									timespan = 'Period Data';
+									currentPeriod = 0;
 									// loop through and fill each metric subindex
 									for (var subindex in metrices[timespan]) {
 										var identifier = metrices[timespan][subindex];
-										if (identifier == 'conv_count' || identifier == 'EPC') {
-											// continue;
-										}
+
 										series_data[timespan][period][subindex] = create_axes(
 											data['stats']['date'],
 											series_data[timespan][period][subindex],
@@ -7627,7 +7633,6 @@ $(document).ready(function() {
 
 		function plot_graph(plot_name, data) {
 			console.log('plotting data...');
-			console.log(data);
 			// first correct the timestamps - they are recorded as the daily
 			// midnights in UTC+0100, but Flot always displays dates in UTC
 			// so we have to add one hour to hit the midnights in the plot
@@ -7722,24 +7727,18 @@ $(document).ready(function() {
 		function default_series_setup(plot_name) {
 			console.log('rendering default display...');
 			var $labels = $(plot_name + ' .legend').find('.legendIndex');
-			activeSeries[plot_name] = 4;
+			activeSeries[plot_name]['number'] = 4;
 			// first iteration, clear all series
 			// second iteration, add back only Hits and Payouts
 			for (var i = 0; i < 2; i++) {
 				$labels.each(function render_default_display() {
-					console.log('-----------------');
 					var $label = $(this);
-					console.log($label);
-					console.log($label.data('index'));
-					console.log($label.data('index') % 2);
-					
 					switch (i) {
 						case 0:
 							togglePlot(plot_name, $label);
 							break;
 						case 1:
 							if ($label.data('index') % 2 == 0) {
-								console.log('adding ' + $label);
 								togglePlot(plot_name, $label);
 								// have to create new label because we redrew the graph
 								var $newlabel = $(plot_name + ' .legend').find('.legendIndex:contains(' + $label.text() + ')');
@@ -7748,10 +7747,10 @@ $(document).ready(function() {
 							}
 							break;
 					}
-					console.log('activeSeries: ' + activeSeries[plot_name]);
+					console.log('activeSeries: ' + activeSeries[plot_name]['number']);
 				});
 			}
-			activeSeries[plot_name] = 2;
+			activeSeries[plot_name]['number'] = 2;
 		}
 
 		//////////////////////////////////////
@@ -7822,37 +7821,48 @@ $(document).ready(function() {
 						if ($label.hasClass('selected')) {
 							$label.removeClass('selected');
 						}
-						activeSeries[plot_name]--;
-						// reactivate inactive plots
-						if (activeSeries[plot_name] < 2) {
-							$labels.each(function makeActive() {
-								if ($(this).hasClass('inactive')) {
-									$(this).removeClass('inactive');
-								}
-							});
-						}
+						activeSeries[plot_name]['number']--;
+						reactivateLabels(plot_name, $labels);
+
 					} else if (series[plotType].hidden) {
 						// block reactivation if there are 2 series displayed
-						if (activeSeries[plot_name] < 2) {
+						if (activeSeries[plot_name]['number'] < 2) {
 							series[plotType].show = true;
 							series[plotType].hidden = false;
 							if (!$label.hasClass('selected')) {
 								$label.addClass('selected');
 							}
-							activeSeries[plot_name]++;
-							// fade out inactive labels if there are two active series
-							if (activeSeries[plot_name] >= 2) {
-								$labels.each(function makeInactive() {
-									if (!$(this).hasClass('selected')) {
-										$(this).addClass('inactive');
-									}
-								});
-							}
+							activeSeries[plot_name]['number']++;
+							deactivateLabels(plot_name, $labels);
 						}
 					}
 				}
 			});
+			redraw_graph(plot_name, someData);
+		}
 
+		function reactivateLabels(plot_name, $labels) {
+			if (activeSeries[plot_name]['number'] < 2) {
+				$labels.each(function makeActive() {
+					if ($(this).hasClass('inactive')) {
+						$(this).removeClass('inactive');
+					}
+				});
+			}
+		}
+
+		function deactivateLabels(plot_name, $labels) {
+		// fade out inactive labels if there are two active series
+			if (activeSeries[plot_name]['number'] >= 2) {
+				$labels.each(function makeInactive() {
+					if (!$(this).hasClass('selected')) {
+						$(this).addClass('inactive');
+					}
+				});
+			}
+		}
+
+		function redraw_graph(plot_name, someData) {
 			// redrawing the graph will render $label useless, so we save the state of the legend
 			// and replace the new legend with the old one after redraw
 			var $cachedLegend = $(plot_name).find('.legend').clone();
@@ -7862,7 +7872,6 @@ $(document).ready(function() {
 
 			// nuke label
 			$(plot_name).find('.legend').remove();
-			console.log($cachedLegend);
 			$cachedLegend.appendTo(plot_name);
 		}
 
@@ -8328,6 +8337,7 @@ $('.period-menu li').click(function getPeriod() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 	var index = $(this).index();
 	var swapid;
+	currentPeriod = index;
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': index,
