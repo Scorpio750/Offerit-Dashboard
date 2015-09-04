@@ -283,6 +283,7 @@ $(document).ready(function() {
 				data[i].idx = i;
 			}
 			// clear data before replotting
+			// set Payouts and EPC to display on the right axis
 			data[2].yaxis = 2;
 			data[3].yaxis = 2;
 			if (typeof plots[plot_name] === 'undefined') {
@@ -492,37 +493,47 @@ $(document).ready(function() {
 			console.log('redrawing graph....');
 			// redrawing the graph will render $label useless, so we save the state of the legend
 			// and replace the new legend with the old one after redraw
-			var $cachedLegend = $(plot_name).find('.legend').clone();
+			var $cachedLegend = $(plot_name).find('.legend').clone(),
+				$cachedLegendDiv = $cachedLegend.find('div').eq(0),
+				$cachedLegendTable = $cachedLegend.find('table').eq(0);
 			plots[plot_name].setData(someData);
 
 			// find new scaled dimensions based on active series
 			console.log(plots[plot_name]);
-			var plotOptions = plots[plot_name].getOptions();
 			var k = 0,
-				maxValue = [, , , ],
+				maxValue = [],
 				yaxis;
 
 			for (var i in activeSeries[plot_name]['series']) {
-				maxValue[i] = getMaxValue(activeSeries[plot_name]['series'][i].data);
+				maxValue.push(getMaxValue(activeSeries[plot_name]['series'][i].data));
+				console.log(maxValue);
 			}
 
-			// smaller value has to be 
-			for (i in maxValue) {
-				if (i <= 2) {
-					yaxis = 0;
-				}
-				else {
-					yaxis = 1;
-				}
-				plotOptions['yaxes'][yaxis]['max'] = maxValue;
-			}
-
+			modifyAxisOptions(plot_name, maxValue);
+			
 			// draw stuff and shit
 			plots[plot_name].setupGrid();
 			plots[plot_name].draw();
 
 			// nuke label
-			$(plot_name).find('.legend').remove();
+			var $newLegend = $(plot_name).find('.legend');
+			var $newLegendCSS = $newLegend.find('div').eq(0);
+			console.log('new legend css...');
+
+			var bottomPos 	= $newLegendCSS.css('bottom'),
+				rightPos	= $newLegendCSS.css('right');
+			console.log('bottom: ' + bottomPos);
+			console.log('right: ' + rightPos);
+
+
+			$newLegend.remove();
+
+			// apply new offset to old legend
+			$cachedLegendDiv.css('bottom', bottomPos);
+			$cachedLegendDiv.css('right', rightPos);
+			$cachedLegendTable.css('bottom', bottomPos);
+			$cachedLegendTable.css('right', rightPos);
+
 			$cachedLegend.appendTo(plot_name);
 		}
 
@@ -531,10 +542,23 @@ $(document).ready(function() {
 			var maxValue = 0;
 			for (i in data) {
 				if (data[i][1] > maxValue) {
-					maxValue = data[i][1] * 2;
+					maxValue = data[i][1] * 1.5;
 				}
 			}
 			return maxValue;
+		}
+
+		function modifyAxisOptions(plot_name, maxValue) {
+			var plotOptions = plots[plot_name].getOptions();
+			// smaller value goes on left axis, otherwise there are scaling issues
+			if (maxValue[0] < maxValue[1]) {
+				plotOptions['yaxes'][0]['max'] = maxValue[0];
+				plotOptions['yaxes'][1]['max'] = maxValue[1];
+			}
+			else {
+				plotOptions['yaxes'][0]['max'] = maxValue[1];
+				plotOptions['yaxes'][1]['max'] = maxValue[0];
+			}
 		}
 
 		$(document).on({
