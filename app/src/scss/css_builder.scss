@@ -25,7 +25,7 @@
 }
 
 
-$font-stack: Roboto-Light, Tahoma, Arial, sans-serif;
+$font-stack: Roboto, Tahoma, Arial, sans-serif;
 $font-color: #ccc;
 $font-menu-color: #686868;
 $off-white: #E6E6E6;
@@ -131,7 +131,6 @@ $sec-red-hover: #A04343;
             color: white;
             opacity: 0.8;
             &:hover {
-                color: white;
                 opacity: 1;
                 text-decoration: none;
             }
@@ -147,7 +146,6 @@ $sec-red-hover: #A04343;
         }
     }
     .top-box {
-        background-color: $prim-green;
         border-radius: 6px 6px 0 0;
         padding-bottom: .25em;
         header {
@@ -164,7 +162,6 @@ $sec-red-hover: #A04343;
         padding: 1em;
         position: relative;
         // max-height: 10em;
-        background-color: $sec-green;
         // overflow: auto;
    
     }
@@ -172,17 +169,23 @@ $sec-red-hover: #A04343;
         flex: 1 0 1em;
         /* background-color: $off-white; */
     }
-
+    #stats-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: space-around;
+        align-content: space-around;
+    }
     .stats-box {
         opacity: 0.6;
         padding: .5em 1em;
-        flex: auto;
+        flex: 1 0 100px;
         display: flex;
-        flex-flow: row nowrap;
         justify-content: space-around;
         align-items: center;
-
-        .left-stats-box {}
+        .left-stats-box, .right-stats-box {
+            flex: auto;
+        }
         .right-stats-box {
             h3 {
                 margin-top: .5em;
@@ -284,16 +287,13 @@ $sec-red-hover: #A04343;
             }
         }
     }
-    .hidden {
-        display: none;
-    }
     .rotated {
         transform: rotateY(180deg);
     }
     /* LOAD AND ERROR STATE SELECTORS */
     .flex-state {
         display: flex;
-        flex-wrap: wrap;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: center;
         align-content: center;
@@ -309,8 +309,7 @@ $sec-red-hover: #A04343;
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0.5;
     }
-    .error-box {
-    }
+    .error-box {}
     .error-message {
         width: 100%;
     }
@@ -338,9 +337,13 @@ $sec-red-hover: #A04343;
     #offer-box {
         flex: 1 2 auto;
         margin-right: 1em;
+        .top-box {
+            background-color: $prim-green;
+        }
         .bottom-box {
             min-height: 8em;
             padding: 1em 0;
+            background-color: $sec-green;
         }
         &:hover {
             .top-box {
@@ -404,10 +407,11 @@ $sec-red-hover: #A04343;
     }
     #offers-area {
         margin: auto;
+        width: 100%;
+        height: 100%;
     }
     #offers-table {
-        // width: 100%;
-        // height: 100%;
+        width: 100%;
         display: none;
         th ~ th {
             border-left: 1px dashed rgba(205, 205, 205, 0.5);
@@ -503,6 +507,23 @@ $sec-red-hover: #A04343;
             }
         }
     }
+    .legendLabel {
+        .legendIndex {
+            opacity: .7;
+            color: #555;
+            font-weight: light;
+        }
+        .hover {
+            opacity: 1;
+        }
+        .selected {
+            opacity: 1;
+        }
+        .inactive {
+            opacity: .4 !important;
+            cursor: default;
+        }
+    }
     #p_chart-title {
         position: absolute;
         display: inline;
@@ -516,17 +537,35 @@ $sec-red-hover: #A04343;
     #three-column {
         align-items: stretch;
         align-content: stretch;
+        .panel {
+            a {
+                color: black;
+            }
+            box-shadow: 0 0 0 0;
+            border-radius: 0;
+            color: black;
+            background-color: transparent;
+        }
         .three-box {
             margin: 0 10 10 0;
             width: 31%;
             height: 70%;
+            .top-box, bottom-box {
+                background-color: transparent;
+            }
+            .top-box {
+                border-bottom: 1px solid black;
+                a {
+                    color: black;
+                }
+            }
             .bottom-box {
                 height: 10em;
                 overflow: auto;
             }
         }
     }
-    #news {
+    /* #news {
         .top-box {
             background-color: $prim-red;
         }
@@ -580,5 +619,5 @@ $sec-red-hover: #A04343;
                 background-color: $sec-beige-hover;
             }
         }
-    }
+    } */
 }

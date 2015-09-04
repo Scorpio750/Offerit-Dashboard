@@ -60,7 +60,6 @@ gulp.task('styles', function() {
 		browsers: ['last 2 versions'],
 		cascade: false
 		}))
-	.pipe(minifyCSS())
 	.pipe(gulp.dest(config.cssSrc));
 });
 
@@ -111,13 +110,13 @@ gulp.task('serve', ['literallyCSS', 'scripts', 'modernizr', 'icons'], function()
 		server: {
 			baseDir: 'app',
 		},
-		startPath: '/dist/dashboard-flat.html',
+		startPath: '/dist/html/dashboard-flat.html',
 		ghostMode: { scroll: false }
 	});
 
 	gulp.watch(config.sassPath, ['literallyCSS']);
 	gulp.watch(config.jsPath + '/**/*.js', ['scripts']);
-	gulp.watch(['dist/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
+	gulp.watch(['dist/html/*.html', 'dist/css/*.css', 'dist/js/*.js'], {cwd: 'app'}, reload);
 });
 
 	gulp.task('ghostMode');

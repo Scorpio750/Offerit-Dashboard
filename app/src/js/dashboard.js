@@ -134,7 +134,7 @@ function shift(n, flag, k) {
 	var $width;
 	var currentPrefix = $span[n].eq(k);
 
-	console.log(currentPrefix);
+	// console.log(currentPrefix);
 	// console.log('width is ' + currentPrefix.width() + 8);
 
 	switch (flag) {
@@ -183,7 +183,7 @@ toggleTopMetric('by Hits');
 
 // triggers subnavs to open upon hovering over a menu item
 $('.dropdown-item').click(function slide() {
-	/* Finding the drop down list that corresponds to the current section: */
+	// Finding the drop down list that corresponds to the current section: 
 	var dropDown = $(this).next('.subnav');
 	$('.subnav').not(dropDown).slideUp();
 	dropDown.slideToggle();
@@ -231,13 +231,7 @@ $('.offer-type').click(function switch_offers() {
 //                                   //
 ///////////////////////////////////////
 
-function fill_stats(data) {
-	console.log('filling stats...');
-
-	if (data.length === 0) {
-		alert('No data found upon retrieval.');
-		return;
-	}
+function fill_stats(data, period_stamp) {
 	var container = $('#stats-container');
 	var boxes = container.find('.stats-box');
 	var target_text, target_data, extracted_data;
@@ -248,46 +242,44 @@ function fill_stats(data) {
 		switch (target_text.text()) {
 			case 'Hits':
 				extracted_data = data['raw_hits'];
+				extracted_data = convert_undefined(extracted_data);
 				break;
 			case 'Convs':
 				extracted_data = data['conv_count'];
+				extracted_data = convert_undefined(extracted_data);
 				break;
 			case 'Payout':
 				extracted_data = data['total_payout'];
 				extracted_data = add_decimals(extracted_data);
-				extracted_data = '$' + extracted_data;
+				if (extracted_data != 'N/A') {
+					extracted_data = '$' + extracted_data;
+				}
 				break;
 			case 'EPC':
 				extracted_data = data['total_payout'] / data['raw_hits'];
-				console.log(data['total_payout'] + ' /  ' + data['raw_hits'] + ' = ' + extracted_data);
 				extracted_data = add_decimals(extracted_data);
-				extracted_data = '$' + extracted_data;
+				if (extracted_data != 'N/A') {
+					extracted_data = '$' + extracted_data;
+				}
 				break;
 		}
-		// console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
+		console.log('Extracted data: ' + extracted_data + '\nTarget data: ' + target_data.text());
 		if (extracted_data != target_data.text()) {
-			// target_data.fadeOut('fast');
-			/*container.animate({
-				height: container.height()
-			})*/
-			console.log('pre-sleep ' + target_text.text());
 			target_data.text(extracted_data);
-			// target_data.fadeIn('fast');
-			/*window.setTimeout(function() {
-				container.animate({
-					width: container.width(),
-					height: container.height()
-				})
-			}, 200);*/
-			console.log('post-sleep ' + target_text.text());
 		}
 	});
 }
 
-function add_decimals(n) {
+function convert_undefined(n) {
 	if (typeof n === 'undefined' || isNaN(n)) {
-		n = 0;
-	} else if (!isInt(n)) {
+		n = 'N/A';
+	}
+	return n;
+}
+
+function add_decimals(n) {
+	n = convert_undefined(n);
+	if (!isInt(n) && n != 'N/A') {
 		n = n.toFixed(2);
 	}
 	return n;
@@ -309,7 +301,7 @@ $('#error-stats-button').click(function reload_data() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 
 	call_data(queryVars, url);
-})
+});
 
 ///////////////////////////////////
 //                               //
@@ -402,8 +394,8 @@ function display_offers(offers, type, scope, state_change) {
 			target_list = 'Epc';
 			value = 'amount';
 			break;
-		case 'new':
 			// new offers list
+		case 'new':
 			target_list = '';
 			value = 'visitor';
 			break;
@@ -450,17 +442,14 @@ function display_offers(offers, type, scope, state_change) {
 			}, 200);
 		}, timer);
 	}
-	// console.log($('#offers-table').width());
-	// console.log($('#offers-table').height());
 }
-
-
 
 // adjusts data displayed to match selected period
 $('.period-menu li').click(function getPeriod() {
 	url = 'http://jamesdev.offerit.com/internal_data.php';
 	var index = $(this).index();
 	var swapid;
+	currentPeriod = index;
 	queryVars = {
 		'function': 'offerit_display_stats',
 		'period_index': index,
@@ -488,13 +477,14 @@ $('.period-menu li').click(function getPeriod() {
 
 // refreshes hourly graph display
 $('#hourly-refresh').click(function() {
-	period = 8;
-	queryVars = {
-		'function': 'offerit_display_hourly_hits',
-		'period': period,
-		'return_type': 'json',
-	};
-	call_data(queryVars, url);
+
+period = 8;
+queryVars = {
+	'function': 'offerit_display_hourly_hits',
+	'period': period,
+	'return_type': 'json',
+};
+call_data(queryVars, url);
 });
 
 });
