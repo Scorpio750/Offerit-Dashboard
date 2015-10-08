@@ -4,7 +4,7 @@ var concat		= require('gulp-concat');
 var browserSync = require('browser-sync').create();
 var reload 		= browserSync.reload;
 var debug 		= require('gulp-debug');
-var uglify		= require('gulp-uglify');
+// var uglify		= require('gulp-uglify');
 
 gulp.task('sass', function() {
 	return sass('./app/src/scss/css_builder.scss')
